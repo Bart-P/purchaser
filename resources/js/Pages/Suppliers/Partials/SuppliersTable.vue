@@ -69,8 +69,7 @@
 import Pagination from "@/Components/Pagination.vue";
 import {Link} from "@inertiajs/inertia-vue3";
 
-defineProps({
-    'suppliers': Object
+const props = defineProps({
+    suppliers: Object,
 })
-
 </script>
