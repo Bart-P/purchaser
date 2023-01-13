@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SuppliersController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,19 +26,19 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
 
-Route::get('/anfragen', function () {
-    return Inertia::render('Inquiries/Inquiries');
-})->middleware(['auth', 'verified'])->name('inquiries');
+    Route::get('/anfragen', function () {
+        return Inertia::render('Inquiries/Inquiries');
+    })->name('inquiries');
 
-Route::get('/lieferanten', function () {
-    return Inertia::render('Suppliers/Suppliers', [
-        'suppliers' => \App\Models\Supplier::paginate(15),
-    ]);
-})->middleware(['auth', 'verified'])->name('suppliers');
+    Route::get('/lieferanten', [SuppliersController::class, 'index'])->name('suppliers');
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
