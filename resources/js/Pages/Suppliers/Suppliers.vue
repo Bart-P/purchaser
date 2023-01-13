@@ -5,7 +5,6 @@
         <template #header>
             Alle Lieferanten
         </template>
-        
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -27,6 +26,8 @@
                                 </div>
                                 <input type="text"
                                        id="table-search"
+                                       v-model="searchInput"
+                                       @keyup="searchFor"
                                        class="
                                          block
                                          p-2
@@ -60,11 +61,35 @@
 
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head} from "@inertiajs/inertia-vue3";
+import {Head,} from "@inertiajs/inertia-vue3";
 import SuppliersTable from "@/Pages/Suppliers/Partials/SuppliersTable.vue";
+import {ref} from "vue";
+import {Inertia} from "@inertiajs/inertia";
 
-defineProps({
-    'suppliers': Object
+const props = defineProps({
+    suppliers: Object,
+    search: {
+        type: Object,
+        default: ref(''),
+    }
 })
+
+let searchInput = props.search.value || ''
+let timeOut = null
+
+function searchFor() {
+    clearTimeout(timeOut)
+    props.search.value = searchInput
+    
+    timeOut = setTimeout(() => {
+            Inertia.get(
+                route('suppliers'),
+                { search: props.search.value },
+                {
+                    preserveState: true,
+                    replace: true,
+                }
+            )}, 500)
+}
 
 </script>
