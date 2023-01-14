@@ -2,6 +2,7 @@
     <div class="px-6 py-4 bg-white dark:bg-gray-900 w-full flex justify-between">
         
         <div class="h-full flex gap-4">
+            <BaseButtonLink :href="route('suppliers.create')" color="primary">Neu</BaseButtonLink>
             <Link :href="route('suppliers.create')" class="cursor-pointer bg-purchaser-primary hover:bg-purchaser-primary-dark text-white px-6 py-2 rounded">Neu</Link>
             <button disabled class="bg-gray-100 text-gray-500 px-6 py-2 rounded">Zur Anfrage Hinzufügen</button>
             <button disabled class="bg-gray-100 text-gray-500 px-6 py-2 rounded">Löschen</button>
@@ -52,6 +53,7 @@
 import {Inertia} from "@inertiajs/inertia";
 import {ref} from "vue";
 import {Link} from "@inertiajs/inertia-vue3";
+import BaseButtonLink from "@/Components/BaseButtonLink.vue";
 
 const props = defineProps({
     search: {
