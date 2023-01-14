@@ -31,11 +31,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/anfragen', function () {
+    Route::get('/inquiries', function () {
         return Inertia::render('Inquiries/Inquiries');
     })->name('inquiries');
 
-    Route::get('/lieferanten', [SuppliersController::class, 'index'])->name('suppliers');
+    Route::get('/suppliers', [SuppliersController::class, 'index'])->name('suppliers');
+    Route::get('/suppliers/create', [SuppliersController::class, 'create'])->name('suppliers.create');
 });
 
 

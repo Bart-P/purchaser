@@ -17,4 +17,8 @@ class SuppliersController extends Controller
               ->withQueryString()
         ]);
     }
+
+    function create() {
+        return Inertia::render('Suppliers/SuppliersCreate');
+    }
 }
