@@ -1,8 +1,9 @@
 <script setup>
+// TODO change all usages to BaseButton
 defineProps({
     type: {
         type: String,
-        default: 'button',
+        default: 'submit',
     },
 });
 </script>
