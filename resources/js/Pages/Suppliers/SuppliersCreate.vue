@@ -9,11 +9,11 @@
             <div class="max-w-7xl mx-auto px-6 w-full">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-8">
                     <div class="flex flex-col gap-6">
-                        <form class="flex flex-col gap-5">
+                        <form @submit.prevent="submitSupplier" class="flex flex-col gap-5">
                             <div class="flex justify-between">
                                 <h3 class="text-xl text-purchaser-primary font-bold rounded px-2">Firma (erforderlich)</h3>
                                 <div class="flex gap-4 justify-end">
-                                    <BaseButton @click.prevent color="primary">Speichern</BaseButton>
+                                    <BaseButton type="submit" color="primary">Speichern</BaseButton>
                                     <BaseButton :href="route('suppliers')" color="light">Zurück</BaseButton>
                                 </div>
                             </div>
@@ -22,6 +22,7 @@
                                     <InputLabel for="company" value="Firma Name *" />
                                     <TextInput
                                         id="company"
+                                        v-model="supplierForm.name"
                                         type="text"
                                         class="mt-1 block w-full"
                                         required
@@ -30,9 +31,10 @@
                                 </div>
     
                                 <div class="w-1/2">
-                                    <InputLabel for="company-email" value="Firma E-Mail *" />
+                                    <InputLabel for="companyEmail" value="Firma E-Mail *" />
                                     <TextInput
-                                        id="company-email"
+                                        id="companyEmail"
+                                        v-model="supplierForm.email"
                                         type="email"
                                         class="mt-1 block w-full"
                                         required
@@ -200,10 +202,18 @@
 </template>
 
 <script setup>
-
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head} from "@inertiajs/inertia-vue3";
+import {Head, useForm} from "@inertiajs/inertia-vue3";
 import TextInput from "@/Components/TextInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import BaseButton from "@/Components/BaseButton.vue";
+
+const supplierForm = useForm({
+    name: null,
+    email: null,
+})
+
+function submitSupplier() {
+    supplierForm.post(route('suppliers.store'))
+}
 </script>
