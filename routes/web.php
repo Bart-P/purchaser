@@ -37,6 +37,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/suppliers', [SuppliersController::class, 'index'])->name('suppliers');
     Route::get('/suppliers/create', [SuppliersController::class, 'create'])->name('suppliers.create');
+    Route::post('/suppliers/store', [SuppliersController::class, 'store'])->name('suppliers.store');
 });
 
 

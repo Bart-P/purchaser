@@ -13,12 +13,27 @@ class SuppliersController extends Controller
             'suppliers' => Supplier::when($request->search, function ($query, $search) {
                 $query->where('name', 'LIKE', '%'.$search.'%')
                       ->orWhere('email', 'LIKE', '%'.$search.'%');
-            })->paginate(15)
+            })->latest()
+              ->paginate(15)
               ->withQueryString()
         ]);
     }
 
     function create() {
         return Inertia::render('Suppliers/SuppliersCreate');
+    }
+
+    function store(Request $request) {
+        $request->validate([
+             'name' => ['required', 'max:50'],
+             'email' => ['required', 'max:50'],
+             ]);
+
+        Supplier::create([
+            'name' => $request->name,
+            'email' => $request->email,
+             ]);
+
+        return redirect()->route('suppliers');
     }
 }
