@@ -1,12 +1,5 @@
 <template>
     <div class="px-6 py-4 bg-white dark:bg-gray-900 w-full flex justify-between">
-        
-        <div class="h-full flex gap-4">
-            <BaseButtonLink :href="route('suppliers.create')" color="primary">Neu</BaseButtonLink>
-            <Link :href="route('suppliers.create')" class="cursor-pointer bg-purchaser-primary hover:bg-purchaser-primary-dark text-white px-6 py-2 rounded">Neu</Link>
-            <button disabled class="bg-gray-100 text-gray-500 px-6 py-2 rounded">Zur Anfrage Hinzufügen</button>
-            <button disabled class="bg-gray-100 text-gray-500 px-6 py-2 rounded">Löschen</button>
-        </div>
         <label for="table-search"
                class="sr-only">Search</label>
         <div class="relative mt-1">
@@ -45,6 +38,10 @@
                           dark:focus:border-blue-500"
                    placeholder="Suche">
         </div>
+        <div class="h-full flex gap-3">
+            <BaseButton :href="route('suppliers.create')" color="primary">Neu</BaseButton>
+            <BaseButton :disabled="props.suppliersChosen.value" color="secondary">Zur Anfrage Hinzufügen</BaseButton>
+        </div>
     </div>
 </template>
 
@@ -52,12 +49,15 @@
 
 import {Inertia} from "@inertiajs/inertia";
 import {ref} from "vue";
-import {Link} from "@inertiajs/inertia-vue3";
-import BaseButtonLink from "@/Components/BaseButtonLink.vue";
+import BaseButton from "@/Components/BaseButton.vue";
 
 const props = defineProps({
     search: {
         default: ref(''),
+        type: Object
+    },
+    suppliersChosen: {
+        default: ref(true),
         type: Object
     }
 })
