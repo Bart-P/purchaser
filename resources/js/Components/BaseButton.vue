@@ -10,27 +10,28 @@
 
 import {Link} from "@inertiajs/inertia-vue3";
 
-const props = defineProps({
-    color: {
-        type: String,
-        default: 'primary'
-    },
-})
+const props = defineProps(
+    {
+        color: {
+            type   : String,
+            default: 'primary'
+        },
+    })
 
 const buttonStyles = {
-    primary: {
+    primary  : {
         'bg-purchaser-primary hover:bg-purchaser-primary-dark text-white': true
     },
     secondary: {
         'bg-purchaser-secondary hover:bg-purchaser-primary-dark text-white': true
     },
-    light: {
+    light    : {
         'bg-gray-100 hover:bg-purchaser-primary-light text-purchaser-primary-dark': true
     },
-    disabled: {
+    disabled : {
         'cursor-not-allowed bg-gray-100 text-gray-500 px-6 py-2 rounded': true
     },
-    danger: {
+    danger   : {
         'bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded': true
     },
 }
