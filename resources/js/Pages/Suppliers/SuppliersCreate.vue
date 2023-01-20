@@ -79,13 +79,14 @@
                              class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
                             <div class="relative w-full h-full max-w-2xl md:h-auto">
                                 <!-- Modal content -->
-                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                <form class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                     <!-- Modal body -->
                                     <div class="flex flex-col gap-5 p-6">
                                         <h3 class="text-purchaser-primary text-xl font-bold">Addresse Hinzufügen</h3>
-                                        
                                         <InputLabel for="addressType">Typ *</InputLabel>
-                                        <select id="addressType"
+                                        <select v-model="addressForm.type"
+                                                required
+                                                id="addressType"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary">
                                             <option selected>Bitte typ wählen</option>
                                             <option value="main">Hauptadresse</option>
@@ -97,53 +98,54 @@
                                         <div class="">
                                             <InputLabel for="name1"
                                                         value="Name 1 *" />
-                                            <TextInput
-                                                id="name1"
-                                                type="text"
-                                                class="mt-1 block w-full"
-                                                autofocus
-                                            />
+                                            
+                                            <TextInput v-model="addressForm.name1"
+                                                       required
+                                                       id="name1"
+                                                       type="text"
+                                                       class="mt-1 block w-full"
+                                                       autofocus />
                                         </div>
                                         
                                         <div class="">
                                             <InputLabel for="name2"
                                                         value="Name 2" />
-                                            <TextInput
-                                                id="name2"
-                                                type="text"
-                                                class="mt-1 block w-full"
+                                            <TextInput v-model="addressForm.name2"
+                                                       id="name2"
+                                                       type="text"
+                                                       class="mt-1 block w-full"
                                             />
                                         </div>
                                         
                                         <div class="">
                                             <InputLabel for="name3"
                                                         value="Name 3" />
-                                            <TextInput
-                                                id="name3"
-                                                type="text"
-                                                class="mt-1 block w-full"
+                                            <TextInput v-model="addressForm.name3"
+                                                       id="name3"
+                                                       type="text"
+                                                       class="mt-1 block w-full"
                                             />
                                         </div>
                                         <div class="flex gap-3">
                                             <div class="w-2/3">
                                                 <InputLabel for="street"
                                                             value="Straße *" />
-                                                <TextInput
-                                                    id="street"
-                                                    type="text"
-                                                    class="mt-1 block w-full"
-                                                    required
+                                                <TextInput v-model="addressForm.street"
+                                                           id="street"
+                                                           type="text"
+                                                           class="mt-1 block w-full"
+                                                           required
                                                 />
                                             </div>
                                             
                                             <div class="w-1/3">
                                                 <InputLabel for="streetNr"
                                                             value="Hausnummer *" />
-                                                <TextInput
-                                                    id="streetNr"
-                                                    type="text"
-                                                    class="mt-1 block w-full"
-                                                    required
+                                                <TextInput v-model="addressForm.streetNr"
+                                                           id="streetNr"
+                                                           type="text"
+                                                           class="mt-1 block w-full"
+                                                           required
                                                 />
                                             </div>
                                         </div>
@@ -151,22 +153,22 @@
                                             <div class="w-1/3">
                                                 <InputLabel for="cityCode"
                                                             value="PLZ *" />
-                                                <TextInput
-                                                    id="cityCode"
-                                                    type="text"
-                                                    class="mt-1 block w-full"
-                                                    required
+                                                <TextInput v-model="addressForm.cityCode"
+                                                           id="cityCode"
+                                                           type="text"
+                                                           class="mt-1 block w-full"
+                                                           required
                                                 />
                                             </div>
                                             
                                             <div class="w-2/3">
                                                 <InputLabel for="city"
                                                             value="Stadt *" />
-                                                <TextInput
-                                                    id="city"
-                                                    type="text"
-                                                    class="mt-1 block w-full"
-                                                    required
+                                                <TextInput v-model="addressForm.city"
+                                                           id="city"
+                                                           type="text"
+                                                           class="mt-1 block w-full"
+                                                           required
                                                 />
                                             </div>
                                         </div>
@@ -174,31 +176,31 @@
                                         <div class="">
                                             <InputLabel for="country"
                                                         value="Land *" />
-                                            <TextInput
-                                                id="country"
-                                                type="text"
-                                                class="mt-1 block w-full"
-                                                required
+                                            <TextInput v-model="addressForm.country"
+                                                       id="country"
+                                                       type="text"
+                                                       class="mt-1 block w-full"
+                                                       required
                                             />
                                         </div>
                                         
                                         <div class="">
                                             <InputLabel for="phone"
                                                         value="Telefon" />
-                                            <TextInput
-                                                id="phone"
-                                                type="text"
-                                                class="mt-1 block w-full"
-                                                required
+                                            <TextInput v-model="addressForm.phone"
+                                                       id="phone"
+                                                       type="text"
+                                                       class="mt-1 block w-full"
                                             />
                                         </div>
                                     </div>
                                     
                                     <!-- Modal footer -->
                                     <div class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                        <BaseButton data-modal-hide="addAddressModal"
-                                                    color="primary"
-                                                    type="button">
+                                        <BaseButton
+                                            color="primary"
+                                            @click="addAddress()"
+                                            type="submit">
                                             Speichern
                                         </BaseButton>
                                         <BaseButton data-modal-hide="addAddressModal"
@@ -207,101 +209,60 @@
                                             Abbrechen
                                         </BaseButton>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <!-- Address Modal End -->
                     </form>
                     
-                    <div class="flex flex-wrap gap-8 pt-8 justify-around">
-                        
-                        <div class="w-[30%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+                    <div class="flex flex-wrap gap-8 pt-8">
+                        <div v-for="(address, index) in addresses"
+                             class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <button class="float-right text-red-600"
+                                    type="submit"
+                                    @click="removeAddress(index)">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                            <dl :id="index"
+                                class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
                                 <div class="flex flex-col pb-3">
                                     <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Addresstyp</dt>
-                                    <dd class="text-lg font-semibold">Hauptadresse</dd>
+                                    <dd class="text-lg font-semibold">{{ address.type }}</dd>
                                 </div>
                                 <div class="flex flex-col py-3">
                                     <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Name 1</dt>
-                                    <dd class="text-lg font-semibold">mephistomedia GmbH</dd>
+                                    <dd class="text-lg font-semibold">{{ address.name1 }}</dd>
+                                </div>
+                                <div v-if="address.name2"
+                                     class="flex flex-col py-3">
+                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Name 2</dt>
+                                    <dd class="text-lg font-semibold">{{ address.name2 }}</dd>
+                                </div>
+                                <div v-if="address.name3"
+                                     class="flex flex-col py-3">
+                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Name 3</dt>
+                                    <dd class="text-lg font-semibold">{{ address.name3 }}</dd>
                                 </div>
                                 <div class="flex flex-col py-3">
                                     <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Straße / Nr</dt>
-                                    <dd class="text-lg font-semibold">in der Mark 107</dd>
+                                    <dd class="text-lg font-semibold">{{ address.street }} {{ address.streetNr }}</dd>
                                 </div>
                                 <div class="flex flex-col pt-3">
                                     <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">PLZ / Ort</dt>
-                                    <dd class="text-lg font-semibold">44869 Bochum</dd>
+                                    <dd class="text-lg font-semibold">{{ address.cityCode }} {{ address.city }}</dd>
                                 </div>
                                 <div class="flex flex-col pt-3">
                                     <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Land</dt>
-                                    <dd class="text-lg font-semibold">Deutschland</dd>
+                                    <dd class="text-lg font-semibold">{{ address.country }}</dd>
                                 </div>
-                                <div class="flex flex-col py-3">
+                                <div v-if="address.phone"
+                                     class="flex flex-col py-3">
                                     <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Telefon</dt>
-                                    <dd class="text-lg font-semibold">01234 34443 22</dd>
-                                </div>
-                            </dl>
-                        </div>
-                        <div class="w-[30%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
-                                <div class="flex flex-col pb-3">
-                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Addresstyp</dt>
-                                    <dd class="text-lg font-semibold">Hauptadresse</dd>
-                                </div>
-                                <div class="flex flex-col py-3">
-                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Name 1</dt>
-                                    <dd class="text-lg font-semibold">mephistomedia GmbH</dd>
-                                </div>
-                                <div class="flex flex-col py-3">
-                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Straße / Nr</dt>
-                                    <dd class="text-lg font-semibold">in der Mark 107</dd>
-                                </div>
-                                <div class="flex flex-col pt-3">
-                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">PLZ / Ort</dt>
-                                    <dd class="text-lg font-semibold">44869 Bochum</dd>
-                                </div>
-                                <div class="flex flex-col pt-3">
-                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Land</dt>
-                                    <dd class="text-lg font-semibold">Deutschland</dd>
-                                </div>
-                                <div class="flex flex-col py-3">
-                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Telefon</dt>
-                                    <dd class="text-lg font-semibold">01234 34443 22</dd>
-                                </div>
-                            </dl>
-                        </div>
-                        <div class="w-[30%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
-                                <div class="flex flex-col pb-3">
-                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Addresstyp</dt>
-                                    <dd class="text-lg font-semibold">Hauptadresse</dd>
-                                </div>
-                                <div class="flex flex-col py-3">
-                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Name 1</dt>
-                                    <dd class="text-lg font-semibold">mephistomedia GmbH</dd>
-                                </div>
-                                <div class="flex flex-col py-3">
-                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Straße / Nr</dt>
-                                    <dd class="text-lg font-semibold">in der Mark 107</dd>
-                                </div>
-                                <div class="flex flex-col pt-3">
-                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">PLZ / Ort</dt>
-                                    <dd class="text-lg font-semibold">44869 Bochum</dd>
-                                </div>
-                                <div class="flex flex-col pt-3">
-                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Land</dt>
-                                    <dd class="text-lg font-semibold">Deutschland</dd>
-                                </div>
-                                <div class="flex flex-col py-3">
-                                    <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Telefon</dt>
-                                    <dd class="text-lg font-semibold">01234 34443 22</dd>
+                                    <dd class="text-lg font-semibold">{{ address.phone }}</dd>
                                 </div>
                             </dl>
                         </div>
                     </div>
-                
-                
                 </div>
             </div>
             
@@ -309,7 +270,6 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-8">
                     <div class="flex flex-col gap-6">
                         <form class="flex flex-col gap-5">
-                            
                             <!-- Person Modal Start -->
                             <!-- Person Modal toggle -->
                             <div class="flex justify-between">
@@ -333,7 +293,8 @@
                                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                         <!-- Modal body -->
                                         <div class="flex flex-col gap-5 p-6">
-                                            <h3 class="text-purchaser-primary text-xl font-bold">Person Hinzufügen</h3>
+                                            <h3 class="text-purchaser-primary text-xl font-bold">Person
+                                                                                                 Hinzufügen</h3>
                                             
                                             
                                             <InputLabel for="personType">
@@ -468,18 +429,64 @@ import {Head, useForm} from "@inertiajs/inertia-vue3";
 import TextInput from "@/Components/TextInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import BaseButton from "@/Components/BaseButton.vue";
-import {onMounted} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import {initModals} from "flowbite";
 
 onMounted(() => {
     initModals()
 })
 
+let addresses = reactive([{
+    type    : 'Hauptadresse',
+    name1   : 'mephistomedia GmbH',
+    name2   : 'z. Hd. Herr du Bois',
+    name3   : '',
+    street  : 'in der Mark',
+    streetNr: '107',
+    cityCode: '44869',
+    city    : 'Bochum',
+    country : 'Deutschland',
+}])
+
+let addressFormError = ref('')
+let addressFormSuccess = ref('')
+
 const supplierForm = useForm(
     {
         name : null,
         email: null,
     })
+
+const addressForm = useForm({
+                                type    : null,
+                                name1   : null,
+                                name2   : null,
+                                name3   : null,
+                                street  : null,
+                                streetNr: null,
+                                cityCode: null,
+                                city    : null,
+                                country : null,
+                                phone   : null,
+                            })
+
+function addAddress() {
+    addressFormSuccess.value = ''
+    addressFormError.value = ''
+    
+    if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.streetNr || !addressForm.cityCode || !addressForm || !addressForm.city || !addressForm.country) {
+        addressFormError.value = 'Bitte alle mit "*" gekennzeichneten Felder befüllen!'
+    } else {
+        addresses.push(addressForm.data())
+        addressForm.reset()
+        addressFormError.value = ''
+        addressFormSuccess.value = 'Addresse Hinzugefügt!'
+    }
+}
+
+function removeAddress(id) {
+    addresses.splice(id, 1)
+}
 
 function submitSupplier() {
     supplierForm.post(route('suppliers.store'))
