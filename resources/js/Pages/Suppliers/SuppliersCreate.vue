@@ -63,6 +63,20 @@
                             Person Hinzufügen
                         </BaseButton>
                     </div>
+                    
+                    <div class="flex flex-wrap gap-8 pt-8">
+                        <div v-for="(person, index) in persons"
+                             class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <button class="float-right text-red-600"
+                                    type="submit"
+                                    @click="removePerson(index)">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                            
+                            <SinglePersonList :id="index"
+                                              :person="person" />
+                        </div>
+                    </div>
                 </div>
             </PageBoxWrapper>
         </div>
@@ -81,25 +95,49 @@ import AddAddressForm from "@/Components/AddAddressForm.vue";
 import SingleAddressList from "@/Components/SingleAddressList.vue";
 import AddPersonForm from "@/Components/AddPersonForm.vue";
 import BaseModal from "@/Components/BaseModal.vue";
+import SinglePersonList from "@/Components/SinglePersonList.vue";
 
 onMounted(() => {
     initModals()
 })
 
-let addresses = reactive([{
-    type    : 'Hauptadresse',
-    name1   : 'mephistomedia GmbH',
-    name2   : 'z. Hd. Herr du Bois',
-    name3   : '',
-    street  : 'in der Mark',
-    streetNr: '107',
-    cityCode: '44869',
-    city    : 'Bochum',
-    country : 'Deutschland',
-}])
+let addresses = reactive(
+    [
+        {
+            type    : 'Hauptadresse',
+            name1   : 'mephistomedia GmbH',
+            name2   : 'z. Hd. Herr du Bois',
+            name3   : '',
+            street  : 'in der Mark',
+            streetNr: '107',
+            cityCode: '44869',
+            city    : 'Bochum',
+            country : 'Deutschland',
+        },
+    ]
+)
 
+let persons = reactive(
+    [
+        {
+            type     : 'Hauptkontakt',
+            gender   : 'männlich',
+            firstName: 'Daniel',
+            lastName : 'du Bois',
+            position : 'GF',
+            phone1   : '107123332',
+            phone2   : '',
+            email1   : 'da@ni.el',
+            email2   : '',
+        },
+    ]
+)
 
-function removeAddress(id) {
-    addresses.splice(id, 1)
+function removeAddress(index) {
+    addresses.splice(index, 1)
+}
+
+function removePerson(index) {
+    persons.splice(index, 1)
 }
 </script>
