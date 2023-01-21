@@ -11,164 +11,32 @@
                 <AddSupplierForm></AddSupplierForm>
             </PageBoxWrapper>
             
+            <!-- Address Modal Start -->
+            <div id="addAddressModal"
+                 tabindex="-1"
+                 aria-hidden="true"
+                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+                <div class="relative w-full h-full max-w-2xl md:h-auto relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal content -->
+                    <AddAddressForm :addresses="addresses"></AddAddressForm>
+                </div>
+            </div>
+            <!-- Address Modal End -->
+            
             <!-- Addresses to save list -->
             <PageBoxWrapper>
-                <form class="flex flex-col gap-5">
-                    <!-- Address Modal Start -->
-                    <!-- Address Modal toggle -->
-                    <div class="flex justify-between">
-                        <h3 class="text-xl text-purchaser-primary font-bold rounded px-2">
-                            Adressen (optional)
-                        </h3>
-                        <BaseButton color="primary"
-                                    type="button"
-                                    data-modal-target="addAddressModal"
-                                    data-modal-toggle="addAddressModal">
-                            Adresse Hinzufügen
-                        </BaseButton>
-                    </div>
-                    <!-- Main modal -->
-                    <div id="addAddressModal"
-                         tabindex="-1"
-                         aria-hidden="true"
-                         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-                        <div class="relative w-full h-full max-w-2xl md:h-auto">
-                            <!-- Modal content -->
-                            <form class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                <!-- Modal body -->
-                                <div class="flex flex-col gap-5 p-6">
-                                    <h3 class="text-purchaser-primary text-xl font-bold">Addresse Hinzufügen</h3>
-                                    <InputLabel for="addressType">Typ *</InputLabel>
-                                    <select v-model="addressForm.type"
-                                            required
-                                            id="addressType"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary">
-                                        <option selected>Bitte typ wählen</option>
-                                        <option value="main">Hauptadresse</option>
-                                        <option value="invoice">Rechnungsadresse</option>
-                                        <option value="delivery">Lieferadresse</option>
-                                        <option value="other">Sonstige</option>
-                                    </select>
-                                    
-                                    <div class="">
-                                        <InputLabel for="name1"
-                                                    value="Name 1 *" />
-                                        
-                                        <TextInput v-model="addressForm.name1"
-                                                   required
-                                                   id="name1"
-                                                   type="text"
-                                                   class="mt-1 block w-full"
-                                                   autofocus />
-                                    </div>
-                                    
-                                    <div class="">
-                                        <InputLabel for="name2"
-                                                    value="Name 2" />
-                                        <TextInput v-model="addressForm.name2"
-                                                   id="name2"
-                                                   type="text"
-                                                   class="mt-1 block w-full"
-                                        />
-                                    </div>
-                                    
-                                    <div class="">
-                                        <InputLabel for="name3"
-                                                    value="Name 3" />
-                                        <TextInput v-model="addressForm.name3"
-                                                   id="name3"
-                                                   type="text"
-                                                   class="mt-1 block w-full"
-                                        />
-                                    </div>
-                                    <div class="flex gap-3">
-                                        <div class="w-2/3">
-                                            <InputLabel for="street"
-                                                        value="Straße *" />
-                                            <TextInput v-model="addressForm.street"
-                                                       id="street"
-                                                       type="text"
-                                                       class="mt-1 block w-full"
-                                                       required
-                                            />
-                                        </div>
-                                        
-                                        <div class="w-1/3">
-                                            <InputLabel for="streetNr"
-                                                        value="Hausnummer *" />
-                                            <TextInput v-model="addressForm.streetNr"
-                                                       id="streetNr"
-                                                       type="text"
-                                                       class="mt-1 block w-full"
-                                                       required
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="flex gap-3">
-                                        <div class="w-1/3">
-                                            <InputLabel for="cityCode"
-                                                        value="PLZ *" />
-                                            <TextInput v-model="addressForm.cityCode"
-                                                       id="cityCode"
-                                                       type="text"
-                                                       class="mt-1 block w-full"
-                                                       required
-                                            />
-                                        </div>
-                                        
-                                        <div class="w-2/3">
-                                            <InputLabel for="city"
-                                                        value="Stadt *" />
-                                            <TextInput v-model="addressForm.city"
-                                                       id="city"
-                                                       type="text"
-                                                       class="mt-1 block w-full"
-                                                       required
-                                            />
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="">
-                                        <InputLabel for="country"
-                                                    value="Land *" />
-                                        <TextInput v-model="addressForm.country"
-                                                   id="country"
-                                                   type="text"
-                                                   class="mt-1 block w-full"
-                                                   required
-                                        />
-                                    </div>
-                                    
-                                    <div class="">
-                                        <InputLabel for="phone"
-                                                    value="Telefon" />
-                                        <TextInput v-model="addressForm.phone"
-                                                   id="phone"
-                                                   type="text"
-                                                   class="mt-1 block w-full"
-                                        />
-                                    </div>
-                                </div>
-                                
-                                <!-- Modal footer -->
-                                <div class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                    <BaseButton
-                                        color="primary"
-                                        @click="addAddress()"
-                                        type="submit">
-                                        Speichern
-                                    </BaseButton>
-                                    <BaseButton data-modal-hide="addAddressModal"
-                                                color="light"
-                                                type="button">
-                                        Abbrechen
-                                    </BaseButton>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- Address Modal End -->
-                </form>
+                <!-- Address Modal toggle -->
+                <div class="flex justify-between">
+                    <h3 class="text-xl text-purchaser-primary font-bold rounded px-2">
+                        Adressen (optional)
+                    </h3>
+                    <BaseButton color="primary"
+                                type="button"
+                                data-modal-target="addAddressModal"
+                                data-modal-toggle="addAddressModal">
+                        Adresse Hinzufügen
+                    </BaseButton>
+                </div>
                 <div class="flex flex-wrap gap-8 pt-8">
                     <div v-for="(address, index) in addresses"
                          class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -375,14 +243,15 @@
 
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head, useForm} from "@inertiajs/inertia-vue3";
+import {Head} from "@inertiajs/inertia-vue3";
 import TextInput from "@/Components/TextInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import BaseButton from "@/Components/BaseButton.vue";
-import {onMounted, reactive, ref} from "vue";
+import {onMounted, reactive} from "vue";
 import {initModals} from "flowbite";
 import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
 import AddSupplierForm from "@/Components/AddSupplierForm.vue";
+import AddAddressForm from "@/Components/AddAddressForm.vue";
 
 onMounted(() => {
     initModals()
@@ -400,39 +269,8 @@ let addresses = reactive([{
     country : 'Deutschland',
 }])
 
-let addressFormError = ref('')
-let addressFormSuccess = ref('')
-
-
-const addressForm = useForm({
-                                type    : null,
-                                name1   : null,
-                                name2   : null,
-                                name3   : null,
-                                street  : null,
-                                streetNr: null,
-                                cityCode: null,
-                                city    : null,
-                                country : null,
-                                phone   : null,
-                            })
-
-function addAddress() {
-    addressFormSuccess.value = ''
-    addressFormError.value = ''
-    
-    if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.streetNr || !addressForm.cityCode || !addressForm || !addressForm.city || !addressForm.country) {
-        addressFormError.value = 'Bitte alle mit "*" gekennzeichneten Felder befüllen!'
-    } else {
-        addresses.push(addressForm.data())
-        addressForm.reset()
-        addressFormError.value = ''
-        addressFormSuccess.value = 'Addresse Hinzugefügt!'
-    }
-}
 
 function removeAddress(id) {
     addresses.splice(id, 1)
 }
-
 </script>
