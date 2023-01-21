@@ -55,7 +55,8 @@ const supplierForm = useForm(
     {
         name : null,
         email: null,
-    })
+    }
+)
 
 function submitSupplier() {
     supplierForm.post(route('suppliers.store'))
