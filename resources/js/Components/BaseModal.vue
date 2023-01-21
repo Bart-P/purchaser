@@ -13,7 +13,7 @@
 
 defineProps(
     {
-        id: Number,
+        id: String,
     }
 )
 </script>
