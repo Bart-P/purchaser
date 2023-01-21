@@ -293,8 +293,8 @@
                                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                         <!-- Modal body -->
                                         <div class="flex flex-col gap-5 p-6">
-                                            <h3 class="text-purchaser-primary text-xl font-bold">Person
-                                                                                                 Hinzufügen</h3>
+                                            <h3 class="text-purchaser-primary text-xl font-bold">
+                                                Person Hinzufügen</h3>
                                             
                                             
                                             <InputLabel for="personType">
