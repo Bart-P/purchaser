@@ -8,49 +8,7 @@
         <div class="py-12 w-full h-full flex flex-col gap-8">
             <!-- add Company Form -->
             <PageBoxWrapper>
-                <form @submit.prevent="submitSupplier"
-                      class="flex flex-col gap-5">
-                    <div class="flex justify-between">
-                        <h3 class="text-xl text-purchaser-primary font-bold rounded px-2">
-                            Firma (erforderlich)
-                        </h3>
-                        <div class="flex gap-4 justify-end">
-                            <BaseButton type="submit"
-                                        color="primary">Speichern
-                            </BaseButton>
-                            <BaseButton :href="route('suppliers')"
-                                        color="light">Zurück
-                            </BaseButton>
-                        </div>
-                    </div>
-                    
-                    <div class="flex gap-5">
-                        <div class="w-1/2">
-                            <InputLabel for="company"
-                                        value="Firma Name *" />
-                            <TextInput
-                                id="company"
-                                v-model="supplierForm.name"
-                                type="text"
-                                class="mt-1 block w-full"
-                                required
-                                autofocus
-                            />
-                        </div>
-                        
-                        <div class="w-1/2">
-                            <InputLabel for="companyEmail"
-                                        value="Firma E-Mail *" />
-                            <TextInput
-                                id="companyEmail"
-                                v-model="supplierForm.email"
-                                type="email"
-                                class="mt-1 block w-full"
-                                required
-                            />
-                        </div>
-                    </div>
-                </form>
+                <AddSupplierForm></AddSupplierForm>
             </PageBoxWrapper>
             
             <!-- Addresses to save list -->
@@ -424,6 +382,7 @@ import BaseButton from "@/Components/BaseButton.vue";
 import {onMounted, reactive, ref} from "vue";
 import {initModals} from "flowbite";
 import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
+import AddSupplierForm from "@/Components/AddSupplierForm.vue";
 
 onMounted(() => {
     initModals()
@@ -444,11 +403,6 @@ let addresses = reactive([{
 let addressFormError = ref('')
 let addressFormSuccess = ref('')
 
-const supplierForm = useForm(
-    {
-        name : null,
-        email: null,
-    })
 
 const addressForm = useForm({
                                 type    : null,
@@ -481,7 +435,4 @@ function removeAddress(id) {
     addresses.splice(id, 1)
 }
 
-function submitSupplier() {
-    supplierForm.post(route('suppliers.store'))
-}
 </script>
