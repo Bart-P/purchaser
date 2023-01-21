@@ -11,17 +11,9 @@
                 <AddSupplierForm></AddSupplierForm>
             </PageBoxWrapper>
             
-            <!-- Address Modal Start -->
-            <div id="addAddressModal"
-                 tabindex="-1"
-                 aria-hidden="true"
-                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-                <div class="relative w-full h-full max-w-2xl md:h-auto relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <!-- Modal content -->
-                    <AddAddressForm :addresses="addresses"></AddAddressForm>
-                </div>
-            </div>
-            <!-- Address Modal End -->
+            <BaseModal id="addAddressModal">
+                <AddAddressForm :addresses="addresses"></AddAddressForm>
+            </BaseModal>
             
             <!-- Addresses to save list -->
             <PageBoxWrapper>
@@ -52,20 +44,9 @@
                 </div>
             </PageBoxWrapper>
             
-            <!-- Person Modal Start -->
-            <div id="addPersonModal"
-                 tabindex="-1"
-                 aria-hidden="true"
-                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-                <div class="relative w-full h-full max-w-2xl md:h-auto">
-                    <!-- Modal content -->
-                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                        <!-- Modal body -->
-                        <AddPersonForm />
-                    </div>
-                </div>
-            </div>
-            <!-- Person Modal End -->
+            <BaseModal id="addPersonModal">
+                <AddPersonForm />
+            </BaseModal>
             
             <!-- Presons to save list -->
             <PageBoxWrapper>
@@ -99,6 +80,7 @@ import AddSupplierForm from "@/Components/AddSupplierForm.vue";
 import AddAddressForm from "@/Components/AddAddressForm.vue";
 import SingleAddressList from "@/Components/SingleAddressList.vue";
 import AddPersonForm from "@/Components/AddPersonForm.vue";
+import BaseModal from "@/Components/BaseModal.vue";
 
 onMounted(() => {
     initModals()
