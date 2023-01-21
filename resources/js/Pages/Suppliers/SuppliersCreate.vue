@@ -46,16 +46,15 @@
                             <i class="fa-solid fa-trash"></i>
                         </button>
                         
-                        <AddressInfoCard :id="index"
-                                         :address="address" />
+                        <SingleAddressList :id="index"
+                                           :address="address" />
                     </div>
                 </div>
             </PageBoxWrapper>
             
             <!-- Presons to save list -->
             <PageBoxWrapper>
-                <form class="flex flex-col gap-5">
-                    <!-- Person Modal Start -->
+                <div class="flex flex-col gap-5">
                     <!-- Person Modal toggle -->
                     <div class="flex justify-between">
                         <h3 class="text-xl text-purchaser-primary font-bold rounded px-2">
@@ -68,7 +67,8 @@
                             Person Hinzufügen
                         </BaseButton>
                     </div>
-                    <!-- Main modal -->
+                    
+                    <!-- Person Modal Start -->
                     <div id="addPersonModal"
                          tabindex="-1"
                          aria-hidden="true"
@@ -179,8 +179,6 @@
                                             />
                                         </div>
                                     </div>
-                                
-                                
                                 </div>
                                 
                                 <!-- Modal footer -->
@@ -200,7 +198,7 @@
                         </div>
                     </div>
                     <!-- Person Modal End -->
-                </form>
+                </div>
             </PageBoxWrapper>
         </div>
     </AuthenticatedLayout>
@@ -209,15 +207,15 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head} from "@inertiajs/inertia-vue3";
+import {onMounted, reactive} from "vue";
+import {initModals} from "flowbite";
 import TextInput from "@/Components/TextInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import BaseButton from "@/Components/BaseButton.vue";
-import {onMounted, reactive} from "vue";
-import {initModals} from "flowbite";
 import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
 import AddSupplierForm from "@/Components/AddSupplierForm.vue";
 import AddAddressForm from "@/Components/AddAddressForm.vue";
-import AddressInfoCard from "@/Components/AddressInfoCard.vue";
+import SingleAddressList from "@/Components/SingleAddressList.vue";
 
 onMounted(() => {
     initModals()
