@@ -45,7 +45,7 @@
             </PageBoxWrapper>
             
             <BaseModal id="addPersonModal">
-                <AddPersonForm />
+                <AddPersonForm :persons="persons" />
             </BaseModal>
             
             <!-- Presons to save list -->
