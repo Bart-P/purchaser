@@ -52,6 +52,21 @@
                 </div>
             </PageBoxWrapper>
             
+            <!-- Person Modal Start -->
+            <div id="addPersonModal"
+                 tabindex="-1"
+                 aria-hidden="true"
+                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+                <div class="relative w-full h-full max-w-2xl md:h-auto">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal body -->
+                        <AddPersonForm />
+                    </div>
+                </div>
+            </div>
+            <!-- Person Modal End -->
+            
             <!-- Presons to save list -->
             <PageBoxWrapper>
                 <div class="flex flex-col gap-5">
@@ -67,137 +82,6 @@
                             Person Hinzufügen
                         </BaseButton>
                     </div>
-                    
-                    <!-- Person Modal Start -->
-                    <div id="addPersonModal"
-                         tabindex="-1"
-                         aria-hidden="true"
-                         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-                        <div class="relative w-full h-full max-w-2xl md:h-auto">
-                            <!-- Modal content -->
-                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                <!-- Modal body -->
-                                <div class="flex flex-col gap-5 p-6">
-                                    <h3 class="text-purchaser-primary text-xl font-bold">
-                                        Person Hinzufügen</h3>
-                                    
-                                    
-                                    <InputLabel for="personType">
-                                        Kontakttyp
-                                    </InputLabel>
-                                    
-                                    <select id="personType"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary"
-                                            required>
-                                        <option selected>Bitte wählen</option>
-                                        <option value="main">Hauptkontakt</option>
-                                        <option value="secondary">Vertretung</option>
-                                        <option value="other">Sonstige</option>
-                                    </select>
-                                    
-                                    <InputLabel for="personType">
-                                        Geschlecht
-                                    </InputLabel>
-                                    
-                                    <select id="personType"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary"
-                                            required>
-                                        <option selected>Bitte wählen</option>
-                                        <option value="male">Männlich</option>
-                                        <option value="female">Weiblich</option>
-                                        <option value="other">Sonstige</option>
-                                    </select>
-                                    <div class="">
-                                        <InputLabel for="firstName"
-                                                    value="Vorname" />
-                                        <TextInput
-                                            id="firstName"
-                                            type="text"
-                                            class="mt-1 block w-full"
-                                            autofocus
-                                        />
-                                    </div>
-                                    
-                                    <div class="">
-                                        <InputLabel for="lastName"
-                                                    value="Nachname" />
-                                        <TextInput
-                                            id="name2"
-                                            type="text"
-                                            class="mt-1 block w-full"
-                                        />
-                                    </div>
-                                    
-                                    <div class="">
-                                        <InputLabel for="position"
-                                                    value="Position" />
-                                        <TextInput
-                                            id="position"
-                                            type="text"
-                                            class="mt-1 block w-full"
-                                        />
-                                    </div>
-                                    <div class="flex gap-3">
-                                        <div class="w-1/2">
-                                            <InputLabel for="phone1"
-                                                        value="Telefon 1" />
-                                            <TextInput
-                                                id="phone1"
-                                                type="text"
-                                                class="mt-1 block w-full"
-                                            />
-                                        </div>
-                                        
-                                        <div class="w-1/2">
-                                            <InputLabel for="phone2"
-                                                        value="Telefon 2" />
-                                            <TextInput
-                                                id="streetNr"
-                                                type="text"
-                                                class="mt-1 block w-full"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="flex gap-3">
-                                        <div class="w-1/2">
-                                            <InputLabel for="email1"
-                                                        value="E-Mail 1" />
-                                            <TextInput
-                                                id="email1"
-                                                type="email"
-                                                class="mt-1 block w-full"
-                                            />
-                                        </div>
-                                        
-                                        <div class="w-1/2">
-                                            <InputLabel for="email2"
-                                                        value="E-Mail2" />
-                                            <TextInput
-                                                id="email2"
-                                                type="email"
-                                                class="mt-1 block w-full"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Modal footer -->
-                                <div class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                    <BaseButton data-modal-hide="addPersonModal"
-                                                color="primary"
-                                                type="button">
-                                        Speichern
-                                    </BaseButton>
-                                    <BaseButton data-modal-hide="addPersonModal"
-                                                color="light"
-                                                type="button">
-                                        Abbrechen
-                                    </BaseButton>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Person Modal End -->
                 </div>
             </PageBoxWrapper>
         </div>
@@ -209,13 +93,12 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head} from "@inertiajs/inertia-vue3";
 import {onMounted, reactive} from "vue";
 import {initModals} from "flowbite";
-import TextInput from "@/Components/TextInput.vue";
-import InputLabel from "@/Components/InputLabel.vue";
 import BaseButton from "@/Components/BaseButton.vue";
 import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
 import AddSupplierForm from "@/Components/AddSupplierForm.vue";
 import AddAddressForm from "@/Components/AddAddressForm.vue";
 import SingleAddressList from "@/Components/SingleAddressList.vue";
+import AddPersonForm from "@/Components/AddPersonForm.vue";
 
 onMounted(() => {
     initModals()
