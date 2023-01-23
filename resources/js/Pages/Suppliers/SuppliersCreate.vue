@@ -8,11 +8,12 @@
         <div class="py-12 w-full h-full flex flex-col gap-8">
             <!-- add Company Form -->
             <PageBoxWrapper>
-                <AddSupplierForm></AddSupplierForm>
+                <AddSupplierForm :persons="persons"
+                                 :addresses="addresses" />
             </PageBoxWrapper>
             
             <BaseModal id="addAddressModal">
-                <AddAddressForm :addresses="addresses"></AddAddressForm>
+                <AddAddressForm :addresses="addresses" />
             </BaseModal>
             
             <!-- Addresses to save list -->
@@ -101,37 +102,9 @@ onMounted(() => {
     initModals()
 })
 
-let addresses = reactive(
-    [
-        {
-            type    : 'Hauptadresse',
-            name1   : 'mephistomedia GmbH',
-            name2   : 'z. Hd. Herr du Bois',
-            name3   : '',
-            street  : 'in der Mark',
-            streetNr: '107',
-            cityCode: '44869',
-            city    : 'Bochum',
-            country : 'Deutschland',
-        },
-    ]
-)
+let addresses = reactive([])
 
-let persons = reactive(
-    [
-        {
-            type     : 'Hauptkontakt',
-            gender   : 'männlich',
-            firstName: 'Daniel',
-            lastName : 'du Bois',
-            position : 'GF',
-            phone1   : '107123332',
-            phone2   : '',
-            email1   : 'da@ni.el',
-            email2   : '',
-        },
-    ]
-)
+let persons = reactive([])
 
 function removeAddress(index) {
     addresses.splice(index, 1)

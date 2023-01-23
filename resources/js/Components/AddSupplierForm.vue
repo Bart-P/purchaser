@@ -51,6 +51,12 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import {useForm} from "@inertiajs/inertia-vue3";
 
+const props = defineProps(
+    {
+        addresses: Array,
+        persons  : Array,
+    })
+
 const supplierForm = useForm(
     {
         name : null,
@@ -59,6 +65,7 @@ const supplierForm = useForm(
 )
 
 function submitSupplier() {
-    supplierForm.post(route('suppliers.store'))
+    // supplierForm.post(route('suppliers.store'))
+    // TODO addresses and persons need to be saved after suppliers with the supplier id.
 }
 </script>

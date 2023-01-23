@@ -3,12 +3,18 @@
         <!-- Modal body -->
         <div class="flex flex-col gap-5 p-6">
             <h3 class="text-purchaser-primary text-xl font-bold">Addresse Hinzufügen</h3>
+            
+            <AlertSuccess v-if="addressFormSuccess"
+                          :message="addressFormSuccess" />
+            
+            <AlertFailed v-if="addressFormError"
+                         :message="addressFormError" />
+            
             <InputLabel for="addressType">Typ *</InputLabel>
             <select v-model="addressForm.type"
                     required
                     id="addressType"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary">
-                <option selected>Bitte wählen</option>
                 <option value="main">Hauptadresse</option>
                 <option value="invoice">Rechnungsadresse</option>
                 <option value="delivery">Lieferadresse</option>
@@ -139,6 +145,8 @@ import TextInput from "@/Components/TextInput.vue";
 import BaseButton from "@/Components/BaseButton.vue";
 import {useForm} from "@inertiajs/inertia-vue3";
 import {ref} from "vue";
+import AlertSuccess from "@/Components/AlertSuccess.vue";
+import AlertFailed from "@/Components/AlertFailed.vue";
 
 const props = defineProps(
     {
@@ -169,12 +177,15 @@ function addAddress() {
     addressFormError.value = ''
     
     if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.streetNr || !addressForm.cityCode || !addressForm || !addressForm.city || !addressForm.country) {
-        addressFormError.value = 'Bitte alle mit "*" gekennzeichneten Felder befüllen!'
+        addressFormError.value = 'Bitte alle mit * gekennzeichneten Felder befüllen!'
     } else {
         props.addresses.push(addressForm.data())
         addressForm.reset()
         addressFormError.value = ''
-        addressFormSuccess.value = 'Addresse Hinzugefügt!'
+        addressFormSuccess.value = 'Addresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.'
     }
+    
+    addressFormError.value = ''
+    addressFormSuccess.value = ''
 }
 </script>

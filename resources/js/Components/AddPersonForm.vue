@@ -12,7 +12,6 @@
                 v-model="personForm.type"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary"
                 required>
-            <option selected>Bitte wählen</option>
             <option value="main">Hauptkontakt</option>
             <option value="secondary">Vertretung</option>
             <option value="other">Sonstige</option>
@@ -26,7 +25,6 @@
                 v-model="personForm.gender"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary"
                 required>
-            <option selected>Bitte wählen</option>
             <option value="male">Männlich</option>
             <option value="female">Weiblich</option>
             <option value="other">Sonstige</option>
@@ -140,8 +138,6 @@ const props = defineProps(
     }
 )
 
-// TODO Figure out error handling in the modal..
-
 const personForm = useForm(
     {
         type     : null,
@@ -171,6 +167,9 @@ function addPerson() {
         personFormError.value = ''
         personFormSuccess.value = 'Kontaktperson Hinzugefügt!'
     }
+    
+    personFormError.value = ''
+    personFormSuccess.value = ''
 }
 
 
