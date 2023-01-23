@@ -91,12 +91,12 @@ import {onMounted, reactive} from "vue";
 import {initModals} from "flowbite";
 import BaseButton from "@/Components/BaseButton.vue";
 import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
-import AddSupplierForm from "@/Components/AddSupplierForm.vue";
-import AddAddressForm from "@/Components/AddAddressForm.vue";
-import SingleAddressList from "@/Components/SingleAddressList.vue";
-import AddPersonForm from "@/Components/AddPersonForm.vue";
+import AddSupplierForm from "@/Pages/Suppliers/Partials/AddSupplierForm.vue";
+import AddAddressForm from "@/Pages/Suppliers/Partials/AddAddressForm.vue";
+import SingleAddressList from "@/Pages/Suppliers/Partials/SingleAddressList.vue";
+import AddPersonForm from "@/Pages/Suppliers/Partials/AddPersonForm.vue";
 import BaseModal from "@/Components/BaseModal.vue";
-import SinglePersonList from "@/Components/SinglePersonList.vue";
+import SinglePersonList from "@/Pages/Suppliers/Partials/SinglePersonList.vue";
 
 onMounted(() => {
     initModals()
