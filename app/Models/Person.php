@@ -10,11 +10,12 @@ class Person extends Model
 {
     use HasFactory;
 
+    public $table = 'persons';
     protected $fillable = [
         'type',
         'gender',
-        'firstName',
-        'lastName',
+        'first_name',
+        'last_name',
         'position',
         'phone1',
         'phone2',
