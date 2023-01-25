@@ -176,7 +176,9 @@ function addAddress() {
     addressFormSuccess.value = ''
     addressFormError.value = ''
     
-    if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.streetNr || !addressForm.cityCode || !addressForm || !addressForm.city || !addressForm.country) {
+    // TODO Error handling does not seem to work...
+    
+    if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.streetNr || !addressForm.cityCode || !addressForm.city || !addressForm.country) {
         addressFormError.value = 'Bitte alle mit * gekennzeichneten Felder befüllen!'
     } else {
         props.addresses.push(addressForm.data())

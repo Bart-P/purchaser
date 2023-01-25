@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SuppliersController;
 use Illuminate\Foundation\Application;
@@ -31,10 +33,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    // INQUIRIES
     Route::get('/inquiries', function () {
         return Inertia::render('Inquiries/Inquiries');
     })->name('inquiries');
 
+    // SUPPLIERS
     Route::get('/suppliers',
                [
                    SuppliersController::class,
@@ -51,28 +55,31 @@ Route::middleware(['auth', 'verified'])->group(function () {
                     'store',
                 ])->name('suppliers.store');
 
+    // ADDRESSES
     Route::get('/addresses/create',
                [
-                   SuppliersController::class,
+                   AddressController::class,
                    'create',
                ])->name('addresses.create');
     Route::post('/addresses/store',
                 [
-                    SuppliersController::class,
+                    AddressController::class,
                     'store',
                 ])->name('addresses.store');
 
+    // PERSONS
     Route::get('/persons/create',
                [
-                   SuppliersController::class,
+                   PersonController::class,
                    'create',
                ])->name('persons.create');
     Route::post('/persons/store',
                 [
-                    SuppliersController::class,
+                    PersonController::class,
                     'store',
                 ])->name('persons.store');
 
+    // USER PROFILE
     Route::get('/profile',
                [
                    ProfileController::class,
