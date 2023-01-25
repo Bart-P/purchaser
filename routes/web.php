@@ -19,10 +19,10 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Auth/Login', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
+        'canLogin'       => Route::has('login'),
+        'canRegister'    => Route::has('register'),
         'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'phpVersion'     => PHP_VERSION,
     ]);
 });
 
@@ -35,17 +35,59 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Inquiries/Inquiries');
     })->name('inquiries');
 
-    Route::get('/suppliers', [SuppliersController::class, 'index'])->name('suppliers');
-    Route::get('/suppliers/create', [SuppliersController::class, 'create'])->name('suppliers.create');
-    Route::post('/suppliers/store', [SuppliersController::class, 'store'])->name('suppliers.store');
+    Route::get('/suppliers',
+               [
+                   SuppliersController::class,
+                   'index',
+               ])->name('suppliers');
+    Route::get('/suppliers/create',
+               [
+                   SuppliersController::class,
+                   'create',
+               ])->name('suppliers.create');
+    Route::post('/suppliers/store',
+                [
+                    SuppliersController::class,
+                    'store',
+                ])->name('suppliers.store');
+
+    Route::get('/addresses/create',
+               [
+                   SuppliersController::class,
+                   'create',
+               ])->name('addresses.create');
+    Route::post('/addresses/store',
+                [
+                    SuppliersController::class,
+                    'store',
+                ])->name('addresses.store');
+
+    Route::get('/persons/create',
+               [
+                   SuppliersController::class,
+                   'create',
+               ])->name('persons.create');
+    Route::post('/persons/store',
+                [
+                    SuppliersController::class,
+                    'store',
+                ])->name('persons.store');
+
+    Route::get('/profile',
+               [
+                   ProfileController::class,
+                   'edit',
+               ])->name('profile.edit');
+    Route::patch('/profile',
+                 [
+                     ProfileController::class,
+                     'update',
+                 ])->name('profile.update');
+    Route::delete('/profile',
+                  [
+                      ProfileController::class,
+                      'destroy',
+                  ])->name('profile.destroy');
 });
 
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
