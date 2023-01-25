@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Address;
+use App\Models\Person;
+use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,13 +20,16 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
-             'name' => 'Bartek',
-             'email' => 'bar-p@wp.pl',
-             'password' => bcrypt('asdfasdf'),
-        ]);
+        User::factory()->create(
+            [
+                'name'     => 'Bartek',
+                'email'    => 'bar-p@wp.pl',
+                'password' => bcrypt('asdfasdf'),
+            ]);
 
-        \App\Models\Supplier::factory(100)->create();
+        Supplier::factory(100)->create();
+        Address::factory(150)->create();
+        Person::factory(125)->create();
 
     }
 }
