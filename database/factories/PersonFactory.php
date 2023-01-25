@@ -17,7 +17,43 @@ class PersonFactory extends Factory
     public function definition()
     {
         return [
-            // TODO
+            'supplier_id' => fake()->numberBetween(1, 100),
+            'type'        => fake()->randomElement(
+                [
+                    'main',
+                    'secondary',
+                    'other',
+                ]
+            ),
+            'gender'      => fake()->randomElement(['m', 'f']),
+            'first_name'  => fake()->firstName(),
+            'last_name'   => fake()->lastName(),
+            'position'    => fake()->randomElement(
+                [
+                    'GF',
+                    'marketing',
+                    null,
+                    null,
+                ]),
+            'phone1'      => fake()->phoneNumber(),
+            'phone2'      => fake()->randomElement(
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    fake()->phoneNumber(),
+                ]),
+            'email1'      => fake()->email(),
+            'email2'      => fake()->randomElement(
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    fake()->email(),
+                ]),
+
         ];
     }
 }
