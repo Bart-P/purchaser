@@ -59,13 +59,17 @@ const props = defineProps(
 
 const supplierForm = useForm(
     {
-        name : null,
-        email: null,
+        name     : null,
+        email    : null,
+        addresses: null
     }
 )
 
 function submitSupplier() {
-    // supplierForm.post(route('suppliers.store'))
-    // TODO addresses and persons need to be saved after suppliers with the supplier id.
+    if (props.addresses.length)
+        supplierForm['addresses'] = props.addresses
+    
+    supplierForm.post(route('suppliers.store'))
+    
 }
 </script>
