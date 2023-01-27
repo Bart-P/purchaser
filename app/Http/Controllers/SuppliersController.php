@@ -42,8 +42,18 @@ class SuppliersController extends Controller
             ]);
 
         if ($supplier) {
-            $addressesArray = $this->getArrayOfAddressObjects($request->addresses, $supplier->id);
-            $this->storeAddressesAndOrPersons($supplier, $addressesArray);
+            $addressesArray = [];
+            $personsArray = [];
+
+            if ($request->addresses) {
+                $addressesArray = $this->getArrayOfAddressObjects($request->addresses, $supplier->id);
+            };
+
+            if ($request->persons) {
+                $personsArray = $this->getArrayOfPersonObjects($request->persons, $supplier->id);
+            };
+
+            $this->storeAddressesAndOrPersons($supplier, $addressesArray, $personsArray);
         }
 
         // TODO set up error or success notification on route
@@ -55,14 +65,21 @@ class SuppliersController extends Controller
         if (count($addresses)) {
             $supplier->addresses()->saveMany($addresses);
         }
+
+        if (count($persons)) {
+            $supplier->persons()->saveMany($persons);
+        }
     }
 
     /**
+     * Returns an array of Address objects and sets the supplier id for each
+     *
      * @param $addresses
-     * @param $supplier
+     * @param $supplierId
      * @return array
+     *
      */
-    public function getArrayOfAddressObjects($addresses, $supplierId): array
+    private function getArrayOfAddressObjects($addresses, $supplierId): array
     {
         $addressesArray = [];
         foreach ($addresses as $address) {
@@ -76,8 +93,8 @@ class SuppliersController extends Controller
                     'street'      => $address['street'],
                     'street_nr'   => $address['streetNr'],
                     'city_code'   => $address['cityCode'],
-                    'city'        => $address['cityCode'],
-                    'country'     => $address['cityCode'],
+                    'city'        => $address['city'],
+                    'country'     => $address['country'],
                     'phone'       => $address['phone'],
                 ]
 
