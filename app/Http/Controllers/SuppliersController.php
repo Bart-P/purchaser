@@ -42,26 +42,7 @@ class SuppliersController extends Controller
             ]);
 
         if ($supplier) {
-            $addressesArray = [];
-            foreach ($request->addresses as $address) {
-                $address = new Address(
-                    [
-                        'supplier_id' => $supplier->id,
-                        'type'        => $address['type'],
-                        'name1'       => $address['name1'],
-                        'name2'       => $address['name2'],
-                        'name3'       => $address['name3'],
-                        'street'      => $address['street'],
-                        'street_nr'   => $address['streetNr'],
-                        'city_code'   => $address['cityCode'],
-                        'city'        => $address['cityCode'],
-                        'country'     => $address['cityCode'],
-                        'phone'       => $address['phone'],
-                    ]
-
-                );
-                $addressesArray[] = $address;
-            };
+            $addressesArray = $this->getArrayOfAddressObjects($request->addresses, $supplier->id);
             $this->storeAddressesAndOrPersons($supplier, $addressesArray);
         }
 
@@ -74,5 +55,35 @@ class SuppliersController extends Controller
         if (count($addresses)) {
             $supplier->addresses()->saveMany($addresses);
         }
+    }
+
+    /**
+     * @param $addresses
+     * @param $supplier
+     * @return array
+     */
+    public function getArrayOfAddressObjects($addresses, $supplierId): array
+    {
+        $addressesArray = [];
+        foreach ($addresses as $address) {
+            $address = new Address(
+                [
+                    'supplier_id' => $supplierId,
+                    'type'        => $address['type'],
+                    'name1'       => $address['name1'],
+                    'name2'       => $address['name2'],
+                    'name3'       => $address['name3'],
+                    'street'      => $address['street'],
+                    'street_nr'   => $address['streetNr'],
+                    'city_code'   => $address['cityCode'],
+                    'city'        => $address['cityCode'],
+                    'country'     => $address['cityCode'],
+                    'phone'       => $address['phone'],
+                ]
+
+            );
+            $addressesArray[] = $address;
+        };
+        return $addressesArray;
     }
 }
