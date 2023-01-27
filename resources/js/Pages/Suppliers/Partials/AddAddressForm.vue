@@ -169,14 +169,10 @@ const addressForm = useForm(
     }
 )
 
-let addressFormError = ref('')
-let addressFormSuccess = ref('')
+let addressFormError = ref(null)
+let addressFormSuccess = ref(null)
 
 function addAddress() {
-    addressFormSuccess.value = ''
-    addressFormError.value = ''
-    
-    // TODO Error handling does not seem to work...
     
     if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.streetNr || !addressForm.cityCode || !addressForm.city || !addressForm.country) {
         addressFormError.value = 'Bitte alle mit * gekennzeichneten Felder befüllen!'
@@ -187,7 +183,9 @@ function addAddress() {
         addressFormSuccess.value = 'Addresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.'
     }
     
-    addressFormError.value = ''
-    addressFormSuccess.value = ''
+    setTimeout(() => {
+        addressFormError.value = ''
+        addressFormSuccess.value = ''
+    }, 5000)
 }
 </script>
