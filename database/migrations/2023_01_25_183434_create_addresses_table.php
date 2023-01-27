@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->integer('supplier_id');
             $table->string('type');
-            $table->string('name1')->unique();
+            $table->string('name1');
             $table->string('name2')->nullable();
             $table->string('name3')->nullable();
             $table->string('street');
