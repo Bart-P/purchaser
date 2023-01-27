@@ -58,10 +58,10 @@ class SuppliersController extends Controller
         }
 
         // TODO set up error or success notification on route
-        return redirect()->route('suppliers');
+        return redirect()->route('suppliers')->with('notification', ['message' => 'Lieferant hinzugefügt!']);
     }
 
-    function storeAddressesAndOrPersons(Supplier $supplier, $addresses = [[]], $persons = [[]])
+    private function storeAddressesAndOrPersons(Supplier $supplier, $addresses = [[]], $persons = [[]])
     {
         if (count($addresses)) {
             $supplier->addresses()->saveMany($addresses);
