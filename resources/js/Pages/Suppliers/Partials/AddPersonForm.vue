@@ -4,6 +4,12 @@
             Person Hinzufügen
         </h3>
         
+        <AlertSuccess v-if="personFormSuccess"
+                      :message="personFormSuccess" />
+        
+        <AlertFailed v-if="personFormError"
+                     :message="personFormError" />
+        
         <InputLabel for="personType">
             Kontakttyp *
         </InputLabel>
@@ -109,8 +115,7 @@
             </div>
         </div>
         <div class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-            <BaseButton data-modal-hide="addPersonModal"
-                        @click="addPerson()"
+            <BaseButton @click="addPerson()"
                         color="primary"
                         type="button">
                 Speichern
@@ -131,6 +136,8 @@ import TextInput from "@/Components/TextInput.vue";
 import BaseButton from "@/Components/BaseButton.vue";
 import {ref} from "vue";
 import {useForm} from "@inertiajs/inertia-vue3";
+import AlertSuccess from "@/Components/AlertSuccess.vue";
+import AlertFailed from "@/Components/AlertFailed.vue";
 
 const props = defineProps(
     {
@@ -156,8 +163,6 @@ let personFormError = ref('')
 let personFormSuccess = ref('')
 
 function addPerson() {
-    personFormSuccess.value = ''
-    personFormError.value = ''
     
     if (!personForm.type || !personForm.gender || !personForm.firstName || !personForm.lastName) {
         personFormError.value = 'Bitte alle mit "*" gekennzeichneten Felder befüllen!'
@@ -168,8 +173,10 @@ function addPerson() {
         personFormSuccess.value = 'Kontaktperson Hinzugefügt!'
     }
     
-    personFormError.value = ''
-    personFormSuccess.value = ''
+    setTimeout(() => {
+        personFormError.value = ''
+        personFormSuccess.value = ''
+    }, 5000)
 }
 
 
