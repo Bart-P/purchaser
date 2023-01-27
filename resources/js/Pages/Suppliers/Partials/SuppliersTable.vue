@@ -1,4 +1,7 @@
 <template>
+    
+    <!-- TODO abstract the notification to its own element. -->
+    <p v-if="$page.props.notification.message">{{ $page.props.notification.message }}</p>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
@@ -46,11 +49,11 @@
             </td>
             <td class="px-6 py-4 flex justify-end gap-4">
                 <Link href="#"
-                   class="text-green-600 dark:text-green-500 hover:underline">
+                      class="text-green-600 dark:text-green-500 hover:underline">
                     <i class="fa-solid fa-eye"></i>
                 </Link>
                 <Link href="#"
-                   class="text-blue-600 dark:text-blue-500 hover:underline">
+                      class="text-blue-600 dark:text-blue-500 hover:underline">
                     <i class="fa-solid fa-pen"></i>
                 </Link>
                 <button class="text-red-600 dark:text-red-500 hover:underline">
@@ -60,7 +63,7 @@
         </tr>
         </tbody>
     </table>
-    <Pagination :data="suppliers"/>
+    <Pagination :data="suppliers" />
 
 </template>
 
@@ -69,7 +72,10 @@
 import Pagination from "@/Components/Pagination.vue";
 import {Link} from "@inertiajs/inertia-vue3";
 
-const props = defineProps({
-    suppliers: Object,
-})
+const props = defineProps(
+    {
+        suppliers: Object,
+    })
+
+
 </script>
