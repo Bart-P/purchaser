@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\Person;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -102,5 +103,39 @@ class SuppliersController extends Controller
             $addressesArray[] = $address;
         };
         return $addressesArray;
+    }
+
+
+    /**
+     * Returns an array of Person objects and sets the supplier id for each
+     *
+     * @param $persons
+     * @param $supplierId
+     * @return array
+     *
+     */
+    private function getArrayOfPersonObjects($persons, $supplierId)
+    {
+        $personsArray = [];
+        foreach ($persons as $person) {
+            $person = new Person(
+                [
+                    'supplier_id' => $supplierId,
+                    'type'        => $person['type'],
+                    'gender'      => $person['gender'],
+                    'first_name'  => $person['firstName'],
+                    'last_name'   => $person['lastName'],
+                    'position'    => $person['position'],
+                    'phone1'      => $person['phone1'],
+                    'phone2'      => $person['phone2'],
+                    'email1'      => $person['email1'],
+                    'email2'      => $person['email2'],
+
+                ]
+
+            );
+            $personsArray[] = $person;
+        };
+        return $personsArray;
     }
 }
