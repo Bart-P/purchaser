@@ -12,6 +12,7 @@ class AddressController extends Controller
         $request->validate(
             [
                 'supplierId' => 'required|integer',
+                'type'       => 'required|max:255',
                 'name1'      => 'required|max:255',
                 'name2'      => 'nullable|max:255',
                 'name3'      => 'nullable|max:255',
@@ -27,6 +28,7 @@ class AddressController extends Controller
         Address::create(
             [
                 'supplier_id' => $request->supplierId,
+                'type'        => $request->type,
                 'name1'       => $request->name1,
                 'name2'       => $request->name2,
                 'name3'       => $request->name3,
