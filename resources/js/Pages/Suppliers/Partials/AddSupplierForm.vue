@@ -61,13 +61,17 @@ const supplierForm = useForm(
     {
         name     : null,
         email    : null,
-        addresses: null
+        addresses: null,
+        persons  : null,
     }
 )
 
 function submitSupplier() {
     if (props.addresses.length)
         supplierForm['addresses'] = props.addresses
+    
+    if (props.persons.length)
+        supplierForm['persons'] = props.persons
     
     supplierForm.post(route('suppliers.store'))
     
