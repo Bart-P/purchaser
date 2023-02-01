@@ -29,15 +29,47 @@
         <InputLabel for="personGender">
             Geschlecht *
         </InputLabel>
+        <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-300 rounded-lg sm:flex">
+            <li class="w-full border-b border-gray-300 sm:border-b-0 sm:border-r">
+                <div class="flex items-center pl-3">
+                    <input id="horizontal-list-male"
+                           v-model="personForm.gender"
+                           type="radio"
+                           value="male"
+                           name="list-radio"
+                           class="w-4 h-4 text-purchaser-primary bg-gray-100 border-gray-300 focus:ring-purchaser-primary focus:ring-2">
+                    <label for="horizontal-list-male"
+                           class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Männlich</label>
+                </div>
+            </li>
+            
+            <li class="w-full border-b border-gray-300 sm:border-b-0 sm:border-r">
+                <div class="flex items-center pl-3">
+                    <input id="horizontal-list-female"
+                           v-model="personForm.gender"
+                           type="radio"
+                           value="female"
+                           name="list-radio"
+                           class="w-4 h-4 text-purchaser-primary bg-gray-100 border-gray-300 focus:ring-purchaser-primary focus:ring-2">
+                    <label for="horizontal-list-female"
+                           class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Weiblich</label>
+                </div>
+            </li>
+            
+            <li class="w-full border-b border-gray-300 sm:border-b-0 sm:border-r">
+                <div class="flex items-center pl-3">
+                    <input id="horizontal-list-other"
+                           v-model="personForm.gender"
+                           type="radio"
+                           value="other"
+                           name="list-radio"
+                           class="w-4 h-4 text-purchaser-primary bg-gray-100 border-gray-300 focus:ring-purchaser-primary focus:ring-2">
+                    <label for="horizontal-list-other"
+                           class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Andere</label>
+                </div>
+            </li>
+        </ul>
         
-        <select id="personGender"
-                v-model="personForm.gender"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary"
-                required>
-            <option value="male">Männlich</option>
-            <option value="female">Weiblich</option>
-            <option value="other">Sonstige</option>
-        </select>
         <div class="">
             <InputLabel for="firstName"
                         value="Vorname *" />
