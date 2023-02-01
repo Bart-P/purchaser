@@ -30,17 +30,14 @@ class SuppliersController extends Controller
 
     function store(Request $request)
     {
-        $request->validate(
-            [
-                'name'  => ['required', 'max:50'],
-                'email' => ['required', 'max:50'],
-            ]);
-
         $supplier = Supplier::create(
-            [
-                'name'  => $request->name,
-                'email' => $request->email,
-            ]);
+            $request->validate(
+                [
+                    'name'  => ['required', 'max:50'],
+                    'email' => ['required', 'max:50'],
+                ]
+            )
+        );
 
         if ($supplier) {
             $addressesArray = [];
