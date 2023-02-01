@@ -54,7 +54,6 @@ class SuppliersController extends Controller
             $this->storeAddressesAndOrPersons($supplier, $addressesArray, $personsArray);
         }
 
-        // TODO set up error or success notification on route
         return redirect()->route('suppliers')->with('notification', ['message' => 'Lieferant hinzugefügt!']);
     }
 
