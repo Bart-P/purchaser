@@ -3,12 +3,15 @@
         <h3 class="text-purchaser-primary text-xl font-bold">
             Person Hinzufügen
         </h3>
+        <Transition>
+            <AlertSuccess v-if="personFormSuccess"
+                          :message="personFormSuccess" />
+        </Transition>
         
-        <AlertSuccess v-if="personFormSuccess"
-                      :message="personFormSuccess" />
-        
-        <AlertFailed v-if="personFormError"
-                     :message="personFormError" />
+        <Transition>
+            <AlertFailed v-if="personFormError"
+                         :message="personFormError" />
+        </Transition>
         
         <InputLabel for="personType">
             Kontakttyp *
@@ -147,7 +150,7 @@ const props = defineProps(
 
 const personForm = useForm(
     {
-        type     : null,
+        type     : 'main',
         gender   : null,
         firstName: null,
         lastName : null,
@@ -181,3 +184,16 @@ function addPerson() {
 
 
 </script>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+    transition: all 0.3s ease-out;
+}
+
+.v-enter-from,
+.v-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+}
+</style>

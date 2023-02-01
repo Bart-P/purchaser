@@ -3,19 +3,23 @@
         <!-- Modal body -->
         <div class="flex flex-col gap-5 p-6">
             <h3 class="text-purchaser-primary text-xl font-bold">Addresse Hinzufügen</h3>
+            <Transition>
+                <AlertSuccess v-if="addressFormSuccess"
+                              :message="addressFormSuccess" />
+            </Transition>
             
-            <AlertSuccess v-if="addressFormSuccess"
-                          :message="addressFormSuccess" />
-            
-            <AlertFailed v-if="addressFormError"
-                         :message="addressFormError" />
+            <Transition>
+                <AlertFailed v-if="addressFormError"
+                             :message="addressFormError" />
+            </Transition>
             
             <InputLabel for="addressType">Typ *</InputLabel>
             <select v-model="addressForm.type"
                     required
                     id="addressType"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary">
-                <option value="main">Hauptadresse</option>
+                <option value="main">Hauptadresse
+                </option>
                 <option value="invoice">Rechnungsadresse</option>
                 <option value="delivery">Lieferadresse</option>
                 <option value="other">Sonstige</option>
@@ -156,7 +160,7 @@ const props = defineProps(
 
 const addressForm = useForm(
     {
-        type    : null,
+        type    : 'main',
         name1   : null,
         name2   : null,
         name3   : null,
@@ -189,3 +193,16 @@ function addAddress() {
     }, 5000)
 }
 </script>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+    transition: all 0.3s ease-out;
+}
+
+.v-enter-from,
+.v-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+}
+</style>
