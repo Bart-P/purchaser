@@ -1,6 +1,33 @@
 <template>
     <FlashNotification :message="$page.props.notification.message" />
     
+    <BaseModal id="deleteSupplierModal">
+        <div class="p-6 text-center">
+            <i class="fa-solid fa-triangle-exclamation mx-auto mb-4 text-red-600 text-5xl dark:text-gray-200"></i>
+            <h3 class="mb-5 text-2xl font-normal text-gray-600">Bist du sicher?</h3>
+            <p class="mb-5 text-lg text-gray-600">
+                Der Lieferant <span class="font-bold">{{ supplierToDelete.name }} (ID: {{ supplierToDelete.id }})</span>
+                sowie
+                die
+                dazugehörigen Adressen und
+                Personen werden
+                unwiederruflich gelöscht!</p>
+            <div class="flex gap-5 w-full items-center justify-center">
+                <BaseButton data-modal-hide="deleteSupplierModal"
+                            @click="deleteSupplier()"
+                            color="danger">
+                    Löschen
+                </BaseButton>
+                
+                <BaseButton data-modal-hide="deleteSupplierModal"
+                            color="light">
+                    Abbrechen
+                </BaseButton>
+            
+            </div>
+        </div>
+    </BaseModal>
+    
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
@@ -55,7 +82,11 @@
                       class="text-blue-600 dark:text-blue-500 hover:underline">
                     <i class="fa-solid fa-pen"></i>
                 </Link>
-                <button class="text-red-600 dark:text-red-500 hover:underline">
+                
+                <button @click="setSupplierToDelete(supplier.id, supplier.name)"
+                        data-modal-target="deleteSupplierModal"
+                        data-modal-toggle="deleteSupplierModal"
+                        class="text-red-600 dark:text-red-500 hover:underline">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </td>
@@ -71,13 +102,37 @@
 import Pagination from "@/Components/Pagination.vue";
 import {Link} from "@inertiajs/inertia-vue3";
 import FlashNotification from "@/Components/FlashNotification.vue";
+import BaseModal from "@/Components/BaseModal.vue";
+import {initModals} from "flowbite";
+import {onMounted, reactive} from "vue";
+import BaseButton from "@/Components/BaseButton.vue";
+import {Inertia} from "@inertiajs/inertia";
 
-const emit = defineEmits(['close-flash-notification'])
+onMounted(() => {
+    initModals()
+    
+})
 
 const props = defineProps(
     {
         suppliers: Object,
     }
 )
+
+const supplierToDelete = reactive(
+    {
+        id  : 0,
+        name: '',
+    })
+
+function setSupplierToDelete(id, name) {
+    supplierToDelete.id = id
+    supplierToDelete.name = name
+}
+
+function deleteSupplier() {
+    // TODO Supplier ist deleted, but no notification. Also addresses and persons should be deleted as well.
+    Inertia.delete(route('suppliers.destroy', supplierToDelete.id))
+}
 
 </script>
