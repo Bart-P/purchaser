@@ -21,8 +21,6 @@
 
 import {onMounted, ref} from "vue";
 
-const emit = defineEmits(['close-flash-notification', 'test'])
-
 let props = defineProps(
     {
         message: String
