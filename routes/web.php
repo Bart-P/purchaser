@@ -54,6 +54,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
                     SuppliersController::class,
                     'store',
                 ])->name('suppliers.store');
+    Route::delete('/suppliers/{id}',
+                  [
+                      SuppliersController::class,
+                      'destroy',
+                  ])->name('suppliers.destroy');
 
     // ADDRESSES
     Route::get('/addresses/create',
