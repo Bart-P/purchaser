@@ -66,17 +66,18 @@
                     </div>
                     
                     <div class="flex flex-wrap gap-8 pt-8">
-                        <div v-for="(person, index) in persons"
-                             class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <button class="float-right text-red-600"
-                                    type="submit"
-                                    @click="removePerson(index)">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                            
-                            <SinglePersonList :id="index"
-                                              :person="person" />
-                        </div>
+                        <template v-for="(person, index) in persons">
+                            <div class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                                <button class="float-right text-red-600"
+                                        type="submit"
+                                        @click="removePerson(index)">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                                <SinglePersonList :id="index"
+                                                  :person="person" />
+                            </div>
+                        </template>
+                    
                     </div>
                 </div>
             </PageBoxWrapper>
