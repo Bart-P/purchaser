@@ -60,7 +60,7 @@ class SuppliersController extends Controller
     function destroy($id)
     {
         Supplier::destroy($id);
-        return redirect()->route('suppliers')->with('notification', ['message' => 'Lieferant gelöscht!']);
+        return redirect()->back()->with('notification', ['message' => 'Lieferant gelöscht!']);
     }
 
     private function storeAddressesAndOrPersons(Supplier $supplier, $addresses = [[]], $persons = [[]])
