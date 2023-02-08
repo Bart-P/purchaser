@@ -29,6 +29,24 @@ class SuppliersController extends Controller
         return Inertia::render('Suppliers/SuppliersCreate');
     }
 
+    function edit($id)
+    {
+        $supplier = Supplier::find($id);
+        $addresses = [];
+        $persons = [];
+
+        if ($supplier) {
+            $addresses = $supplier->addresses()->get();
+            $persons = $supplier->persons()->get();
+        }
+
+        return Inertia::render('Suppliers/SuppliersEdit', [
+            'supplier'  => $supplier,
+            'addresses' => $addresses,
+            'persons'   => $persons,
+        ]);
+    }
+
     function store(Request $request)
     {
         $supplier = Supplier::create(
