@@ -40,6 +40,10 @@
                 </div>
             </th>
             <th scope="col"
+                class="px-6 py-3  max-w-[30px]">
+                ID
+            </th>
+            <th scope="col"
                 class="px-6 py-3">
                 Firma
             </th>
@@ -64,10 +68,12 @@
                            class="sr-only">checkbox</label>
                 </div>
             </td>
-            <th scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <td class="px-6 py-4 max-w-[30px]">
+                {{ supplier.id }}
+            </td>
+            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {{ supplier.name }}
-            </th>
+            </td>
             <td class="px-6 py-4">
                 {{ supplier.email }}
             </td>
@@ -76,10 +82,10 @@
                       class="text-green-600 dark:text-green-500 hover:underline">
                     <i class="fa-solid fa-eye"></i>
                 </Link>
-                <button @click="editSupplier"
-                        class="text-blue-600 dark:text-blue-500 hover:underline">
+                <Link :href="route('suppliers.edit', supplier.id)"
+                      class="text-blue-600 dark:text-blue-500 hover:underline">
                     <i class="fa-solid fa-pen"></i>
-                </button>
+                </Link>
                 
                 <button @click="setSupplierToDelete(supplier.id, supplier.name)"
                         data-modal-target="deleteSupplierModal"
@@ -128,14 +134,11 @@ function setSupplierToDelete(id, name) {
     supplierToDelete.name = name
 }
 
-function editSupplier() {
-    store.flash.message = 'edit clicked!'
-}
-
 function deleteSupplier() {
     Inertia.delete(route('suppliers.destroy', supplierToDelete.id))
     setTimeout(() => {
         store.flash.message = usePage().props.value.notification.message
+        store.flash.type = 'danger'
     }, 500)
     
 }
