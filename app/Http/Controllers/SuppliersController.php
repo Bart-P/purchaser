@@ -12,15 +12,16 @@ class SuppliersController extends Controller
 {
     function index(Request $request)
     {
-        return Inertia::render('Suppliers/Suppliers',
-                               [
-                                   'suppliers' => Supplier::when($request->search, function ($query, $search) {
-                                       $query->where('name', 'LIKE', '%' . $search . '%')
-                                             ->orWhere('email', 'LIKE', '%' . $search . '%');
-                                   })->latest()
-                                                          ->paginate(15)
-                                                          ->withQueryString(),
-                               ]);
+        return Inertia::render('Suppliers/Suppliers', [
+            'suppliers' => Supplier
+                ::when($request->search, function ($query, $search) {
+                    $query->where('name', 'LIKE', '%' . $search . '%')
+                          ->orWhere('email', 'LIKE', '%' . $search . '%');
+                })
+                ->orderBy('updated_at', 'DESC')
+                ->paginate(15)
+                ->withQueryString(),
+        ]);
     }
 
     function create()
