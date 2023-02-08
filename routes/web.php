@@ -49,6 +49,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
                    SuppliersController::class,
                    'create',
                ])->name('suppliers.create');
+    Route::get('/suppliers/edit/{id}',
+               [
+                   SuppliersController::class,
+                   'edit',
+               ])->name('suppliers.edit');
     Route::post('/suppliers/store',
                 [
                     SuppliersController::class,
@@ -59,6 +64,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
                       SuppliersController::class,
                       'destroy',
                   ])->name('suppliers.destroy');
+    Route::put('/suppliers',
+               [
+                   SuppliersController::class,
+                   'put',
+               ])->name('suppliers.put');
 
     // ADDRESSES
     Route::get('/addresses/create',
