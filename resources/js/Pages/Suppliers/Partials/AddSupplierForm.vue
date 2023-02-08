@@ -53,6 +53,10 @@ import {useForm} from "@inertiajs/inertia-vue3";
 
 const props = defineProps(
     {
+        supplier : {
+            default: null,
+            type   : Object,
+        },
         addresses: Array,
         persons  : Array,
     })
