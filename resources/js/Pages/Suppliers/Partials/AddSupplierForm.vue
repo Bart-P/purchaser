@@ -63,8 +63,8 @@ const props = defineProps(
 
 const supplierForm = useForm(
     {
-        name     : null,
-        email    : null,
+        name     : props.supplier?.name,
+        email    : props.supplier?.email,
         addresses: null,
         persons  : null,
     }
@@ -77,7 +77,16 @@ function submitSupplier() {
     if (props.persons.length)
         supplierForm['persons'] = props.persons
     
-    supplierForm.post(route('suppliers.store'))
+    if (props.supplier) {
+        supplierForm.put(route('suppliers.put',
+                               {
+                                   'id'   : props.supplier.id,
+                                   'name' : supplierForm.name,
+                                   'email': supplierForm.email,
+                               }))
+    } else {
+        supplierForm.post(route('suppliers.store'))
+    }
     
 }
 </script>
