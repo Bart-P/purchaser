@@ -24,4 +24,12 @@ class Supplier extends Model
     {
         return $this->hasMany(Person::class);
     }
+
+    public function delete(): ?bool
+    {
+        $this->addresses()->delete();
+        $this->persons()->delete();
+
+        return parent::delete();
+    }
 }
