@@ -73,6 +73,7 @@ class SuppliersController extends Controller
             $this->storeAddressesAndOrPersons($supplier, $addressesArray, $personsArray);
         }
 
+        // ADD FAILED MESSAGE
         return redirect()->route('suppliers')->with('notification', ['message' => 'Lieferant hinzugefügt!']);
     }
 
@@ -80,6 +81,17 @@ class SuppliersController extends Controller
     {
         Supplier::destroy($id);
         return redirect()->back()->with('notification', ['message' => 'Lieferant gelöscht!']);
+    }
+
+    function put(Request $request)
+    {
+        $supplier = Supplier::find($request->id);
+        $supplier->name = $request->name;
+        $supplier->email = $request->email;
+        $supplier->save();
+
+        // ADD FAILED MESSAGE
+        return redirect()->route('suppliers')->with('notification', ['message' => 'Änderung gespeichert!']);
     }
 
     private function storeAddressesAndOrPersons(Supplier $supplier, $addresses = [[]], $persons = [[]])
