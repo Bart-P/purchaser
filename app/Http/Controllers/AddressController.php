@@ -45,4 +45,11 @@ class AddressController extends Controller
         );
 
     }
+
+    function destroy(Request $request)
+    {
+        Address::destroy($request->id);
+
+        return redirect()->back();
+    }
 }
