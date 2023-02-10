@@ -44,6 +44,7 @@ class AddressController extends Controller
             ]
         );
 
+        return redirect()->back();
     }
 
     function destroy(Request $request)
