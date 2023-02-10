@@ -4,12 +4,12 @@
         <div class="flex flex-col gap-5 p-6">
             <h3 class="text-purchaser-primary text-xl font-bold">Addresse Hinzufügen</h3>
             <Transition>
-                <AlertSuccess v-if="addressFormSuccess"
+                <AlertSuccess v-show="addressFormSuccess"
                               :message="addressFormSuccess" />
             </Transition>
             
             <Transition>
-                <AlertFailed v-if="addressFormError"
+                <AlertFailed v-show="addressFormError"
                              :message="addressFormError" />
             </Transition>
             
@@ -151,30 +151,40 @@ import {useForm} from "@inertiajs/inertia-vue3";
 import {ref} from "vue";
 import AlertSuccess from "@/Components/AlertSuccess.vue";
 import AlertFailed from "@/Components/AlertFailed.vue";
+import {Inertia} from "@inertiajs/inertia";
 
 const props = defineProps(
     {
-        addresses: Array
+        addresses: Array,
+        addressId: {
+            default: null,
+            type   : Number,
+        },
+        supplier : {
+            default: null,
+            type   : Object,
+        }
     }
 )
 
 const addressForm = useForm(
     {
-        type    : 'main',
-        name1   : null,
-        name2   : null,
-        name3   : null,
-        street  : null,
-        streetNr: null,
-        cityCode: null,
-        city    : null,
-        country : null,
-        phone   : null,
+        type      : 'main',
+        supplierId: null,
+        name1     : null,
+        name2     : null,
+        name3     : null,
+        street    : null,
+        streetNr  : null,
+        cityCode  : null,
+        city      : null,
+        country   : null,
+        phone     : null,
     }
 )
 
-let addressFormError = ref(null)
-let addressFormSuccess = ref(null)
+let addressFormError = ref('')
+let addressFormSuccess = ref('')
 
 function addAddress() {
     
@@ -182,6 +192,9 @@ function addAddress() {
         addressFormError.value = 'Bitte alle mit * gekennzeichneten Felder befüllen!'
     } else {
         props.addresses.push(addressForm.data())
+        if (props.supplier.id && !props.addressId) {
+            saveNewAddressForSupplier(addressForm.data())
+        }
         addressForm.reset()
         addressFormError.value = ''
         addressFormSuccess.value = 'Addresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.'
@@ -192,6 +205,12 @@ function addAddress() {
         addressFormSuccess.value = ''
     }, 5000)
 }
+
+function saveNewAddressForSupplier(addressData) {
+    addressData['supplierId'] = props.supplier.id
+    Inertia.post(route('addresses.store'), addressData)
+}
+
 </script>
 
 <style scoped>

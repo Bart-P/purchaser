@@ -14,7 +14,8 @@
             </PageBoxWrapper>
             
             <BaseModal id="addAddressModal">
-                <AddAddressForm :addresses="props.addresses" />
+                <AddAddressForm :supplier="props.supplier"
+                                :addresses="props.addresses" />
             </BaseModal>
             
             <!-- Addresses to save list -->
