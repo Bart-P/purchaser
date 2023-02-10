@@ -104,7 +104,6 @@ onMounted(() => {
 })
 
 let addresses = reactive([])
-
 let persons = reactive([])
 
 function removeAddress(index) {
