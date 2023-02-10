@@ -88,7 +88,7 @@ class SuppliersController extends Controller
         $supplier = Supplier::find($request->id);
         $supplier->name = $request->name;
         $supplier->email = $request->email;
-        $supplier->save();
+        $supplier->update();
 
         // ADD FAILED MESSAGE
         return redirect()->route('suppliers')->with('notification', ['message' => 'Änderung gespeichert!']);
