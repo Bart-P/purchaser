@@ -35,11 +35,16 @@
                 <div class="flex flex-wrap gap-8 pt-8">
                     <div v-for="(address, index) in props.addresses"
                          class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <button class="float-right text-red-600"
-                                type="submit"
-                                @click="removeAddress(index)">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
+                        <div class="float-right flex gap-4">
+                            <button class="text-blue-600">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button class="text-red-600"
+                                    type="submit"
+                                    @click="removeAddress(index)">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
                         
                         <SingleAddressList :id="index"
                                            :address="address" />
