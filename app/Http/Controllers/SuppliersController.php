@@ -83,7 +83,7 @@ class SuppliersController extends Controller
         return redirect()->back()->with('notification', ['message' => 'Lieferant gelöscht!']);
     }
 
-    function put(Request $request)
+    function update(Request $request)
     {
         $supplier = Supplier::find($request->id);
         $supplier->name = $request->name;

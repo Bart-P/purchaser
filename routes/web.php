@@ -67,7 +67,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/suppliers',
                [
                    SuppliersController::class,
-                   'put',
+                   'update',
                ])->name('suppliers.put');
 
     // ADDRESSES
