@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -25,6 +26,8 @@ class AddressController extends Controller
             ]
         );
 
+        Supplier::find($request->supplierId)->touch();
+
         Address::create(
             [
                 'supplier_id' => $request->supplierId,
@@ -40,5 +43,6 @@ class AddressController extends Controller
                 'phone'       => $request->phone,
             ]
         );
+
     }
 }
