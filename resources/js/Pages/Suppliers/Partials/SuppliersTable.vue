@@ -1,25 +1,30 @@
 <template>
     <FlashNotification />
     
-    <DeleteConfirmationModal id="deleteSupplierModal">
-        <template #text>
-            Der Lieferant
-            <span class="font-bold">{{ supplierToDelete.name }} (ID: {{ supplierToDelete.id }})</span>
-            sowie die dazugehörigen Adressen und Personen werden unwiederruflich gelöscht!
-        </template>
-        <template #buttons>
-            <BaseButton data-modal-hide="deleteSupplierModal"
-                        @click="deleteSupplier()"
-                        color="danger">
-                Löschen
-            </BaseButton>
+    <BaseModal id="deleteSupplierModal">
+        <div class="p-6 text-center">
+            <i class="fa-solid fa-triangle-exclamation mx-auto mb-4 text-red-600 text-5xl dark:text-gray-200"></i>
+            <h3 class="mb-5 text-2xl font-normal text-gray-600">Bist du sicher?</h3>
+            <p class="mb-5 text-lg text-gray-600">
+                Der Lieferant
+                <span class="font-bold">{{ supplierToDelete.name }} (ID: {{ supplierToDelete.id }})</span>
+                sowie die dazugehörigen Adressen und Personen werden unwiederruflich gelöscht!
+            </p>
+            <div class="flex gap-5 w-full items-center justify-center">
+                <BaseButton data-modal-hide="deleteSupplierModal"
+                            @click="deleteSupplier()"
+                            color="danger">
+                    Löschen
+                </BaseButton>
+                
+                <BaseButton data-modal-hide="deleteSupplierModal"
+                            color="light">
+                    Abbrechen
+                </BaseButton>
             
-            <BaseButton data-modal-hide="deleteSupplierModal"
-                        color="light">
-                Abbrechen
-            </BaseButton>
-        </template>
-    </DeleteConfirmationModal>
+            </div>
+        </div>
+    </BaseModal>
     
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -101,12 +106,12 @@
 import Pagination from "@/Components/Pagination.vue";
 import {Link, usePage} from "@inertiajs/inertia-vue3";
 import FlashNotification from "@/Components/FlashNotification.vue";
+import BaseModal from "@/Components/BaseModal.vue";
 import {initModals} from "flowbite";
 import {onMounted, reactive} from "vue";
 import BaseButton from "@/Components/BaseButton.vue";
 import {Inertia} from "@inertiajs/inertia";
 import {store} from "@/store";
-import DeleteConfirmationModal from "@/Components/DeleteConfirmationModal.vue";
 
 onMounted(() => {
     initModals()

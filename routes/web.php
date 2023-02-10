@@ -81,11 +81,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                     AddressController::class,
                     'store',
                 ])->name('addresses.store');
-    Route::delete('/addresses/{id}',
-                  [
-                      AddressController::class,
-                      'destroy',
-                  ])->name('addresses.destroy');
+
     // PERSONS
     Route::get('/persons/create',
                [

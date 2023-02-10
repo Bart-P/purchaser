@@ -46,11 +46,4 @@ class AddressController extends Controller
 
         return redirect()->back();
     }
-
-    function destroy(Request $request)
-    {
-        Address::destroy($request->id);
-
-        return redirect()->back();
-    }
 }

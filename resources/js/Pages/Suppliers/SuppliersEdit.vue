@@ -1,25 +1,6 @@
 <template>
     <Head title="Lieferant Bearbeiten" />
     
-    <DeleteConfirmationModal id="deleteAddressModal">
-        <template #text>
-            Die Addresse
-            <span class="font-bold">{{ addressToDelete.name }} (ID: {{ addressToDelete.id }})</span>
-            wird unwiederruflich gelöscht!
-        </template>
-        <template #buttons>
-            <BaseButton @click="deleteAddress()"
-                        color="danger">
-                Löschen
-            </BaseButton>
-            
-            <BaseButton @click="deleteAddressModal.hide()"
-                        color="light">
-                Abbrechen
-            </BaseButton>
-        </template>
-    </DeleteConfirmationModal>
-    
     <AuthenticatedLayout>
         <template #header>
             Lieferant Bearbeiten
@@ -33,8 +14,7 @@
             </PageBoxWrapper>
             
             <BaseModal id="addAddressModal">
-                <AddAddressForm :address="props.address"
-                                :supplier="props.supplier"
+                <AddAddressForm :supplier="props.supplier"
                                 :addresses="props.addresses" />
             </BaseModal>
             
@@ -61,8 +41,7 @@
                             </button>
                             <button class="text-red-600"
                                     type="submit"
-                                    data-modal-target="deleteAddressModal"
-                                    @click="setAddressToDelete(address.id, address.name1)">
+                                    @click="removeAddress(index)">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </div>
@@ -98,7 +77,7 @@
                             <div class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                                 <button class="float-right text-red-600"
                                         type="submit"
-                                        @click="deletePerson(index)">
+                                        @click="removePerson(index)">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                                 <SinglePersonList :id="index"
@@ -116,7 +95,7 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head} from "@inertiajs/inertia-vue3";
-import {onMounted, ref} from "vue";
+import {onMounted} from "vue";
 import {initModals} from "flowbite";
 import BaseButton from "@/Components/BaseButton.vue";
 import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
@@ -126,44 +105,24 @@ import SingleAddressList from "@/Pages/Suppliers/Partials/SingleAddressList.vue"
 import AddPersonForm from "@/Pages/Suppliers/Partials/AddPersonForm.vue";
 import BaseModal from "@/Components/BaseModal.vue";
 import SinglePersonList from "@/Pages/Suppliers/Partials/SinglePersonList.vue";
-import DeleteConfirmationModal from "@/Components/DeleteConfirmationModal.vue";
-import {Inertia} from "@inertiajs/inertia";
-import {Modal} from "flowbite";
 
 onMounted(() => {
     initModals()
-    deleteAddressModal = new Modal(document.getElementById('deleteAddressModal'))
 })
 
 const props = defineProps(
     {
         'supplier' : Object,
-        'address'  : {
-            type   : Object,
-            default: null,
-        },
         'addresses': Array,
         'persons'  : Array
     })
 
-let deleteAddressModal = null;
-let addressToDelete = ref({});
 
-function setAddressToDelete(addressId, addressName) {
-    deleteAddressModal.toggle()
-    addressToDelete.value = {
-        id  : addressId,
-        name: addressName,
-    };
+function removeAddress(index) {
+    props.addresses.splice(index, 1)
 }
 
-function deleteAddress() {
-    Inertia.delete(route('addresses.destroy', addressToDelete.value.id))
-    deleteAddressModal.hide()
-}
-
-
-function deletePerson(index) {
+function removePerson(index) {
     props.persons.splice(index, 1)
 }
 </script>
