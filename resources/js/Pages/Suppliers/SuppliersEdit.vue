@@ -1,6 +1,5 @@
 <template>
     <Head title="Lieferant Bearbeiten" />
-    
     <DeleteConfirmationModal id="deleteAddressModal">
         <template #text>
             Die Addresse
@@ -33,9 +32,9 @@
             </PageBoxWrapper>
             
             <BaseModal id="addAddressModal">
-                <AddAddressForm :address="props.address"
-                                :supplier="props.supplier"
-                                :addresses="props.addresses" />
+                <AddAddressForm
+                    :supplier="props.supplier"
+                    :addresses="props.addresses" />
             </BaseModal>
             
             <!-- Addresses to save list -->
@@ -56,7 +55,9 @@
                     <div v-for="(address, index) in props.addresses"
                          class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                         <div class="float-right flex gap-4">
-                            <button class="text-blue-600">
+                            <button @click="editAddress(address)"
+                                    data-modal-toggle="addAddressModal"
+                                    class="text-blue-600">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                             <button class="text-red-600"
@@ -138,16 +139,13 @@ onMounted(() => {
 const props = defineProps(
     {
         'supplier' : Object,
-        'address'  : {
-            type   : Object,
-            default: null,
-        },
         'addresses': Array,
         'persons'  : Array
     })
 
-let deleteAddressModal = null;
-let addressToDelete = ref({});
+let address = ref(null)
+let deleteAddressModal = null
+let addressToDelete = ref({})
 
 function setAddressToDelete(addressId, addressName) {
     deleteAddressModal.toggle()
@@ -160,6 +158,10 @@ function setAddressToDelete(addressId, addressName) {
 function deleteAddress() {
     Inertia.delete(route('addresses.destroy', addressToDelete.value.id))
     deleteAddressModal.hide()
+}
+
+function editAddress(address) {
+    address.value = address
 }
 
 

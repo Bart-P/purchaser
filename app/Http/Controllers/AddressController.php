@@ -53,4 +53,11 @@ class AddressController extends Controller
 
         return redirect()->back();
     }
+
+    function update(Request $request)
+    {
+        $address = Address::find($request->id);
+        $address->fill($request);
+        $address->save();
+    }
 }

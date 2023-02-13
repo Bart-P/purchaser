@@ -156,9 +156,22 @@ import {Inertia} from "@inertiajs/inertia";
 const props = defineProps(
     {
         addresses: Array,
-        addressId: {
-            default: null,
-            type   : Number,
+        address  : {
+            default: {
+                type      : 'main',
+                id        : null,
+                supplierId: null,
+                name1     : null,
+                name2     : null,
+                name3     : null,
+                street    : null,
+                streetNr  : null,
+                cityCode  : null,
+                city      : null,
+                country   : null,
+                phone     : null,
+            },
+            type   : Object,
         },
         supplier : {
             default: null,
@@ -168,19 +181,7 @@ const props = defineProps(
 )
 
 const addressForm = useForm(
-    {
-        type      : 'main',
-        supplierId: null,
-        name1     : null,
-        name2     : null,
-        name3     : null,
-        street    : null,
-        streetNr  : null,
-        cityCode  : null,
-        city      : null,
-        country   : null,
-        phone     : null,
-    }
+    props.address
 )
 
 let addressFormError = ref('')

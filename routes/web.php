@@ -86,6 +86,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
                       AddressController::class,
                       'destroy',
                   ])->name('addresses.destroy');
+    Route::patch('/addresses/',
+                 [
+                     AddressController::class,
+                     'update',
+                 ])->name('addresses.update');
+
     // PERSONS
     Route::get('/persons/create',
                [
