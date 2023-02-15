@@ -58,11 +58,11 @@
                     <div v-for="(address, index) in props.addresses"
                          class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                         <div class="float-right flex gap-4">
-                            <button @click="editAddress(address)"
-                                    data-modal-toggle="addAddressModal"
-                                    class="text-blue-600">
+                            <Link v-if="address.id"
+                                  :href="route('address.edit', address.id)"
+                                  class="text-blue-600">
                                 <i class="fa-solid fa-pen"></i>
-                            </button>
+                            </Link>
                             <button class="text-red-600"
                                     type="submit"
                                     data-modal-target="deleteAddressModal"
@@ -119,7 +119,7 @@
 
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head} from "@inertiajs/inertia-vue3";
+import {Head, Link} from "@inertiajs/inertia-vue3";
 import {onMounted, ref} from "vue";
 import {initModals} from "flowbite";
 import BaseButton from "@/Components/BaseButton.vue";
