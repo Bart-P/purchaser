@@ -156,23 +156,6 @@ import {Inertia} from "@inertiajs/inertia";
 const props = defineProps(
     {
         addresses: Array,
-        address  : {
-            default: {
-                type      : 'main',
-                id        : null,
-                supplierId: null,
-                name1     : null,
-                name2     : null,
-                name3     : null,
-                street    : null,
-                streetNr  : null,
-                cityCode  : null,
-                city      : null,
-                country   : null,
-                phone     : null,
-            },
-            type   : Object,
-        },
         supplier : {
             default: null,
             type   : Object,
@@ -181,8 +164,21 @@ const props = defineProps(
 )
 
 const addressForm = useForm(
-    props.address
-)
+    {
+        type      : 'main',
+        id        : null,
+        supplierId: null,
+        name1     : null,
+        name2     : null,
+        name3     : null,
+        street    : null,
+        streetNr  : null,
+        cityCode  : null,
+        city      : null,
+        country   : null,
+        phone     : null,
+    })
+
 
 let addressFormError = ref('')
 let addressFormSuccess = ref('')
@@ -193,7 +189,7 @@ function addAddress() {
         addressFormError.value = 'Bitte alle mit * gekennzeichneten Felder befüllen!'
     } else {
         props.addresses.push(addressForm.data())
-        if (props.supplier.id && !props.addressId) {
+        if (props.supplier?.id && !addressForm.id) {
             saveNewAddressForSupplier(addressForm.data())
         }
         addressForm.reset()
@@ -209,7 +205,7 @@ function addAddress() {
 
 function saveNewAddressForSupplier(addressData) {
     addressData['supplierId'] = props.supplier.id
-    Inertia.post(route('addresses.store'), addressData)
+    Inertia.post(route('address.store'), addressData)
 }
 
 </script>
