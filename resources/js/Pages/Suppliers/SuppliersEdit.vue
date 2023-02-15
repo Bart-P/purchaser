@@ -147,7 +147,6 @@ const props = defineProps(
         'persons'  : Array
     })
 
-let address = ref(null)
 let deleteAddressModal = null
 let addressToDelete = ref({})
 
@@ -163,11 +162,6 @@ function deleteAddress() {
     Inertia.delete(route('addresses.destroy', addressToDelete.value.id))
     deleteAddressModal.hide()
 }
-
-function editAddress(address) {
-    address.value = address
-}
-
 
 function deletePerson(index) {
     props.persons.splice(index, 1)
