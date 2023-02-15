@@ -71,7 +71,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                ])->name('suppliers.put');
 
     // ADDRESSES
-    Route::get('/addresses/create',
+    Route::get('/address/edit/{id}',
                [
                    AddressController::class,
                    'edit',
