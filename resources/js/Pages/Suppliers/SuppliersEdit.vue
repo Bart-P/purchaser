@@ -1,5 +1,8 @@
 <template>
     <Head title="Lieferant Bearbeiten" />
+    
+    <FlashNotification />
+    
     <DeleteConfirmationModal id="deleteAddressModal">
         <template #text>
             Die Addresse
@@ -130,6 +133,7 @@ import SinglePersonList from "@/Pages/Suppliers/Partials/SinglePersonList.vue";
 import DeleteConfirmationModal from "@/Components/DeleteConfirmationModal.vue";
 import {Inertia} from "@inertiajs/inertia";
 import {Modal} from "flowbite";
+import FlashNotification from "@/Components/FlashNotification.vue";
 
 onMounted(() => {
     initModals()
