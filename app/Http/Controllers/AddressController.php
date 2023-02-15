@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AddressController extends Controller
 {
+    function edit($id)
+    {
+        $address = Address::find($id);
+
+        return Inertia::render('Address/Edit', [
+            'address' => $address,
+        ]);
+    }
+
     function store(Request $request)
     {
         $request->validate(
