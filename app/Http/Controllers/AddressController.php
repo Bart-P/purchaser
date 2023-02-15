@@ -67,7 +67,10 @@ class AddressController extends Controller
     function update(Request $request)
     {
         $address = Address::find($request->id);
-        $address->fill($request);
+        $address->fill($request->query());
         $address->save();
+
+        // ADD FAILED MESSAGE
+        return redirect()->route('suppliers.edit', $address->supplier_id)->with('notification', ['message' => 'Änderung gespeichert!']);
     }
 }
