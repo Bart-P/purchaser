@@ -159,7 +159,7 @@ function setAddressToDelete(addressId, addressName) {
 }
 
 function deleteAddress() {
-    Inertia.delete(route('addresses.destroy', addressToDelete.value.id))
+    Inertia.delete(route('address.destroy', addressToDelete.value.id))
     deleteAddressModal.hide()
 }
 

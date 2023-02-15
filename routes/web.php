@@ -74,23 +74,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/addresses/create',
                [
                    AddressController::class,
-                   'create',
-               ])->name('addresses.create');
-    Route::post('/addresses/store',
+                   'edit',
+               ])->name('address.edit');
+    Route::post('/address/store',
                 [
                     AddressController::class,
                     'store',
-                ])->name('addresses.store');
-    Route::delete('/addresses/{id}',
+                ])->name('address.store');
+    Route::delete('/address/{id}',
                   [
                       AddressController::class,
                       'destroy',
-                  ])->name('addresses.destroy');
-    Route::patch('/addresses/',
+                  ])->name('address.destroy');
+    Route::patch('/address/',
                  [
                      AddressController::class,
                      'update',
-                 ])->name('addresses.update');
+                 ])->name('address.patch');
 
     // PERSONS
     Route::get('/persons/create',
