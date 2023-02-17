@@ -4,9 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Person;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PersonController extends Controller
 {
+    function edit($id)
+    {
+        $person = Person::find($id);
+
+        return Inertia::render('Person/Edit', [
+            'person' => $person
+        ]);
+    }
+
     function store(Request $request)
     {
         $request->validate(
