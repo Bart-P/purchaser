@@ -22,6 +22,27 @@
         </template>
     </DeleteConfirmationModal>
     
+    <DeleteConfirmationModal id="deletePersonModal">
+        <template #text>
+            Die die Person
+            <span class="font-bold">{{ personToDelete.fname }} {{ personToDelete.lname }} (ID: {{
+                    personToDelete.id
+                                    }})</span>
+            wird unwiederruflich gelöscht!
+        </template>
+        <template #buttons>
+            <BaseButton @click="deletePerson()"
+                        color="danger">
+                Löschen
+            </BaseButton>
+            
+            <BaseButton @click="deletePersonModal.hide()"
+                        color="light">
+                Abbrechen
+            </BaseButton>
+        </template>
+    </DeleteConfirmationModal>
+    
     <AuthenticatedLayout>
         <template #header>
             Lieferant Bearbeiten
@@ -78,7 +99,8 @@
             </PageBoxWrapper>
             
             <BaseModal id="addPersonModal">
-                <AddPersonForm :persons="persons" />
+                <AddPersonForm :supplier="props.supplier"
+                               :persons="persons" />
             </BaseModal>
             
             <!-- Presons to save list -->
@@ -102,7 +124,7 @@
                             <div class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                                 <button class="float-right text-red-600"
                                         type="submit"
-                                        @click="deletePerson(index)">
+                                        @click="setPersonToDelete(person.first_name, person.last_name, person.id)">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                                 <SinglePersonList :id="index"
@@ -138,6 +160,7 @@ import FlashNotification from "@/Components/FlashNotification.vue";
 onMounted(() => {
     initModals()
     deleteAddressModal = new Modal(document.getElementById('deleteAddressModal'))
+    deletePersonModal = new Modal(document.getElementById('deletePersonModal'))
 })
 
 const props = defineProps(
@@ -148,7 +171,9 @@ const props = defineProps(
     })
 
 let deleteAddressModal = null
+let deletePersonModal = null
 let addressToDelete = ref({})
+let personToDelete = ref({})
 
 function setAddressToDelete(addressId, addressName) {
     deleteAddressModal.toggle()
@@ -158,12 +183,22 @@ function setAddressToDelete(addressId, addressName) {
     };
 }
 
+function setPersonToDelete(fname, lname, id) {
+    deletePersonModal.show()
+    personToDelete.value = {
+        id   : id,
+        fname: fname,
+        lname: lname,
+    }
+}
+
 function deleteAddress() {
     Inertia.delete(route('address.destroy', addressToDelete.value.id))
     deleteAddressModal.hide()
 }
 
-function deletePerson(index) {
-    props.persons.splice(index, 1)
+function deletePerson() {
+    Inertia.delete(route('person.destroy', personToDelete.value.id))
+    deletePersonModal.hide()
 }
 </script>

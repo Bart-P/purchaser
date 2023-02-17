@@ -93,21 +93,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
                  ])->name('address.patch');
 
     // PERSONS
-    Route::get('/person/create',
-               [
-                   PersonController::class,
-                   'create',
-               ])->name('person.create');
-    Route::post('/person/store',
-                [
-                    PersonController::class,
-                    'store',
-                ])->name('person.store');
     Route::get('/person/edit/{id}',
                [
                    PersonController::class,
                    'edit',
                ])->name('person.edit');
+    Route::post('/person/store',
+                [
+                    PersonController::class,
+                    'store',
+                ])->name('person.store');
+    Route::delete('/person/{id}',
+                  [
+                      PersonController::class,
+                      'destroy',
+                  ])->name('person.destroy');
     Route::patch('/person/',
                  [
                      PersonController::class,

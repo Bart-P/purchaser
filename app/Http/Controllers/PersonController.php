@@ -11,21 +11,21 @@ class PersonController extends Controller
     {
         $request->validate(
             [
-                'supplierId' => 'required|integer',
-                'type'       => 'required|max:255',
-                'gender'     => 'required|max:20',
-                'first_name' => 'required|max:255',
-                'last_name'  => 'required|max:255',
-                'position'   => 'nullable|max:255',
-                'phone1'     => 'nullable|max:255',
-                'phone2'     => 'nullable|max:255',
-                'email1'     => 'nullable|max:255',
-                'email2'     => 'nullable|max:255',
+                'supplier_id' => 'required|integer',
+                'type'        => 'required|max:255',
+                'gender'      => 'required|max:20',
+                'first_name'  => 'required|max:255',
+                'last_name'   => 'required|max:255',
+                'position'    => 'nullable|max:255',
+                'phone1'      => 'nullable|max:255',
+                'phone2'      => 'nullable|max:255',
+                'email1'      => 'nullable|max:255',
+                'email2'      => 'nullable|max:255',
             ]);
 
         Person::create(
             [
-                'supplier_id' => $request->supplierId,
+                'supplier_id' => $request->supplier_id,
                 'type'        => $request->type,
                 'gender'      => $request->gender,
                 'first_name'  => $request->first_name,
@@ -36,6 +36,13 @@ class PersonController extends Controller
                 'email1'      => $request->email1,
                 'email2'      => $request->email2,
             ]);
+    }
+
+    function destroy($id)
+    {
+        Person::destroy($id);
+
+        return redirect()->back();
     }
 
     function update(Request $request)
