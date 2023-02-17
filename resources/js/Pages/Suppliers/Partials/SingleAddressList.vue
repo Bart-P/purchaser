@@ -21,11 +21,11 @@
         </div>
         <div class="flex flex-col py-3">
             <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Straße / Nr</dt>
-            <dd class="text-lg font-semibold">{{ address.street }} {{ address.streetNr }}</dd>
+            <dd class="text-lg font-semibold">{{ address.street }} {{ address.street_nr }}</dd>
         </div>
         <div class="flex flex-col pt-3">
             <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">PLZ / Ort</dt>
-            <dd class="text-lg font-semibold">{{ address.cityCode }} {{ address.city }}</dd>
+            <dd class="text-lg font-semibold">{{ address.city_code }} {{ address.city }}</dd>
         </div>
         <div class="flex flex-col pt-3">
             <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Land</dt>
