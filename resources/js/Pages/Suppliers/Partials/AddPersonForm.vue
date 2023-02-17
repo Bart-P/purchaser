@@ -35,7 +35,7 @@
                     <input id="horizontal-list-male"
                            v-model="personForm.gender"
                            type="radio"
-                           value="male"
+                           value="m"
                            name="list-radio"
                            class="w-4 h-4 text-purchaser-primary bg-gray-100 border-gray-300 focus:ring-purchaser-primary focus:ring-2">
                     <label for="horizontal-list-male"
@@ -48,7 +48,7 @@
                     <input id="horizontal-list-female"
                            v-model="personForm.gender"
                            type="radio"
-                           value="female"
+                           value="f"
                            name="list-radio"
                            class="w-4 h-4 text-purchaser-primary bg-gray-100 border-gray-300 focus:ring-purchaser-primary focus:ring-2">
                     <label for="horizontal-list-female"
@@ -61,7 +61,7 @@
                     <input id="horizontal-list-other"
                            v-model="personForm.gender"
                            type="radio"
-                           value="other"
+                           value="o"
                            name="list-radio"
                            class="w-4 h-4 text-purchaser-primary bg-gray-100 border-gray-300 focus:ring-purchaser-primary focus:ring-2">
                     <label for="horizontal-list-other"

@@ -46,15 +46,13 @@
                     Geschlecht *
                 </InputLabel>
                 
-                <!-- TODO the gender box does not automatically fill-->
-                
                 <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-300 rounded-lg sm:flex">
                     <li class="w-full border-b border-gray-300 sm:border-b-0 sm:border-r">
                         <div class="flex items-center pl-3">
                             <input id="horizontal-list-male"
                                    v-model="personForm.gender"
                                    type="radio"
-                                   value="male"
+                                   value="m"
                                    name="list-radio"
                                    class="w-4 h-4 text-purchaser-primary bg-gray-100 border-gray-300 focus:ring-purchaser-primary focus:ring-2">
                             <label for="horizontal-list-male"
@@ -67,7 +65,7 @@
                             <input id="horizontal-list-female"
                                    v-model="personForm.gender"
                                    type="radio"
-                                   value="female"
+                                   value="f"
                                    name="list-radio"
                                    class="w-4 h-4 text-purchaser-primary bg-gray-100 border-gray-300 focus:ring-purchaser-primary focus:ring-2">
                             <label for="horizontal-list-female"
@@ -80,7 +78,7 @@
                             <input id="horizontal-list-other"
                                    v-model="personForm.gender"
                                    type="radio"
-                                   value="other"
+                                   value="o"
                                    name="list-radio"
                                    class="w-4 h-4 text-purchaser-primary bg-gray-100 border-gray-300 focus:ring-purchaser-primary focus:ring-2">
                             <label for="horizontal-list-other"
@@ -195,9 +193,10 @@ const props = defineProps(
 
 let personForm = useForm(props.person)
 
-// TODO -> after gender todo in template, make the save function work
+// TODO make the save function work
+// TODO create enums for Gender and Type (same for address)
 function savePerson() {
-    console.log(props.person)
+    console.log(props.person.value)
 }
 
 
