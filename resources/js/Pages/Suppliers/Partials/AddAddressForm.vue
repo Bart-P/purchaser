@@ -71,7 +71,7 @@
                 <div class="w-1/3">
                     <InputLabel for="streetNr"
                                 value="Hausnummer *" />
-                    <TextInput v-model="addressForm.streetNr"
+                    <TextInput v-model="addressForm.street_nr"
                                id="streetNr"
                                type="text"
                                class="mt-1 block w-full"
@@ -83,7 +83,7 @@
                 <div class="w-1/3">
                     <InputLabel for="cityCode"
                                 value="PLZ *" />
-                    <TextInput v-model="addressForm.cityCode"
+                    <TextInput v-model="addressForm.city_code"
                                id="cityCode"
                                type="text"
                                class="mt-1 block w-full"
@@ -165,18 +165,18 @@ const props = defineProps(
 
 const addressForm = useForm(
     {
-        type      : 'main',
-        id        : null,
-        supplierId: null,
-        name1     : null,
-        name2     : null,
-        name3     : null,
-        street    : null,
-        streetNr  : null,
-        cityCode  : null,
-        city      : null,
-        country   : null,
-        phone     : null,
+        type       : 'main',
+        id         : null,
+        supplier_id: null,
+        name1      : null,
+        name2      : null,
+        name3      : null,
+        street     : null,
+        street_nr  : null,
+        city_code  : null,
+        city       : null,
+        country    : null,
+        phone      : null,
     })
 
 
@@ -185,7 +185,7 @@ let addressFormSuccess = ref('')
 
 function addAddress() {
     
-    if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.streetNr || !addressForm.cityCode || !addressForm.city || !addressForm.country) {
+    if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.street_nr || !addressForm.city_code || !addressForm.city || !addressForm.country) {
         addressFormError.value = 'Bitte alle mit * gekennzeichneten Felder befüllen!'
     } else {
         props.addresses.push(addressForm.data())
@@ -204,7 +204,7 @@ function addAddress() {
 }
 
 function saveNewAddressForSupplier(addressData) {
-    addressData['supplierId'] = props.supplier.id
+    addressData['supplier_id'] = props.supplier.id
     Inertia.post(route('address.store'), addressData)
 }
 
