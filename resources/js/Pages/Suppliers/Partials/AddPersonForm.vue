@@ -74,7 +74,7 @@
             <InputLabel for="firstName"
                         value="Vorname *" />
             <TextInput
-                v-model="personForm.firstName"
+                v-model="personForm.first_name"
                 id="firstName"
                 type="text"
                 class="mt-1 block w-full"
@@ -86,7 +86,7 @@
             <InputLabel for="lastName"
                         value="Nachname *" />
             <TextInput
-                v-model="personForm.lastName"
+                v-model="personForm.last_name"
                 id="name2"
                 type="text"
                 class="mt-1 block w-full"
@@ -182,15 +182,15 @@ const props = defineProps(
 
 const personForm = useForm(
     {
-        type     : 'main',
-        gender   : null,
-        firstName: null,
-        lastName : null,
-        position : null,
-        phone1   : null,
-        phone2   : null,
-        email1   : null,
-        email2   : null,
+        type      : 'main',
+        gender    : null,
+        first_name: null,
+        last_name : null,
+        position  : null,
+        phone1    : null,
+        phone2    : null,
+        email1    : null,
+        email2    : null,
     }
 )
 
@@ -199,7 +199,7 @@ let personFormSuccess = ref('')
 
 function addPerson() {
     
-    if (!personForm.type || !personForm.gender || !personForm.firstName || !personForm.lastName) {
+    if (!personForm.type || !personForm.gender || !personForm.first_name || !personForm.last_name) {
         personFormError.value = 'Bitte alle mit "*" gekennzeichneten Felder befüllen!'
     } else {
         props.persons.push(personForm.data())
