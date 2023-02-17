@@ -12,6 +12,7 @@ class Person extends Model
 
     public $table = 'persons';
     protected $fillable = [
+        'supplier_id',
         'type',
         'gender',
         'first_name',

@@ -173,10 +173,15 @@ import {ref} from "vue";
 import {useForm} from "@inertiajs/inertia-vue3";
 import AlertSuccess from "@/Components/AlertSuccess.vue";
 import AlertFailed from "@/Components/AlertFailed.vue";
+import {Inertia} from "@inertiajs/inertia";
 
 const props = defineProps(
     {
-        persons: Array,
+        persons : Array,
+        supplier: {
+            default: null,
+            type   : Object,
+        }
     }
 )
 
@@ -203,6 +208,9 @@ function addPerson() {
         personFormError.value = 'Bitte alle mit "*" gekennzeichneten Felder befüllen!'
     } else {
         props.persons.push(personForm.data())
+        if (props.supplier?.id) {
+            saveNewPersonForSupplier(personForm.data())
+        }
         personForm.reset()
         personFormError.value = ''
         personFormSuccess.value = 'Kontaktperson Hinzugefügt!'
@@ -212,6 +220,11 @@ function addPerson() {
         personFormError.value = ''
         personFormSuccess.value = ''
     }, 5000)
+}
+
+function saveNewPersonForSupplier(personData) {
+    personData['supplier_id'] = props.supplier.id
+    Inertia.post(route('person.store'), personData)
 }
 
 
