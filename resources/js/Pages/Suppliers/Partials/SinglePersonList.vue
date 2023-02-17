@@ -11,7 +11,7 @@
         </div>
         <div class="flex flex-col py-3">
             <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Vorname / Nachname</dt>
-            <dd class="text-lg font-semibold">{{ person.firstName }} {{ person.lastName }}</dd>
+            <dd class="text-lg font-semibold">{{ person.first_name }} {{ person.last_name }}</dd>
         </div>
         <div v-if="person.position"
              class="flex flex-col py-3">
