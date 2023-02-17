@@ -37,4 +37,13 @@ class PersonController extends Controller
                 'email2'      => $request->email2,
             ]);
     }
+
+    function update(Request $request)
+    {
+        $person = Person::find($request->id);
+        $person->fill($request->query());
+        $person->save();
+
+        return redirect()->route('suppliers.edit', $request->id)->with('notification', ['message' => 'Person geändert!']);
+    }
 }
