@@ -25,7 +25,7 @@ class PersonFactory extends Factory
                     'other',
                 ]
             ),
-            'gender'      => fake()->randomElement(['m', 'f']),
+            'gender'      => fake()->randomElement(['m', 'f', 'o']),
             'first_name'  => fake()->firstName(),
             'last_name'   => fake()->lastName(),
             'position'    => fake()->randomElement(
