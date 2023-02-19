@@ -3,11 +3,14 @@
         class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
         <div class="flex flex-col pb-3">
             <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Kontakttyp</dt>
-            <dd class="text-lg font-semibold">{{ person.type }}</dd>
+            <dd class="text-lg font-semibold">{{
+                    capitalizeWord(Person.type.de[person.type])
+                                              }}
+            </dd>
         </div>
         <div class="flex flex-col py-3">
             <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Geschlecht</dt>
-            <dd class="text-lg font-semibold">{{ person.gender }}</dd>
+            <dd class="text-lg font-semibold">{{ capitalizeWord(Person.gender.de[person.gender]) }}</dd>
         </div>
         <div class="flex flex-col py-3">
             <dt class="mb-1 text-gray-500 text-sm dark:text-gray-400">Vorname / Nachname</dt>
@@ -43,6 +46,9 @@
 
 <script setup>
 
+import {Person} from "@/Localisation/Person";
+import {capitalizeWord} from "@/utils";
+
 defineProps(
     {
         person: {
@@ -54,4 +60,5 @@ defineProps(
             type   : Number,
         }
     })
+
 </script>
