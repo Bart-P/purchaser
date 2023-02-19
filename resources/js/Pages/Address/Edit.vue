@@ -157,6 +157,7 @@ const props = defineProps(
     })
 
 //TODO make country codes work
+console.log(CountryCodes.de['DE'])
 
 let addressForm = useForm(props.address)
 
