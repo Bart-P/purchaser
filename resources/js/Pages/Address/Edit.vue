@@ -137,8 +137,6 @@
                 </div>
             </div>
         </PageBoxWrapper>
-    
-    
     </AuthenticatedLayout>
 
 </template>
@@ -151,11 +149,14 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
 import BaseButton from "@/Components/BaseButton.vue";
 import {Inertia} from "@inertiajs/inertia";
+import {CountryCodes} from "@/Localisation/CountryCodes";
 
 const props = defineProps(
     {
         address: Object
     })
+
+//TODO make country codes work
 
 let addressForm = useForm(props.address)
 
