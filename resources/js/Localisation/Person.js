@@ -1,9 +1,9 @@
 export const Person = {
   type  : {
     de: {
-      main    : 'hauptkontakt',
-      secondar: 'vertretung',
-      other   : 'andere',
+      main     : 'hauptkontakt',
+      secondary: 'vertretung',
+      other    : 'andere',
     }
   },
   gender: {
