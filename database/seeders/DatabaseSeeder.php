@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
             'draht'             => 2,
             'blech'             => 2,
             'leichtholz'        => 3,
-            'möbelbaul'         => 3,
+            'möbelbau'          => 3,
             'boxen'             => 3,
             'lasern'            => 3,
             'drucken'           => 3,
