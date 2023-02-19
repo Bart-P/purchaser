@@ -185,6 +185,7 @@ import BaseButton from "@/Components/BaseButton.vue";
 import {useForm, Head} from "@inertiajs/inertia-vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
+import {Inertia} from "@inertiajs/inertia";
 
 const props = defineProps(
     {
@@ -193,10 +194,9 @@ const props = defineProps(
 
 let personForm = useForm(props.person)
 
-// TODO make the save function work
 // TODO create enums for Gender and Type (same for address)
 function savePerson() {
-    console.log(props.person.value)
+    Inertia.patch(route('person.patch', personForm))
 }
 
 

@@ -13,7 +13,7 @@ class PersonController extends Controller
         $person = Person::find($id);
 
         return Inertia::render('Person/Edit', [
-            'person' => $person
+            'person' => $person,
         ]);
     }
 
@@ -61,6 +61,6 @@ class PersonController extends Controller
         $person->fill($request->query());
         $person->save();
 
-        return redirect()->route('suppliers.edit', $request->id)->with('notification', ['message' => 'Person geändert!']);
+        return redirect()->route('suppliers.edit', $request->supplier_id)->with('notification', ['message' => 'Person geändert!']);
     }
 }
