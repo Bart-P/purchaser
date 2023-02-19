@@ -194,7 +194,6 @@ const props = defineProps(
 
 let personForm = useForm(props.person)
 
-// TODO create enums for Gender and Type (same for address)
 function savePerson() {
     Inertia.patch(route('person.patch', personForm))
 }
