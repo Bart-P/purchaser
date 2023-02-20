@@ -121,12 +121,56 @@
                 <div class="">
                     <InputLabel for="country"
                                 value="Land *" />
-                    <TextInput v-model="addressForm.country"
-                               id="country"
-                               type="text"
-                               class="mt-1 block w-full"
-                               required
-                    />
+                    <div class="flex items-center gap-4">
+                        <TextInput v-model="addressForm.country"
+                                   id="country"
+                                   type="text"
+                                   class="mt-1 block w-[50px] text-center uppercase"
+                                   required
+                        />
+                        <BaseButton @click="toggleCountryDropdown()"
+                                    color="light"
+                                    class="flex items-center border-gray-300 border-[1px] rounded-lg bg-gray-50"
+                                    type="button">
+                            <Transition>
+                                <div v-if="computed(() => CountryCodes.de[addressForm.country.toUpperCase()]).value">
+                                    {{
+                                        computed(() => CountryCodes.de[addressForm.country.toUpperCase()]).value
+                                    }}
+                                </div>
+                                <div v-else>Auswählen</div>
+                            </Transition>
+                            <svg class="w-4 h-4 ml-2"
+                                 aria-hidden="true"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </BaseButton>
+
+                        <div class="relative overflow-visible">
+                            <!-- Dropdown menu -->
+                            <Transition>
+                                <div v-show="showCountryDropdown"
+                                     class="z-10 bg-white rounded-lg shadow w-60 dark:bg-gray-700 absolute bottom-[25px] right-0">
+                                    <ul class="h-96 py-2 overflow-y-auto text-gray-700 dark:text-gray-200">
+                                        <li v-for="country in countryCodesShort">
+                                            <div @click="selectCountry(country)"
+                                                 class="cursor-pointer flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                {{ country }} - {{ CountryCodes.de[country] }}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </Transition>
+
+                        </div>
+                    </div>
                 </div>
 
                 <div class="">
