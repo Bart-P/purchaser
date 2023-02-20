@@ -1,23 +1,23 @@
 <template>
     <Head title="Addresse Bearbeiten" />
-    
+
     <AuthenticatedLayout>
         <template #header>
             Addresse Bearbeiten
         </template>
-        
+
         <PageBoxWrapper class="my-12 w-full h-full">
             <div class="flex flex-col gap-5">
                 <div class="flex justify-between">
                     <h3 class="text-purchaser-primary text-xl font-bold">
                         Addresse (ID: {{ addressForm.id }}) Bearbeiten</h3>
-                    
+
                     <div class="flex gap-4">
                         <BaseButton @click="saveAddress()"
                                     color="success">
                             Speichern
                         </BaseButton>
-                        
+
                         <BaseButton :href="route('suppliers.edit', addressForm.supplier_id)"
                                     color="light">
                             Zurück
@@ -36,11 +36,11 @@
                     <option value="delivery">Lieferadresse</option>
                     <option value="other">Sonstige</option>
                 </select>
-                
+
                 <div class="">
                     <InputLabel for="name1"
                                 value="Name 1 *" />
-                    
+
                     <TextInput v-model="addressForm.name1"
                                required
                                id="name1"
@@ -48,7 +48,7 @@
                                class="mt-1 block w-full"
                                autofocus />
                 </div>
-                
+
                 <div class="">
                     <InputLabel for="name2"
                                 value="Name 2" />
@@ -58,7 +58,7 @@
                                class="mt-1 block w-full"
                     />
                 </div>
-                
+
                 <div class="">
                     <InputLabel for="name3"
                                 value="Name 3" />
@@ -79,7 +79,7 @@
                                    required
                         />
                     </div>
-                    
+
                     <div class="w-1/3">
                         <InputLabel for="streetNr"
                                     value="Hausnummer *" />
@@ -102,7 +102,7 @@
                                    required
                         />
                     </div>
-                    
+
                     <div class="w-2/3">
                         <InputLabel for="city"
                                     value="Stadt *" />
@@ -114,7 +114,7 @@
                         />
                     </div>
                 </div>
-                
+
                 <div class="">
                     <InputLabel for="country"
                                 value="Land *" />
@@ -125,7 +125,7 @@
                                required
                     />
                 </div>
-                
+
                 <div class="">
                     <InputLabel for="phone"
                                 value="Telefon" />
@@ -153,7 +153,7 @@ import {CountryCodes} from "@/Localisation/CountryCodes";
 
 const props = defineProps(
     {
-        address: Object
+        address: Object,
     })
 
 //TODO make country codes work
