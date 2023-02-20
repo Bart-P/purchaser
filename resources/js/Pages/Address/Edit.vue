@@ -221,7 +221,26 @@ function selectCountry(countryCode) {
 }
 
 function saveAddress() {
-    Inertia.patch(route('address.patch', addressForm))
+    if (fieldsValidated()) {
+        Inertia.patch(route('address.patch', addressForm))
+    } else {
+        addressFormError.value = 'Bitte alle mit * gekennzeichneten Felder befüllen'
+
+        if (addressForm.country && !CountryCodes.de.hasOwnProperty(
+            addressForm.country.toUpperCase())) {
+            addressFormError.value = 'Land wurde nicht erkannt! Bitte Länderkod eingeben oder aus der Auswahlliste wählen.'
+        }
+    }
+}
+
+function fieldsValidated() {
+    return addressForm.type
+        && addressForm.name1
+        && addressForm.street
+        && addressForm.street_nr
+        && addressForm.city_code
+        && addressForm.city
+        && CountryCodes.de.hasOwnProperty(addressForm.country.toUpperCase())
 }
 
 </script>
