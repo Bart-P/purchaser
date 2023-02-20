@@ -189,7 +189,6 @@ function addAddress() {
     if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.street_nr || !addressForm.city_code || !addressForm.city || !addressForm.country) {
         addressFormError.value = 'Bitte alle mit * gekennzeichneten Felder befüllen!'
     } else {
-        props.addresses.push(addressForm.data())
         if (props.supplier?.id && !addressForm.id) {
             saveNewAddressForSupplier(addressForm.data())
         }
