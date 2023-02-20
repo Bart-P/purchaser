@@ -164,7 +164,17 @@ const props = defineProps(
 const countryCodesShort = Object.keys(CountryCodes.de)
 let addressFormError = ref('')
 
+let showCountryDropdown = ref(false)
 let addressForm = useForm(props.address)
+
+function toggleCountryDropdown() {
+    showCountryDropdown.value = !showCountryDropdown.value
+}
+
+function selectCountry(countryCode) {
+    addressForm.country = countryCode
+    toggleCountryDropdown()
+}
 
 function saveAddress() {
     Inertia.patch(route('address.patch', addressForm))
