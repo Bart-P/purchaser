@@ -130,7 +130,7 @@
                         />
                         <BaseButton @click="toggleCountryDropdown()"
                                     color="light"
-                                    class="flex items-center border-gray-300 border-[1px] rounded-lg bg-gray-50"
+                                    class="flex justify-between items-center border-gray-300 border-[1px] rounded-lg bg-gray-50 min-w-[300px]"
                                     type="button">
                             <Transition>
                                 <div v-if="computed(() => CountryCodes.de[addressForm.country.toUpperCase()]).value">
@@ -157,7 +157,7 @@
                             <!-- Dropdown menu -->
                             <Transition>
                                 <div v-show="showCountryDropdown"
-                                     class="z-10 bg-white rounded-lg shadow w-60 dark:bg-gray-700 absolute bottom-[25px] right-0">
+                                     class="z-10 bg-white rounded-lg shadow w-60 dark:bg-gray-700 absolute bottom-[25px] right-4 w-[300px]">
                                     <ul class="h-96 py-2 overflow-y-auto text-gray-700 dark:text-gray-200">
                                         <li v-for="country in countryCodesShort">
                                             <div @click="selectCountry(country)"
@@ -248,7 +248,7 @@ function fieldsValidated() {
 <style scoped>
 .v-enter-active,
 .v-leave-active {
-    transition: opacity 0.1s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
 }
 
 .v-enter-from,
