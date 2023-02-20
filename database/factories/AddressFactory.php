@@ -39,7 +39,7 @@ class AddressFactory extends Factory
             'street_nr'   => fake()->numberBetween(1, 100),
             'city_code'   => fake()->postcode(),
             'city'        => fake()->city(),
-            'country'     => fake()->country(),
+            'country'     => fake()->countryCode(),
             'phone'       => fake()->randomElement(
                 [
                     fake()->phoneNumber(),
