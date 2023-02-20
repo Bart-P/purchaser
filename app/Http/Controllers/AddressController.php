@@ -49,7 +49,7 @@ class AddressController extends Controller
                 'street_nr'   => $request->street_nr,
                 'city_code'   => $request->city_code,
                 'city'        => $request->city,
-                'country'     => $request->country,
+                'country'     => strtoupper($request->country),
                 'phone'       => $request->phone,
             ]
         );
@@ -68,6 +68,7 @@ class AddressController extends Controller
     {
         $address = Address::find($request->id);
         $address->fill($request->query());
+        $address->country = strtoupper($address->country);
         $address->save();
 
         // ADD FAILED MESSAGE
