@@ -24,7 +24,10 @@
                         </BaseButton>
                     </div>
                 </div>
-                
+                <Transition>
+                    <AlertFailed v-show="addressFormError"
+                                 :message="addressFormError" />
+                </Transition>
                 <InputLabel for="addressType">Typ *</InputLabel>
                 <select v-model="addressForm.type"
                         required
@@ -142,22 +145,24 @@
 </template>
 
 <script setup>
-import {Head, useForm} from "@inertiajs/inertia-vue3";
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
-import BaseButton from "@/Components/BaseButton.vue";
-import {Inertia} from "@inertiajs/inertia";
-import {CountryCodes} from "@/Localisation/CountryCodes";
+import AlertFailed from '@/Components/AlertFailed.vue';
+import {Head, useForm} from '@inertiajs/inertia-vue3';
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import PageBoxWrapper from '@/Components/PageBoxWrapper.vue';
+import BaseButton from '@/Components/BaseButton.vue';
+import {Inertia} from '@inertiajs/inertia';
+import {CountryCodes} from '@/Localisation/CountryCodes';
+import {computed, ref} from 'vue';
 
 const props = defineProps(
     {
         address: Object,
     })
 
-//TODO make country codes work
-console.log(CountryCodes.de['DE'])
+const countryCodesShort = Object.keys(CountryCodes.de)
+let addressFormError = ref('')
 
 let addressForm = useForm(props.address)
 
@@ -166,3 +171,15 @@ function saveAddress() {
 }
 
 </script>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.1s ease-in-out;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+</style>
