@@ -7,12 +7,12 @@
                 <AlertSuccess v-show="addressFormSuccess"
                               :message="addressFormSuccess" />
             </Transition>
-            
+
             <Transition>
                 <AlertFailed v-show="addressFormError"
                              :message="addressFormError" />
             </Transition>
-            
+
             <InputLabel for="addressType">Typ *</InputLabel>
             <select v-model="addressForm.type"
                     required
@@ -24,11 +24,11 @@
                 <option value="delivery">Lieferadresse</option>
                 <option value="other">Sonstige</option>
             </select>
-            
+
             <div class="">
                 <InputLabel for="name1"
                             value="Name 1 *" />
-                
+
                 <TextInput v-model="addressForm.name1"
                            required
                            id="name1"
@@ -36,7 +36,7 @@
                            class="mt-1 block w-full"
                            autofocus />
             </div>
-            
+
             <div class="">
                 <InputLabel for="name2"
                             value="Name 2" />
@@ -46,7 +46,7 @@
                            class="mt-1 block w-full"
                 />
             </div>
-            
+
             <div class="">
                 <InputLabel for="name3"
                             value="Name 3" />
@@ -67,7 +67,7 @@
                                required
                     />
                 </div>
-                
+
                 <div class="w-1/3">
                     <InputLabel for="streetNr"
                                 value="Hausnummer *" />
@@ -90,7 +90,7 @@
                                required
                     />
                 </div>
-                
+
                 <div class="w-2/3">
                     <InputLabel for="city"
                                 value="Stadt *" />
@@ -102,7 +102,7 @@
                     />
                 </div>
             </div>
-            
+
             <div class="">
                 <InputLabel for="country"
                             value="Land *" />
@@ -113,7 +113,7 @@
                            required
                 />
             </div>
-            
+
             <div class="">
                 <InputLabel for="phone"
                             value="Telefon" />
@@ -124,7 +124,7 @@
                 />
             </div>
         </div>
-        
+
         <!-- Modal footer -->
         <div class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
             <BaseButton
@@ -144,14 +144,14 @@
 
 <script setup>
 
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
-import BaseButton from "@/Components/BaseButton.vue";
-import {useForm} from "@inertiajs/inertia-vue3";
-import {ref} from "vue";
-import AlertSuccess from "@/Components/AlertSuccess.vue";
-import AlertFailed from "@/Components/AlertFailed.vue";
-import {Inertia} from "@inertiajs/inertia";
+import AlertFailed from '@/Components/AlertFailed.vue';
+import AlertSuccess from '@/Components/AlertSuccess.vue';
+import BaseButton from '@/Components/BaseButton.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
+import {Inertia} from '@inertiajs/inertia';
+import {useForm} from '@inertiajs/inertia-vue3';
+import {ref} from 'vue';
 
 const props = defineProps(
     {
@@ -159,8 +159,8 @@ const props = defineProps(
         supplier : {
             default: null,
             type   : Object,
-        }
-    }
+        },
+    },
 )
 
 const addressForm = useForm(
@@ -179,12 +179,13 @@ const addressForm = useForm(
         phone      : null,
     })
 
+// TODO Implement country select as in edit view
 
 let addressFormError = ref('')
 let addressFormSuccess = ref('')
 
 function addAddress() {
-    
+
     if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.street_nr || !addressForm.city_code || !addressForm.city || !addressForm.country) {
         addressFormError.value = 'Bitte alle mit * gekennzeichneten Felder befüllen!'
     } else {
@@ -196,7 +197,7 @@ function addAddress() {
         addressFormError.value = ''
         addressFormSuccess.value = 'Addresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.'
     }
-    
+
     setTimeout(() => {
         addressFormError.value = ''
         addressFormSuccess.value = ''
