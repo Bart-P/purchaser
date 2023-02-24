@@ -103,16 +103,8 @@
                 </div>
             </div>
 
-            <div class="">
-                <InputLabel for="country"
-                            value="Land *" />
-                <TextInput v-model="addressForm.country"
-                           id="country"
-                           type="text"
-                           class="mt-1 block w-full"
-                           required
-                />
-            </div>
+            <SelectCountryField :country-code="addressForm.country"
+                                @select-country="selectCountry" />
 
             <div class="">
                 <InputLabel for="phone"
@@ -149,6 +141,7 @@ import AlertSuccess from '@/Components/AlertSuccess.vue';
 import BaseButton from '@/Components/BaseButton.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
+import SelectCountryField from '@/Pages/Address/Partials/SelectCountryField.vue';
 import {Inertia} from '@inertiajs/inertia';
 import {useForm} from '@inertiajs/inertia-vue3';
 import {ref} from 'vue';
@@ -162,6 +155,8 @@ const props = defineProps(
         },
     },
 )
+
+const emit = defineEmits(['addAddress'])
 
 const addressForm = useForm(
     {
@@ -179,8 +174,6 @@ const addressForm = useForm(
         phone      : null,
     })
 
-// TODO Implement country select as in edit view
-
 let addressFormError = ref('')
 let addressFormSuccess = ref('')
 
@@ -192,6 +185,9 @@ function addAddress() {
         if (props.supplier?.id && !addressForm.id) {
             saveNewAddressForSupplier(addressForm.data())
         }
+
+        emit('addAddress', addressForm.data())
+
         addressForm.reset()
         addressFormError.value = ''
         addressFormSuccess.value = 'Addresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.'
@@ -206,6 +202,10 @@ function addAddress() {
 function saveNewAddressForSupplier(addressData) {
     addressData['supplier_id'] = props.supplier.id
     Inertia.post(route('address.store'), addressData)
+}
+
+function selectCountry(countryCode) {
+    addressForm.country = countryCode
 }
 
 </script>
