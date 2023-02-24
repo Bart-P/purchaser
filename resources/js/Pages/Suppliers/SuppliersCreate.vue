@@ -1,6 +1,6 @@
 <template>
     <Head title="Lieferanten Hinzufügen" />
-    
+
     <AuthenticatedLayout>
         <template #header>
             Neuen Lieferant Hinzufügen
@@ -11,11 +11,12 @@
                 <AddSupplierForm :persons="persons"
                                  :addresses="addresses" />
             </PageBoxWrapper>
-            
+
             <BaseModal id="addAddressModal">
-                <AddAddressForm :addresses="addresses" />
+                <AddAddressForm @add-address="addAddress"
+                                :addresses="addresses" />
             </BaseModal>
-            
+
             <!-- Addresses to save list -->
             <PageBoxWrapper>
                 <!-- Address Modal toggle -->
@@ -38,17 +39,17 @@
                                 @click="removeAddress(index)">
                             <i class="fa-solid fa-trash"></i>
                         </button>
-                        
+
                         <SingleAddressList :id="index"
                                            :address="address" />
                     </div>
                 </div>
             </PageBoxWrapper>
-            
+
             <BaseModal id="addPersonModal">
                 <AddPersonForm :persons="persons" />
             </BaseModal>
-            
+
             <!-- Presons to save list -->
             <PageBoxWrapper>
                 <div class="flex flex-col gap-5">
@@ -64,7 +65,7 @@
                             Person Hinzufügen
                         </BaseButton>
                     </div>
-                    
+
                     <div class="flex flex-wrap gap-8 pt-8">
                         <template v-for="(person, index) in persons">
                             <div class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -77,7 +78,7 @@
                                                   :person="person" />
                             </div>
                         </template>
-                    
+
                     </div>
                 </div>
             </PageBoxWrapper>
@@ -86,18 +87,18 @@
 </template>
 
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head} from "@inertiajs/inertia-vue3";
-import {onMounted, reactive} from "vue";
-import {initModals} from "flowbite";
-import BaseButton from "@/Components/BaseButton.vue";
-import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
-import AddSupplierForm from "@/Pages/Suppliers/Partials/AddSupplierForm.vue";
-import AddAddressForm from "@/Pages/Suppliers/Partials/AddAddressForm.vue";
-import SingleAddressList from "@/Pages/Suppliers/Partials/SingleAddressList.vue";
-import AddPersonForm from "@/Pages/Suppliers/Partials/AddPersonForm.vue";
-import BaseModal from "@/Components/BaseModal.vue";
-import SinglePersonList from "@/Pages/Suppliers/Partials/SinglePersonList.vue";
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import {Head} from '@inertiajs/inertia-vue3';
+import {onMounted, reactive} from 'vue';
+import {initModals} from 'flowbite';
+import BaseButton from '@/Components/BaseButton.vue';
+import PageBoxWrapper from '@/Components/PageBoxWrapper.vue';
+import AddSupplierForm from '@/Pages/Suppliers/Partials/AddSupplierForm.vue';
+import AddAddressForm from '@/Pages/Suppliers/Partials/AddAddressForm.vue';
+import SingleAddressList from '@/Pages/Suppliers/Partials/SingleAddressList.vue';
+import AddPersonForm from '@/Pages/Suppliers/Partials/AddPersonForm.vue';
+import BaseModal from '@/Components/BaseModal.vue';
+import SinglePersonList from '@/Pages/Suppliers/Partials/SinglePersonList.vue';
 
 onMounted(() => {
     initModals()
@@ -105,6 +106,11 @@ onMounted(() => {
 
 let addresses = reactive([])
 let persons = reactive([])
+
+// TODO check if new addresses and persons are added on save..
+function addAddress(address) {
+    addresses.push(address)
+}
 
 function removeAddress(index) {
     addresses.splice(index, 1)
