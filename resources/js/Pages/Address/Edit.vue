@@ -32,7 +32,7 @@
                 <select v-model="addressForm.type"
                         required
                         id="addressType"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary">
                     <option value="main">Hauptadresse
                     </option>
                     <option value="invoice">Rechnungsadresse</option>
@@ -48,7 +48,6 @@
                                required
                                id="name1"
                                type="text"
-                               class="mt-1 block w-full"
                                autofocus />
                 </div>
 
@@ -58,7 +57,6 @@
                     <TextInput v-model="addressForm.name2"
                                id="name2"
                                type="text"
-                               class="mt-1 block w-full"
                     />
                 </div>
 
@@ -68,7 +66,6 @@
                     <TextInput v-model="addressForm.name3"
                                id="name3"
                                type="text"
-                               class="mt-1 block w-full"
                     />
                 </div>
                 <div class="flex gap-3">
@@ -78,7 +75,6 @@
                         <TextInput v-model="addressForm.street"
                                    id="street"
                                    type="text"
-                                   class="mt-1 block w-full"
                                    required
                         />
                     </div>
@@ -89,7 +85,6 @@
                         <TextInput v-model="addressForm.street_nr"
                                    id="streetNr"
                                    type="text"
-                                   class="mt-1 block w-full"
                                    required
                         />
                     </div>
@@ -101,7 +96,6 @@
                         <TextInput v-model="addressForm.city_code"
                                    id="cityCode"
                                    type="text"
-                                   class="mt-1 block w-full"
                                    required
                         />
                     </div>
@@ -112,7 +106,6 @@
                         <TextInput v-model="addressForm.city"
                                    id="city"
                                    type="text"
-                                   class="mt-1 block w-full"
                                    required
                         />
                     </div>
