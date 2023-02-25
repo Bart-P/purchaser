@@ -13,6 +13,9 @@ use Inertia\Response;
 
 class ProfileController extends Controller
 {
+    // TODO add notification messages
+    // TODO change redirects to same as in all other controllers
+
     /**
      * Display the user's profile form.
      */
@@ -20,7 +23,7 @@ class ProfileController extends Controller
     {
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => session('status'),
+            'status'          => session('status'),
         ]);
     }
 
@@ -46,8 +49,8 @@ class ProfileController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         $request->validate([
-            'password' => ['required', 'current-password'],
-        ]);
+                               'password' => ['required', 'current-password'],
+                           ]);
 
         $user = $request->user();
 
