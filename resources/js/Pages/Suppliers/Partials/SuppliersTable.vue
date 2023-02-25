@@ -1,6 +1,4 @@
 <template>
-    <FlashNotification />
-    
     <DeleteConfirmationModal id="deleteSupplierModal">
         <template #text>
             Der Lieferant
@@ -13,14 +11,14 @@
                         color="danger">
                 Löschen
             </BaseButton>
-            
+
             <BaseButton data-modal-hide="deleteSupplierModal"
                         color="light">
                 Abbrechen
             </BaseButton>
         </template>
     </DeleteConfirmationModal>
-    
+
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
@@ -81,7 +79,7 @@
                       class="text-blue-600 dark:text-blue-500 hover:underline">
                     <i class="fa-solid fa-pen"></i>
                 </Link>
-                
+
                 <button @click="setSupplierToDelete(supplier.id, supplier.name)"
                         data-modal-target="deleteSupplierModal"
                         data-modal-toggle="deleteSupplierModal"
@@ -98,15 +96,14 @@
 
 <script setup>
 
-import Pagination from "@/Components/Pagination.vue";
-import {Link, usePage} from "@inertiajs/inertia-vue3";
-import FlashNotification from "@/Components/FlashNotification.vue";
-import {initModals} from "flowbite";
-import {onMounted, reactive} from "vue";
-import BaseButton from "@/Components/BaseButton.vue";
-import {Inertia} from "@inertiajs/inertia";
-import {store} from "@/store";
-import DeleteConfirmationModal from "@/Components/DeleteConfirmationModal.vue";
+import BaseButton from '@/Components/BaseButton.vue';
+import DeleteConfirmationModal from '@/Components/DeleteConfirmationModal.vue';
+import Pagination from '@/Components/Pagination.vue';
+import {store} from '@/store';
+import {Inertia} from '@inertiajs/inertia';
+import {Link, usePage} from '@inertiajs/inertia-vue3';
+import {initModals} from 'flowbite';
+import {onMounted, reactive} from 'vue';
 
 onMounted(() => {
     initModals()
@@ -115,7 +112,7 @@ onMounted(() => {
 const props = defineProps(
     {
         suppliers: Object,
-    }
+    },
 )
 
 const supplierToDelete = reactive(
@@ -135,7 +132,7 @@ function deleteSupplier() {
         store.flash.message = usePage().props.value.notification.message
         store.flash.type = 'danger'
     }, 500)
-    
+
 }
 
 </script>
