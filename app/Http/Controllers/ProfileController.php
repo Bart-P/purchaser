@@ -13,7 +13,6 @@ use Inertia\Response;
 
 class ProfileController extends Controller
 {
-    // TODO add notification messages
     // TODO change redirects to same as in all other controllers
 
     /**
@@ -40,7 +39,11 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit');
+        // ADD FAILED NOTIFICATION
+        return redirect()->back()->with('notification', [
+            'message' => 'Nutzerdaten gespeichert!',
+            'type'    => 'success',
+        ]);
     }
 
     /**
