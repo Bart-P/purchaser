@@ -177,6 +177,7 @@ const addressForm = useForm(
 let addressFormError = ref('')
 let addressFormSuccess = ref('')
 
+// TODO remove addAddress bug where if the country is preselected the whole form is reloaded and data is lost..
 function addAddress() {
 
     if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.street_nr || !addressForm.city_code || !addressForm.city || !addressForm.country) {
