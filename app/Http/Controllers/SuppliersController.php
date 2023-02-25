@@ -74,13 +74,19 @@ class SuppliersController extends Controller
         }
 
         // ADD FAILED MESSAGE
-        return redirect()->route('suppliers')->with('notification', ['message' => 'Lieferant hinzugefügt!']);
+        return redirect()->route('suppliers')->with('notification', [
+            'message' => 'Lieferant hinzugefügt!',
+            'type'    => 'success',
+        ]);
     }
 
     function destroy($id)
     {
         Supplier::destroy($id);
-        return redirect()->back()->with('notification', ['message' => 'Lieferant gelöscht!']);
+        return redirect()->back()->with('notification', [
+            'message' => 'Lieferant gelöscht!',
+            'type'    => 'success',
+        ]);
     }
 
     function update(Request $request)
@@ -91,7 +97,10 @@ class SuppliersController extends Controller
         $supplier->update();
 
         // ADD FAILED MESSAGE
-        return redirect()->route('suppliers')->with('notification', ['message' => 'Änderung gespeichert!']);
+        return redirect()->route('suppliers')->with('notification', [
+            'message' => 'Änderung gespeichert!',
+            'type'    => 'success',
+        ]);
     }
 
     private function storeAddressesAndOrPersons(Supplier $supplier, $addresses = [[]], $persons = [[]])
