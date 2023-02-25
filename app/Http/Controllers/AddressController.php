@@ -54,13 +54,21 @@ class AddressController extends Controller
             ]
         );
 
+        return redirect()->back()->with('notification', [
+            'message' => 'Addresse gespeichert!',
+            'type'    => 'success',
+        ]);
+
     }
 
     function destroy(Request $request)
     {
         Address::destroy($request->id);
 
-        return redirect()->back();
+        return redirect()->back()->with('notification', [
+            'message' => 'Addresse gelöscht!',
+            'type'    => 'warning',
+        ]);
     }
 
     function update(Request $request)
@@ -71,6 +79,9 @@ class AddressController extends Controller
         $address->save();
 
         // ADD FAILED MESSAGE
-        return redirect()->route('suppliers.edit', $address->supplier_id)->with('notification', ['message' => 'Änderung gespeichert!']);
+        return redirect()->route('suppliers.edit', $address->supplier_id)->with('notification', [
+            'message' => 'Adresse geändert!',
+            'type'    => 'success',
+        ]);
     }
 }
