@@ -14,15 +14,14 @@
                         color="light"
                         class="mt-1 flex justify-between items-center border-gray-300 border-[1px] rounded-md bg-gray-50 min-w-[300px]"
                         type="button">
-                <Transition>
-                    <div v-if="country && computed(() => CountryCodes.de[country.toUpperCase()]).value">
-                        {{
-                            computed(() => CountryCodes.de[country.toUpperCase()]).value
-                        }}
-                    </div>
-                    <div v-else-if="country">...</div>
-                    <div v-else>Auswählen</div>
-                </Transition>
+                <div v-if="country && computed(() => CountryCodes.de[country.toUpperCase()]).value">
+                    {{
+                        computed(() => CountryCodes.de[country.toUpperCase()]).value
+                    }}
+                </div>
+                <div v-else-if="country">...</div>
+                <div v-else>Auswählen</div>
+
                 <svg class="w-4 h-4 ml-2"
                      aria-hidden="true"
                      fill="none"
@@ -80,8 +79,10 @@ const props = defineProps(
     })
 
 const emit = defineEmits(['selectCountry'])
-let countries = CountryCodes.de
+const country = ref(props.countryCode)
 
+let countries = CountryCodes.de
+let showCountryDropdown = ref(false)
 let searchCountryTerm = ref('')
 let filteredCountryCodes = computed(
     () => Object.entries(countries)
@@ -91,9 +92,6 @@ let filteredCountryCodes = computed(
                             || el[1].toLowerCase()
                                     .includes(searchCountryTerm.value)))
 
-const country = ref(props.countryCode)
-
-let showCountryDropdown = ref(false)
 
 function toggleCountryDropdown() {
     showCountryDropdown.value = !showCountryDropdown.value
