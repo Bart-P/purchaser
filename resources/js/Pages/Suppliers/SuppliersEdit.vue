@@ -1,8 +1,6 @@
 <template>
     <Head title="Lieferant Bearbeiten" />
-    
-    <FlashNotification />
-    
+
     <DeleteConfirmationModal id="deleteAddressModal">
         <template #text>
             Die Addresse
@@ -14,14 +12,14 @@
                         color="danger">
                 Löschen
             </BaseButton>
-            
+
             <BaseButton @click="deleteAddressModal.hide()"
                         color="light">
                 Abbrechen
             </BaseButton>
         </template>
     </DeleteConfirmationModal>
-    
+
     <DeleteConfirmationModal id="deletePersonModal">
         <template #text>
             Die die Person
@@ -35,14 +33,14 @@
                         color="danger">
                 Löschen
             </BaseButton>
-            
+
             <BaseButton @click="deletePersonModal.hide()"
                         color="light">
                 Abbrechen
             </BaseButton>
         </template>
     </DeleteConfirmationModal>
-    
+
     <AuthenticatedLayout>
         <template #header>
             Lieferant Bearbeiten
@@ -54,13 +52,13 @@
                                  :persons="props.persons"
                                  :addresses="props.addresses" />
             </PageBoxWrapper>
-            
+
             <BaseModal id="addAddressModal">
                 <AddAddressForm
                     :supplier="props.supplier"
                     :addresses="props.addresses" />
             </BaseModal>
-            
+
             <!-- Addresses to save list -->
             <PageBoxWrapper>
                 <!-- Address Modal toggle -->
@@ -91,18 +89,18 @@
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </div>
-                        
+
                         <SingleAddressList :id="index"
                                            :address="address" />
                     </div>
                 </div>
             </PageBoxWrapper>
-            
+
             <BaseModal id="addPersonModal">
                 <AddPersonForm :supplier="props.supplier"
                                :persons="persons" />
             </BaseModal>
-            
+
             <!-- Presons to save list -->
             <PageBoxWrapper>
                 <div class="flex flex-col gap-5">
@@ -118,11 +116,11 @@
                             Person Hinzufügen
                         </BaseButton>
                     </div>
-                    
+
                     <div class="flex flex-wrap gap-8 pt-8">
                         <template v-for="(person, index) in persons">
                             <div class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                                
+
                                 <div class="float-right flex gap-4">
                                     <Link v-if="person.id"
                                           :href="route('person.edit', person.id)"
@@ -139,7 +137,7 @@
                                                   :person="person" />
                             </div>
                         </template>
-                    
+
                     </div>
                 </div>
             </PageBoxWrapper>
@@ -148,22 +146,21 @@
 </template>
 
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head, Link} from "@inertiajs/inertia-vue3";
-import {onMounted, ref} from "vue";
-import {initModals} from "flowbite";
-import BaseButton from "@/Components/BaseButton.vue";
-import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
-import AddSupplierForm from "@/Pages/Suppliers/Partials/AddSupplierForm.vue";
-import AddAddressForm from "@/Pages/Suppliers/Partials/AddAddressForm.vue";
-import SingleAddressList from "@/Pages/Suppliers/Partials/SingleAddressList.vue";
-import AddPersonForm from "@/Pages/Suppliers/Partials/AddPersonForm.vue";
-import BaseModal from "@/Components/BaseModal.vue";
-import SinglePersonList from "@/Pages/Suppliers/Partials/SinglePersonList.vue";
-import DeleteConfirmationModal from "@/Components/DeleteConfirmationModal.vue";
-import {Inertia} from "@inertiajs/inertia";
-import {Modal} from "flowbite";
-import FlashNotification from "@/Components/FlashNotification.vue";
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import {Head, Link} from '@inertiajs/inertia-vue3';
+import {onMounted, ref} from 'vue';
+import {initModals} from 'flowbite';
+import BaseButton from '@/Components/BaseButton.vue';
+import PageBoxWrapper from '@/Components/PageBoxWrapper.vue';
+import AddSupplierForm from '@/Pages/Suppliers/Partials/AddSupplierForm.vue';
+import AddAddressForm from '@/Pages/Suppliers/Partials/AddAddressForm.vue';
+import SingleAddressList from '@/Pages/Suppliers/Partials/SingleAddressList.vue';
+import AddPersonForm from '@/Pages/Suppliers/Partials/AddPersonForm.vue';
+import BaseModal from '@/Components/BaseModal.vue';
+import SinglePersonList from '@/Pages/Suppliers/Partials/SinglePersonList.vue';
+import DeleteConfirmationModal from '@/Components/DeleteConfirmationModal.vue';
+import {Inertia} from '@inertiajs/inertia';
+import {Modal} from 'flowbite';
 
 onMounted(() => {
     initModals()
@@ -175,7 +172,7 @@ const props = defineProps(
     {
         'supplier' : Object,
         'addresses': Array,
-        'persons'  : Array
+        'persons'  : Array,
     })
 
 let deleteAddressModal = null
