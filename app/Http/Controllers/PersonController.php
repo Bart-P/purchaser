@@ -46,13 +46,22 @@ class PersonController extends Controller
                 'email1'      => $request->email1,
                 'email2'      => $request->email2,
             ]);
+
+
+        return redirect()->route('suppliers.edit', $request->supplier_id)->with('notification', [
+            'message' => 'Neue Person erfolgreich erstellt!',
+            'type'    => 'success',
+        ]);
     }
 
     function destroy($id)
     {
         Person::destroy($id);
 
-        return redirect()->back();
+        return redirect()->back()->with('notification', [
+            'message' => 'Person wurde aus der Datenbank gelöscht!',
+            'type'    => 'success',
+        ]);
     }
 
     function update(Request $request)
@@ -61,6 +70,12 @@ class PersonController extends Controller
         $person->fill($request->query());
         $person->save();
 
-        return redirect()->route('suppliers.edit', $request->supplier_id)->with('notification', ['message' => 'Person geändert!']);
+        return redirect()->route('suppliers.edit', $request->supplier_id)->with(
+            'notification',
+            [
+                'message' => 'Person geändert!',
+                'type'    => 'success',
+            ],
+        );
     }
 }
