@@ -99,9 +99,8 @@
 import BaseButton from '@/Components/BaseButton.vue';
 import DeleteConfirmationModal from '@/Components/DeleteConfirmationModal.vue';
 import Pagination from '@/Components/Pagination.vue';
-import {store} from '@/store';
 import {Inertia} from '@inertiajs/inertia';
-import {Link, usePage} from '@inertiajs/inertia-vue3';
+import {Link} from '@inertiajs/inertia-vue3';
 import {initModals} from 'flowbite';
 import {onMounted, reactive} from 'vue';
 
@@ -128,11 +127,6 @@ function setSupplierToDelete(id, name) {
 
 function deleteSupplier() {
     Inertia.delete(route('suppliers.destroy', supplierToDelete.id))
-    setTimeout(() => {
-        store.flash.message = usePage().props.value.notification.message
-        store.flash.type = 'danger'
-    }, 500)
-
 }
 
 </script>
