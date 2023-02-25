@@ -107,7 +107,6 @@ onMounted(() => {
 let addresses = reactive([])
 let persons = reactive([])
 
-// TODO check if new addresses and persons are added on save..
 function addAddress(address) {
     addresses.push(address)
 }
