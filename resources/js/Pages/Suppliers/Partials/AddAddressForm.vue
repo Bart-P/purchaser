@@ -197,7 +197,7 @@ function addAddress() {
         return
     }
 
-    emit('addAddress', addressForm.data())
+    props.addresses.push(addressForm.data())
     addressForm.reset()
     addressFormError.value = ''
     addressFormSuccess.value = 'Addresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.'
