@@ -121,7 +121,7 @@
         <div class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
             <BaseButton
                 color="primary"
-                @click="addAddress()"
+                @click.prevent="addAddress()"
                 type="submit">
                 Speichern
             </BaseButton>
@@ -141,6 +141,7 @@ import AlertSuccess from '@/Components/AlertSuccess.vue';
 import BaseButton from '@/Components/BaseButton.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
+import {CountryCodes} from '@/Localisation/CountryCodes';
 import SelectCountryField from '@/Pages/Address/Partials/SelectCountryField.vue';
 import {Inertia} from '@inertiajs/inertia';
 import {useForm} from '@inertiajs/inertia-vue3';
@@ -177,22 +178,29 @@ const addressForm = useForm(
 let addressFormError = ref('')
 let addressFormSuccess = ref('')
 
-// TODO remove addAddress bug where if the country is preselected the whole form is reloaded and data is lost..
+// TODO revamp notifications - now the whole form jumps - it should close and a toast should appear that the address/person was added.
+
 function addAddress() {
+
+    if (addressForm.country && !CountryCodes.de.hasOwnProperty(addressForm.country)) {
+        addressFormError.value = 'Länderkod nicht erkannt!'
+        return
+    }
 
     if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.street_nr || !addressForm.city_code || !addressForm.city || !addressForm.country) {
         addressFormError.value = 'Bitte alle mit * gekennzeichneten Felder befüllen!'
-    } else {
-        if (props.supplier?.id && !addressForm.id) {
-            saveNewAddressForSupplier(addressForm.data())
-        }
-
-        emit('addAddress', addressForm.data())
-
-        addressForm.reset()
-        addressFormError.value = ''
-        addressFormSuccess.value = 'Addresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.'
+        return
     }
+
+    if (props.supplier?.id && !addressForm.id) {
+        saveNewAddressForSupplier(addressForm.data())
+        return
+    }
+
+    emit('addAddress', addressForm.data())
+    addressForm.reset()
+    addressFormError.value = ''
+    addressFormSuccess.value = 'Addresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.'
 
     setTimeout(() => {
         addressFormError.value = ''
