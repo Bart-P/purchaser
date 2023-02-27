@@ -3,8 +3,8 @@
         <InputLabel for="country"
                     value="Land *" />
         <div class="flex items-center gap-4">
-            <TextInput v-model="country"
-                       @keyup="selectCountryWithDebounce(country)"
+            <TextInput @keyup="selectCountryWithDebounce($event.target.value)"
+                       :model-value="countryCode"
                        id="country"
                        type="text"
                        class="mt-1 block w-[50px] text-center uppercase"
@@ -14,12 +14,12 @@
                         color="light"
                         class="mt-1 flex justify-between items-center border-gray-300 border-[1px] rounded-md bg-gray-50 min-w-[300px]"
                         type="button">
-                <div v-if="country && computed(() => CountryCodes.de[country.toUpperCase()]).value">
+                <div v-if="countryCode && countries[countryCode.toUpperCase()]">
                     {{
-                        computed(() => CountryCodes.de[country.toUpperCase()]).value
+                        countries[countryCode.toUpperCase()]
                     }}
                 </div>
-                <div v-else-if="country">...</div>
+                <div v-else-if="countryCode">...</div>
                 <div v-else>Auswählen</div>
 
                 <svg class="w-4 h-4 ml-2"
@@ -79,7 +79,6 @@ const props = defineProps(
     })
 
 const emit = defineEmits(['selectCountry'])
-const country = ref(props.countryCode)
 
 let countries = CountryCodes.de
 let showCountryDropdown = ref(false)
@@ -108,15 +107,12 @@ function selectCountryWithDebounce(countryCode) {
         clearTimeout(timeout)
     }
     timeout = setTimeout(() => {
-        country.value = countryCode
-        emit('selectCountry', country.value)
-        closeCountryDropdown()
+        selectCountry(countryCode)
     }, 500)
 }
 
 function selectCountry(countryCode) {
-    country.value = countryCode
-    emit('selectCountry', country.value)
+    emit('selectCountry', countryCode.toUpperCase())
     closeCountryDropdown()
 }
 </script>
