@@ -13,8 +13,7 @@
             </PageBoxWrapper>
 
             <BaseModal id="addAddressModal">
-                <AddAddressForm @add-address="addAddress"
-                                :addresses="addresses" />
+                <AddAddressForm :addresses="addresses" />
             </BaseModal>
 
             <!-- Addresses to save list -->
@@ -106,10 +105,6 @@ onMounted(() => {
 
 let addresses = reactive([])
 let persons = reactive([])
-
-function addAddress(address) {
-    addresses.push(address)
-}
 
 function removeAddress(index) {
     addresses.splice(index, 1)
