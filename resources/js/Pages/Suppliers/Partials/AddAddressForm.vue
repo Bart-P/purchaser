@@ -189,7 +189,7 @@ function addAddress() {
     props.addresses.push(addressForm.data())
     addressForm.reset()
     toast.add({
-                  type   : 'success',
+                  type   : 'info',
                   message: 'Addresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.',
               })
 }
