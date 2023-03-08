@@ -99,6 +99,13 @@ import AddPersonForm from '@/Pages/Suppliers/Partials/AddPersonForm.vue';
 import BaseModal from '@/Components/BaseModal.vue';
 import SinglePersonList from '@/Pages/Suppliers/Partials/SinglePersonList.vue';
 
+const props = defineProps(
+    {
+        categories: Object,
+    })
+
+// TODO implement category dropdown with search from flowbite
+
 onMounted(() => {
     initModals()
 })
