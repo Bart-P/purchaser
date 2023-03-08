@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\Category;
 use App\Models\Person;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
@@ -26,7 +27,9 @@ class SuppliersController extends Controller
 
     function create()
     {
-        return Inertia::render('Suppliers/SuppliersCreate');
+        return Inertia::render('Suppliers/SuppliersCreate', [
+            'categories' => Category::all(),
+        ]);
     }
 
     function edit($id)
