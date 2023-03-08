@@ -39,28 +39,33 @@
                    placeholder="Suche">
         </div>
         <div class="h-full flex gap-3">
-            <BaseButton :href="route('suppliers.create')" color="primary">Neu</BaseButton>
-            <BaseButton :disabled="props.suppliersChosen.value" color="secondary">Zur Anfrage Hinzufügen</BaseButton>
+            <BaseButton :href="route('suppliers.create')"
+                        color="primary">Neu
+            </BaseButton>
+            <BaseButton :disabled="props.suppliersChosen.value"
+                        color="secondary">Zur Anfrage Hinzufügen
+            </BaseButton>
         </div>
     </div>
 </template>
 
 <script setup>
 
-import {Inertia} from "@inertiajs/inertia";
-import {ref} from "vue";
-import BaseButton from "@/Components/BaseButton.vue";
+import BaseButton from '@/Components/BaseButton.vue';
+import {Inertia} from '@inertiajs/inertia';
+import {ref} from 'vue';
 
-const props = defineProps({
-    search: {
-        default: ref(''),
-        type: Object
-    },
-    suppliersChosen: {
-        default: ref(true),
-        type: Object
-    }
-})
+const props = defineProps(
+    {
+        search         : {
+            default: ref(''),
+            type   : Object,
+        },
+        suppliersChosen: {
+            default: ref(true),
+            type   : Object,
+        },
+    })
 
 let searchInput = props.search.value || ''
 let timeOut = null
@@ -68,15 +73,15 @@ let timeOut = null
 function searchFor() {
     clearTimeout(timeOut)
     props.search.value = searchInput
-    
+
     timeOut = setTimeout(() => {
         Inertia.get(
             route('suppliers'),
             {search: props.search.value},
             {
                 preserveState: true,
-                replace: true,
-            }
+                replace      : true,
+            },
         )
     }, 500)
 }
