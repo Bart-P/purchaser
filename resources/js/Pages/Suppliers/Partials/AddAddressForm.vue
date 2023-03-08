@@ -3,16 +3,6 @@
         <!-- Modal body -->
         <div class="flex flex-col gap-5 p-6">
             <h3 class="text-purchaser-primary text-xl font-bold">Addresse Hinzufügen</h3>
-            <Transition>
-                <AlertSuccess v-show="addressFormSuccess"
-                              :message="addressFormSuccess" />
-            </Transition>
-
-            <Transition>
-                <AlertFailed v-show="addressFormError"
-                             :message="addressFormError" />
-            </Transition>
-
             <InputLabel for="addressType">Typ *</InputLabel>
             <select v-model="addressForm.type"
                     required
@@ -136,16 +126,14 @@
 
 <script setup>
 
-import AlertFailed from '@/Components/AlertFailed.vue';
-import AlertSuccess from '@/Components/AlertSuccess.vue';
 import BaseButton from '@/Components/BaseButton.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import {CountryCodes} from '@/Localisation/CountryCodes';
 import SelectCountryField from '@/Pages/Address/Partials/SelectCountryField.vue';
+import toast from '@/Stores/toast';
 import {Inertia} from '@inertiajs/inertia';
 import {useForm} from '@inertiajs/inertia-vue3';
-import {ref} from 'vue';
 
 const props = defineProps(
     {
@@ -175,20 +163,21 @@ const addressForm = useForm(
         phone      : null,
     })
 
-let addressFormError = ref('')
-let addressFormSuccess = ref('')
-
-// TODO revamp notifications - now the whole form jumps - it should close and a toast should appear that the address/person was added.
-
 function addAddress() {
 
-    if (addressForm.country && !CountryCodes.de.hasOwnProperty(addressForm.country)) {
-        addressFormError.value = 'Länderkod nicht erkannt!'
+    if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.street_nr || !addressForm.city_code || !addressForm.city || !addressForm.country) {
+        toast.add({
+                      type   : 'warning',
+                      message: 'Bitte alle mit * gekennzeichneten Felder befüllen!',
+                  })
         return
     }
 
-    if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.street_nr || !addressForm.city_code || !addressForm.city || !addressForm.country) {
-        addressFormError.value = 'Bitte alle mit * gekennzeichneten Felder befüllen!'
+    if (addressForm.country && !CountryCodes.de.hasOwnProperty(addressForm.country)) {
+        toast.add({
+                      type   : 'warning',
+                      message: 'Länderkod nicht erkannt!',
+                  })
         return
     }
 
@@ -199,13 +188,10 @@ function addAddress() {
 
     props.addresses.push(addressForm.data())
     addressForm.reset()
-    addressFormError.value = ''
-    addressFormSuccess.value = 'Addresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.'
-
-    setTimeout(() => {
-        addressFormError.value = ''
-        addressFormSuccess.value = ''
-    }, 5000)
+    toast.add({
+                  type   : 'success',
+                  message: 'Addresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.',
+              })
 }
 
 function saveNewAddressForSupplier(addressData) {
