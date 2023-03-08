@@ -1,6 +1,6 @@
 <template>
     <Head title="Lieferanten" />
-    
+
     <AuthenticatedLayout>
         <template #header>
             Alle Lieferanten
@@ -10,7 +10,7 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-4">
                         <SuppliersTableNav :suppliers="suppliers" />
-                        
+
                         <SuppliersTable :suppliers="suppliers" />
                     </div>
                 </div>
@@ -20,11 +20,11 @@
 </template>
 
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head} from "@inertiajs/inertia-vue3";
-import SuppliersTable from "@/Pages/Suppliers/Partials/SuppliersTable.vue";
-import {ref} from "vue";
-import SuppliersTableNav from "@/Pages/Suppliers/Partials/SuppliersTableNav.vue";
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import {Head} from '@inertiajs/inertia-vue3';
+import SuppliersTable from '@/Pages/Suppliers/Partials/SuppliersTable.vue';
+import {ref} from 'vue';
+import SuppliersTableNav from '@/Pages/Suppliers/Partials/SuppliersTableNav.vue';
 
 const props = defineProps(
     {
@@ -32,7 +32,6 @@ const props = defineProps(
         search   : {
             type   : Object,
             default: ref(''),
-        }
+        },
     })
-
 </script>
