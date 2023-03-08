@@ -3,20 +3,10 @@
         <h3 class="text-purchaser-primary text-xl font-bold">
             Person Hinzufügen
         </h3>
-        <Transition>
-            <AlertSuccess v-if="personFormSuccess"
-                          :message="personFormSuccess" />
-        </Transition>
-        
-        <Transition>
-            <AlertFailed v-if="personFormError"
-                         :message="personFormError" />
-        </Transition>
-        
         <InputLabel for="personType">
             Kontakttyp *
         </InputLabel>
-        
+
         <select id="personType"
                 v-model="personForm.type"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary"
@@ -25,7 +15,7 @@
             <option value="secondary">Vertretung</option>
             <option value="other">Sonstige</option>
         </select>
-        
+
         <InputLabel for="personGender">
             Geschlecht *
         </InputLabel>
@@ -42,7 +32,7 @@
                            class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Männlich</label>
                 </div>
             </li>
-            
+
             <li class="w-full border-b border-gray-300 sm:border-b-0 sm:border-r">
                 <div class="flex items-center pl-3">
                     <input id="horizontal-list-female"
@@ -55,7 +45,7 @@
                            class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Weiblich</label>
                 </div>
             </li>
-            
+
             <li class="w-full border-b border-gray-300 sm:border-b-0 sm:border-r">
                 <div class="flex items-center pl-3">
                     <input id="horizontal-list-other"
@@ -69,7 +59,7 @@
                 </div>
             </li>
         </ul>
-        
+
         <div class="">
             <InputLabel for="firstName"
                         value="Vorname *" />
@@ -81,7 +71,7 @@
                 autofocus
             />
         </div>
-        
+
         <div class="">
             <InputLabel for="lastName"
                         value="Nachname *" />
@@ -92,7 +82,7 @@
                 class="mt-1 block w-full"
             />
         </div>
-        
+
         <div class="">
             <InputLabel for="position"
                         value="Position" />
@@ -114,7 +104,7 @@
                     class="mt-1 block w-full"
                 />
             </div>
-            
+
             <div class="w-1/2">
                 <InputLabel for="phone2"
                             value="Telefon 2" />
@@ -137,7 +127,7 @@
                     class="mt-1 block w-full"
                 />
             </div>
-            
+
             <div class="w-1/2">
                 <InputLabel for="email2"
                             value="E-Mail2" />
@@ -166,14 +156,12 @@
 
 <script setup>
 
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
-import BaseButton from "@/Components/BaseButton.vue";
-import {ref} from "vue";
-import {useForm} from "@inertiajs/inertia-vue3";
-import AlertSuccess from "@/Components/AlertSuccess.vue";
-import AlertFailed from "@/Components/AlertFailed.vue";
-import {Inertia} from "@inertiajs/inertia";
+import BaseButton from '@/Components/BaseButton.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
+import toast from '@/Stores/toast';
+import {Inertia} from '@inertiajs/inertia';
+import {useForm} from '@inertiajs/inertia-vue3';
 
 const props = defineProps(
     {
@@ -181,8 +169,8 @@ const props = defineProps(
         supplier: {
             default: null,
             type   : Object,
-        }
-    }
+        },
+    },
 )
 
 const personForm = useForm(
@@ -196,30 +184,28 @@ const personForm = useForm(
         phone2    : null,
         email1    : null,
         email2    : null,
-    }
+    },
 )
 
-let personFormError = ref('')
-let personFormSuccess = ref('')
-
 function addPerson() {
-    
+
     if (!personForm.type || !personForm.gender || !personForm.first_name || !personForm.last_name) {
-        personFormError.value = 'Bitte alle mit "*" gekennzeichneten Felder befüllen!'
+        toast.add({
+                      type   : 'warning',
+                      message: 'Bitte alle mit "*" gekennzeichneten Felder befüllen!',
+                  })
     } else {
         props.persons.push(personForm.data())
         if (props.supplier?.id) {
             saveNewPersonForSupplier(personForm.data())
         }
+
         personForm.reset()
-        personFormError.value = ''
-        personFormSuccess.value = 'Kontaktperson Hinzugefügt!'
+        toast.add({
+                      type   : 'info',
+                      message: 'Person Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.',
+                  })
     }
-    
-    setTimeout(() => {
-        personFormError.value = ''
-        personFormSuccess.value = ''
-    }, 5000)
 }
 
 function saveNewPersonForSupplier(personData) {
