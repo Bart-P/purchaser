@@ -158,6 +158,9 @@ const props = defineProps(
         persons   : Array,
     })
 
+const checkedCategories = ref([]);
+const filteredCategories = ref(props.categories)
+
 const supplierForm = useForm(
     {
         name     : props.supplier?.name,
@@ -166,6 +169,28 @@ const supplierForm = useForm(
         persons  : null,
     },
 )
+
+// TODO - restyle category element and abstract it to its own component so it can be reused
+
+let applyFilterTimeout = null
+
+function applyFilterCategories() {
+    let filterTerm = document.getElementById('category-search-input')
+    if (!filterTerm) {
+        filterTerm = ''
+    }
+
+    if (applyFilterTimeout) {
+        clearTimeout(applyFilterTimeout)
+    }
+
+    applyFilterTimeout = setTimeout(() => {
+        filteredCategories.value = props.categories
+                                        .filter((cat) =>
+                                                    cat.name.toLowerCase()
+                                                       .includes(filterTerm.value.toLowerCase()))
+    }, 500)
+}
 
 function submitSupplier() {
     if (props.addresses.length) {
