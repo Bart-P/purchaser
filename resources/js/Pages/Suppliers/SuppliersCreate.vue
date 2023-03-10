@@ -8,7 +8,8 @@
         <div class="py-12 w-full h-full flex flex-col gap-8">
             <!-- add Company Form -->
             <PageBoxWrapper>
-                <AddSupplierForm :persons="persons"
+                <AddSupplierForm :categories="categories"
+                                 :persons="persons"
                                  :addresses="addresses" />
             </PageBoxWrapper>
 
@@ -103,8 +104,6 @@ const props = defineProps(
     {
         categories: Object,
     })
-
-// TODO implement category dropdown with search from flowbite
 
 onMounted(() => {
     initModals()
