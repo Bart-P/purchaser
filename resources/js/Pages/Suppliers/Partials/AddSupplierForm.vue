@@ -46,7 +46,7 @@
 
         <div class="space-y-6">
             <div class="flex justify-between items-center">
-                <h3 class="heading-4">Kategorien</h3>
+                <h4 class="heading-4">Kategorien</h4>
                 <BaseButton id="dropdownSearchButton"
                             data-dropdown-toggle="dropdownCategorySearch"
                             data-dropdown-placement="bottom"
