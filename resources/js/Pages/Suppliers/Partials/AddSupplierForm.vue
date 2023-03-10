@@ -2,7 +2,7 @@
     <form @submit.prevent="submitSupplier"
           class="flex flex-col gap-5">
         <div class="flex justify-between">
-            <h3 class="text-xl text-purchaser-primary font-bold rounded px-2">
+            <h3 class="heading-3">
                 Firma (erforderlich)
             </h3>
             <div class="flex gap-4 justify-end">
@@ -14,7 +14,7 @@
                 </BaseButton>
             </div>
         </div>
-        
+
         <div class="flex gap-5">
             <div class="w-1/2">
                 <InputLabel for="company"
@@ -28,7 +28,7 @@
                     autofocus
                 />
             </div>
-            
+
             <div class="w-1/2">
                 <InputLabel for="companyEmail"
                             value="Firma E-Mail *" />
@@ -41,15 +41,19 @@
                 />
             </div>
         </div>
+
+        <div class="heading-3">
+            <h3>Kategorien</h3>
+        </div>
     </form>
 </template>
 
 <script setup>
 
-import BaseButton from "@/Components/BaseButton.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
-import {useForm} from "@inertiajs/inertia-vue3";
+import BaseButton from '@/Components/BaseButton.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
+import {useForm} from '@inertiajs/inertia-vue3';
 
 const props = defineProps(
     {
@@ -67,16 +71,18 @@ const supplierForm = useForm(
         email    : props.supplier?.email,
         addresses: null,
         persons  : null,
-    }
+    },
 )
 
 function submitSupplier() {
-    if (props.addresses.length)
+    if (props.addresses.length) {
         supplierForm['addresses'] = props.addresses
-    
-    if (props.persons.length)
+    }
+
+    if (props.persons.length) {
         supplierForm['persons'] = props.persons
-    
+    }
+
     if (props.supplier) {
         supplierForm.put(route('suppliers.put',
                                {
@@ -87,6 +93,6 @@ function submitSupplier() {
     } else {
         supplierForm.post(route('suppliers.store'))
     }
-    
+
 }
 </script>
