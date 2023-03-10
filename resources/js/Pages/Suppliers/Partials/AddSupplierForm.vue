@@ -170,7 +170,7 @@ const supplierForm = useForm(
     },
 )
 
-// TODO - restyle category element and abstract it to its own component so it can be reused
+// TODO - restyle category element and abstract it to its own component, so it can be reused
 
 let applyFilterTimeout = null
 
