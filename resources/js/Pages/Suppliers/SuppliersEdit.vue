@@ -63,7 +63,7 @@
             <PageBoxWrapper>
                 <!-- Address Modal toggle -->
                 <div class="flex justify-between">
-                    <h3 class="text-xl text-purchaser-primary font-bold rounded px-2">
+                    <h3 class="heading-3">
                         Adressen (optional)
                     </h3>
                     <BaseButton color="primary"
@@ -106,7 +106,7 @@
                 <div class="flex flex-col gap-5">
                     <!-- Person Modal toggle -->
                     <div class="flex justify-between">
-                        <h3 class="text-xl text-purchaser-primary font-bold rounded px-2">
+                        <h3 class="heading-3">
                             Personen (optional)
                         </h3>
                         <BaseButton color="primary"

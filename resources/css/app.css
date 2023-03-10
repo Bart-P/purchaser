@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.heading-3 {
+    @apply text-xl text-purchaser-primary font-bold rounded px-2;
+}
