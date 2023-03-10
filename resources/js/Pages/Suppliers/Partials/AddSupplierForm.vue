@@ -42,10 +42,11 @@
             </div>
         </div>
 
-        <div class="pt-10 space-y-6">
-            <hr class="mt-4">
+        <hr class="my-5">
+
+        <div class="space-y-6">
             <div class="flex justify-between items-center">
-                <h3 class="heading-3">Kategorien</h3>
+                <h3 class="heading-4">Kategorien</h3>
                 <BaseButton id="dropdownSearchButton"
                             data-dropdown-toggle="dropdownCategorySearch"
                             data-dropdown-placement="bottom"

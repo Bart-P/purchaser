@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 .heading-3 {
-    @apply text-xl text-purchaser-primary font-bold rounded px-2;
+    @apply text-xl text-purchaser-primary font-bold px-2;
+}
+
+.heading-4 {
+    @apply text-xl text-purchaser-primary px-2;
 }
