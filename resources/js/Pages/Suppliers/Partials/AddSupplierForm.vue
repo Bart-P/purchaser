@@ -46,7 +46,7 @@
 
         <div class="space-y-6">
             <div class="flex justify-between items-center">
-                <h4 class="heading-4">Kategorien</h4>
+                <h4 class="heading-4">Kategorien (erforderlich)</h4>
                 <BaseButton id="dropdownSearchButton"
                             data-dropdown-toggle="dropdownCategorySearch"
                             data-dropdown-placement="bottom"
@@ -74,6 +74,11 @@
                         {{ cat.name }}
                     </li>
                 </TransitionGroup>
+
+                <li
+                    class="py-2 px-3 border-[1px] border-white rounded-md text-red-700 float-left"
+                    v-show="!checkedCategories.length">*Bitte eine Kategorie auswählen
+                </li>
             </ul>
 
             <SelectCategoryDropdown id="dropdownCategorySearch"
@@ -162,5 +167,6 @@ function submitSupplier() {
 .v-leave-to {
     opacity: 0;
 }
+
 
 </style>
