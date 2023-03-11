@@ -87,10 +87,6 @@ function applyFilterCategories() {
     }, 500)
 }
 
-function toggleCheckCategory(category) {
-    console.log(category.name)
-    emit('toggleCheckCategory', [category])
-}
 </script>
 
 <style lang="scss"
