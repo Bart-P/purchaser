@@ -153,7 +153,6 @@ function submitSupplier() {
     } else {
         supplierForm.post(route('suppliers.store'))
     }
-
 }
 </script>
 
