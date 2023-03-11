@@ -3,7 +3,7 @@
     <!-- The class !m-0 has to be added, else popper.js throughs a warning in the console -->
 
     <div id="dropdownCategorySearch"
-         class="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700 !m-0">
+         class="z-10 hidden bg-white rounded-md shadow w-60 dark:bg-gray-700 !m-0">
         <div class="p-3">
             <label for="category-search-input"
                    class="sr-only">Search</label>
@@ -22,7 +22,7 @@
                 <input type="text"
                        @keyup="applyFilterCategories"
                        id="category-search-input"
-                       class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50 focus:ring-purchaser-primary focus:border-purchaser-primary"
                        placeholder="Suchen">
             </div>
         </div>
@@ -34,9 +34,9 @@
                            @click="$emit('toggleCheckCategory', category)"
                            type="checkbox"
                            :value="category"
-                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                           class="w-4 h-4 text-purchaser-primary bg-gray-100 border-gray-300 rounded-md focus:ring-purchaser-primary focus:ring-1 dark:bg-gray-600 dark:border-gray-500">
                     <label for="checkbox-item-11"
-                           class="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                           class="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded-md">
                         {{ category.name }}
                     </label>
                 </div>
