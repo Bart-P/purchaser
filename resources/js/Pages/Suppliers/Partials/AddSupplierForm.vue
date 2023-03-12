@@ -106,16 +106,24 @@ onMounted(() => {
 
 const props = defineProps(
     {
-        supplier  : {
+        supplier          : {
             default: null,
             type   : Object,
         },
-        categories: Object,
-        addresses : Array,
-        persons   : Array,
+        categories        : Object,
+        supplierCategories: {
+            type   : Object,
+            default: null,
+        },
+        addresses         : Array,
+        persons           : Array,
     })
 
 const checkedCategories = ref([]);
+
+if (props.supplierCategories) {
+    checkedCategories.value = props.supplierCategories
+}
 
 const supplierForm = useForm(
     {
@@ -166,6 +174,4 @@ function submitSupplier() {
 .v-leave-to {
     opacity: 0;
 }
-
-
 </style>
