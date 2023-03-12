@@ -83,6 +83,7 @@
 
             <SelectCategoryDropdown id="dropdownCategorySearch"
                                     @toggle-check-category="toggleCheckCategory"
+                                    :checked-categories="checkedCategories"
                                     :categories="categories" />
 
 

@@ -34,6 +34,7 @@
                            @click="$emit('toggleCheckCategory', category)"
                            type="checkbox"
                            :value="category"
+                           :checked="categoryIsChecked(category.id)"
                            class="w-4 h-4 text-purchaser-primary bg-gray-100 border-gray-300 rounded-md focus:ring-purchaser-primary focus:ring-1 dark:bg-gray-600 dark:border-gray-500">
                     <label for="checkbox-item-11"
                            class="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded-md">
@@ -55,10 +56,15 @@ import {ref} from 'vue';
 
 const props = defineProps(
     {
-        categories: Object,
+        categories       : Object,
+        checkedCategories: {
+            type   : Object,
+            default: null,
+        },
     })
 
 const emit = defineEmits(['toggleCheckCategory'])
+
 
 const filteredCategories = ref(props.categories)
 let applyFilterTimeout = null
@@ -81,9 +87,13 @@ function applyFilterCategories() {
     }, 500)
 }
 
+function categoryIsChecked(categoryId) {
+    if (!props.checkedCategories) {
+        return false
+    }
+
+    return Boolean(Object.values(props.checkedCategories)
+                         .some(cat => cat.id === categoryId))
+}
+
 </script>
-
-<style lang="scss"
-       scoped>
-
-</style>
