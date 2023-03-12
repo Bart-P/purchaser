@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\Category;
 use App\Models\Person;
 use App\Models\Supplier;
+use App\Models\SupplierCategoryJunction;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -37,16 +38,26 @@ class SuppliersController extends Controller
         $supplier = Supplier::find($id);
         $addresses = [];
         $persons = [];
+        $categories = Category::all();
+        $supplierCategories = [];
 
         if ($supplier) {
             $addresses = $supplier->addresses()->get();
             $persons = $supplier->persons()->get();
+            $supplierCategoryJunction = SupplierCategoryJunction::all()->where('supplier_id', 'like', $id)->values();
+            foreach ($categories as $category) {
+                if ($supplierCategoryJunction->contains('category_id', $category->id)) {
+                    $supplierCategories[] = $category;
+                }
+            };
         }
 
         return Inertia::render('Suppliers/SuppliersEdit', [
-            'supplier'  => $supplier,
-            'addresses' => $addresses,
-            'persons'   => $persons,
+            'supplier'           => $supplier,
+            'addresses'          => $addresses,
+            'persons'            => $persons,
+            'supplierCategories' => $supplierCategories,
+            'categories'         => $categories,
         ]);
     }
 
