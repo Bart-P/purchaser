@@ -192,6 +192,4 @@ class SuppliersController extends Controller
         };
         return $personsArray;
     }
-
-    // TODO figure out how to add Supplier categories + tags with an admin page to add and delete categories from admin Panel or simillar.
 }

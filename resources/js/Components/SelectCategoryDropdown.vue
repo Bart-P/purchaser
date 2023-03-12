@@ -1,7 +1,7 @@
 <template>
     <!-- Dropdown menu -->
-    <!-- The class !m-0 has to be added, else popper.js throughs a warning in the console -->
 
+    <!-- The class !m-0 has to be added to the dropdown, else popper.js throughs a warning in the console -->
     <div id="dropdownCategorySearch"
          class="z-10 hidden bg-white rounded-md shadow w-60 dark:bg-gray-700 !m-0">
         <div class="p-3">
