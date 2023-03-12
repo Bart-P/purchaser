@@ -7,6 +7,7 @@ use App\Models\Address;
 use App\Models\Category;
 use App\Models\Person;
 use App\Models\Supplier;
+use App\Models\SupplierCategoryJunction;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -74,9 +75,21 @@ class DatabaseSeeder extends Seeder
                     'category_id' => $tags[$tag_key],
                 ]);
         };
+
         Supplier::factory(100)->create();
         Address::factory(150)->create();
         Person::factory(125)->create();
 
+        $supplier_ids = Supplier::all('id');
+        $category_ids = Category::all('id');
+
+        foreach ($supplier_ids as $id) {
+            SupplierCategoryJunction::factory()->create(
+                [
+                    'supplier_id' => $id,
+                    'category_id' => fake()->randomElement($category_ids),
+                ]
+            );
+        }
     }
 }
