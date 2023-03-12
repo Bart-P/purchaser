@@ -2,7 +2,7 @@
     <Head title="Addresse Bearbeiten" />
 
     <AuthenticatedLayout>
-        <template #header> Addresse Bearbeiten </template>
+        <template #header> Addresse Bearbeiten</template>
 
         <PageBoxWrapper class="my-12 w-full h-full">
             <div class="flex flex-col gap-5">
@@ -12,14 +12,13 @@
                     </h3>
 
                     <div class="flex gap-4">
-                        <BaseButton @click="saveAddress()" color="success">
+                        <BaseButton @click="saveAddress()"
+                                    color="success">
                             Speichern
                         </BaseButton>
 
                         <BaseButton
-                            :href="
-                                route('suppliers.edit', addressForm.supplier_id)
-                            "
+                            :href="route('suppliers.edit', addressForm.supplier_id)"
                             color="light"
                         >
                             Zurück
@@ -46,7 +45,8 @@
                 </select>
 
                 <div class="">
-                    <InputLabel for="name1" value="Name 1 *" />
+                    <InputLabel for="name1"
+                                value="Name 1 *" />
 
                     <TextInput
                         v-model="addressForm.name1"
@@ -58,7 +58,8 @@
                 </div>
 
                 <div class="">
-                    <InputLabel for="name2" value="Name 2" />
+                    <InputLabel for="name2"
+                                value="Name 2" />
                     <TextInput
                         v-model="addressForm.name2"
                         id="name2"
@@ -67,7 +68,8 @@
                 </div>
 
                 <div class="">
-                    <InputLabel for="name3" value="Name 3" />
+                    <InputLabel for="name3"
+                                value="Name 3" />
                     <TextInput
                         v-model="addressForm.name3"
                         id="name3"
@@ -76,7 +78,8 @@
                 </div>
                 <div class="flex gap-3">
                     <div class="w-2/3">
-                        <InputLabel for="street" value="Straße *" />
+                        <InputLabel for="street"
+                                    value="Straße *" />
                         <TextInput
                             v-model="addressForm.street"
                             id="street"
@@ -86,7 +89,8 @@
                     </div>
 
                     <div class="w-1/3">
-                        <InputLabel for="streetNr" value="Hausnummer *" />
+                        <InputLabel for="streetNr"
+                                    value="Hausnummer *" />
                         <TextInput
                             v-model="addressForm.street_nr"
                             id="streetNr"
@@ -97,7 +101,8 @@
                 </div>
                 <div class="flex gap-3">
                     <div class="w-1/3">
-                        <InputLabel for="cityCode" value="PLZ *" />
+                        <InputLabel for="cityCode"
+                                    value="PLZ *" />
                         <TextInput
                             v-model="addressForm.city_code"
                             id="cityCode"
@@ -107,7 +112,8 @@
                     </div>
 
                     <div class="w-2/3">
-                        <InputLabel for="city" value="Stadt *" />
+                        <InputLabel for="city"
+                                    value="Stadt *" />
                         <TextInput
                             v-model="addressForm.city"
                             id="city"
@@ -123,7 +129,8 @@
                 />
 
                 <div class="">
-                    <InputLabel for="phone" value="Telefon" />
+                    <InputLabel for="phone"
+                                value="Telefon" />
                     <TextInput
                         v-model="addressForm.phone"
                         id="phone"
@@ -137,23 +144,24 @@
 </template>
 
 <script setup>
-import AlertFailed from "@/Components/AlertFailed.vue";
-import SelectCountryField from "@/Pages/Address/Partials/SelectCountryField.vue";
-import { Head, useForm } from "@inertiajs/inertia-vue3";
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
-import BaseButton from "@/Components/BaseButton.vue";
-import { Inertia } from "@inertiajs/inertia";
-import { CountryCodes } from "@/Localisation/CountryCodes";
-import { ref } from "vue";
+import AlertFailed from '@/Components/AlertFailed.vue';
+import SelectCountryField from '@/Pages/Address/Partials/SelectCountryField.vue';
+import {Head, useForm} from '@inertiajs/inertia-vue3';
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import PageBoxWrapper from '@/Components/PageBoxWrapper.vue';
+import BaseButton from '@/Components/BaseButton.vue';
+import {Inertia} from '@inertiajs/inertia';
+import {CountryCodes} from '@/Localisation/CountryCodes';
+import {ref} from 'vue';
 
-const props = defineProps({
-    address: Object,
-});
+const props = defineProps(
+    {
+        address: Object,
+    });
 
-let addressFormError = ref("");
+let addressFormError = ref('');
 
 let addressForm = useForm(props.address);
 
@@ -163,17 +171,15 @@ function selectCountry(countryCode) {
 
 function saveAddress() {
     if (fieldsValidated()) {
-        Inertia.patch(route("address.patch", addressForm));
+        Inertia.patch(route('address.patch', addressForm));
     } else {
         addressFormError.value =
-            "Bitte alle mit * gekennzeichneten Felder befüllen";
+            'Bitte alle mit * gekennzeichneten Felder befüllen';
 
-        if (
-            addressForm.country &&
-            !CountryCodes.de.hasOwnProperty(addressForm.country.toUpperCase())
-        ) {
+        if (addressForm.country &&
+            !CountryCodes.de.hasOwnProperty(addressForm.country.toUpperCase())) {
             addressFormError.value =
-                "Land wurde nicht erkannt! Bitte Länderkod eingeben oder aus der Auswahlliste wählen.";
+                'Land wurde nicht erkannt! Bitte Länderkod eingeben oder aus der Auswahlliste wählen.';
         }
     }
 }
