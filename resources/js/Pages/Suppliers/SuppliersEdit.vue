@@ -48,15 +48,17 @@
         <div class="py-12 w-full h-full flex flex-col gap-8">
             <!-- add Company Form -->
             <PageBoxWrapper>
-                <AddSupplierForm :supplier="props.supplier"
-                                 :persons="props.persons"
-                                 :addresses="props.addresses" />
+                <AddSupplierForm :supplier="supplier"
+                                 :persons="persons"
+                                 :addresses="addresses"
+                                 :categories="categories"
+                                 :supplier-categories="supplierCategories" />
             </PageBoxWrapper>
 
             <BaseModal id="addAddressModal">
                 <AddAddressForm
-                    :supplier="props.supplier"
-                    :addresses="props.addresses" />
+                    :supplier="supplier"
+                    :addresses="addresses" />
             </BaseModal>
 
             <!-- Addresses to save list -->
@@ -74,7 +76,7 @@
                     </BaseButton>
                 </div>
                 <div class="flex flex-wrap gap-8 pt-8">
-                    <div v-for="(address, index) in props.addresses"
+                    <div v-for="(address, index) in addresses"
                          class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                         <div class="float-right flex gap-4">
                             <Link v-if="address.id"
@@ -97,7 +99,7 @@
             </PageBoxWrapper>
 
             <BaseModal id="addPersonModal">
-                <AddPersonForm :supplier="props.supplier"
+                <AddPersonForm :supplier="supplier"
                                :persons="persons" />
             </BaseModal>
 
@@ -170,10 +172,14 @@ onMounted(() => {
 
 const props = defineProps(
     {
-        'supplier' : Object,
-        'addresses': Array,
-        'persons'  : Array,
+        'supplier'          : Object,
+        'addresses'         : Array,
+        'persons'           : Array,
+        'categories'        : Object,
+        'supplierCategories': Object,
     })
+
+console.log(props.supplierCategories)
 
 let deleteAddressModal = null
 let deletePersonModal = null
