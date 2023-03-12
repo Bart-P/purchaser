@@ -179,8 +179,6 @@ const props = defineProps(
         'supplierCategories': Object,
     })
 
-console.log(props.supplierCategories)
-
 let deleteAddressModal = null
 let deletePersonModal = null
 let addressToDelete = ref({})
