@@ -97,6 +97,7 @@ import BaseButton from '@/Components/BaseButton.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import SelectCategoryDropdown from '@/Components/SelectCategoryDropdown.vue';
 import TextInput from '@/Components/TextInput.vue';
+import Toast from '@/Stores/toast';
 import {useForm} from '@inertiajs/inertia-vue3';
 import {initDropdowns} from 'flowbite';
 import {onMounted, ref} from 'vue';
@@ -128,10 +129,11 @@ if (props.supplierCategories) {
 
 const supplierForm = useForm(
     {
-        name     : props.supplier?.name,
-        email    : props.supplier?.email,
-        addresses: null,
-        persons  : null,
+        name      : props.supplier?.name,
+        email     : props.supplier?.email,
+        addresses : null,
+        persons   : null,
+        categories: checkedCategories,
     },
 )
 
@@ -144,6 +146,16 @@ function toggleCheckCategory(category) {
 }
 
 function submitSupplier() {
+
+    if (!checkedCategories.value.length) {
+        Toast.add(
+            {
+                'message': 'Bitte mindestens eine Kategorie auswählen',
+                'type'   : 'warning',
+            });
+        return
+    }
+
     if (props.addresses.length) {
         supplierForm['addresses'] = props.addresses
     }
@@ -155,9 +167,10 @@ function submitSupplier() {
     if (props.supplier) {
         supplierForm.put(route('suppliers.put',
                                {
-                                   'id'   : props.supplier.id,
-                                   'name' : supplierForm.name,
-                                   'email': supplierForm.email,
+                                   'id'        : props.supplier.id,
+                                   'name'      : supplierForm.name,
+                                   'email'     : supplierForm.email,
+                                   'categories': checkedCategories,
                                }))
     } else {
         supplierForm.post(route('suppliers.store'))
