@@ -63,6 +63,7 @@ class SuppliersController extends Controller
 
     function store(Request $request)
     {
+
         $supplier = Supplier::create(
             $request->validate(
                 [
@@ -85,6 +86,15 @@ class SuppliersController extends Controller
             };
 
             $this->storeAddressesAndOrPersons($supplier, $addressesArray, $personsArray);
+
+            foreach ($request->categories as $category) {
+                SupplierCategoryJunction::create(
+                    [
+                        'supplier_id' => $supplier->id,
+                        'category_id' => $category['id'],
+                    ]
+                );
+            }
         }
 
         // ADD FAILED MESSAGE
@@ -109,6 +119,11 @@ class SuppliersController extends Controller
         $supplier->name = $request->name;
         $supplier->email = $request->email;
         $supplier->update();
+
+        //TODO figure out how to update all category junctions - we need to compare 2 arrays,
+        // 1. delete the ones that are not in $request but are present in db
+        // 2. do nothing if a junction is in both db and $request
+        // 3. create a new junction if it is in $request but not in db
 
         // ADD FAILED MESSAGE
         return redirect()->route('suppliers')->with('notification', [
