@@ -29,9 +29,9 @@
         <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
             aria-labelledby="dropdownSearchButton">
             <li v-for="category in filteredCategories">
-                <div class="flex items-center pl-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                <div @click="$emit('toggleCheckCategory', category)"
+                     class="flex items-center pl-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                     <input :id="'cat-' + category.id"
-                           @click="$emit('toggleCheckCategory', category)"
                            type="checkbox"
                            :value="category"
                            :checked="categoryIsChecked(category.id)"
