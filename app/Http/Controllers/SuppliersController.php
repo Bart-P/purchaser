@@ -145,7 +145,9 @@ class SuppliersController extends Controller
                 ]);
         }
 
-        dd($rawJunctions, $junctionsToCreate, $junctionsToDelete);
+        foreach ($junctionsToDelete as $category) {
+            SupplierCategoryJunction::destroy($rawJunctions->where('category_id', 'like', $category));
+        }
 
         // ADD FAILED MESSAGE
         return redirect()->route('suppliers')->with('notification', [
