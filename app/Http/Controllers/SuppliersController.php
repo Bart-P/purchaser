@@ -130,12 +130,20 @@ class SuppliersController extends Controller
 
         $requestCategoryId = array_map(function ($cat) {
             return $cat['id'];
-        }, $request->categories);
+        }, array_values($request->categories));
         $junctionIds = array_map(function ($jun) {
             return $jun['category_id'];
         }, array_values($rawJunctions->toArray()));
         $junctionsToCreate = array_diff($requestCategoryId, $junctionIds);
         $junctionsToDelete = array_diff($junctionIds, $requestCategoryId);
+
+        foreach ($junctionsToCreate as $category) {
+            SupplierCategoryJunction::create(
+                [
+                    'supplier_id' => $supplier->id,
+                    'category_id' => $category,
+                ]);
+        }
 
         dd($rawJunctions, $junctionsToCreate, $junctionsToDelete);
 
