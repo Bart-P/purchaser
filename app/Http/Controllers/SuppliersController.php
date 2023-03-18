@@ -120,10 +120,24 @@ class SuppliersController extends Controller
         $supplier->email = $request->email;
         $supplier->update();
 
-        //TODO figure out how to update all category junctions - we need to compare 2 arrays,
-        // 1. delete the ones that are not in $request but are present in db
-        // 2. do nothing if a junction is in both db and $request
-        // 3. create a new junction if it is in $request but not in db
+        $rawJunctions = SupplierCategoryJunction::all('id', 'category_id', 'supplier_id')
+                                                ->where('supplier_id', 'like', $supplier->id);
+
+        // TODO This seems to work - not tested enough though
+        // First get category ids from the request,
+        // then get an array with just category ids out of the supplier juncions TODO (should be moved to Supplier model to avoid this WHERE clouse)
+        // then compare both, if something is missing either delete or create a junction
+
+        $requestCategoryId = array_map(function ($cat) {
+            return $cat['id'];
+        }, $request->categories);
+        $junctionIds = array_map(function ($jun) {
+            return $jun['category_id'];
+        }, array_values($rawJunctions->toArray()));
+        $junctionsToCreate = array_diff($requestCategoryId, $junctionIds);
+        $junctionsToDelete = array_diff($junctionIds, $requestCategoryId);
+
+        dd($rawJunctions, $junctionsToCreate, $junctionsToDelete);
 
         // ADD FAILED MESSAGE
         return redirect()->route('suppliers')->with('notification', [
