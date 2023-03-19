@@ -42,7 +42,7 @@ class SuppliersController extends Controller
         if ($supplier) {
             $addresses = $supplier->addresses()->get();
             $persons = $supplier->persons()->get();
-            $supplierCategoryJunction = SupplierCategoryJunction::all()->where('supplier_id', 'like', $id)->values();
+            $supplierCategoryJunction = $supplier->categoryJunctions()->get();
             foreach ($categories as $category) {
                 if ($supplierCategoryJunction->contains('category_id', $category->id)) {
                     $supplierCategories[] = $category;
