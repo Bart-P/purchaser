@@ -120,40 +120,47 @@ class SuppliersController extends Controller
 
         $rawJunctions = $supplier->categoryJunctions()->get();
 
-        /**
-         * First get category ids from the request,
-         * then get an array with just category ids out of the supplier junctions
-         * then compare both, if something is missing either delete or create a junction
-         */
-        $requestCategoryIds = array_map(function ($cat) {
-            return $cat['id'];
-        }, array_values($request->categories));
-
-        $junctionIds = array_map(function ($jun) {
-            return $jun['category_id'];
-        }, array_values($rawJunctions->toArray()));
-
-        $junctionsToCreate = array_diff($requestCategoryIds, $junctionIds);
-        $junctionsToDelete = array_diff($junctionIds, $requestCategoryIds);
-
-
-        foreach ($junctionsToCreate as $category) {
-            SupplierCategoryJunction::create(
-                [
-                    'supplier_id' => $supplier->id,
-                    'category_id' => $category,
-                ]);
-        }
-
-        foreach ($junctionsToDelete as $category) {
-            SupplierCategoryJunction::destroy($rawJunctions->where('category_id', 'like', $category));
-        }
+        $this->updateJunctions($request->categories, $rawJunctions, $supplier->id);
 
         // ADD FAILED MESSAGE
         return redirect()->route('suppliers')->with('notification', [
             'message' => 'Änderung gespeichert!',
             'type'    => 'success',
         ]);
+    }
+
+    /**
+     * compares categories with junctions for supplier
+     * then deletes or creates a new junction depending on the difference
+     *
+     * @param $categories
+     * @param $junctions
+     * @param $supplierId
+     */
+    private function updateJunctions($categories, $junctions, $supplierId)
+    {
+        $requestCategoryIds = array_map(function ($cat) {
+            return $cat['id'];
+        }, array_values($categories));
+
+        $junctionIds = array_map(function ($jun) {
+            return $jun['category_id'];
+        }, array_values($junctions->toArray()));
+
+        $junctionsToCreate = array_diff($requestCategoryIds, $junctionIds);
+        $junctionsToDelete = array_diff($junctionIds, $requestCategoryIds);
+
+        foreach ($junctionsToCreate as $category) {
+            SupplierCategoryJunction::create(
+                [
+                    'supplier_id' => $supplierId,
+                    'category_id' => $category,
+                ]);
+        }
+
+        foreach ($junctionsToDelete as $category) {
+            SupplierCategoryJunction::destroy($junctions->where('category_id', 'like', $category));
+        }
     }
 
     private function storeAddressesAndOrPersons(Supplier $supplier, $addresses = [[]], $persons = [[]])
