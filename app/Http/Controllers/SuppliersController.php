@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Address;
 use App\Models\Category;
-use App\Models\Person;
 use App\Models\Supplier;
 use App\Models\SupplierCategoryJunction;
 use Illuminate\Http\Request;
@@ -78,11 +76,11 @@ class SuppliersController extends Controller
             $personsArray = [];
 
             if ($request->addresses) {
-                $addressesArray = $this->getArrayOfAddressObjects($request->addresses, $supplier->id);
+                $addressesArray = AddressController::getArrayOfAddressObjects($request->addresses, $supplier->id);
             };
 
             if ($request->persons) {
-                $personsArray = $this->getArrayOfPersonObjects($request->persons, $supplier->id);
+                $personsArray = PersonController::getArrayOfPersonObjects($request->persons, $supplier->id);
             };
 
             $this->storeAddressesAndOrPersons($supplier, $addressesArray, $personsArray);
@@ -122,12 +120,12 @@ class SuppliersController extends Controller
 
         $rawJunctions = $supplier->categoryJunctions()->get();
 
-        /*
-        * First get category ids from the request,
-        * then get an array with just category ids out of the supplier junctions
-        * then compare both, if something is missing either delete or create a junction
-        */
-        $requestCategoryId = array_map(function ($cat) {
+        /**
+         * First get category ids from the request,
+         * then get an array with just category ids out of the supplier junctions
+         * then compare both, if something is missing either delete or create a junction
+         */
+        $requestCategoryIds = array_map(function ($cat) {
             return $cat['id'];
         }, array_values($request->categories));
 
@@ -135,8 +133,8 @@ class SuppliersController extends Controller
             return $jun['category_id'];
         }, array_values($rawJunctions->toArray()));
 
-        $junctionsToCreate = array_diff($requestCategoryId, $junctionIds);
-        $junctionsToDelete = array_diff($junctionIds, $requestCategoryId);
+        $junctionsToCreate = array_diff($requestCategoryIds, $junctionIds);
+        $junctionsToDelete = array_diff($junctionIds, $requestCategoryIds);
 
 
         foreach ($junctionsToCreate as $category) {
@@ -167,70 +165,5 @@ class SuppliersController extends Controller
         if (count($persons)) {
             $supplier->persons()->saveMany($persons);
         }
-    }
-
-    /**
-     * Returns an array of Address objects and sets the supplier id for each
-     *
-     * @param $addresses
-     * @param $supplierId
-     * @return array
-     *
-     */
-    private function getArrayOfAddressObjects($addresses, $supplierId): array
-    {
-        $addressesArray = [];
-        foreach ($addresses as $address) {
-            $address = new Address(
-                [
-                    'supplier_id' => $supplierId,
-                    'type'        => $address['type'],
-                    'name1'       => $address['name1'],
-                    'name2'       => $address['name2'],
-                    'name3'       => $address['name3'],
-                    'street'      => $address['street'],
-                    'street_nr'   => $address['street_nr'],
-                    'city_code'   => $address['city_code'],
-                    'city'        => $address['city'],
-                    'country'     => $address['country'],
-                    'phone'       => $address['phone'],
-                ]
-            );
-            $addressesArray[] = $address;
-        };
-        return $addressesArray;
-    }
-
-
-    /**
-     * Returns an array of Person objects and sets the supplier id for each
-     *
-     * @param $persons
-     * @param $supplierId
-     * @return array
-     *
-     */
-    private function getArrayOfPersonObjects($persons, $supplierId)
-    {
-        $personsArray = [];
-        foreach ($persons as $person) {
-            $person = new Person(
-                [
-                    'supplier_id' => $supplierId,
-                    'type'        => $person['type'],
-                    'gender'      => $person['gender'],
-                    'first_name'  => $person['first_name'],
-                    'last_name'   => $person['last_name'],
-                    'position'    => $person['position'],
-                    'phone1'      => $person['phone1'],
-                    'phone2'      => $person['phone2'],
-                    'email1'      => $person['email1'],
-                    'email2'      => $person['email2'],
-
-                ]
-            );
-            $personsArray[] = $person;
-        };
-        return $personsArray;
     }
 }
