@@ -9,6 +9,38 @@ use Inertia\Inertia;
 
 class AddressController extends Controller
 {
+    /**
+     * Returns an array of address objects with set supplier id
+     *
+     * @param $addresses
+     * @param $supplierId
+     * @return array
+     *
+     */
+    public static function getArrayOfAddressObjects($addresses, $supplierId): array
+    {
+        $addressesArray = [];
+        foreach ($addresses as $address) {
+            $address = new Address(
+                [
+                    'supplier_id' => $supplierId,
+                    'type'        => $address['type'],
+                    'name1'       => $address['name1'],
+                    'name2'       => $address['name2'],
+                    'name3'       => $address['name3'],
+                    'street'      => $address['street'],
+                    'street_nr'   => $address['street_nr'],
+                    'city_code'   => $address['city_code'],
+                    'city'        => $address['city'],
+                    'country'     => $address['country'],
+                    'phone'       => $address['phone'],
+                ]
+            );
+            $addressesArray[] = $address;
+        };
+        return $addressesArray;
+    }
+
     function edit($id)
     {
         $address = Address::find($id);
