@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Supplier;
-use App\Models\SupplierCategoryJunction;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -103,51 +101,12 @@ class SuppliersController extends Controller
         $supplier->name = $request->name;
         $supplier->email = $request->email;
         $supplier->update();
-
-        $rawJunctions = $supplier->categoryJunctions()->get();
-
-        $this->updateJunctions($request->categories, $rawJunctions, $supplier->id);
+        $supplier->updateCategoryJunctions($request->categories);
 
         // TODO ADD FAILED MESSAGE
         return redirect()->route('suppliers')->with('notification', [
             'message' => 'Änderung gespeichert!',
             'type'    => 'success',
         ]);
-    }
-
-    /**
-     * compares categories with junctions for supplier
-     * then deletes or creates a new junction depending on the difference
-     *
-     * @param array $categories
-     * @param Collection $junctions
-     * @param int $supplierId
-     *
-     * @return void
-     */
-    private function updateJunctions(array $categories, Collection $junctions, int $supplierId)
-    {
-        $requestCategoryIds = array_map(function ($cat) {
-            return $cat['id'];
-        }, array_values($categories));
-
-        $junctionIds = array_map(function ($jun) {
-            return $jun['category_id'];
-        }, array_values($junctions->toArray()));
-
-        $junctionsToCreate = array_diff($requestCategoryIds, $junctionIds);
-        $junctionsToDelete = array_diff($junctionIds, $requestCategoryIds);
-
-        foreach ($junctionsToCreate as $categoryId) {
-            SupplierCategoryJunction::create(
-                [
-                    'supplier_id' => $supplierId,
-                    'category_id' => $categoryId,
-                ]);
-        }
-
-        foreach ($junctionsToDelete as $categoryId) {
-            SupplierCategoryJunction::destroy($junctions->where('category_id', 'like', $categoryId));
-        }
     }
 }

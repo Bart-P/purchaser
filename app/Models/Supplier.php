@@ -60,6 +60,42 @@ class Supplier extends Model
         }
     }
 
+    /**
+     * compares categories with junctions for supplier
+     * then deletes or creates a new junction depending on the difference
+     *
+     * @param array $categories
+     *
+     * @return void
+     */
+    public function updateCategoryJunctions(array $categories): void
+    {
+        $junctions = $this->categoryJunctions()->get();
+
+        $requestCategoryIds = array_map(function ($cat) {
+            return $cat['id'];
+        }, array_values($categories));
+
+        $junctionIds = array_map(function ($jun) {
+            return $jun['category_id'];
+        }, array_values($junctions->toArray()));
+
+        $junctionsToCreate = array_diff($requestCategoryIds, $junctionIds);
+        $junctionsToDelete = array_diff($junctionIds, $requestCategoryIds);
+
+        foreach ($junctionsToCreate as $categoryId) {
+            SupplierCategoryJunction::create(
+                [
+                    'supplier_id' => $this->id,
+                    'category_id' => $categoryId,
+                ]);
+        }
+
+        foreach ($junctionsToDelete as $categoryId) {
+            SupplierCategoryJunction::destroy($junctions->where('category_id', 'like', $categoryId));
+        }
+    }
+
     public function delete(): ?bool
     {
         $this->addresses()->delete();
