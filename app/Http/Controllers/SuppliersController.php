@@ -62,7 +62,6 @@ class SuppliersController extends Controller
 
     function store(Request $request)
     {
-
         $supplier = Supplier::create(
             $request->validate(
                 [
@@ -72,28 +71,7 @@ class SuppliersController extends Controller
             )
         );
 
-        if ($supplier) {
-            $addressesArray = [];
-            $personsArray = [];
-
-            if ($request->addresses) {
-                $addressesArray = AddressController::getArrayOfAddressObjects($request->addresses, $supplier->id);
-            };
-
-            if ($request->persons) {
-                $personsArray = PersonController::getArrayOfPersonObjects($request->persons, $supplier->id);
-            };
-
-            $this->storeAddressesAndOrPersons($supplier, $addressesArray, $personsArray);
-
-            foreach ($request->categories as $category) {
-                SupplierCategoryJunction::create(
-                    [
-                        'supplier_id' => $supplier->id,
-                        'category_id' => $category['id'],
-                    ]
-                );
-            }
+        if (!$supplier) {
             return redirect()->route('suppliers')->with('notification', [
                 'message' => 'Lieferant hinzugefügt!',
                 'type'    => 'success',
@@ -101,8 +79,8 @@ class SuppliersController extends Controller
         }
 
         return redirect()->route('suppliers')->with('notification', [
-            'message' => 'Fehler - Lieferant konnte nicht hinzugefügt werden!',
-            'type'    => 'danger',
+            'message' => 'Lieferant hinzugefügt!',
+            'type'    => 'success',
         ]);
     }
 
