@@ -73,10 +73,14 @@ class SuppliersController extends Controller
 
         if (!$supplier) {
             return redirect()->route('suppliers')->with('notification', [
-                'message' => 'Lieferant hinzugefügt!',
-                'type'    => 'success',
+                'message' => 'Fehler - Lieferant konnte nicht hinzugefügt werden!',
+                'type'    => 'danger',
             ]);
         }
+
+        $supplier->saveAddresses($request->addresses);
+        $supplier->savePersons($request->persons);
+        $supplier->createCategoryJunctions($request->categories);
 
         return redirect()->route('suppliers')->with('notification', [
             'message' => 'Lieferant hinzugefügt!',
@@ -134,27 +138,16 @@ class SuppliersController extends Controller
         $junctionsToCreate = array_diff($requestCategoryIds, $junctionIds);
         $junctionsToDelete = array_diff($junctionIds, $requestCategoryIds);
 
-        foreach ($junctionsToCreate as $category) {
+        foreach ($junctionsToCreate as $categoryId) {
             SupplierCategoryJunction::create(
                 [
                     'supplier_id' => $supplierId,
-                    'category_id' => $category,
+                    'category_id' => $categoryId,
                 ]);
         }
 
-        foreach ($junctionsToDelete as $category) {
-            SupplierCategoryJunction::destroy($junctions->where('category_id', 'like', $category));
-        }
-    }
-
-    private function storeAddressesAndOrPersons(Supplier $supplier, $addresses = [[]], $persons = [[]])
-    {
-        if (count($addresses)) {
-            $supplier->addresses()->saveMany($addresses);
-        }
-
-        if (count($persons)) {
-            $supplier->persons()->saveMany($persons);
+        foreach ($junctionsToDelete as $categoryId) {
+            SupplierCategoryJunction::destroy($junctions->where('category_id', 'like', $categoryId));
         }
     }
 }
