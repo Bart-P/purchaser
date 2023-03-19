@@ -51,13 +51,18 @@ class Supplier extends Model
     public function createCategoryJunctions($categories)
     {
         foreach ($categories as $category) {
-            SupplierCategoryJunction::create(
-                [
-                    'supplier_id' => $this->id,
-                    'category_id' => $category['id'],
-                ]
-            );
+            $this->createSingleCategoryJunction($category['id']);
         }
+    }
+
+    public function createSingleCategoryJunction($categoryId)
+    {
+        SupplierCategoryJunction::create(
+            [
+                'supplier_id' => $this->id,
+                'category_id' => $categoryId,
+            ]
+        );
     }
 
     /**
@@ -84,11 +89,7 @@ class Supplier extends Model
         $junctionsToDelete = array_diff($junctionIds, $requestCategoryIds);
 
         foreach ($junctionsToCreate as $categoryId) {
-            SupplierCategoryJunction::create(
-                [
-                    'supplier_id' => $this->id,
-                    'category_id' => $categoryId,
-                ]);
+            $this->createSingleCategoryJunction($categoryId);
         }
 
         foreach ($junctionsToDelete as $categoryId) {
