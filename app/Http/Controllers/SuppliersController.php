@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\SupplierCategoryJunction;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -93,12 +94,15 @@ class SuppliersController extends Controller
                     ]
                 );
             }
+            return redirect()->route('suppliers')->with('notification', [
+                'message' => 'Lieferant hinzugefügt!',
+                'type'    => 'success',
+            ]);
         }
 
-        // ADD FAILED MESSAGE
         return redirect()->route('suppliers')->with('notification', [
-            'message' => 'Lieferant hinzugefügt!',
-            'type'    => 'success',
+            'message' => 'Fehler - Lieferant konnte nicht hinzugefügt werden!',
+            'type'    => 'danger',
         ]);
     }
 
@@ -122,7 +126,7 @@ class SuppliersController extends Controller
 
         $this->updateJunctions($request->categories, $rawJunctions, $supplier->id);
 
-        // ADD FAILED MESSAGE
+        // TODO ADD FAILED MESSAGE
         return redirect()->route('suppliers')->with('notification', [
             'message' => 'Änderung gespeichert!',
             'type'    => 'success',
@@ -133,11 +137,13 @@ class SuppliersController extends Controller
      * compares categories with junctions for supplier
      * then deletes or creates a new junction depending on the difference
      *
-     * @param $categories
-     * @param $junctions
-     * @param $supplierId
+     * @param array $categories
+     * @param Collection $junctions
+     * @param int $supplierId
+     *
+     * @return void
      */
-    private function updateJunctions($categories, $junctions, $supplierId)
+    private function updateJunctions(array $categories, Collection $junctions, int $supplierId)
     {
         $requestCategoryIds = array_map(function ($cat) {
             return $cat['id'];
