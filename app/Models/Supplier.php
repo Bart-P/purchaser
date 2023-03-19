@@ -34,6 +34,7 @@ class Supplier extends Model
     {
         $this->addresses()->delete();
         $this->persons()->delete();
+        $this->categoryJunctions()->delete();
 
         return parent::delete();
     }
