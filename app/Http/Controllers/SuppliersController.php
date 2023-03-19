@@ -120,22 +120,24 @@ class SuppliersController extends Controller
         $supplier->email = $request->email;
         $supplier->update();
 
-        $rawJunctions = SupplierCategoryJunction::all('id', 'category_id', 'supplier_id')
-                                                ->where('supplier_id', 'like', $supplier->id);
+        $rawJunctions = $supplier->categoryJunctions()->get();
 
-        // TODO This seems to work - not tested enough though
-        // First get category ids from the request,
-        // then get an array with just category ids out of the supplier juncions TODO (should be moved to Supplier model to avoid this WHERE clouse)
-        // then compare both, if something is missing either delete or create a junction
-
+        /*
+        * First get category ids from the request,
+        * then get an array with just category ids out of the supplier junctions
+        * then compare both, if something is missing either delete or create a junction
+        */
         $requestCategoryId = array_map(function ($cat) {
             return $cat['id'];
         }, array_values($request->categories));
+
         $junctionIds = array_map(function ($jun) {
             return $jun['category_id'];
         }, array_values($rawJunctions->toArray()));
+
         $junctionsToCreate = array_diff($requestCategoryId, $junctionIds);
         $junctionsToDelete = array_diff($junctionIds, $requestCategoryId);
+
 
         foreach ($junctionsToCreate as $category) {
             SupplierCategoryJunction::create(
