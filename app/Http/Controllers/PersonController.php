@@ -8,6 +8,39 @@ use Inertia\Inertia;
 
 class PersonController extends Controller
 {
+
+    /**
+     * Returns an array of Person objects with set supplier id
+     *
+     * @param $persons
+     * @param $supplierId
+     * @return array
+     *
+     */
+    public static function getArrayOfPersonObjects($persons, $supplierId)
+    {
+        $personsArray = [];
+        foreach ($persons as $person) {
+            $person = new Person(
+                [
+                    'supplier_id' => $supplierId,
+                    'type'        => $person['type'],
+                    'gender'      => $person['gender'],
+                    'first_name'  => $person['first_name'],
+                    'last_name'   => $person['last_name'],
+                    'position'    => $person['position'],
+                    'phone1'      => $person['phone1'],
+                    'phone2'      => $person['phone2'],
+                    'email1'      => $person['email1'],
+                    'email2'      => $person['email2'],
+
+                ]
+            );
+            $personsArray[] = $person;
+        };
+        return $personsArray;
+    }
+
     function edit($id)
     {
         $person = Person::find($id);
