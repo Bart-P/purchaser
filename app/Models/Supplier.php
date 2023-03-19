@@ -25,6 +25,11 @@ class Supplier extends Model
         return $this->hasMany(Person::class);
     }
 
+    public function categoryJunctions(): HasMany
+    {
+        return $this->hasMany(SupplierCategoryJunction::class);
+    }
+
     public function delete(): ?bool
     {
         $this->addresses()->delete();
