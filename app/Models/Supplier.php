@@ -22,7 +22,7 @@ class Supplier extends Model
         return $this->hasMany(Address::class);
     }
 
-    public function saveAddresses($addresses)
+    public function saveAddresses($addresses): void
     {
         if ($addresses) {
             $addressesArray = AddressController::getArrayOfAddressObjects($addresses, $this->id);
@@ -35,7 +35,7 @@ class Supplier extends Model
         return $this->hasMany(Person::class);
     }
 
-    public function savePersons($persons)
+    public function savePersons($persons): void
     {
         if ($persons) {
             $personsArray = PersonController::getArrayOfPersonObjects($persons, $this->id);
@@ -48,14 +48,14 @@ class Supplier extends Model
         return $this->hasMany(SupplierCategoryJunction::class);
     }
 
-    public function createCategoryJunctions($categories)
+    public function createCategoryJunctions($categories): void
     {
         foreach ($categories as $category) {
             $this->createSingleCategoryJunction($category['id']);
         }
     }
 
-    public function createSingleCategoryJunction($categoryId)
+    public function createSingleCategoryJunction($categoryId): void
     {
         SupplierCategoryJunction::create(
             [
