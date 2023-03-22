@@ -97,6 +97,11 @@ class Supplier extends Model
         }
     }
 
+    public function tagJunctions(): HasMany
+    {
+        return $this->hasMany(SupplierTagJunction::class);
+    }
+
     public function delete(): ?bool
     {
         $this->addresses()->delete();
