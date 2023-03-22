@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Supplier;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -37,14 +38,22 @@ class SuppliersController extends Controller
         $persons = [];
         $categories = Category::all();
         $supplierCategories = [];
+        $tags = Tag::all();
+        $supplierTags = [];
 
         if ($supplier) {
             $addresses = $supplier->addresses()->get();
             $persons = $supplier->persons()->get();
             $supplierCategoryJunction = $supplier->categoryJunctions()->get();
+            $supplierTagJunction = $supplier->tagJunctions()->get();
             foreach ($categories as $category) {
                 if ($supplierCategoryJunction->contains('category_id', $category->id)) {
                     $supplierCategories[] = $category;
+                }
+            };
+            foreach ($tags as $tag) {
+                if ($supplierTagJunction->contains('tag_id', $tag->id)) {
+                    $supplierTags[] = $tag;
                 }
             };
         }
@@ -55,6 +64,8 @@ class SuppliersController extends Controller
             'persons'            => $persons,
             'supplierCategories' => $supplierCategories,
             'categories'         => $categories,
+            'tags'               => $tags,
+            'supplierTags'       => $supplierTags,
         ]);
     }
 
