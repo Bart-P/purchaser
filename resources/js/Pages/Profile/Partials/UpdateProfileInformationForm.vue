@@ -1,10 +1,10 @@
 <template>
     <section>
         <header>
-            <h2 class="heading-2">Profile Information</h2>
+            <h2 class="heading-2">Profil Informationen</h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                Update your account's profile information and email address.
+                Ändere deine persönlichen Informationen.
             </p>
         </header>
 
@@ -47,14 +47,14 @@
 
             <div v-if="props.mustVerifyEmail && user.email_verified_at === null">
                 <p class="text-sm mt-2 text-gray-800">
-                    Your email address is unverified.
+                    Deine Email addresse ist nicht verifiziert.
                     <Link
                         :href="route('verification.send')"
                         method="post"
                         as="button"
                         class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Click here to re-send the verification email.
+                        Hier klicken um die Verifikationsemail nochmal zu versenden.
                     </Link>
                 </p>
 
@@ -62,20 +62,20 @@
                     v-show="props.status === 'verification-link-sent'"
                     class="mt-2 font-medium text-sm text-green-600"
                 >
-                    A new verification link has been sent to your email address.
+                    Ein neuer Verifikationslink wurde an deine Emailadresse geschickt.
                 </div>
             </div>
 
             <div class="flex items-center gap-4">
                 <BaseButton color="primary"
-                            :disabled="form.processing">Save
+                            :disabled="form.processing">Speichern
                 </BaseButton>
 
                 <Transition enter-from-class="opacity-0"
                             leave-to-class="opacity-0"
                             class="transition ease-in-out">
                     <p v-if="form.recentlySuccessful"
-                       class="text-sm text-gray-600">Saved.</p>
+                       class="text-sm text-gray-600">Gespeichert.</p>
                 </Transition>
             </div>
         </form>
