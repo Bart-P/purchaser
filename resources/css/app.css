@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.heading-2 {
+    @apply text-2xl text-purchaser-primary font-bold;
+}
+
 .heading-3 {
-    @apply text-xl text-purchaser-primary font-bold px-2;
+    @apply text-xl text-purchaser-primary font-bold;
 }
 
 .heading-4 {
-    @apply text-xl text-purchaser-primary px-2;
+    @apply text-xl text-purchaser-primary;
 }
