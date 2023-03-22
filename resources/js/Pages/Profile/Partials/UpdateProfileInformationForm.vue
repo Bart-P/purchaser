@@ -67,7 +67,9 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <BaseButton color="primary"
+                            :disabled="form.processing">Save
+                </BaseButton>
 
                 <Transition enter-from-class="opacity-0"
                             leave-to-class="opacity-0"
@@ -81,9 +83,9 @@
 </template>
 
 <script setup>
+import BaseButton from '@/Components/BaseButton.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import {Link, useForm, usePage} from '@inertiajs/inertia-vue3';
 
