@@ -88,6 +88,34 @@
 
 
         </div>
+
+
+        <hr class="my-5">
+
+        <div class="space-y-6">
+            <div class="flex justify-between items-center">
+                <h4 class="heading-4">Tags (optional)</h4>
+                <BaseButton id="dropdownSearchButton"
+                            class="inline-flex items-center"
+                            type="button">Tag Auswählen
+                    <svg class="w-4 h-4 ml-2"
+                         aria-hidden="true"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </BaseButton>
+            </div>
+
+            <ul class="flex flex-wrap items-center gap-4 uppercase">
+
+            </ul>
+        </div>
     </form>
 </template>
 
@@ -165,13 +193,14 @@ function submitSupplier() {
     }
 
     if (props.supplier) {
-        supplierForm.put(route('suppliers.put',
-                               {
-                                   'id'        : props.supplier.id,
-                                   'name'      : supplierForm.name,
-                                   'email'     : supplierForm.email,
-                                   'categories': checkedCategories,
-                               }))
+        supplierForm.put(
+            route('suppliers.put',
+                  {
+                      'id'        : props.supplier.id,
+                      'name'      : supplierForm.name,
+                      'email'     : supplierForm.email,
+                      'categories': checkedCategories,
+                  }))
     } else {
         supplierForm.post(route('suppliers.store'))
     }
