@@ -1,7 +1,7 @@
 <template>
     <section class="space-y-6">
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Konto Löschen</h2>
+            <h2 class="heading-2">Konto Löschen</h2>
 
             <p class="mt-1 text-sm text-gray-600">
                 Sobald Ihr konto gelöscht ist, sind alle daten unwiederruflich weg!
@@ -16,12 +16,12 @@
                @close="closeModal">
             <div class="p-6">
                 <h2 class="text-lg font-medium text-gray-900">
-                    Are you sure you want to delete your account?
+                    Bist du Sicher?
                 </h2>
 
                 <p class="mt-1 text-sm text-gray-600">
-                    Once your account is deleted, all of its resources and data will be permanently deleted. Please
-                    enter your password to confirm you would like to permanently delete your account.
+                    Alle Daten werden unwiederruflich gelöscht! Bitte Passwort eingeben um dieses Konto permanent zu
+                    Löschen.
                 </p>
 
                 <div class="mt-6">
@@ -44,16 +44,17 @@
                 </div>
 
                 <div class="mt-6 flex justify-end">
-                    <SecondaryButton @click="closeModal"> Cancel</SecondaryButton>
+                    <BaseButton color="light"
+                                @click="closeModal">Abbrechen
+                    </BaseButton>
 
-                    <DangerButton
-                        class="ml-3"
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing"
-                        @click="deleteUser"
-                    >
-                        Delete Account
-                    </DangerButton>
+                    <BaseButton color="danger"
+                                :class="{ 'opacity-25': form.processing }"
+                                class="ml-3"
+                                :disabled="form.processing"
+                                @click="deleteUser">
+                        Konto Löschen
+                    </BaseButton>
                 </div>
             </div>
         </Modal>
@@ -62,11 +63,9 @@
 
 <script setup>
 import BaseButton from '@/Components/BaseButton.vue';
-import DangerButton from '@/Components/DangerButton.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import Modal from '@/Components/Modal.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import {useForm} from '@inertiajs/inertia-vue3';
 import {nextTick, ref} from 'vue';
