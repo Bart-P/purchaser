@@ -52,6 +52,8 @@
                                  :persons="persons"
                                  :addresses="addresses"
                                  :categories="categories"
+                                 :tags="tags"
+                                 :supplier-tags="supplierTags"
                                  :supplier-categories="supplierCategories" />
             </PageBoxWrapper>
 
@@ -177,6 +179,8 @@ const props = defineProps(
         'persons'           : Array,
         'categories'        : Object,
         'supplierCategories': Object,
+        'tags'              : Object,
+        'supplierTags'      : Object,
     })
 
 let deleteAddressModal = null
