@@ -1,7 +1,7 @@
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Passwort Ändern</h2>
+            <h2 class="heading-2">Passwort Ändern</h2>
 
             <p class="mt-1 text-sm text-gray-600">
                 Stelle bitte sicher, dass dein Passwort lang ist und aus zufälligen Zeichen besteht.
