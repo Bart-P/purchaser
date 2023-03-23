@@ -29,19 +29,20 @@ class DatabaseSeeder extends Seeder
             ]);
 
         $categories = [
-            'Kartonage',
-            'Metall',
-            'Holz',
-            'Druck',
-            'Werbemittel',
-            'Messebau',
-            'Plexi',
+            ['name' => 'Kartonage', 'color' => '#1E88E5'],
+            ['name' => 'Metall', 'color' => '#3949AB'],
+            ['name' => 'Holz', 'color' => '#00ACC1'],
+            ['name' => 'Druck', 'color' => '#43A047'],
+            ['name' => 'Werbemittel', 'color' => '#C0CA33'],
+            ['name' => 'Messebau', 'color' => '#FFB300'],
+            ['name' => 'Plexi', 'color' => '#F4511E'],
         ];
 
         foreach ($categories as $category) {
             Category::factory()->create(
                 [
-                    'name' => $category,
+                    'name'  => $category['name'],
+                    'color' => $category['color'],
                 ]);
         }
 
