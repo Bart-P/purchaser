@@ -95,30 +95,18 @@
         <div class="space-y-6">
             <div class="flex justify-between items-center">
                 <h4 class="heading-4">Tags (optional)</h4>
-                <BaseButton id="dropdownSearchButton"
+                <BaseButton id="chooseTagsModal"
                             class="inline-flex items-center"
                             type="button">Tag Auswählen
-                    <svg class="w-4 h-4 ml-2"
-                         aria-hidden="true"
-                         fill="none"
-                         stroke="currentColor"
-                         viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M19 9l-7 7-7-7"></path>
-                    </svg>
                 </BaseButton>
             </div>
 
             <ul class="flex flex-wrap items-center gap-4 uppercase">
-
-                <li v-for="tag in supplierTags"
-                    class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                <li v-for="tag in checkedTags"
+                    :style="{backgroundColor: tag.color}"
+                    class="text-white font-bold text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
                     {{ tag.name }}
                 </li>
-
             </ul>
         </div>
     </form>
@@ -190,7 +178,6 @@ function toggleCheckCategory(category) {
 }
 
 function submitSupplier() {
-
     if (!checkedCategories.value.length) {
         Toast.add(
             {
