@@ -204,7 +204,22 @@ const checkedCategories = ref([])
 const checkedTags = ref([])
 
 if (props.supplierCategories) {
-    checkedCategories.value = props.supplierCategories
+    assignTagsToCategories()
+}
+
+function assignTagsToCategories() {
+    checkedCategories.value =
+        props.supplierCategories.map((cat) => {
+            return updateCategryWithTags(cat)
+        })
+}
+
+function updateCategryWithTags(category) {
+    category = {
+        ...category,
+        tags: getTagsForCategory(category.id),
+    }
+    return category
 }
 
 if (props.supplierTags) {
@@ -226,8 +241,14 @@ function toggleCheckCategory(category) {
     if (checkedCategories.value.some((cat => cat['id'] === category.id))) {
         checkedCategories.value = checkedCategories.value.filter((cat) => cat['id'] !== category.id)
     } else {
-        checkedCategories.value = [...checkedCategories.value, category]
+        checkedCategories.value = [...checkedCategories.value, updateCategryWithTags(category)]
     }
+}
+
+function getTagsForCategory(id) {
+    return [...props.tags].filter((tag) => {
+        return id === tag.category_id
+    })
 }
 
 function submitSupplier() {
