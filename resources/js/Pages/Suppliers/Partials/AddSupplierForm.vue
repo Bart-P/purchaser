@@ -159,10 +159,15 @@ const props = defineProps(
         persons           : Array,
     })
 
-const checkedCategories = ref([]);
+const checkedCategories = ref([])
+const checkedTags = ref([])
 
 if (props.supplierCategories) {
     checkedCategories.value = props.supplierCategories
+}
+
+if (props.supplierTags) {
+    checkedTags.value = props.supplierTags
 }
 
 const supplierForm = useForm(
@@ -172,6 +177,7 @@ const supplierForm = useForm(
         addresses : null,
         persons   : null,
         categories: checkedCategories,
+        tags      : checkedTags,
     },
 )
 
