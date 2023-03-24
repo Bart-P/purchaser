@@ -190,10 +190,13 @@ const props = defineProps(
             type   : Object,
             default: null,
         },
-        tags              : Object,
+        tags              : {
+            type   : Object,
+            default: [],
+        },
         supplierTags      : {
             type   : Object,
-            default: null,
+            default: [],
         },
         addresses         : Array,
         persons           : Array,
