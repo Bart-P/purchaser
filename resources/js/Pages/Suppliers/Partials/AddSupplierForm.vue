@@ -242,6 +242,7 @@ const supplierForm = useForm(
 function toggleCheckCategory(category) {
     if (checkedCategories.value.some((cat => cat['id'] === category.id))) {
         checkedCategories.value = checkedCategories.value.filter((cat) => cat['id'] !== category.id)
+        checkedTags.value = checkedTags.value.filter((tag) => tag.category_id !== category.id)
     } else {
         checkedCategories.value = [...checkedCategories.value, updateCategryWithTags(category)]
     }
