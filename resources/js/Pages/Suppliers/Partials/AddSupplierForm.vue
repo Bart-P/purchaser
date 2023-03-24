@@ -120,6 +120,7 @@
                 <TransitionGroup>
                     <li class="py-2 px-3 border-[1px] border-purchaser-primary rounded-md shadow-md text-purchaser-primary"
                         v-for="cat in checkedCategories"
+                        :style="{borderColor: cat.color, color: cat.color}"
                         :key="'cat-key-' + cat.id">
                         {{ cat.name }}
                     </li>
