@@ -152,7 +152,7 @@
                 </BaseButton>
             </div>
 
-            <ul class="flex flex-wrap items-center gap-4 uppercase">
+            <ul class="flex flex-wrap items-center gap-2">
                 <li v-for="tag in checkedTags"
                     :style="{backgroundColor: tag.color}"
                     class="tag">
