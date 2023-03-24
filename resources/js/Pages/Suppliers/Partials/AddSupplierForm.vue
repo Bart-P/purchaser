@@ -41,8 +41,14 @@
                 <ul class="space-y-2">
                     <template v-for="category in checkedCategories">
                         <li v-if="category.tags.length"
-                            class="border-t-2 border-purchaser-primary">
-                            <h4 class="heading-4">{{ category.name }}</h4>
+                            class="border-t-2 border-purchaser-primary cursor-pointer">
+                            <h4 class="heading-4">
+                                {{ category.name }}
+                                <span class="float-right text-purchaser-dark text-base font-bold"
+                                      v-show="getCheckedTagsForCategoryLength(category.id) ">
+                                    {{ getCheckedTagsForCategoryLength(category.id) }}
+                                </span>
+                            </h4>
                             <ul class="space-y-2 py-2 mt-2">
                                 <li v-for="tag in category.tags"
                                     :style="{backgroundColor: category.color}"
