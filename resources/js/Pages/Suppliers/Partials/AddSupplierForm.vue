@@ -56,6 +56,7 @@
                                     :class="[checkedTags.some(checkedTag => checkedTag.id !== tag.id) || !checkedTags.length ? 'bg-gray-500 text-purchaser-dark' : '']"
                                     class="tag">{{ tag.name }}
                                 </li>
+
                             </ul>
                         </li>
                     </template>
