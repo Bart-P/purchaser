@@ -21,7 +21,7 @@
              tabindex="-1"
              aria-labelledby="choose-tag-drawer-label">
             <h5 id="choose-tag-drawer-label"
-                class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">Menu</h5>
+                class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">Tag Auswahl</h5>
             <button type="button"
                     data-drawer-hide="choose-tag-drawer"
                     aria-controls="choose-tag-drawer"
