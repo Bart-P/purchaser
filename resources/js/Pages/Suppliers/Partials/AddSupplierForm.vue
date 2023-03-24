@@ -266,8 +266,6 @@ function toggleCheckTag(tag) {
     } else {
         checkedTags.value = [...checkedTags.value, tag]
     }
-
-    console.log(checkedTags.value)
 }
 
 function getTagStyle(tagId, color) {
