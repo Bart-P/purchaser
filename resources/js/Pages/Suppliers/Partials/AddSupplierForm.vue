@@ -51,7 +51,9 @@
                             </h4>
                             <ul class="space-y-2 py-2 mt-2">
                                 <li v-for="tag in category.tags"
-                                    :style="{backgroundColor: category.color}"
+                                    :style="getTagStyle(tag.id, category.color)"
+                                    @click="toggleCheckTag(tag)"
+                                    :class="[checkedTags.some(checkedTag => checkedTag.id !== tag.id) || !checkedTags.length ? 'bg-gray-500 text-purchaser-dark' : '']"
                                     class="tag">{{ tag.name }}
                                 </li>
                             </ul>
@@ -61,7 +63,6 @@
                 </ul>
             </div>
         </div>
-
 
         <div class="flex gap-5">
             <div class="w-1/2">
@@ -247,6 +248,26 @@ function getTagsForCategory(id) {
     return [...props.tags].filter((tag) => {
         return id === tag.category_id
     })
+}
+
+function toggleCheckTag(tag) {
+    if (checkedTags.value.some(checkedTag => tag['id'] === checkedTag.id)) {
+        checkedTags.value = checkedTags.value.filter((checkedTag) => tag['id'] !== checkedTag.id)
+    } else {
+        checkedTags.value = [...checkedTags.value, tag]
+    }
+
+    console.log(checkedTags.value)
+}
+
+function getTagStyle(tagId, color) {
+    return checkedTags.value.find((tag) => tag.id === tagId)
+           ? {backgroundColor: color}
+           : {}
+}
+
+function getCheckedTagsForCategoryLength(categoryId) {
+    return checkedTags.value.filter(tag => tag.category_id === categoryId).length
 }
 
 function submitSupplier() {
