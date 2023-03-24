@@ -155,11 +155,15 @@
             </div>
 
             <ul class="flex flex-wrap items-center gap-2">
-                <li v-for="tag in checkedTags"
-                    :style="{backgroundColor: tag.color}"
-                    class="tag">
-                    {{ tag.name }}
-                </li>
+                <TransitionGroup>
+                    <li v-for="tag in checkedTags"
+                        :key="'tag-key-' + tag.id"
+                        :style="{backgroundColor: tag.color}"
+                        class="tag">
+                        {{ tag.name }}
+                    </li>
+                </TransitionGroup>
+
             </ul>
         </div>
     </form>
