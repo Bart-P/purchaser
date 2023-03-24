@@ -15,11 +15,6 @@
             </div>
         </div>
 
-        <!-- drawer init and show -->
-        <div class="text-center">
-
-        </div>
-
         <!-- drawer component -->
         <div id="choose-tag-drawer"
              class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-80 dark:bg-gray-800"
@@ -132,10 +127,7 @@
                                     @toggle-check-category="toggleCheckCategory"
                                     :checked-categories="checkedCategories"
                                     :categories="categories" />
-
-
         </div>
-
 
         <hr class="my-5">
 
