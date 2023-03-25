@@ -114,13 +114,19 @@ class SuppliersController extends Controller
         $supplier = Supplier::find($request->id);
         $supplier->name = $request->name;
         $supplier->email = $request->email;
-        $supplier->update();
-        $supplier->updateCategoryJunctions($request->categories);
 
-        // TODO ADD FAILED MESSAGE
+        if ($supplier->save()) {
+            $supplier->updateCategoryJunctions($request->categories);
+
+            return redirect()->route('suppliers')->with('notification', [
+                'message' => 'Änderungen wurden gespeichert!',
+                'type'    => 'success',
+            ]);
+        };
+
         return redirect()->route('suppliers')->with('notification', [
-            'message' => 'Änderung gespeichert!',
-            'type'    => 'success',
+            'message' => 'Es ist ein Fehler aufgetreten, Änderungen am Lieferanten wurden nicht gespeichert!',
+            'type'    => 'danger',
         ]);
     }
 }
