@@ -16,7 +16,7 @@ class SuppliersController extends Controller
             'suppliers' => Supplier
                 ::when($request->search, function ($query, $search) {
                     $query->where('name', 'LIKE', '%' . $search . '%')
-                          ->orWhere('email', 'LIKE', '%' . $search . '%');
+                        ->orWhere('email', 'LIKE', '%' . $search . '%');
                 })
                 ->orderBy('updated_at', 'DESC')
                 ->paginate(15)

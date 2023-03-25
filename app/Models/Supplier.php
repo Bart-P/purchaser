@@ -111,3 +111,4 @@ class Supplier extends Model
         return parent::delete();
     }
 }
+
