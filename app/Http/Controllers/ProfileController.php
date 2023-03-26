@@ -37,12 +37,16 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
-        $request->user()->save();
+        if ($request->user()->save()) {
+            return redirect()->back()->with('notification', [
+                'message' => 'Nutzerdaten gespeichert!',
+                'type'    => 'success',
+            ]);
+        };
 
-        // ADD FAILED NOTIFICATION
         return redirect()->back()->with('notification', [
-            'message' => 'Nutzerdaten gespeichert!',
-            'type'    => 'success',
+            'message' => 'Es ist ein Fehler aufgetreten. Nutzerdaten konnten nicht gespeichert werden.',
+            'type' => 'danger',
         ]);
     }
 
@@ -52,8 +56,8 @@ class ProfileController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         $request->validate([
-                               'password' => ['required', 'current-password'],
-                           ]);
+            'password' => ['required', 'current-password'],
+        ]);
 
         $user = $request->user();
 
@@ -67,3 +71,4 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 }
+
