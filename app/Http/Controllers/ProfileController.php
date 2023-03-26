@@ -13,8 +13,6 @@ use Inertia\Response;
 
 class ProfileController extends Controller
 {
-    // TODO change redirects to same as in all other controllers
-
     /**
      * Display the user's profile form.
      */
