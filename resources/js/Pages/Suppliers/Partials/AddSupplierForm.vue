@@ -5,9 +5,11 @@
                 Firma (erforderlich)
             </h3>
             <div class="flex gap-4 justify-end">
-                <BaseButton type="submit" color="primary">Speichern
+                <BaseButton type="submit" color="primary">
+                    Speichern
                 </BaseButton>
-                <BaseButton :href="route('suppliers')" color="light">Zurück
+                <BaseButton :href="route('suppliers')" color="light">
+                    Zurück
                 </BaseButton>
             </div>
         </div>
