@@ -73,28 +73,10 @@ class Supplier extends Model
      *
      * @return void
      */
-    public function updateCategoryJunctions(array $categories): void
+
+    public function updateCategoryPivot(array $categegory_ids)
     {
-        $junctions = $this->categoryJunctions()->get();
-
-        $requestCategoryIds = array_map(function ($cat) {
-            return $cat['id'];
-        }, array_values($categories));
-
-        $junctionIds = array_map(function ($jun) {
-            return $jun['category_id'];
-        }, array_values($junctions->toArray()));
-
-        $junctionsToCreate = array_diff($requestCategoryIds, $junctionIds);
-        $junctionsToDelete = array_diff($junctionIds, $requestCategoryIds);
-
-        foreach ($junctionsToCreate as $categoryId) {
-            $this->createSingleCategoryJunction($categoryId);
-        }
-
-        foreach ($junctionsToDelete as $categoryId) {
-            SupplierCategoryJunction::destroy($junctions->where('category_id', 'like', $categoryId));
-        }
+        $this->categories()->sync($categegory_ids);
     }
 
     public function tagJunctions(): HasMany
@@ -111,4 +93,3 @@ class Supplier extends Model
         return parent::delete();
     }
 }
-

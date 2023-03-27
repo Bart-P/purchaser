@@ -44,14 +44,9 @@ class SuppliersController extends Controller
         if ($supplier) {
             $addresses = $supplier->addresses()->get();
             $persons = $supplier->persons()->get();
-            $supplierCategoryJunction = $supplier->categoryJunctions()->get();
-            $supplierTagJunction = $supplier->tagJunctions()->get();
 
-            foreach ($categories as $category) {
-                if ($supplierCategoryJunction->contains('category_id', $category->id)) {
-                    $supplierCategories[] = $category;
-                }
-            };
+            $supplierCategories = $supplier->categories()->get();
+            $supplierTagJunction = $supplier->tagJunctions()->get();
 
             foreach ($tags as $tag) {
                 $tag->color = $categories->find($tag->category_id)->color;
@@ -116,7 +111,12 @@ class SuppliersController extends Controller
         $supplier->email = $request->email;
 
         if ($supplier->save()) {
-            $supplier->updateCategoryJunctions($request->categories);
+
+            $categoryIds = array_map((function ($category) {
+                return $category['id'];
+            }), $request->categories);
+
+            $supplier->updateCategoryPivot($categoryIds);
 
             return redirect()->route('suppliers')->with('notification', [
                 'message' => 'Änderungen wurden gespeichert!',
