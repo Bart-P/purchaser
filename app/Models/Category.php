@@ -16,4 +16,10 @@ class Category extends Model
     {
         return $this->hasMany(Tag::class);
     }
+
+    public function suppliers()
+    {
+        return $this->belongsToMany(Supplier::class);
+    }
 }
+

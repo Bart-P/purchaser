@@ -1,6 +1,5 @@
 <template>
     <Head title="Lieferanten" />
-
     <AuthenticatedLayout>
         <template #header>
             Alle Lieferanten
@@ -21,16 +20,16 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import {Head} from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/inertia-vue3';
 import SuppliersTable from '@/Pages/Suppliers/Partials/SuppliersTable.vue';
-import {ref} from 'vue';
+import { ref } from 'vue';
 import SuppliersTableNav from '@/Pages/Suppliers/Partials/SuppliersTableNav.vue';
 
 const props = defineProps(
     {
         suppliers: Object,
-        search   : {
-            type   : Object,
+        search: {
+            type: Object,
             default: ref(''),
         },
     })

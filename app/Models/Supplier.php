@@ -43,6 +43,11 @@ class Supplier extends Model
         }
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
     public function categoryJunctions(): HasMany
     {
         return $this->hasMany(SupplierCategoryJunction::class);
