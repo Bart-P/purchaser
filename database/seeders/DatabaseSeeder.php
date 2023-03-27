@@ -26,25 +26,14 @@ class DatabaseSeeder extends Seeder
                 'name'     => 'Bartek',
                 'email'    => 'bar-p@wp.pl',
                 'password' => bcrypt('asdfasdf'),
-            ]);
+            ]
+        );
 
-        $categories = [
-            ['name' => 'Kartonage', 'color' => '#1E88E5'],
-            ['name' => 'Metall', 'color' => '#3949AB'],
-            ['name' => 'Holz', 'color' => '#00ACC1'],
-            ['name' => 'Druck', 'color' => '#43A047'],
-            ['name' => 'Werbemittel', 'color' => '#C0CA33'],
-            ['name' => 'Messebau', 'color' => '#FFB300'],
-            ['name' => 'Plexi', 'color' => '#F4511E'],
-        ];
+        Supplier::factory(100)->create();
+        Address::factory(150)->create();
+        Person::factory(125)->create();
 
-        foreach ($categories as $category) {
-            Category::factory()->create(
-                [
-                    'name'  => $category['name'],
-                    'color' => $category['color'],
-                ]);
-        }
+        $this->call([CategorySeeder::class]);
 
         $tags = [
             'offset'            => 1,
@@ -72,12 +61,9 @@ class DatabaseSeeder extends Seeder
                 [
                     'name'        => $tag_key,
                     'category_id' => $tags[$tag_key],
-                ]);
+                ]
+            );
         };
-
-        Supplier::factory(100)->create();
-        Address::factory(150)->create();
-        Person::factory(125)->create();
 
         $supplier_ids = Supplier::all('id');
         $category_ids = Category::all('id');
