@@ -87,7 +87,7 @@ class SuppliersController extends Controller
 
         $supplier->saveAddresses($request->addresses);
         $supplier->savePersons($request->persons);
-        $supplier->createCategoryJunctions($request->categories);
+        $supplier->updateCategoryPivot($this->getCategoryIds($request->categories));
 
         return redirect()->route('suppliers')->with('notification', [
             'message' => 'Lieferant hinzugefügt!',
@@ -112,11 +112,7 @@ class SuppliersController extends Controller
 
         if ($supplier->save()) {
 
-            $categoryIds = array_map((function ($category) {
-                return $category['id'];
-            }), $request->categories);
-
-            $supplier->updateCategoryPivot($categoryIds);
+            $supplier->updateCategoryPivot($this->getCategoryIds($request->categories));
 
             return redirect()->route('suppliers')->with('notification', [
                 'message' => 'Änderungen wurden gespeichert!',
@@ -128,5 +124,12 @@ class SuppliersController extends Controller
             'message' => 'Es ist ein Fehler aufgetreten, Änderungen am Lieferanten wurden nicht gespeichert!',
             'type'    => 'danger',
         ]);
+    }
+
+    function getCategoryIds($categories)
+    {
+        return array_map((function ($category) {
+            return $category['id'];
+        }), $categories);
     }
 }
