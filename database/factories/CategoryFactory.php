@@ -16,17 +16,7 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'name' => fake()->unique()->randomElement(
-                [
-                    'Kartonage',
-                    'Metall',
-                    'Holz',
-                    'Druck',
-                    'Werbemittel',
-                    'Messebau',
-                    'Plexi',
-                ]),
-        ];
+        return [];
     }
 }
+
