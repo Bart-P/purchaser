@@ -27,11 +27,15 @@ class CategorySeeder extends Seeder
         ];
 
         Category::factory()->createMany($categories);
+        $categories = Category::all();
+        $supplierIds = Supplier::all()->pluck('id');
 
-        for ($i = 0; $i < Supplier::all()->count(); $i++) {
-            foreach (Category::all() as $category) {
-                $suppliers = Supplier::inRandomOrder()->take(rand(0, 1))->pluck('id');
-                $category->suppliers()->attach($suppliers);
+
+        foreach ($supplierIds as $supplier) {
+            $category = $categories->random(rand(1, 3));
+
+            foreach ($category as $cat) {
+                $cat->suppliers()->attach($supplier);
             }
         }
     }
