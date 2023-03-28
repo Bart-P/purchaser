@@ -15,7 +15,6 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-
         $categories = [
             ['name' => 'Kartonage', 'color' => '#1E88E5'],
             ['name' => 'Metall', 'color' => '#3949AB'],
@@ -29,7 +28,6 @@ class CategorySeeder extends Seeder
         Category::factory()->createMany($categories);
         $categories = Category::all();
         $supplierIds = Supplier::all()->pluck('id');
-
 
         foreach ($supplierIds as $supplier) {
             $category = $categories->random(rand(1, 3));
