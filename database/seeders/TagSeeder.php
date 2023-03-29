@@ -38,18 +38,15 @@ class TagSeeder extends Seeder
 
         Tag::factory()->createMany($tags);
 
-        // TODO -> finish up this function, for now no suppliers are selected.
-        //$category_ids = [1, 2, 3, 4];
-        //
-        // foreach ($category_ids as $cat_id) {
-        //     $suppliers = Supplier::all()->where('category_id', 'like', $cat_id);
-        //     $available_tags = array_filter($tags, function ($tag) use ($cat_id) {
-        //         return $tag['category_id'] === $cat_id;
-        //     });
-        //
-        //     foreach ($suppliers as $sup) {
-        //         $sup->tags()->attach($available_tags);
-        //     }
-        // }
+        $category_ids = [1, 2, 3, 4];
+
+        foreach ($category_ids as $cat_id) {
+            $currentCat = Category::find($cat_id);
+            $suppliers = $currentCat->suppliers()->get();
+            $available_tags = $currentCat->tags()->get();
+            foreach ($suppliers as $sup) {
+                $sup->tags()->attach($available_tags);
+            }
+        }
     }
 }
