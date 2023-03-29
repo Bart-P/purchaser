@@ -46,13 +46,9 @@ class SuppliersController extends Controller
             $persons = $supplier->persons()->get();
 
             $supplierCategories = $supplier->categories()->get();
-            $supplierTagJunction = $supplier->tagJunctions()->get();
 
             foreach ($tags as $tag) {
                 $tag->color = $categories->find($tag->category_id)->color;
-                if ($supplierTagJunction->contains('tag_id', $tag->id)) {
-                    $supplierTags[] = $tag;
-                }
             };
         }
 

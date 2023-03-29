@@ -89,11 +89,6 @@ class Supplier extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function tagJunctions(): HasMany
-    {
-        return $this->hasMany(SupplierTagJunction::class);
-    }
-
     public function delete(): ?bool
     {
         $this->addresses()->delete();
