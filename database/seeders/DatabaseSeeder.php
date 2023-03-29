@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         Address::factory(150)->create();
         Person::factory(125)->create();
 
-        $this->call([CategorySeeder::class]);
-        $this->call([TagSeeder::class]);
+        $this->call(CategorySeeder::class);
+        $this->call(TagSeeder::class);
     }
 }

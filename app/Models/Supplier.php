@@ -84,6 +84,11 @@ class Supplier extends Model
         $this->categories()->sync($categegory_ids);
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
     public function tagJunctions(): HasMany
     {
         return $this->hasMany(SupplierTagJunction::class);
