@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
