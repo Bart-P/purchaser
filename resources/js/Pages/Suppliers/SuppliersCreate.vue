@@ -92,6 +92,7 @@ import SinglePersonList from '@/Pages/Suppliers/Partials/SinglePersonList.vue';
 const props = defineProps(
     {
         categories: Object,
+        tags: Object,
     })
 
 onMounted(() => {

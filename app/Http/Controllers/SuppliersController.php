@@ -69,6 +69,13 @@ class SuppliersController extends Controller
         ]);
     }
 
+    private function updateTagsWithColors(Collection $tags, $categories)
+    {
+        $tags->map(function ($tag) use ($categories) {
+            return $tag->color = $categories->find($tag->category_id)->color;
+        });
+    }
+
     function store(Request $request)
     {
         $supplier = Supplier::create(
