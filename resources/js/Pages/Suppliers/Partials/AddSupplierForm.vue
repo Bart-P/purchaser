@@ -173,7 +173,7 @@ if (props.supplierCategories) {
     assignTagsToCategories()
 }
 
-if (props.supplierTags) {
+if (props.supplierTags.length) {
     checkedTags.value = props.supplierTags
 }
 

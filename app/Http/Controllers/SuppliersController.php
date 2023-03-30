@@ -97,6 +97,7 @@ class SuppliersController extends Controller
         $supplier->saveAddresses($request->addresses);
         $supplier->savePersons($request->persons);
         $supplier->updateCategoryPivot($this->getCategoryIds($request->categories));
+        $supplier->updateTagPivot($this->getTagIds($request->tags));
 
         return redirect()->route('suppliers')->with('notification', [
             'message' => 'Lieferant hinzugefügt!',
