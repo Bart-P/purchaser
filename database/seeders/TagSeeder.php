@@ -43,7 +43,7 @@ class TagSeeder extends Seeder
         foreach ($category_ids as $cat_id) {
             $currentCat = Category::find($cat_id);
             $suppliers = $currentCat->suppliers()->get();
-            $available_tags = $currentCat->tags()->get();
+            $available_tags = $currentCat->tags()->get()->random(rand(1, 3));
             foreach ($suppliers as $sup) {
                 $sup->tags()->attach($available_tags);
             }
