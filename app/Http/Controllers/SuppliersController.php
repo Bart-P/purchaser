@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Tag;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -26,8 +27,13 @@ class SuppliersController extends Controller
 
     function create()
     {
+        $categories = Category::all();
+        $tags = Tag::all();
+        $this->updateTagsWithColors($tags, $categories);
+
         return Inertia::render('Suppliers/SuppliersCreate', [
-            'categories' => Category::all(),
+            'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -41,19 +47,15 @@ class SuppliersController extends Controller
         $tags = Tag::all();
         $supplierTags = [];
 
+        $this->updateTagsWithColors($tags, $categories);
+
         if ($supplier) {
             $addresses = $supplier->addresses()->get();
             $persons = $supplier->persons()->get();
             $supplierTags = $supplier->tags()->get();
             $supplierCategories = $supplier->categories()->get();
 
-            foreach ($tags as $tag) {
-                $tag->color = $categories->find($tag->category_id)->color;
-            };
-
-            foreach ($supplierTags as $tag) {
-                $tag->color = $categories->find($tag->category_id)->color;
-            };
+            $this->updateTagsWithColors($supplierTags, $categories);
         }
 
         return Inertia::render('Suppliers/SuppliersEdit', [

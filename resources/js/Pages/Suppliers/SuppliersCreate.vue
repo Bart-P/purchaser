@@ -8,9 +8,7 @@
         <div class="py-12 w-full h-full flex flex-col gap-8">
             <!-- add Company Form -->
             <PageBoxWrapper>
-                <AddSupplierForm :categories="categories"
-                                 :persons="persons"
-                                 :addresses="addresses" />
+                <AddSupplierForm :categories="categories" :tags="tags" :persons="persons" :addresses="addresses" />
             </PageBoxWrapper>
 
             <BaseModal id="addAddressModal">
@@ -24,24 +22,19 @@
                     <h3 class="heading-3">
                         Adressen (optional)
                     </h3>
-                    <BaseButton color="primary"
-                                type="button"
-                                data-modal-target="addAddressModal"
-                                data-modal-toggle="addAddressModal">
+                    <BaseButton color="primary" type="button" data-modal-target="addAddressModal"
+                        data-modal-toggle="addAddressModal">
                         Adresse Hinzufügen
                     </BaseButton>
                 </div>
                 <div class="flex flex-wrap gap-8 pt-8">
                     <div v-for="(address, index) in addresses"
-                         class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <button class="float-right text-red-600"
-                                type="submit"
-                                @click="removeAddress(index)">
+                        class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <button class="float-right text-red-600" type="submit" @click="removeAddress(index)">
                             <i class="fa-solid fa-trash"></i>
                         </button>
 
-                        <SingleAddressList :id="index"
-                                           :address="address" />
+                        <SingleAddressList :id="index" :address="address" />
                     </div>
                 </div>
             </PageBoxWrapper>
@@ -58,24 +51,20 @@
                         <h3 class="heading-3">
                             Personen (optional)
                         </h3>
-                        <BaseButton color="primary"
-                                    type="button"
-                                    data-modal-target="addPersonModal"
-                                    data-modal-toggle="addPersonModal">
+                        <BaseButton color="primary" type="button" data-modal-target="addPersonModal"
+                            data-modal-toggle="addPersonModal">
                             Person Hinzufügen
                         </BaseButton>
                     </div>
 
                     <div class="flex flex-wrap gap-8 pt-8">
                         <template v-for="(person, index) in persons">
-                            <div class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                                <button class="float-right text-red-600"
-                                        type="submit"
-                                        @click="removePerson(index)">
+                            <div
+                                class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                                <button class="float-right text-red-600" type="submit" @click="removePerson(index)">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
-                                <SinglePersonList :id="index"
-                                                  :person="person" />
+                                <SinglePersonList :id="index" :person="person" />
                             </div>
                         </template>
 
@@ -88,9 +77,9 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import {Head} from '@inertiajs/inertia-vue3';
-import {onMounted, reactive} from 'vue';
-import {initModals} from 'flowbite';
+import { Head } from '@inertiajs/inertia-vue3';
+import { onMounted, reactive } from 'vue';
+import { initModals } from 'flowbite';
 import BaseButton from '@/Components/BaseButton.vue';
 import PageBoxWrapper from '@/Components/PageBoxWrapper.vue';
 import AddSupplierForm from '@/Pages/Suppliers/Partials/AddSupplierForm.vue';
