@@ -22,4 +22,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Supplier::class);
     }
+
+    public function delete()
+    {
+        $this->tags()->detach();
+    }
 }
