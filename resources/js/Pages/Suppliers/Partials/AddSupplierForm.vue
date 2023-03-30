@@ -90,6 +90,7 @@
                         :key="'cat-key-' + cat.id">
                         {{ cat.name }}
                     </li>
+
                 </TransitionGroup>
 
                 <li class="py-2 px-3 border-[1px] border-white rounded-md text-red-700 float-left"
@@ -115,7 +116,7 @@
 
             <ul class="flex flex-wrap items-center gap-2">
                 <TransitionGroup>
-                    <li v-for="tag in checkedTags" :key="'tag-key-' + tag.id" :style="{ backgroundColor: tag.color }"
+                    <li v-for="tag in checkedTags" :key="'tag-key-' + tag.id" :style="getTagStyle(tag.id, tag.color)"
                         class="tag">
                         {{ tag.name }}
                     </li>

@@ -44,10 +44,14 @@ class SuppliersController extends Controller
         if ($supplier) {
             $addresses = $supplier->addresses()->get();
             $persons = $supplier->persons()->get();
-
+            $supplierTags = $supplier->tags()->get();
             $supplierCategories = $supplier->categories()->get();
 
             foreach ($tags as $tag) {
+                $tag->color = $categories->find($tag->category_id)->color;
+            };
+
+            foreach ($supplierTags as $tag) {
                 $tag->color = $categories->find($tag->category_id)->color;
             };
         }

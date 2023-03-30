@@ -8,13 +8,11 @@
             wird unwiederruflich gelöscht!
         </template>
         <template #buttons>
-            <BaseButton @click="deleteAddress()"
-                        color="danger">
+            <BaseButton @click="deleteAddress()" color="danger">
                 Löschen
             </BaseButton>
 
-            <BaseButton @click="deleteAddressModal.hide()"
-                        color="light">
+            <BaseButton @click="deleteAddressModal.hide()" color="light">
                 Abbrechen
             </BaseButton>
         </template>
@@ -24,18 +22,16 @@
         <template #text>
             Die die Person
             <span class="font-bold">{{ personToDelete.fname }} {{ personToDelete.lname }} (ID: {{
-                    personToDelete.id
-                                    }})</span>
+                personToDelete.id
+            }})</span>
             wird unwiederruflich gelöscht!
         </template>
         <template #buttons>
-            <BaseButton @click="deletePerson()"
-                        color="danger">
+            <BaseButton @click="deletePerson()" color="danger">
                 Löschen
             </BaseButton>
 
-            <BaseButton @click="deletePersonModal.hide()"
-                        color="light">
+            <BaseButton @click="deletePersonModal.hide()" color="light">
                 Abbrechen
             </BaseButton>
         </template>
@@ -48,18 +44,12 @@
         <div class="py-12 w-full h-full flex flex-col gap-8">
             <!-- add Company Form -->
             <PageBoxWrapper>
-                <AddSupplierForm :supplier="supplier"
-                                 :persons="persons"
-                                 :addresses="addresses"
-                                 :categories="categories"
-                                 :tags="tags"
-                                 :supplier-tags="supplierTags"
-                                 :supplier-categories="supplierCategories" />
+                <AddSupplierForm :supplier="supplier" :persons="persons" :addresses="addresses" :categories="categories"
+                    :tags="tags" :supplier-tags="supplierTags" :supplier-categories="supplierCategories" />
             </PageBoxWrapper>
 
             <BaseModal id="addAddressModal">
-                <AddAddressForm :supplier="supplier"
-                                :addresses="addresses" />
+                <AddAddressForm :supplier="supplier" :addresses="addresses" />
             </BaseModal>
 
             <!-- Addresses to save list -->
@@ -69,39 +59,31 @@
                     <h3 class="heading-3">
                         Adressen (optional)
                     </h3>
-                    <BaseButton color="primary"
-                                type="button"
-                                data-modal-target="addAddressModal"
-                                data-modal-toggle="addAddressModal">
+                    <BaseButton color="primary" type="button" data-modal-target="addAddressModal"
+                        data-modal-toggle="addAddressModal">
                         Adresse Hinzufügen
                     </BaseButton>
                 </div>
                 <div class="flex flex-wrap gap-8 pt-8">
                     <div v-for="(address, index) in addresses"
-                         class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                         <div class="float-right flex gap-4">
-                            <Link v-if="address.id"
-                                  :href="route('address.edit', address.id)"
-                                  class="text-blue-600">
-                                <i class="fa-solid fa-pen"></i>
+                            <Link v-if="address.id" :href="route('address.edit', address.id)" class="text-blue-600">
+                            <i class="fa-solid fa-pen"></i>
                             </Link>
-                            <button class="text-red-600"
-                                    type="submit"
-                                    data-modal-target="deleteAddressModal"
-                                    @click="setAddressToDelete(address.id, address.name1)">
+                            <button class="text-red-600" type="submit" data-modal-target="deleteAddressModal"
+                                @click="setAddressToDelete(address.id, address.name1)">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </div>
 
-                        <SingleAddressList :id="index"
-                                           :address="address" />
+                        <SingleAddressList :id="index" :address="address" />
                     </div>
                 </div>
             </PageBoxWrapper>
 
             <BaseModal id="addPersonModal">
-                <AddPersonForm :supplier="supplier"
-                               :persons="persons" />
+                <AddPersonForm :supplier="supplier" :persons="persons" />
             </BaseModal>
 
             <!-- Presons to save list -->
@@ -112,10 +94,8 @@
                         <h3 class="heading-3">
                             Personen (optional)
                         </h3>
-                        <BaseButton color="primary"
-                                    type="button"
-                                    data-modal-target="addPersonModal"
-                                    data-modal-toggle="addPersonModal">
+                        <BaseButton color="primary" type="button" data-modal-target="addPersonModal"
+                            data-modal-toggle="addPersonModal">
                             Person Hinzufügen
                         </BaseButton>
                     </div>
@@ -126,22 +106,17 @@
                                 class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
                                 <div class="float-right flex gap-4">
-                                    <Link v-if="person.id"
-                                          :href="route('person.edit', person.id)"
-                                          class="text-blue-600">
-                                        <i class="fa-solid fa-pen"></i>
+                                    <Link v-if="person.id" :href="route('person.edit', person.id)" class="text-blue-600">
+                                    <i class="fa-solid fa-pen"></i>
                                     </Link>
-                                    <button class="float-right text-red-600"
-                                            type="submit"
-                                            @click="setPersonToDelete(person.first_name, person.last_name, person.id)">
+                                    <button class="float-right text-red-600" type="submit"
+                                        @click="setPersonToDelete(person.first_name, person.last_name, person.id)">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </div>
-                                <SinglePersonList :id="index"
-                                                  :person="person" />
+                                <SinglePersonList :id="index" :person="person" />
                             </div>
                         </template>
-
                     </div>
                 </div>
             </PageBoxWrapper>
@@ -151,9 +126,9 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import {Head, Link} from '@inertiajs/inertia-vue3';
-import {onMounted, ref} from 'vue';
-import {initModals} from 'flowbite';
+import { Head, Link } from '@inertiajs/inertia-vue3';
+import { onMounted, ref } from 'vue';
+import { initModals } from 'flowbite';
 import BaseButton from '@/Components/BaseButton.vue';
 import PageBoxWrapper from '@/Components/PageBoxWrapper.vue';
 import AddSupplierForm from '@/Pages/Suppliers/Partials/AddSupplierForm.vue';
@@ -163,8 +138,8 @@ import AddPersonForm from '@/Pages/Suppliers/Partials/AddPersonForm.vue';
 import BaseModal from '@/Components/BaseModal.vue';
 import SinglePersonList from '@/Pages/Suppliers/Partials/SinglePersonList.vue';
 import DeleteConfirmationModal from '@/Components/DeleteConfirmationModal.vue';
-import {Inertia} from '@inertiajs/inertia';
-import {Modal} from 'flowbite';
+import { Inertia } from '@inertiajs/inertia';
+import { Modal } from 'flowbite';
 
 onMounted(() => {
     initModals()
@@ -174,13 +149,13 @@ onMounted(() => {
 
 const props = defineProps(
     {
-        'supplier'          : Object,
-        'addresses'         : Array,
-        'persons'           : Array,
-        'categories'        : Object,
+        'supplier': Object,
+        'addresses': Array,
+        'persons': Array,
+        'categories': Object,
         'supplierCategories': Object,
-        'tags'              : Object,
-        'supplierTags'      : Object,
+        'tags': Object,
+        'supplierTags': Object,
     })
 
 let deleteAddressModal = null
@@ -191,7 +166,7 @@ let personToDelete = ref({})
 function setAddressToDelete(addressId, addressName) {
     deleteAddressModal.toggle()
     addressToDelete.value = {
-        id  : addressId,
+        id: addressId,
         name: addressName,
     };
 }
@@ -199,7 +174,7 @@ function setAddressToDelete(addressId, addressName) {
 function setPersonToDelete(fname, lname, id) {
     deletePersonModal.show()
     personToDelete.value = {
-        id   : id,
+        id: id,
         fname: fname,
         lname: lname,
     }
