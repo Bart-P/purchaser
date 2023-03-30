@@ -89,6 +89,11 @@ class Supplier extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function updateTagPivot(array $tag_ids)
+    {
+        $this->tags()->sync($tag_ids);
+    }
+
     public function delete(): ?bool
     {
         $this->addresses()->delete();

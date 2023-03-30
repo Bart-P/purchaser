@@ -169,8 +169,15 @@ const props = defineProps(
 const checkedCategories = ref([])
 const checkedTags = ref([])
 
+// TODO -> tag dont get the colors anymore.. maybe get them ofer all cat array? 
+
 if (props.supplierCategories) {
     assignTagsToCategories()
+}
+
+if (props.supplierTags) {
+    checkedTags.value = props.supplierTags
+    console.log(checkedTags.value)
 }
 
 function assignTagsToCategories() {
@@ -262,11 +269,14 @@ function submitSupplier() {
                     'name': supplierForm.name,
                     'email': supplierForm.email,
                     'categories': checkedCategories,
+                    'tags': checkedTags,
                 }))
     } else {
         supplierForm.post(route('suppliers.store'))
     }
 }
+
+
 </script>
 
 <style scoped>

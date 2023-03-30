@@ -113,6 +113,7 @@ class SuppliersController extends Controller
         if ($supplier->save()) {
 
             $supplier->updateCategoryPivot($this->getCategoryIds($request->categories));
+            $supplier->updateTagPivot($this->getTagIds($request->tags));
 
             return redirect()->route('suppliers')->with('notification', [
                 'message' => 'Änderungen wurden gespeichert!',
@@ -131,5 +132,12 @@ class SuppliersController extends Controller
         return array_map((function ($category) {
             return $category['id'];
         }), $categories);
+    }
+
+    function getTagIds($tags)
+    {
+        return array_map((function ($tag) {
+            return $tag['id'];
+        }), $tags);
     }
 }
