@@ -48,37 +48,6 @@ class Supplier extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function categoryJunctions(): HasMany
-    {
-        return $this->hasMany(SupplierCategoryJunction::class);
-    }
-
-    public function createCategoryJunctions($categories): void
-    {
-        foreach ($categories as $category) {
-            $this->createSingleCategoryJunction($category['id']);
-        }
-    }
-
-    public function createSingleCategoryJunction($categoryId): void
-    {
-        SupplierCategoryJunction::create(
-            [
-                'supplier_id' => $this->id,
-                'category_id' => $categoryId,
-            ]
-        );
-    }
-
-    /**
-     * compares categories with junctions for supplier
-     * then deletes or creates a new junction depending on the difference
-     *
-     * @param array $categories
-     *
-     * @return void
-     */
-
     public function updateCategoryPivot(array $categegory_ids)
     {
         $this->categories()->sync($categegory_ids);
@@ -98,7 +67,8 @@ class Supplier extends Model
     {
         $this->addresses()->delete();
         $this->persons()->delete();
-        $this->categoryJunctions()->delete();
+        $this->categories()->detach();
+        $this->tags()->detach();
 
         return parent::delete();
     }
