@@ -120,7 +120,7 @@ class SuppliersController extends Controller
         $supplier->name = $request->name;
         $supplier->email = $request->email;
 
-        if ($supplier->save()) {
+        if ($supplier->touch()) {
 
             $supplier->updateCategoryPivot($this->getCategoryIds($request->categories));
             $supplier->updateTagPivot($this->getTagIds($request->tags));
