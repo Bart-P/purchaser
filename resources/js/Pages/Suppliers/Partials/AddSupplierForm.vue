@@ -34,28 +34,8 @@
 
         <hr class="my-5">
 
-        <div class="space-y-6">
-            <div class="flex justify-between items-center">
-                <h4 class="heading-4">Tags (optional)</h4>
-                <BaseButton color="primary" type="button" class="inline-flex items-center"
-                    data-drawer-target="choose-tag-drawer" data-drawer-show="choose-tag-drawer"
-                    aria-controls="choose-tag-drawer">
-                    Tag Auswählen
-                </BaseButton>
-            </div>
-
-            <ul class="flex flex-wrap items-center gap-2">
-                <TransitionGroup>
-                    <li v-for="tag in checkedTags" :key="'tag-key-' + tag.id" :style="getTagStyle(tag.id, tag.color)"
-                        class="tag">
-                        {{ tag.name }}
-                    </li>
-                </TransitionGroup>
-
-            </ul>
-        </div>
-        <SelectTagDrawer id="choose-tag-drawer" :checked-categories="checkedCategories" :checked-tags="checkedTags"
-            @toggle-check-tag="toggleCheckTag" />
+        <AddTagForm @toggle-check-tag="toggleCheckTag" :checked-categories="checkedCategories"
+            :checked-tags="checkedTags" />
     </form>
 </template>
 
@@ -64,7 +44,7 @@
 import BaseButton from '@/Components/BaseButton.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import AddCategoryForm from '@/Pages/Suppliers/Partials/AddCategoryForm.vue';
-import SelectTagDrawer from '@/Components/SelectTagDrawer.vue';
+import AddTagForm from '@/Pages/Suppliers/Partials/AddTagForm.vue';
 import TextInput from '@/Components/TextInput.vue';
 import Toast from '@/Stores/toast';
 import { useForm } from '@inertiajs/inertia-vue3';
@@ -161,12 +141,6 @@ function toggleCheckTag(tag) {
     } else {
         checkedTags.value = [...checkedTags.value, tag]
     }
-}
-
-function getTagStyle(tagId, color) {
-    return checkedTags.value.find((tag) => tag.id === tagId)
-        ? { backgroundColor: color }
-        : {}
 }
 
 function submitSupplier() {
