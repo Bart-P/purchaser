@@ -18,9 +18,10 @@
             </TransitionGroup>
 
         </ul>
+
+        <SelectTagDrawer id="choose-tag-drawer" :checked-categories="checkedCategories" :checked-tags="checkedTags"
+            @toggle-check-tag="toggleCheckTag" />
     </div>
-    <SelectTagDrawer id="choose-tag-drawer" :checked-categories="checkedCategories" :checked-tags="checkedTags"
-        @toggle-check-tag="toggleCheckTag" />
 </template>
 
 <script setup>

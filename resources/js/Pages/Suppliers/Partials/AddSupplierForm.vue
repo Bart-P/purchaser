@@ -175,7 +175,6 @@ function submitSupplier() {
         supplierForm.post(route('suppliers.store'))
     }
 }
-
 </script>
 
 <style scoped>
