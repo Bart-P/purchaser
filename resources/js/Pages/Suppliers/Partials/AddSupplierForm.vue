@@ -29,36 +29,8 @@
 
         <hr class="my-5">
 
-        <div class="space-y-6">
-            <div class="flex justify-between items-center">
-                <h4 class="heading-4">Kategorien (erforderlich)</h4>
-                <BaseButton id="dropdownSearchButton" data-dropdown-toggle="dropdownCategorySearch"
-                    data-dropdown-placement="bottom" class="inline-flex items-center" type="button">Kategorie Auswählen
-                    <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </BaseButton>
-            </div>
-
-            <ul class="flex flex-wrap items-center gap-4 uppercase">
-                <TransitionGroup>
-                    <li class="py-2 px-3 border-[1px] font-bold border-purchaser-primary rounded-md shadow-md text-purchaser-primary"
-                        v-for="cat in checkedCategories" :style="{ borderColor: cat.color, color: cat.color }"
-                        :key="'cat-key-' + cat.id">
-                        {{ cat.name }}
-                    </li>
-
-                </TransitionGroup>
-
-                <li class="py-2 px-3 border-[1px] border-white rounded-md text-red-700 float-left"
-                    v-show="!checkedCategories.length">*Bitte eine Kategorie auswählen
-                </li>
-            </ul>
-
-            <SelectCategoryDropdown id="dropdownCategorySearch" @toggle-check-category="toggleCheckCategory"
-                :checked-categories="checkedCategories" :categories="categories" />
-        </div>
+        <AddCategoryForm @toggle-check-category="toggleCheckCategory" :categories="categories"
+            :checked-categories="checkedCategories" />
 
         <hr class="my-5">
 
@@ -130,7 +102,7 @@ const props = defineProps(
 const checkedCategories = ref([])
 const checkedTags = ref([])
 
-if (props.supplierCategories) {
+if (props.supplierCategories.length) {
     assignTagsToCategories()
 }
 
