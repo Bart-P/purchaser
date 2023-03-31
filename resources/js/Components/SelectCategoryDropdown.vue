@@ -18,7 +18,7 @@
                     placeholder="Suchen">
             </div>
         </div>
-        <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+        <ul class="max-h-72 min-h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
             aria-labelledby="dropdownSearchButton">
             <li v-for="category in filteredCategories">
                 <div @click="$emit('toggleCheckCategory', category)"
@@ -32,11 +32,6 @@
                 </div>
             </li>
         </ul>
-        <a href="#"
-            class="flex items-center p-3 text-sm font-medium text-purchaser-secondary border-t border-gray-200 rounded-b-md bg-gray-50 hover:bg-gray-100 hover:font-bold">
-            <i class="fa-solid fa-folder-open mr-2"></i>
-            Kategorien bearbeiten
-        </a>
     </div>
 </template>
 
