@@ -62,7 +62,10 @@ const props = defineProps(
             default: null,
             type: Object,
         },
-        categories: Object,
+        categories: {
+            type: Object,
+            default: null,
+        },
         supplierCategories: {
             type: Object,
             default: null,
@@ -82,7 +85,7 @@ const props = defineProps(
 const checkedCategories = ref([])
 const checkedTags = ref([])
 
-if (props.supplierCategories.length) {
+if (props.supplierCategories) {
     assignTagsToCategories()
 }
 
