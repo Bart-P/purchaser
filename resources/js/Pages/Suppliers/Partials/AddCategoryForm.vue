@@ -1,19 +1,19 @@
 <template>
     <div class="space-y-6">
         <div class="flex justify-between items-center">
-            <h4 class="heading-4">Kategorien (erforderlich)</h4>
             <div class="flex items-center gap-4">
+                <h4 class="heading-4">Kategorien (erforderlich)</h4>
                 <BaseButton type="button" color="light" class="text-blue-700">
                     <i class="fa-solid fa-pen"></i>
                 </BaseButton>
-                <BaseButton id="dropdownSearchButton" data-dropdown-toggle="dropdownCategorySearch"
-                    data-dropdown-placement="bottom" class="inline-flex items-center" type="button">Kategorie Auswählen
-                    <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </BaseButton>
             </div>
+            <BaseButton id="dropdownSearchButton" data-dropdown-toggle="dropdownCategorySearch"
+                data-dropdown-placement="bottom" class="inline-flex items-center" type="button">Kategorie Auswählen
+                <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </BaseButton>
         </div>
 
         <ul class="flex flex-wrap items-center gap-4 uppercase">
