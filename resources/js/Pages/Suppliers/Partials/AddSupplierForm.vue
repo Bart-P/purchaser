@@ -29,7 +29,7 @@
 
         <hr class="my-5">
 
-        <AddCategoryForm @toggle-check-category="toggleCheckCategory" :categories="categories"
+        <AddCategoryForm @toggle-check-category="toggleCheckCategory" :tags="tags" :categories="categories"
             :checked-categories="checkedCategories" />
 
         <hr class="my-5">

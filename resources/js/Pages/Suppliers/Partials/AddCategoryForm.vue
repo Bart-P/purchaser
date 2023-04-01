@@ -1,11 +1,47 @@
 <template>
+    <BaseModal id="editCategoryModal">
+
+        <div class="flex w-full p-4 gap-4">
+            <div class="basis-1/3 space-y-2">
+                <div class="flex items-center gap-6">
+                    <h4 class="heading-4">Kategorien</h4>
+                    <button
+                        class="text-green-700 border-[1px] border-green-500 rounded-md px-2 py-1 hover:bg-green-500 hover:text-white">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+                <ul class="space-y-2">
+                    <button v-for="category in categories" class="w-full text-start" @click="editCategory(category)">
+                        <li class="category border-gray-500 text-gray-500">
+                            {{ category.name }}
+                        </li>
+                    </button>
+                </ul>
+            </div>
+            <div class="basis-2/3 space-y-2">
+                <div class="flex items-center gap-6">
+                    <h4 class="heading-4">Tags</h4>
+                    <button
+                        class="text-green-700 border-[1px] border-green-500 rounded-md px-2 py-1 hover:bg-green-500 hover:text-white">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+
+                <ul class="flex flex-wrap gap-2">
+                    <li class="tag bg-gray-500" v-for="tag in categoryTags" :key="tag.name + tag.id">{{ tag.name }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </BaseModal>
     <div class="space-y-6">
         <div class="flex justify-between items-center">
             <div class="flex items-center gap-4">
                 <h4 class="heading-4">Kategorien (erforderlich)</h4>
-                <BaseButton type="button" color="light" class="text-blue-700">
+                <button type="button" class="text-blue-700 text-sm" data-modal-toggle="editCategoryModal">
                     <i class="fa-solid fa-pen"></i>
-                </BaseButton>
+                </button>
             </div>
             <BaseButton id="dropdownSearchButton" data-dropdown-toggle="dropdownCategorySearch"
                 data-dropdown-placement="bottom" class="inline-flex items-center" type="button">Kategorie Auswählen
@@ -37,17 +73,42 @@
 <script setup>
 
 import BaseButton from '@/Components/BaseButton.vue';
+import BaseModal from '@/Components/BaseModal.vue';
 import SelectCategoryDropdown from '@/Components/SelectCategoryDropdown.vue';
+import { ref } from 'vue';
 
 const props = defineProps({
-    categories: Object,
-    checkedCategories: Object,
-});
+    categories: {
+        default: null,
+        type: Object,
+    },
+    checkedCategories: {
+        default: null,
+        type: Object,
+    },
+    tags: Object,
+    categoryTags: {
+        default: [],
+        type: Object
+    }
+})
+
+// TODO - tags dont show whec categoryTags change
+
+const categoryTags = ref([])
 
 const emit = defineEmits(['toggleCheckCategory']);
 
 function toggleCheckCategory(category) {
     emit('toggleCheckCategory', category)
+}
+
+function editCategory(category) {
+
+    props.categoryTags.value = props.tags.filter(tag => {
+        return category.id === tag.category_id
+    })
+
 }
 
 </script>
