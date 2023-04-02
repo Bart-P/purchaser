@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <ul class="space-y-2">
-                    <div id="dropdownAddCategory" class="hidden z-10 flex flex-col gap-4 rounded-md bg-white shadow-md p-4">
+                    <div id="dropdownAddCategory" class="flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
                         <h5 class="heading-5">Kategorie hinzufügen</h5>
                         <TextInput type="text" placeholder="Name"></TextInput>
                         <TextInput type="text" placeholder="Farbe"></TextInput>
@@ -33,6 +33,7 @@
                             <i class="fa-solid fa-save"></i>
                         </button>
                     </div>
+
                     <button v-for="category in categories" class="w-full text-start" @click="toggleEditCategory(category)">
                         <li class="category border-gray-500 text-gray-500"
                             :style="category.id === selectedCategory.id ? { color: category.color, borderColor: category.color, borderWidth: '2px' } : {}">
