@@ -1,6 +1,5 @@
 <template>
     <BaseModal id="editCategoryModal">
-
         <div class="flex w-full p-4 gap-4">
             <div class="basis-1/3 space-y-2">
                 <div class="flex items-center gap-6">
@@ -28,8 +27,10 @@
                 </div>
 
                 <ul class="flex flex-wrap gap-2">
-                    <li class="tag bg-gray-500" v-for="tag in categoryTags" :key="tag.name + tag.id">{{ tag.name }}
-                    </li>
+                    <TransitionGroup>
+                        <li class="tag bg-gray-500" v-for="tag in categoryTags" :key="tag.name + tag.id">{{ tag.name }}
+                        </li>
+                    </TransitionGroup>
                 </ul>
             </div>
         </div>
@@ -75,7 +76,7 @@
 import BaseButton from '@/Components/BaseButton.vue';
 import BaseModal from '@/Components/BaseModal.vue';
 import SelectCategoryDropdown from '@/Components/SelectCategoryDropdown.vue';
-import { ref } from 'vue';
+import { TransitionGroup, ref } from 'vue';
 
 const props = defineProps({
     categories: {
@@ -116,7 +117,11 @@ function editCategory(category) {
 <style scoped>
 .v-enter-active,
 .v-leave-active {
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity .2s ease-in-out;
+}
+
+.v-enter-active {
+    transition-delay: .2s;
 }
 
 .v-enter-from,
