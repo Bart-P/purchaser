@@ -8,18 +8,22 @@
                         <button class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white">
                             <i class="fa-solid fa-plus"></i>
                         </button>
-                        <button v-show="selectedCategory.id"
-                            class="text-blue-500 px-1 py-1 rounded-md border-blue-500 hover:bg-blue-500 hover:text-white">
-                            <i class="fa-solid fa-pen"></i>
-                        </button>
-                        <button v-show="selectedCategory.id"
-                            class="text-red-500 px-1 py-1 rounded-md border-red-500 hover:bg-red-500 hover:text-white">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
+                        <Transition>
+                            <button v-show="selectedCategory.id"
+                                class="text-blue-500 px-1 py-1 rounded-md border-blue-500 hover:bg-blue-500 hover:text-white">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </Transition>
+                        <Transition>
+                            <button v-show="selectedCategory.id"
+                                class="text-red-500 px-1 py-1 rounded-md border-red-500 hover:bg-red-500 hover:text-white">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </Transition>
                     </div>
                 </div>
                 <ul class="space-y-2">
-                    <button v-for="category in categories" class="w-full text-start" @click="editCategory(category)">
+                    <button v-for="category in categories" class="w-full text-start" @click="toggleEditCategory(category)">
 
                         <li class="category border-gray-500 text-gray-500"
                             :style="category.id === selectedCategory.id ? { color: category.color, borderColor: category.color, borderWidth: '2px' } : {}">
@@ -35,19 +39,27 @@
                         <button class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white">
                             <i class="fa-solid fa-plus"></i>
                         </button>
-                        <button
-                            class="text-blue-500 px-1 py-1 rounded-md border-blue-500 hover:bg-blue-500 hover:text-white">
-                            <i class="fa-solid fa-pen"></i>
-                        </button>
-                        <button class="text-red-500 px-1 py-1 rounded-md border-red-500 hover:bg-red-500 hover:text-white">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
+                        <Transition>
+                            <button v-show="selectedTag.id"
+                                class="text-blue-500 px-1 py-1 rounded-md border-blue-500 hover:bg-blue-500 hover:text-white">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </Transition>
+                        <Transition>
+                            <button v-show="selectedTag.id"
+                                class="text-red-500 px-1 py-1 rounded-md border-red-500 hover:bg-red-500 hover:text-white">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </Transition>
                     </div>
                 </div>
 
                 <ul class="flex flex-wrap gap-2">
                     <TransitionGroup>
-                        <li class="tag bg-gray-500" v-for="tag in categoryTags" :key="tag.name + tag.id">{{ tag.name }}
+                        <li class="tag bg-gray-500 cursor-pointer" v-for="tag in categoryTags" :key="tag.name + tag.id"
+                            @click="toggleEditTag(tag)"
+                            :style="tag.id === selectedTag.id ? { backgroundColor: tag.color } : {}">
+                            {{ tag.name }}
                         </li>
                     </TransitionGroup>
                 </ul>
@@ -95,7 +107,7 @@
 import BaseButton from '@/Components/BaseButton.vue';
 import BaseModal from '@/Components/BaseModal.vue';
 import SelectCategoryDropdown from '@/Components/SelectCategoryDropdown.vue';
-import { TransitionGroup, ref } from 'vue';
+import { Transition, TransitionGroup, ref } from 'vue';
 
 const props = defineProps({
     categories: {
@@ -110,7 +122,8 @@ const props = defineProps({
 })
 
 let categoryTags = ref([])
-let selectedCategory = ref({});
+let selectedCategory = ref({})
+let selectedTag = ref({})
 
 const emit = defineEmits(['toggleCheckCategory']);
 
@@ -118,17 +131,28 @@ function toggleCheckCategory(category) {
     emit('toggleCheckCategory', category)
 }
 
-function editCategory(category) {
+function toggleEditCategory(category) {
     if (selectedCategory.value.id === category.id) {
-        selectedCategory.value = []
+        selectedCategory.value = {}
         categoryTags.value = []
+        selectedTag.value = {}
         return
     }
 
+    selectedTag.value = {}
     selectedCategory.value = category
     categoryTags.value = props.tags.filter(tag => {
         return category.id === tag.category_id
     })
+}
+
+function toggleEditTag(tag) {
+    if (selectedTag.value.id === tag.id) {
+        selectedTag.value = []
+        return
+    }
+
+    selectedTag.value = tag
 }
 
 </script>
