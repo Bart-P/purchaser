@@ -119,11 +119,16 @@ function toggleCheckCategory(category) {
 }
 
 function editCategory(category) {
+    if (selectedCategory.value.id === category.id) {
+        selectedCategory.value = []
+        categoryTags.value = []
+        return
+    }
 
+    selectedCategory.value = category
     categoryTags.value = props.tags.filter(tag => {
         return category.id === tag.category_id
     })
-
 }
 
 </script>
