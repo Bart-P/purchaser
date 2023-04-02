@@ -14,6 +14,10 @@
     @apply text-xl text-purchaser-primary;
 }
 
+.heading-5 {
+    @apply text-purchaser-primary;
+}
+
 .tag {
     @apply text-white font-medium uppercase px-2.5 py-0.5 rounded-md;
 }

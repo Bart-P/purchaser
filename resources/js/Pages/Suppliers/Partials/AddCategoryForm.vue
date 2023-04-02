@@ -5,7 +5,8 @@
                 <div class="flex items-center justify-between gap-2">
                     <h4 class="heading-4">Kategorien</h4>
                     <div class="space-x-2">
-                        <button class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white">
+                        <button data-dropdown-toggle="dropdownAddCategory" type="button"
+                            class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white">
                             <i class="fa-solid fa-plus"></i>
                         </button>
                         <Transition>
@@ -23,8 +24,16 @@
                     </div>
                 </div>
                 <ul class="space-y-2">
+                    <div id="dropdownAddCategory" class="hidden z-10 flex flex-col gap-4 rounded-md bg-white shadow-md p-4">
+                        <h5 class="heading-5">Kategorie hinzufügen</h5>
+                        <TextInput type="text" placeholder="Name"></TextInput>
+                        <TextInput type="text" placeholder="Farbe"></TextInput>
+                        <button
+                            class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
+                            <i class="fa-solid fa-save"></i>
+                        </button>
+                    </div>
                     <button v-for="category in categories" class="w-full text-start" @click="toggleEditCategory(category)">
-
                         <li class="category border-gray-500 text-gray-500"
                             :style="category.id === selectedCategory.id ? { color: category.color, borderColor: category.color, borderWidth: '2px' } : {}">
                             {{ category.name }}
@@ -107,8 +116,13 @@
 import BaseButton from '@/Components/BaseButton.vue';
 import BaseModal from '@/Components/BaseModal.vue';
 import SelectCategoryDropdown from '@/Components/SelectCategoryDropdown.vue';
-import { Transition, TransitionGroup, ref } from 'vue';
+import { Transition, TransitionGroup, onMounted, ref } from 'vue';
+import { initDropdowns } from 'flowbite';
+import TextInput from '@/Components/TextInput.vue';
 
+onMounted(() => {
+    initDropdowns()
+})
 const props = defineProps({
     categories: {
         default: null,
