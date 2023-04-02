@@ -88,15 +88,11 @@ const props = defineProps({
         type: Object,
     },
     tags: Object,
-    categoryTags: {
-        default: [],
-        type: Object
-    }
 })
 
-// TODO - tags dont show whec categoryTags change
+// TODO - tags dont show when categoryTags change
 
-const categoryTags = ref([])
+let categoryTags = ref([])
 
 const emit = defineEmits(['toggleCheckCategory']);
 
@@ -106,7 +102,7 @@ function toggleCheckCategory(category) {
 
 function editCategory(category) {
 
-    props.categoryTags.value = props.tags.filter(tag => {
+    categoryTags.value = props.tags.filter(tag => {
         return category.id === tag.category_id
     })
 
