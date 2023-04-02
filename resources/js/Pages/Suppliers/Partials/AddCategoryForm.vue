@@ -2,28 +2,47 @@
     <BaseModal id="editCategoryModal">
         <div class="flex w-full p-4 gap-4">
             <div class="basis-1/3 space-y-2">
-                <div class="flex items-center gap-6">
+                <div class="flex items-center justify-between gap-2">
                     <h4 class="heading-4">Kategorien</h4>
-                    <button
-                        class="text-green-700 border-[1px] border-green-500 rounded-md px-2 py-1 hover:bg-green-500 hover:text-white">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
+                    <div class="space-x-2">
+                        <button class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <button v-show="selectedCategory.id"
+                            class="text-blue-500 px-1 py-1 rounded-md border-blue-500 hover:bg-blue-500 hover:text-white">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button v-show="selectedCategory.id"
+                            class="text-red-500 px-1 py-1 rounded-md border-red-500 hover:bg-red-500 hover:text-white">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
                 <ul class="space-y-2">
                     <button v-for="category in categories" class="w-full text-start" @click="editCategory(category)">
-                        <li class="category border-gray-500 text-gray-500">
+
+                        <li class="category border-gray-500 text-gray-500"
+                            :style="category.id === selectedCategory.id ? { color: category.color, borderColor: category.color, borderWidth: '2px' } : {}">
                             {{ category.name }}
                         </li>
                     </button>
                 </ul>
             </div>
             <div class="basis-2/3 space-y-2">
-                <div class="flex items-center gap-6">
+                <div class="flex items-center justify-between gap-2">
                     <h4 class="heading-4">Tags</h4>
-                    <button
-                        class="text-green-700 border-[1px] border-green-500 rounded-md px-2 py-1 hover:bg-green-500 hover:text-white">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
+                    <div class="space-x-2">
+                        <button class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <button
+                            class="text-blue-500 px-1 py-1 rounded-md border-blue-500 hover:bg-blue-500 hover:text-white">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="text-red-500 px-1 py-1 rounded-md border-red-500 hover:bg-red-500 hover:text-white">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <ul class="flex flex-wrap gap-2">
@@ -90,9 +109,8 @@ const props = defineProps({
     tags: Object,
 })
 
-// TODO - tags dont show when categoryTags change
-
 let categoryTags = ref([])
+let selectedCategory = ref({});
 
 const emit = defineEmits(['toggleCheckCategory']);
 
