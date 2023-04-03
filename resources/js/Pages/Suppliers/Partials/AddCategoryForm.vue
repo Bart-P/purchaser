@@ -5,38 +5,63 @@
                 <div class="flex items-center justify-between gap-2">
                     <h4 class="heading-4">Kategorien</h4>
                     <div class="space-x-2">
-                        <button data-dropdown-toggle="dropdownAddCategory" type="button"
-                            class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
                         <Transition>
-                            <button v-show="selectedCategory.id"
+                            <button v-show="selectedCategory.id" data-dropdown-toggle="dropdownEditCategory"
                                 class="text-blue-500 px-1 py-1 rounded-md border-blue-500 hover:bg-blue-500 hover:text-white">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                         </Transition>
                         <Transition>
-                            <button v-show="selectedCategory.id"
+                            <button v-show="selectedCategory.id" data-dropdown-toggle="dropdownDeleteCategory"
                                 class="text-red-500 px-1 py-1 rounded-md border-red-500 hover:bg-red-500 hover:text-white">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </Transition>
+                        <button data-dropdown-toggle="dropdownAddCategory" type="button"
+                            class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
                     </div>
-                </div>
-                <ul class="space-y-2">
-                    <div id="dropdownAddCategory" class="flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
+                    <form id="dropdownAddCategory"
+                        class="flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
                         <h5 class="heading-5">Kategorie hinzufügen</h5>
-                        <TextInput type="text" placeholder="Name"></TextInput>
+                        <TextInput type="text" placeholder="Name">
+                        </TextInput>
                         <TextInput type="text" placeholder="Farbe"></TextInput>
                         <button
                             class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
                             <i class="fa-solid fa-save"></i>
                         </button>
+                    </form>
+                </div>
+                <div id="dropdownEditCategory" class="flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
+                    <h5 class="heading-5">Kategorie bearbeiten</h5>
+                    <TextInput type="text" placeholder="Name" v-model="selectedCategory.name"></TextInput>
+                    <TextInput type="text" placeholder="Farbe" v-model="selectedCategory.color"></TextInput>
+                    <button
+                        class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
+                        <i class="fa-solid fa-save"></i>
+                    </button>
+                </div>
+                <div id="dropdownDeleteCategory" class="flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
+                    <h5 class="heading-5">Kategorie Löschen</h5>
+                    <div class="text-center">
+                        <p>
+                            Soll die Kategorie <span class="font-bold">"{{ selectedCategory.name }}"</span>
+                        </p>
+                        <p>
+                            wirklich gelöscht werden?
+                        </p>
                     </div>
-
+                    <button
+                        class="text-white px-2 py-1 w-full hover:text-red-500 hover:bg-white border-2 border-red-500 bg-red-500 rounded-md">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+                <ul class="space-y-2">
                     <button v-for="category in categories" class="w-full text-start" @click="toggleEditCategory(category)">
-                        <li class="category border-gray-500 text-gray-500"
-                            :style="category.id === selectedCategory.id ? { color: category.color, borderColor: category.color, borderWidth: '2px' } : {}">
+                        <li class="category border-gray-400 text-gray-400"
+                            :style="category.id === selectedCategory.id ? { color: category.color, borderColor: category.color } : {}">
                             {{ category.name }}
                         </li>
                     </button>
@@ -46,9 +71,6 @@
                 <div class="flex items-center justify-between gap-2">
                     <h4 class="heading-4">Tags</h4>
                     <div class="space-x-2">
-                        <button class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
                         <Transition>
                             <button v-show="selectedTag.id"
                                 class="text-blue-500 px-1 py-1 rounded-md border-blue-500 hover:bg-blue-500 hover:text-white">
@@ -59,6 +81,12 @@
                             <button v-show="selectedTag.id"
                                 class="text-red-500 px-1 py-1 rounded-md border-red-500 hover:bg-red-500 hover:text-white">
                                 <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </Transition>
+                        <Transition>
+                            <button class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white"
+                                v-show="selectedCategory.id">
+                                <i class="fa-solid fa-plus"></i>
                             </button>
                         </Transition>
                     </div>
