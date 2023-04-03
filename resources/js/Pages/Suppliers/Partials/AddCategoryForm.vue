@@ -23,7 +23,7 @@
                         </button>
                     </div>
                     <form id="dropdownAddCategory"
-                        class="flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
+                        class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
                         <h5 class="heading-5">Kategorie hinzufügen</h5>
                         <TextInput type="text" placeholder="Name">
                         </TextInput>
@@ -34,7 +34,8 @@
                         </button>
                     </form>
                 </div>
-                <div id="dropdownEditCategory" class="flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
+                <div id="dropdownEditCategory"
+                    class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
                     <h5 class="heading-5">Kategorie bearbeiten</h5>
                     <TextInput type="text" placeholder="Name" v-model="selectedCategory.name"></TextInput>
                     <TextInput type="text" placeholder="Farbe" v-model="selectedCategory.color"></TextInput>
@@ -43,7 +44,8 @@
                         <i class="fa-solid fa-save"></i>
                     </button>
                 </div>
-                <div id="dropdownDeleteCategory" class="flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
+                <div id="dropdownDeleteCategory"
+                    class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
                     <h5 class="heading-5">Kategorie Löschen</h5>
                     <div class="text-center">
                         <p>
