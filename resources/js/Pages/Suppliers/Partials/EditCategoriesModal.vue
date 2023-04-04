@@ -159,4 +159,4 @@ function toggleEditTag(tag) {
 
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

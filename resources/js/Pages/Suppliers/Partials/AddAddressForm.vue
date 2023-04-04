@@ -156,15 +156,4 @@ function selectCountry(countryCode) {
 
 </script>
 
-<style scoped>
-.v-enter-active,
-.v-leave-active {
-    transition: all 0.3s ease-out;
-}
-
-.v-enter-from,
-.v-leave-to {
-    transform: translateX(20px);
-    opacity: 0;
-}
-</style>
+<style scoped></style>

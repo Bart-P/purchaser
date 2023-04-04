@@ -66,18 +66,4 @@ function toggleCheckCategory(category) {
 
 </script>
 
-<style scoped>
-.v-enter-active,
-.v-leave-active {
-    transition: opacity .2s ease-in-out;
-}
-
-.v-enter-active {
-    transition-delay: .2s;
-}
-
-.v-enter-from,
-.v-leave-to {
-    opacity: 0;
-}
-</style>
+<style scoped></style>

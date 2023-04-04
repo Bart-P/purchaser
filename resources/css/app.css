@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+.v-enter-active,
+.v-leave-active {
+    transition: opacity .2s ease-in-out;
+}
+
+.v-enter-active {
+    transition-delay: .2s;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+
 .heading-2 {
     @apply text-2xl text-purchaser-primary font-bold;
 }
