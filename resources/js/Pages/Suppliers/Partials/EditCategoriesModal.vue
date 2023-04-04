@@ -25,9 +25,8 @@
                     <form id="dropdownAddCategory"
                         class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
                         <h5 class="heading-5">Kategorie hinzufügen</h5>
-                        <TextInput type="text" placeholder="Name">
-                        </TextInput>
-                        <TextInput type="text" placeholder="Farbe"></TextInput>
+                        <TextInput type="text" placeholder="Name" />
+                        <TextInput type="text" placeholder="Farbe" />
                         <button
                             class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
                             <i class="fa-solid fa-save"></i>
@@ -37,8 +36,8 @@
                 <form id="dropdownEditCategory"
                     class="!m-0 flex flex-col z-10 gap-4 rounded-md bg-white shadow-md p-4 hidden">
                     <h5 class="heading-5">Kategorie bearbeiten</h5>
-                    <TextInput type="text" placeholder="Name" v-model="selectedCategory.name"></TextInput>
-                    <TextInput type="text" placeholder="Farbe" v-model="selectedCategory.color"></TextInput>
+                    <TextInput type="text" placeholder="Name" v-model="selectedCategory.name" />
+                    <TextInput type="text" placeholder="Farbe" v-model="selectedCategory.color" />
                     <button
                         class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
                         <i class="fa-solid fa-save"></i>
