@@ -17,7 +17,7 @@
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </Transition>
-                        <button data-dropdown-toggle="dropdownAddCategory" type="button"
+                        <button data-dropdown-toggle="dropdownAddCategory" type="button" id="toggleAddCategoryDropdown"
                             class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white">
                             <i class="fa-solid fa-plus"></i>
                         </button>
@@ -25,9 +25,9 @@
                     <form id="dropdownAddCategory"
                         class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
                         <h5 class="heading-5">Kategorie hinzufügen</h5>
-                        <TextInput type="text" placeholder="Name" />
-                        <TextInput type="text" placeholder="Farbe" />
-                        <button
+                        <TextInput type="text" placeholder="Name" v-model="addCategoryForm.name" required />
+                        <TextInput type="text" placeholder="Farbe" v-model="addCategoryForm.color" required />
+                        <button @click.submit="addNewCategory"
                             class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
                             <i class="fa-solid fa-save"></i>
                         </button>
@@ -112,10 +112,15 @@ import BaseModal from '@/Components/BaseModal.vue';
 import { Transition, TransitionGroup, ref, onMounted } from 'vue';
 import TextInput from '@/Components/TextInput.vue';
 import { initDropdowns } from 'flowbite'
+import { useForm } from '@inertiajs/inertia-vue3';
 
 onMounted(() => {
     initDropdowns()
+
 })
+
+const dropdownAddCategoryClose = document.getElementById('toggleAddCategoryDropdown')
+
 const props = defineProps({
     id: String,
     categories: {
@@ -132,6 +137,21 @@ const props = defineProps({
 let categoryTags = ref([])
 let selectedCategory = ref({})
 let selectedTag = ref({})
+
+const addCategoryForm = useForm(
+    {
+        name: null,
+        color: null,
+    },
+)
+
+function addNewCategory() {
+    if (addCategoryForm.name && addCategoryForm.color) {
+        addCategoryForm.post(route('category.store'))
+        addCategoryForm.reset()
+        toggleAddCategoryDropdown.click()
+    }
+}
 
 function toggleEditCategory(category) {
     if (selectedCategory.value.id === category.id) {
