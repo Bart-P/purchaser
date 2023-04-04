@@ -91,7 +91,7 @@ function selectCountryWithDebounce(countryCode) {
     }
     timeout = setTimeout(() => {
         selectCountry(countryCode)
-    }, 500)
+    }, 200)
 }
 
 function selectCountry(countryCode) {
