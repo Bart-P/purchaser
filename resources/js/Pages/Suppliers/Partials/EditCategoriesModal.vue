@@ -22,15 +22,20 @@
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
-                    <form id="dropdownAddCategory"
+                    <form id="dropdownAddCategory" @submit.prevent="addNewCategory"
                         class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
                         <h5 class="heading-5">Kategorie hinzufügen</h5>
                         <TextInput type="text" placeholder="Name" v-model="addCategoryForm.name" required />
                         <TextInput type="text" placeholder="Farbe" v-model="addCategoryForm.color" required />
-                        <button @click.submit="addNewCategory"
+                        <button type="submit"
                             class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
                             <i class="fa-solid fa-save"></i>
                         </button>
+                        <button @click="addNewCategory" type="button"
+                            class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
+                            <i class="fa-solid fa-trash">test</i>
+                        </button>
+
                     </form>
                 </div>
                 <form id="dropdownEditCategory"
@@ -119,7 +124,6 @@ onMounted(() => {
 
 })
 
-const dropdownAddCategoryClose = document.getElementById('toggleAddCategoryDropdown')
 
 const props = defineProps({
     id: String,
@@ -145,11 +149,14 @@ const addCategoryForm = useForm(
     },
 )
 
+// TODO - Bug -> after save, categories in "Kategorien Auswählen" Dropdown are not automatically updated. 
+// Page needs to be reloaded then new Categories appear, but not before... 
+
 function addNewCategory() {
     if (addCategoryForm.name && addCategoryForm.color) {
         addCategoryForm.post(route('category.store'))
+        document.getElementById('toggleAddCategoryDropdown').click()
         addCategoryForm.reset()
-        toggleAddCategoryDropdown.click()
     }
 }
 
