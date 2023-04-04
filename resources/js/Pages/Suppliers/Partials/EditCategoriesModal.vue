@@ -31,11 +31,6 @@
                             class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
                             <i class="fa-solid fa-save"></i>
                         </button>
-                        <button @click="addNewCategory" type="button"
-                            class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
-                            <i class="fa-solid fa-trash">test</i>
-                        </button>
-
                     </form>
                 </div>
                 <form id="dropdownEditCategory"
