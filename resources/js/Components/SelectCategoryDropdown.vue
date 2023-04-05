@@ -13,7 +13,7 @@
                             clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <input type="text" @keyup="applyFilterCategories" id="category-search-input"
+                <input type="text" id="category-search-input" v-model="filterTerm"
                     class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50 focus:ring-purchaser-primary focus:border-purchaser-primary"
                     placeholder="Suchen">
             </div>
@@ -36,6 +36,7 @@
 </template>
 
 <script setup>
+import { computed } from '@vue/reactivity';
 import { ref } from 'vue';
 
 const props = defineProps(
@@ -49,27 +50,13 @@ const props = defineProps(
 
 const emit = defineEmits(['toggleCheckCategory'])
 
-
-const filteredCategories = ref(props.categories)
-let applyFilterTimeout = null
-
-function applyFilterCategories() {
-    let filterTerm = document.getElementById('category-search-input')
-    if (!filterTerm) {
-        filterTerm = ''
-    }
-
-    if (applyFilterTimeout) {
-        clearTimeout(applyFilterTimeout)
-    }
-
-    applyFilterTimeout = setTimeout(() => {
-        filteredCategories.value = props.categories
-            .filter((cat) =>
-                cat.name.toLowerCase()
-                    .includes(filterTerm.value.toLowerCase()))
-    }, 500)
-}
+let filterTerm = ref('')
+let filteredCategories = computed(() => {
+    return props.categories.filter((cat) => {
+        return cat.name.toLowerCase()
+            .includes(filterTerm.value.toLowerCase())
+    })
+})
 
 function categoryIsChecked(categoryId) {
     if (!props.checkedCategories) {

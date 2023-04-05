@@ -151,9 +151,6 @@ const addCategoryForm = useForm(
     },
 )
 
-// TODO - Bug -> after save, categories in "Kategorien Auswählen" Dropdown are not automatically updated. 
-// Page needs to be reloaded then new Categories appear, but not before... 
-
 function addNewCategory() {
     if (addCategoryForm.name && addCategoryForm.color) {
         addCategoryForm.post(route('category.store'))
