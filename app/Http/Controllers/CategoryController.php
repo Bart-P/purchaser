@@ -19,12 +19,12 @@ class CategoryController extends Controller
         );
 
         if ($category) {
-
             return redirect()->back()->with('notification', [
                 'message' => 'Kategorie hinzugefügt!',
                 'type'    => 'success',
             ]);
         }
+
         return redirect()->back()->with('notification', [
             'message' => 'Es ist ein Fehler aufgetreten! Kategorie wurde nicht gespeichert.',
             'type'    => 'danger',

@@ -123,9 +123,7 @@ import { useForm } from '@inertiajs/inertia-vue3';
 
 onMounted(() => {
     initDropdowns()
-
 })
-
 
 const props = defineProps({
     id: String,
