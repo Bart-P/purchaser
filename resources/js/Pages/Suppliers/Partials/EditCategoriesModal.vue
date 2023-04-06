@@ -102,12 +102,16 @@
                         </li>
                     </TransitionGroup>
 
-                    <li v-show="!categoryTags.length && !selectedCategory.name" class="text-gray-600">
-                        Bitte eine Kategorie auswählen und Tags anzuzeigen!
-                    </li>
-                    <li v-show="!categoryTags.length && selectedCategory.name" class="text-gray-600">
-                        Diese Kategorie hat noch keine Tags!
-                    </li>
+                    <Transition>
+                        <li v-show="!categoryTags.length && !selectedCategory.name" class="text-gray-600">
+                            Bitte eine Kategorie auswählen und Tags anzuzeigen!
+                        </li>
+                    </Transition>
+                    <Transition>
+                        <li v-show="!categoryTags.length && selectedCategory.name" class="text-gray-600">
+                            Diese Kategorie hat noch keine Tags!
+                        </li>
+                    </Transition>
                 </ul>
             </div>
         </div>
