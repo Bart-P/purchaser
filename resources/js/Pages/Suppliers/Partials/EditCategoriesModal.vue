@@ -164,7 +164,11 @@ function addNewCategory() {
 
 function deleteSelectedCategory() {
     const idToDelete = selectedCategory.value.id
+
     if (idToDelete) {
+        selectedCategory.value = {}
+        categoryTags.value = []
+        selectedTag.value = {}
         Inertia.delete(route('category.destroy', idToDelete))
     }
 }

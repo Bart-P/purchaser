@@ -25,6 +25,8 @@ class Category extends Model
 
     public function delete()
     {
-        $this->tags()->detach();
+        $this->tags()->delete();
+
+        return parent::delete();
     }
 }
