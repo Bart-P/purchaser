@@ -40,10 +40,16 @@ class TagSeeder extends Seeder
 
         $category_ids = [1, 2, 3, 4];
 
+        // TODO Check this change, do we really need a pivot table? Could be nice to have a tag to be reusable between categories.. 
+        // relation would need to change, and rest should be easy peasy. 
         foreach ($category_ids as $cat_id) {
             $currentCat = Category::find($cat_id);
             $suppliers = $currentCat->suppliers()->get();
-            $available_tags = $currentCat->tags()->get()->random(rand(1, 3));
+            $available_tags = [];
+            if (count($currentCat->tags()->get())) {
+                $available_tags = $currentCat->tags()->get()->random(rand(1, 3));
+            }
+
             foreach ($suppliers as $sup) {
                 $sup->tags()->attach($available_tags);
             }

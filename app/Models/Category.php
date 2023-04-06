@@ -12,9 +12,9 @@ class Category extends Model
 
     protected $fillable = ['name', 'color'];
 
-    public function tags(): HasMany
+    public function tags(): BelongsToMany
     {
-        return $this->hasMany(Tag::class);
+        return $this->belongsToMany(Tag::class);
     }
 
     public function suppliers(): BelongsToMany
