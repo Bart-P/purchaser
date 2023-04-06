@@ -161,22 +161,24 @@ function addNewCategory() {
     }
 }
 
+function resetSelectableValues() {
+    selectedCategory.value = {}
+    categoryTags.value = []
+    selectedTag.value = {}
+}
+
 function deleteSelectedCategory() {
     const idToDelete = selectedCategory.value.id
 
     if (idToDelete) {
-        selectedCategory.value = {}
-        categoryTags.value = []
-        selectedTag.value = {}
+        resetSelectableValues()
         Inertia.delete(route('category.destroy', idToDelete))
     }
 }
 
 function toggleEditCategory(category) {
     if (selectedCategory.value.id === category.id) {
-        selectedCategory.value = {}
-        categoryTags.value = []
-        selectedTag.value = {}
+        resetSelectableValues()
         return
     }
 
