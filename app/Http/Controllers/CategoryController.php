@@ -30,4 +30,19 @@ class CategoryController extends Controller
             'type'    => 'danger',
         ]);
     }
+
+    function destroy($id)
+    {
+        if (Category::destroy($id)) {
+            return redirect()->back()->with('notification', [
+                'message' => 'Kategorie gelöscht!',
+                'type'    => 'success',
+            ]);
+        };
+
+        return redirect()->back()->with('notification', [
+            'message' => 'Es ist ein Fehler aufgetreten! Kategorie konnte nicht gelöscht werden.',
+            'type'    => 'danger',
+        ]);
+    }
 }

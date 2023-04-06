@@ -170,6 +170,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ]
     )->name('category.store');
 
+    Route::delete(
+        '/category/{id}',
+        [
+            CategoryController::class,
+            'destroy',
+        ]
+    )->name('category.destroy');
 
     // USER PROFILE
     Route::get(
