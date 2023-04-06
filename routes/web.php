@@ -5,6 +5,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\CategoryController;
+use App\Models\Category;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -177,6 +178,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'destroy',
         ]
     )->name('category.destroy');
+
+    Route::patch(
+        '/category',
+        [
+            CategoryController::class,
+            'update',
+        ]
+    )->name('category.patch');
 
     // USER PROFILE
     Route::get(

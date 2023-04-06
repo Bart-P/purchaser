@@ -46,6 +46,7 @@ import { initDropdowns } from 'flowbite'
 onMounted(() => {
     initDropdowns()
 })
+
 const props = defineProps({
     categories: {
         default: null,
@@ -57,6 +58,8 @@ const props = defineProps({
     },
     tags: Object,
 })
+
+// TODO after name update of Checked Categories, the category list is not updated.. Fix that
 
 const emit = defineEmits(['toggleCheckCategory']);
 

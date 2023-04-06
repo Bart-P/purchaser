@@ -45,4 +45,21 @@ class CategoryController extends Controller
             'type'    => 'danger',
         ]);
     }
+
+    function update(Request $request)
+    {
+        $category = Category::find($request->id);
+        $category->fill($request->query());
+        if ($category->save()) {
+            return redirect()->back()->with('notification', [
+                'message' => 'Kategorie änderungen wurden gespeichert!',
+                'type'    => 'success',
+            ]);
+        }
+
+        return redirect()->back()->with('notification', [
+            'message' => 'Es ist ein Fehler aufgetreten! Kategorie konnte nicht gespeichert werden.',
+            'type'    => 'danger',
+        ]);
+    }
 }

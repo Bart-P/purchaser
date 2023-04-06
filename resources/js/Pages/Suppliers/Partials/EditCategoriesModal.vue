@@ -33,12 +33,12 @@
                         </button>
                     </form>
                 </div>
-                <form id="dropdownEditCategory"
+                <form id="dropdownEditCategory" @submit.prevent="updateCategory"
                     class="!m-0 flex flex-col z-10 gap-4 rounded-md bg-white shadow-md p-4 hidden">
                     <h5 class="heading-5">Kategorie bearbeiten</h5>
                     <TextInput type="text" placeholder="Name" v-model="selectedCategory.name" />
                     <TextInput type="text" placeholder="Farbe" v-model="selectedCategory.color" />
-                    <button
+                    <button type="submit"
                         class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
                         <i class="fa-solid fa-save"></i>
                     </button>
@@ -140,7 +140,6 @@ const props = defineProps({
         default: null,
         type: Object,
     }
-
 });
 
 let categoryTags = ref([])
@@ -186,6 +185,12 @@ function toggleEditCategory(category) {
     categoryTags.value = props.tags.filter(tag => {
         return category.id === tag.category_id
     })
+}
+
+function updateCategory() {
+    if (selectedCategory.value.name && selectedCategory.value.color) {
+        Inertia.patch(route('category.patch', selectedCategory.value))
+    }
 }
 
 function toggleEditTag(tag) {

@@ -82,8 +82,8 @@ const props = defineProps(
         persons: Array,
     })
 
-const checkedCategories = ref([])
-const checkedTags = ref([])
+let checkedCategories = ref([])
+let checkedTags = ref([])
 
 if (props.supplierCategories) {
     assignTagsToCategories()
