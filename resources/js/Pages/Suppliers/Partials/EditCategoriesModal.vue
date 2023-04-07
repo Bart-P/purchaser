@@ -7,6 +7,7 @@
                     <div class="space-x-2">
                         <Transition>
                             <button v-show="selectedCategory.id" data-dropdown-toggle="dropdownEditCategory"
+                                id="toggleEditCategoryDropdown"
                                 class="text-blue-500 px-1 py-1 rounded-md border-blue-500 hover:bg-blue-500 hover:text-white">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
@@ -192,6 +193,7 @@ function toggleEditCategory(category) {
 function updateCategory() {
     if (selectedCategory.value.name && selectedCategory.value.color) {
         Inertia.patch(route('category.patch', selectedCategory.value))
+        document.getElementById('toggleEditCategoryDropdown').click()
     }
 }
 
