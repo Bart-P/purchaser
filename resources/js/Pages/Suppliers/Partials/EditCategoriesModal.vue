@@ -184,7 +184,7 @@ function toggleEditCategory(category) {
     }
 
     selectedTag.value = {}
-    selectedCategory.value = category
+    selectedCategory.value = { ...category }
     categoryTags.value = props.tags.filter(tag => {
         return category.id === tag.category_id
     })
@@ -203,7 +203,7 @@ function toggleEditTag(tag) {
         return
     }
 
-    selectedTag.value = tag
+    selectedTag.value = { ...tag }
 }
 
 </script>
