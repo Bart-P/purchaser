@@ -5,8 +5,8 @@
                 <div class="flex items-center justify-between gap-2">
                     <h4 class="heading-4">Kategorien</h4>
 
-                    <CategoryControlls @reset-selectable-values="resetSelectableValues"
-                        :selected-category="selectedCategory"></CategoryControlls>
+                    <CategoryControls @reset-selectable-values="resetSelectableValues"
+                        :selected-category="selectedCategory" />
                 </div>
                 <ul class="space-y-2">
                     <button v-for="category in categories" class="w-full text-start" @click="toggleEditCategory(category)">
@@ -20,26 +20,7 @@
             <div class="basis-2/3 space-y-2">
                 <div class="flex items-center justify-between gap-2">
                     <h4 class="heading-4">Tags</h4>
-                    <div class="space-x-2">
-                        <Transition>
-                            <button v-show="selectedTag.id"
-                                class="text-blue-500 px-1 py-1 rounded-md border-blue-500 hover:bg-blue-500 hover:text-white">
-                                <i class="fa-solid fa-pen"></i>
-                            </button>
-                        </Transition>
-                        <Transition>
-                            <button v-show="selectedTag.id"
-                                class="text-red-500 px-1 py-1 rounded-md border-red-500 hover:bg-red-500 hover:text-white">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </Transition>
-                        <Transition>
-                            <button class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white"
-                                v-show="selectedCategory.id">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </Transition>
-                    </div>
+                    <TagControls :show-add-tag="!!selectedCategory.id" :selected-tag="selectedTag" />
                 </div>
 
                 <ul class="flex flex-wrap gap-2">
@@ -69,13 +50,9 @@
 
 <script setup>
 import BaseModal from '@/Components/BaseModal.vue'
-import { Transition, TransitionGroup, ref, onMounted } from 'vue'
-import CategoryControlls from '@/Pages/Suppliers/Partials/CategoryControlls.vue'
-import { initDropdowns } from 'flowbite'
-
-onMounted(() => {
-    initDropdowns()
-})
+import { Transition, TransitionGroup, ref } from 'vue'
+import CategoryControls from '@/Pages/Suppliers/Partials/CategoryControls.vue'
+import TagControls from '@/Pages/Suppliers/Partials/TagControls.vue'
 
 const props = defineProps({
     id: String,
@@ -94,8 +71,8 @@ let selectedCategory = ref({})
 let selectedTag = ref({})
 
 function resetSelectableValues() {
-    selectedCategory.value = {}
     categoryTags.value = []
+    selectedCategory.value = {}
     selectedTag.value = {}
 }
 
@@ -114,7 +91,7 @@ function toggleEditCategory(category) {
 
 function toggleEditTag(tag) {
     if (selectedTag.value.id === tag.id) {
-        selectedTag.value = []
+        selectedTag.value = {}
         return
     }
 
