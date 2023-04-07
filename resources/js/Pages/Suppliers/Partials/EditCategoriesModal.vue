@@ -64,7 +64,7 @@ const props = defineProps({
         default: null,
         type: Object,
     }
-});
+})
 
 let categoryTags = ref([])
 let selectedCategory = ref({})
