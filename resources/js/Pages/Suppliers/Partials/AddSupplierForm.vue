@@ -49,7 +49,7 @@ import TextInput from '@/Components/TextInput.vue';
 import Toast from '@/Stores/toast';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { initDrawers, initDropdowns } from 'flowbite';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 onMounted(() => {
     initDropdowns();
@@ -88,6 +88,12 @@ let checkedTags = ref([])
 if (props.supplierCategories) {
     assignTagsToCategories()
 }
+
+// If an category is updated by something, update the view automagically
+watch(
+    () => props.supplierCategories,
+    () => assignTagsToCategories()
+)
 
 if (props.supplierTags.length) {
     checkedTags.value = props.supplierTags

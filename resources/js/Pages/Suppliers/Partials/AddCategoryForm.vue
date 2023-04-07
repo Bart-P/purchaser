@@ -23,7 +23,6 @@
                     :key="'cat-key-' + cat.id">
                     {{ cat.name }}
                 </li>
-
             </TransitionGroup>
 
             <li class="py-2 px-3 border-[1px] border-white rounded-md text-red-700 float-left"
@@ -58,8 +57,6 @@ const props = defineProps({
     },
     tags: Object,
 })
-
-// TODO after name update of Checked Categories, the category list is not updated.. Fix that
 
 const emit = defineEmits(['toggleCheckCategory']);
 
