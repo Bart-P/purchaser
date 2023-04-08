@@ -64,6 +64,7 @@ import TextInput from '@/Components/TextInput.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { onMounted } from 'vue'
 import { initDropdowns } from 'flowbite'
+import { Inertia } from '@inertiajs/inertia';
 
 onMounted(() => {
     initDropdowns()
@@ -88,6 +89,7 @@ function addTag() {
     addTagForm.categoryId = props.categoryId
 
     if (addTagForm.name && addTagForm.categoryId) {
+        console.log(addTagForm.categoryId)
         addTagForm.post(route('tag.store'))
         document.getElementById('toggleAddTagForm').click()
         addTagForm.reset()
@@ -95,13 +97,12 @@ function addTag() {
 }
 
 function updateTag() {
-    //TODO TAG Inertia call to backend
-    console.log(props.selectedTag.name, props.categoryId)
+    Inertia.patch(route('tag.patch'), props.selectedTag)
     document.getElementById('toggleEditTagForm').click()
 }
 
 function deleteTag() {
-    console.log(props.selectedTag.name, props.categoryId)
+    Inertia.delete(route('tag.destroy', props.selectedTag.id))
     document.getElementById('toggleDeleteTagForm').click()
 }
 

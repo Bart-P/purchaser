@@ -70,6 +70,11 @@ let categoryTags = ref([])
 let selectedCategory = ref({})
 let selectedTag = ref({})
 
+watch(
+    () => props.tags,
+    () => refreshCategoryTags()
+)
+
 function resetSelectableValues() {
     categoryTags.value = []
     selectedCategory.value = {}
@@ -84,8 +89,12 @@ function toggleEditCategory(category) {
 
     selectedTag.value = {}
     selectedCategory.value = { ...category }
+    refreshCategoryTags()
+}
+
+function refreshCategoryTags() {
     categoryTags.value = props.tags.filter(tag => {
-        return category.id === tag.category_id
+        return selectedCategory.value.id === tag.category_id
     })
 }
 
