@@ -87,13 +87,15 @@ const addTagForm = useForm(
 function addTag() {
     addTagForm.categoryId = props.categoryId
 
-    //TODO TAG Inertia call to backend
-    console.log(addTagForm.name, addTagForm.categoryId)
-    document.getElementById('toggleAddTagForm').click()
-    addTagForm.reset()
+    if (addTagForm.name && addTagForm.categoryId) {
+        addTagForm.post(route('tag.store'))
+        document.getElementById('toggleAddTagForm').click()
+        addTagForm.reset()
+    }
 }
 
 function updateTag() {
+    //TODO TAG Inertia call to backend
     console.log(props.selectedTag.name, props.categoryId)
     document.getElementById('toggleEditTagForm').click()
 }
