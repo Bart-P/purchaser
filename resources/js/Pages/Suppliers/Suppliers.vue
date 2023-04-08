@@ -8,7 +8,8 @@
             <div class="max-w-7xl mx-auto px-6">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-4">
-                        <SuppliersTableNav :suppliers="suppliers" />
+                        <SuppliersTableNav @toggle-check-category="toggleCheckCategory" :suppliers="suppliers"
+                            :categories="categories" :filter-by-categories="filterByCategories" />
 
                         <SuppliersTable :suppliers="suppliers" />
                     </div>
@@ -32,5 +33,33 @@ const props = defineProps(
             type: Object,
             default: ref(''),
         },
+        categories: Object,
+        tags: Object,
     })
+
+const filterByCategories = ref([]);
+
+function toggleCheckCategory(category) {
+    if (filterByCategories.value.some((cat => cat['id'] === category.id))) {
+        filterByCategories.value = filterByCategories.value.filter((cat) => cat['id'] !== category.id)
+        // checkedTags.value = checkedTags.value.filter((tag) => tag.category_id !== category.id)
+    } else {
+        filterByCategories.value = [...filterByCategories.value, updateCategoryWithTags(category)]
+    }
+}
+
+function updateCategoryWithTags(category) {
+    category = {
+        ...category,
+        tags: getTagsForCategory(category.id),
+    }
+    return category
+}
+
+function getTagsForCategory(id) {
+    return [...props.tags].filter((tag) => {
+        return id === tag.category_id
+    })
+}
+
 </script>

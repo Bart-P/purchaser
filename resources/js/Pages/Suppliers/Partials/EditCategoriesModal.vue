@@ -50,7 +50,7 @@
 
 <script setup>
 import BaseModal from '@/Components/BaseModal.vue'
-import { Transition, TransitionGroup, ref } from 'vue'
+import { Transition, TransitionGroup, ref, watch } from 'vue'
 import CategoryControls from '@/Pages/Suppliers/Partials/CategoryControls.vue'
 import TagControls from '@/Pages/Suppliers/Partials/TagControls.vue'
 
