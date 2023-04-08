@@ -20,7 +20,7 @@
             <div class="basis-2/3 space-y-2">
                 <div class="flex items-center justify-between gap-2">
                     <h4 class="heading-4">Tags</h4>
-                    <TagControls :show-add-tag="!!selectedCategory.id" :selected-tag="selectedTag" />
+                    <TagControls :category-id="selectedCategory.id" :selected-tag="selectedTag" />
                 </div>
 
                 <ul class="flex flex-wrap gap-2">
