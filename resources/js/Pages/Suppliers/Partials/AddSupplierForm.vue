@@ -102,11 +102,11 @@ if (props.supplierTags.length) {
 function assignTagsToCategories() {
     checkedCategories.value =
         props.supplierCategories.map((cat) => {
-            return updateCategryWithTags(cat)
+            return updateCategoryWithTags(cat)
         })
 }
 
-function updateCategryWithTags(category) {
+function updateCategoryWithTags(category) {
     category = {
         ...category,
         tags: getTagsForCategory(category.id),
@@ -134,7 +134,7 @@ function toggleCheckCategory(category) {
         checkedCategories.value = checkedCategories.value.filter((cat) => cat['id'] !== category.id)
         checkedTags.value = checkedTags.value.filter((tag) => tag.category_id !== category.id)
     } else {
-        checkedCategories.value = [...checkedCategories.value, updateCategryWithTags(category)]
+        checkedCategories.value = [...checkedCategories.value, updateCategoryWithTags(category)]
     }
 }
 

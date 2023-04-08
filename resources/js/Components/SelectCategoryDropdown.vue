@@ -1,4 +1,8 @@
 <template>
+    <BaseButton :color="color" id="dropdownSearchButton" data-dropdown-toggle="dropdownCategorySearch"
+        data-dropdown-placement="bottom" class="inline-flex items-center" type="button">
+        <slot />
+    </BaseButton>
     <!-- Dropdown menu -->
     <!-- The class !m-0 has to be added to the dropdown, else popper.js throughs a warning in the console -->
     <div id="dropdownCategorySearch" class="z-10 hidden bg-white rounded-md shadow w-60 dark:bg-gray-700 !m-0">
@@ -36,16 +40,30 @@
 </template>
 
 <script setup>
+import BaseButton from '@/Components/BaseButton.vue';
 import { computed } from '@vue/reactivity';
 import { ref } from 'vue';
+import { onMounted } from 'vue';
+import { initDropdowns } from 'flowbite'
+
+onMounted(() => {
+    initDropdowns()
+})
 
 const props = defineProps(
     {
-        categories: Object,
+        categories: {
+            type: Object,
+            default: {},
+        },
         checkedCategories: {
             type: Object,
-            default: null,
+            default: {},
         },
+        color: {
+            default: null,
+            type: String,
+        }
     })
 
 const emit = defineEmits(['toggleCheckCategory'])

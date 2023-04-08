@@ -8,13 +8,10 @@
                     <i class="fa-solid fa-pen"></i>
                 </button>
             </div>
-            <BaseButton id="dropdownSearchButton" data-dropdown-toggle="dropdownCategorySearch"
-                data-dropdown-placement="bottom" class="inline-flex items-center" type="button">Kategorie Auswählen
-                <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-            </BaseButton>
+            <SelectCategoryDropdown @toggle-check-category="toggleCheckCategory" :checked-categories="checkedCategories"
+                :categories="categories">
+                Kategorie Auswahl
+            </SelectCategoryDropdown>
         </div>
 
         <ul class="flex flex-wrap items-center gap-4 uppercase">
@@ -29,22 +26,15 @@
                 v-show="!checkedCategories.length">*Bitte eine Kategorie auswählen
             </li>
         </ul>
-        <SelectCategoryDropdown id="dropdownCategorySearch" @toggle-check-category="toggleCheckCategory"
-            :checked-categories="checkedCategories" :categories="categories" />
+
     </div>
 </template>
 
 <script setup>
 
-import BaseButton from '@/Components/BaseButton.vue'
 import SelectCategoryDropdown from '@/Components/SelectCategoryDropdown.vue'
 import EditCategoriesModal from '@/Pages/Suppliers/Partials/EditCategoriesModal.vue'
-import { TransitionGroup, onMounted } from 'vue'
-import { initDropdowns } from 'flowbite'
-
-onMounted(() => {
-    initDropdowns()
-})
+import { TransitionGroup } from 'vue'
 
 const props = defineProps({
     categories: {

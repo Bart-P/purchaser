@@ -22,6 +22,8 @@ class SuppliersController extends Controller
                 ->orderBy('updated_at', 'DESC')
                 ->paginate(15)
                 ->withQueryString(),
+            'categories' => Category::all(),
+            'tags' => Tag::all(),
         ]);
     }
 
