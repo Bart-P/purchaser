@@ -162,7 +162,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     )->name('person.patch');
 
     // CATEGORIES 
-
     Route::post(
         '/category/store',
         [
@@ -186,6 +185,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'update',
         ]
     )->name('category.patch');
+
+    // TAGS
+    Route::post(
+        '/tag/store',
+        [TagController::class, 'store',]
+    )->name('tag.store');
+
+    Route::delete(
+        '/tag/{id}',
+        [
+            TagController::class,
+            'destroy',
+        ]
+    )->name('tag.destroy');
+
+    Route::patch(
+        '/tag',
+        [
+            TagController::class,
+            'update',
+        ]
+    )->name('tag.patch');
 
     // USER PROFILE
     Route::get(
