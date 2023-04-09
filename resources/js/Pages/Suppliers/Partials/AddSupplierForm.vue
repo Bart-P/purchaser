@@ -8,7 +8,7 @@
                 <BaseButton type="submit" color="primary">
                     Speichern
                 </BaseButton>
-                <BaseButton :href="route('suppliers')" color="light">
+                <BaseButton type="button" @click="back" color="light">
                     Zurück
                 </BaseButton>
             </div>
@@ -81,6 +81,10 @@ const props = defineProps(
         addresses: Array,
         persons: Array,
     })
+
+function back() {
+    window.history.back()
+}
 
 let checkedCategories = ref([])
 let checkedTags = ref([])

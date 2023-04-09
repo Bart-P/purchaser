@@ -37,12 +37,14 @@ class HandleInertiaRequests extends Middleware
             'ziggy'        => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),
+                    'query' => $request->query(),
                 ]);
             },
             'notification' => [
-                'message' => fn() => session('notification.message'),
-                'type'    => fn() => session('notification.type'),
+                'message' => fn () => session('notification.message'),
+                'type'    => fn () => session('notification.type'),
             ],
         ]);
     }
 }
+

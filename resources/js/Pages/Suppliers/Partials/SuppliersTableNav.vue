@@ -47,6 +47,7 @@
 import BaseButton from '@/Components/BaseButton.vue';
 import SelectCategoryDropdown from '@/Components/SelectCategoryDropdown.vue';
 import { Inertia } from '@inertiajs/inertia';
+import { usePage } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
 
 const props = defineProps(
@@ -65,23 +66,46 @@ const props = defineProps(
         },
         filterByCategories: {
             type: Object,
-            defaulg: {},
+            default: {},
         }
     })
 
 const emits = defineEmits(['toggleCheckCategory']);
 
-let searchInput = props.search.value || ''
+const queryParams = usePage().props.value.ziggy.query;
+
+if (props.categories && queryParams.filterCategories) {
+    // emit toggle 
+    for (let i = 0; i < props.categories.length; i++) {
+        const filterCategoryIdList = queryParams.filterCategories.split(',')
+        if (filterCategoryIdList.filter(id => id == props.categories[i].id).length) {
+            emits('toggleCheckCategory', props.categories[i])
+        }
+    }
+}
+
+let searchInput = queryParams.search || props.search.value || ''
 let timeOut = null
+
+if (searchInput) searchFor()
 
 function searchFor() {
     clearTimeout(timeOut)
     props.search.value = searchInput
 
+    let filterCategories = []
+
     timeOut = setTimeout(() => {
+        if (props.filterByCategories.length) {
+            filterCategories = props.filterByCategories.map((cat) => cat.id)
+        }
+
         Inertia.get(
             route('suppliers'),
-            { search: props.search.value },
+            {
+                search: props.search.value,
+                filterCategories: filterCategories.join(','),
+            },
             {
                 preserveState: true,
                 replace: true,
@@ -92,6 +116,7 @@ function searchFor() {
 
 function toggleCheckCategory(cat) {
     emits('toggleCheckCategory', cat)
+    searchFor()
 }
 
 </script>
