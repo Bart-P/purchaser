@@ -35,13 +35,14 @@
             </SelectCategoryDropdown>
 
             <BaseButton color="light">Tags filter</BaseButton>
-
         </div>
     </div>
 </template>
 
 <script setup>
 
+// TODO Cats returned from SelectCategoryDropdown now have a type prop - goal is to reuse the whole thing for Categories as well as Tags, or whatever type. 
+// Base Idea would be to get the type if there is more than one component, and differentiate in the listener what to do with return object. 
 import BaseButton from '@/Components/BaseButton.vue';
 import SelectCategoryDropdown from '@/Components/SelectCategoryDropdown.vue';
 import { Inertia } from '@inertiajs/inertia';
@@ -72,8 +73,8 @@ const emits = defineEmits(['toggleCheckCategory']);
 
 const queryParams = usePage().props.value.ziggy.query;
 
+// emit toggle if any filterCategories are in queryParams or props.filterByCategories to reselect them
 if (props.categories && queryParams.filterCategories) {
-    // emit toggle 
     for (let i = 0; i < props.categories.length; i++) {
         const filterCategoryIdList = queryParams.filterCategories.split(',')
         if (filterCategoryIdList.filter(id => id == props.categories[i].id).length) {

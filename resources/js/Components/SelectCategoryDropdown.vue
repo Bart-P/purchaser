@@ -25,7 +25,7 @@
         <ul class="max-h-72 min-h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
             aria-labelledby="dropdownSearchButton">
             <li v-for="category in filteredCategories">
-                <div @click="$emit('toggleCheckCategory', category)"
+                <div @click="$emit('toggleCheckCategory', { ...category, type: type })"
                     class="flex items-center pl-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                     <input :id="'cat-' + category.id" type="checkbox" :value="category"
                         :checked="categoryIsChecked(category.id)"
@@ -53,17 +53,22 @@ onMounted(() => {
 const props = defineProps(
     {
         categories: {
-            type: Object,
             default: {},
+            type: Object,
         },
         checkedCategories: {
-            type: Object,
             default: {},
+            type: Object,
         },
         color: {
             default: null,
             type: String,
+        },
+        type: {
+            default: null,
+            type: String,
         }
+
     })
 
 const emit = defineEmits(['toggleCheckCategory'])
