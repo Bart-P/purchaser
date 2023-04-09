@@ -19,6 +19,16 @@ class SuppliersController extends Controller
                     $query->where('name', 'LIKE', '%' . $search . '%')
                         ->orWhere('email', 'LIKE', '%' . $search . '%');
                 })
+                ->when($request->filterCategories, function ($query, $filterCategories) {
+                    $query->whereHas('categories', function ($query) use ($filterCategories) {
+                        $query->whereIn('id',  explode(',', $filterCategories));
+                    }, '=', count(explode(',', $filterCategories)));
+                })
+                ->when($request->filterTags, function ($query, $filterTags) {
+                    $query->whereHas('tags', function ($query) use ($filterTags) {
+                        $query->whereIn('id',  explode(',', $filterTags));
+                    }, '=', count(explode(',', $filterTags)));
+                })
                 ->orderBy('updated_at', 'DESC')
                 ->paginate(15)
                 ->withQueryString(),
