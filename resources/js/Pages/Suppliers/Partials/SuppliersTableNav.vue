@@ -28,7 +28,7 @@
                 Kategorie filter
                 <transition>
                     <div v-show="filterByCategories.length"
-                        class="inline-flex items-center justify-center ml-2 text-sm bg-blue-500 w-6 h-6 rounded-full text-white font-bold -right-4">
+                        class="inline-flex items-center justify-center ml-2 text-sm bg-purchaser-secondary w-6 h-6 rounded-full text-white font-bold -right-4">
                         {{ filterByCategories.length }}
                     </div>
                 </transition>
