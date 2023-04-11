@@ -50,8 +50,7 @@
 
 <script setup>
 
-// TODO fix Bug where back from edit Suppliers goes only back to last visited page 
-// - which does not have to be the result you might expect (ex. edit address, press back brings you to edit address again - expected is Suppliers)
+// TODO fix Bug where back from edit Suppliers goes only back to last visited page - thought it will be smart to add window back.. It wasn't.
 
 import BaseButton from '@/Components/BaseButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue';
