@@ -32,7 +32,7 @@
 
 <script setup>
 
-import SelectCategoryDropdown from '@/Components/SelectCategoryDropdown.vue'
+import SelectItemDropdown from '@/Components/SelectItemDropdown.vue'
 import EditCategoriesModal from '@/Pages/Suppliers/Partials/EditCategoriesModal.vue'
 import { TransitionGroup } from 'vue'
 
