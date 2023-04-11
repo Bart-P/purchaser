@@ -44,7 +44,7 @@ const filterByTags = ref([]);
 function toggleCheckCategory(category) {
     if (filterByCategories.value.some((cat => cat['id'] === category.id))) {
         filterByCategories.value = filterByCategories.value.filter((cat) => cat['id'] !== category.id)
-        checkedTags.value = checkedTags.value.filter((tag) => tag.category_id !== category.id)
+        filterByTags.value = filterByTags.value.filter((tag) => tag.category_id !== category.id)
     } else {
         filterByCategories.value = [updateCategoryWithTags(category)]
     }
