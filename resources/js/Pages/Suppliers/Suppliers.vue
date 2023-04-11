@@ -9,7 +9,7 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-4">
                         <SuppliersTableNav @toggle-check-category="toggleCheckCategory" :suppliers="suppliers"
-                            :categories="categories" :filter-by-categories="filterByCategories" />
+                            :categories="categories" :filter-by-categories="filterByCategories" :tags="tags" />
 
                         <SuppliersTable :suppliers="suppliers" />
                     </div>
