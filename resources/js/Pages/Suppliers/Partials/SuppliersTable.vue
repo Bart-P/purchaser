@@ -16,7 +16,7 @@
         </template>
     </DeleteConfirmationModal>
 
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="p-4">
@@ -69,6 +69,8 @@
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </td>
+            </tr>
+            <tr v-if="suppliers.data.length < 5" class="h-32">
             </tr>
         </tbody>
     </table>
