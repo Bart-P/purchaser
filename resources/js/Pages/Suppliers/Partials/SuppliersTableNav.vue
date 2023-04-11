@@ -34,7 +34,6 @@
                 </transition>
             </SelectItemDropdown>
 
-            <!-- TODO finish up using SelectItemDropdown as Tag dropdown -->
             <SelectItemDropdown id="tagDropdown" @toggle-check-item="toggleCheckTag" color="light" :items="categoryTags"
                 :checked-items="filterByTags">
                 Tag filter
