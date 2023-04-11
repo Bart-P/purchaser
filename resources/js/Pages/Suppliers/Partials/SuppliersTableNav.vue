@@ -51,6 +51,9 @@
 
 <script setup>
 
+// TODO fix Bug where back from edit Suppliers goes only back to last visited page 
+// - which does not have to be the result you might expect (ex. edit address, press back brings you to edit address again - expected is Suppliers)
+
 import BaseButton from '@/Components/BaseButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue';
 import { Inertia } from '@inertiajs/inertia';
