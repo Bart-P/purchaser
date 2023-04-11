@@ -126,12 +126,12 @@ function searchFor() {
 }
 
 function toggleCheckCategory(cat) {
-    emits('toggleCheckCategory', cat.item)
+    emits('toggleCheckCategory', cat)
     searchFor()
 }
 
 function toggleCheckTag(tag) {
-    emits('toggleCheckCategory', cat.item)
+    emits('toggleCheckTag', tag)
     searchFor()
 }
 </script>

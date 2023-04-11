@@ -25,7 +25,7 @@
         <ul class="max-h-72 min-h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
             aria-labelledby="dropdownSearchButton">
             <li v-for="item in filteredItems">
-                <div @click="$emit('toggleCheckItem', { item: { ...item }, type: itemType })"
+                <div @click="$emit('toggleCheckItem', item)"
                     class="flex items-center pl-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                     <input :id="'cat-' + item.id" type="checkbox" :value="item" :checked="itemIsChecked(item.id)"
                         class="w-4 h-4 text-purchaser-primary bg-gray-100 border-gray-300 rounded-md focus:ring-purchaser-primary focus:ring-1 dark:bg-gray-600 dark:border-gray-500">
@@ -62,19 +62,14 @@ const props = defineProps(
             default: null,
             type: String,
         },
-        itemType: {
-            default: null,
-            type: String,
-        }
-
     })
 
 const emit = defineEmits(['toggleCheckItem'])
 
 let filterTerm = ref('')
 let filteredItems = computed(() => {
-    return props.items.filter((cat) => {
-        return cat.name.toLowerCase()
+    return props.items.filter((item) => {
+        return item.name.toLowerCase()
             .includes(filterTerm.value.toLowerCase())
     })
 })

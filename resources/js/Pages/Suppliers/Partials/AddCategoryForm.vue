@@ -51,7 +51,7 @@ const props = defineProps({
 const emit = defineEmits(['toggleCheckCategory']);
 
 function toggleCheckCategory(item) {
-    emit('toggleCheckCategory', item.item)
+    emit('toggleCheckCategory', item)
 }
 
 </script>
