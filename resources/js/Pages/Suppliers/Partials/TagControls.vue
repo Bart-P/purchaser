@@ -89,7 +89,6 @@ function addTag() {
     addTagForm.categoryId = props.categoryId
 
     if (addTagForm.name && addTagForm.categoryId) {
-        console.log(addTagForm.categoryId)
         addTagForm.post(route('tag.store'))
         document.getElementById('toggleAddTagForm').click()
         addTagForm.reset()
