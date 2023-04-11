@@ -8,8 +8,9 @@
             <div class="max-w-7xl mx-auto px-6">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-4">
-                        <SuppliersTableNav @toggle-check-category="toggleCheckCategory" :suppliers="suppliers"
-                            :categories="categories" :filter-by-categories="filterByCategories" :tags="tags" />
+                        <SuppliersTableNav @toggle-check-category="toggleCheckCategory" @toggle-check-tag="toggleCheckTag"
+                            :suppliers="suppliers" :categories="categories" :filter-by-categories="filterByCategories"
+                            :filter-by-tags="filterByTags" :tags="tags" />
 
                         <SuppliersTable :suppliers="suppliers" />
                     </div>
@@ -38,13 +39,22 @@ const props = defineProps(
     })
 
 const filterByCategories = ref([]);
+const filterByTags = ref([]);
 
 function toggleCheckCategory(category) {
     if (filterByCategories.value.some((cat => cat['id'] === category.id))) {
         filterByCategories.value = filterByCategories.value.filter((cat) => cat['id'] !== category.id)
-        // checkedTags.value = checkedTags.value.filter((tag) => tag.category_id !== category.id)
+        checkedTags.value = checkedTags.value.filter((tag) => tag.category_id !== category.id)
     } else {
-        filterByCategories.value = [...filterByCategories.value, updateCategoryWithTags(category)]
+        filterByCategories.value = [updateCategoryWithTags(category)]
+    }
+}
+
+function toggleCheckTag(tag) {
+    if (filterByTags.value.some((t => t['id'] === tag.id))) {
+        filterByTags.value = filterByTags.value.filter((t) => t['id'] !== tag.id)
+    } else {
+        filterByTags.value = [...filterByTags.value, tag]
     }
 }
 

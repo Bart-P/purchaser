@@ -35,16 +35,16 @@
             </SelectItemDropdown>
 
             <!-- TODO finish up using SelectItemDropdown as Tag dropdown -->
-            <!-- <SelectItemDropdown @toggle-check-item="toggleCheckTag" color="light" :items="categoryTags" -->
-            <!--     :checked-items="filterByTags"> -->
-            <!--     Kategorie filter -->
-            <!--     <transition> -->
-            <!--         <div v-show="filterByCategories.length" -->
-            <!--             class="inline-flex items-center justify-center ml-2 text-sm bg-purchaser-secondary w-6 h-6 rounded-full text-white font-bold -right-4"> -->
-            <!--             {{ filterByCategories.length }} -->
-            <!--         </div> -->
-            <!--     </transition> -->
-            <!-- </SelectItemDropdown> -->
+            <SelectItemDropdown id="tagDropdown" @toggle-check-item="toggleCheckTag" color="light" :items="categoryTags"
+                :checked-items="filterByTags">
+                Tag filter
+                <transition>
+                    <div v-show="filterByTags.length"
+                        class="inline-flex items-center justify-center ml-2 text-sm bg-purchaser-secondary w-6 h-6 rounded-full text-white font-bold -right-4">
+                        {{ filterByTags.length }}
+                    </div>
+                </transition>
+            </SelectItemDropdown>
         </div>
     </div>
 </template>
@@ -58,6 +58,7 @@ import BaseButton from '@/Components/BaseButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue';
 import { Inertia } from '@inertiajs/inertia';
 import { usePage } from '@inertiajs/inertia-vue3';
+import { computed } from '@vue/reactivity';
 import { ref } from 'vue';
 
 const props = defineProps(
@@ -78,10 +79,14 @@ const props = defineProps(
             type: Object,
             default: {},
         },
-        tags: Object
+        tags: Object,
+        filterByTags: {
+            type: Object,
+            default: {},
+        }
     })
 
-const emits = defineEmits(['toggleCheckCategory']);
+const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag']);
 
 const queryParams = usePage().props.value.ziggy.query;
 
@@ -95,6 +100,18 @@ if (props.categories && queryParams.filterCategories) {
     }
 }
 
+const categoryTags = computed(() => {
+    let filteredTags = []
+    props.filterByCategories.map(
+        cat => {
+            return cat.tags.map(
+                tag => filteredTags.push(tag)
+            )
+        })
+
+    return filteredTags
+})
+
 let searchInput = queryParams.search || props.search.value || ''
 let timeOut = null
 
@@ -105,10 +122,15 @@ function searchFor() {
     props.search.value = searchInput
 
     let filterCategories = []
+    let filterTags = []
 
     timeOut = setTimeout(() => {
         if (props.filterByCategories.length) {
             filterCategories = props.filterByCategories.map((cat) => cat.id)
+        }
+
+        if (props.filterByTags.length) {
+            filterTags = props.filterByTags.map((tag) => tag.id)
         }
 
         Inertia.get(
@@ -116,6 +138,7 @@ function searchFor() {
             {
                 search: props.search.value,
                 filterCategories: filterCategories.join(','),
+                filterTags: filterTags.join(','),
             },
             {
                 preserveState: true,
