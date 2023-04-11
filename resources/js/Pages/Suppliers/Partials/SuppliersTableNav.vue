@@ -23,8 +23,8 @@
             </div>
         </div>
         <div class="space-x-3">
-            <SelectCategoryDropdown @toggle-check-category="toggleCheckCategory" color="light" :categories="categories"
-                :checked-categories="filterByCategories">
+            <SelectItemDropdown @toggle-check-item="toggleCheckCategory" color="light" :items="categories"
+                :checked-items="filterByCategories">
                 Kategorie filter
                 <transition>
                     <div v-show="filterByCategories.length"
@@ -32,19 +32,27 @@
                         {{ filterByCategories.length }}
                     </div>
                 </transition>
-            </SelectCategoryDropdown>
+            </SelectItemDropdown>
 
-            <BaseButton color="light">Tags filter</BaseButton>
+            <!-- TODO finish up using SelectItemDropdown as Tag dropdown -->
+            <!-- <SelectItemDropdown @toggle-check-item="toggleCheckTag" color="light" :items="categoryTags" -->
+            <!--     :checked-items="filterByTags"> -->
+            <!--     Kategorie filter -->
+            <!--     <transition> -->
+            <!--         <div v-show="filterByCategories.length" -->
+            <!--             class="inline-flex items-center justify-center ml-2 text-sm bg-purchaser-secondary w-6 h-6 rounded-full text-white font-bold -right-4"> -->
+            <!--             {{ filterByCategories.length }} -->
+            <!--         </div> -->
+            <!--     </transition> -->
+            <!-- </SelectItemDropdown> -->
         </div>
     </div>
 </template>
 
 <script setup>
 
-// TODO Cats returned from SelectCategoryDropdown now have a type prop - goal is to reuse the whole thing for Categories as well as Tags, or whatever type. 
-// Base Idea would be to get the type if there is more than one component, and differentiate in the listener what to do with return object. 
 import BaseButton from '@/Components/BaseButton.vue';
-import SelectCategoryDropdown from '@/Components/SelectCategoryDropdown.vue';
+import SelectItemDropdown from '@/Components/SelectItemDropdown.vue';
 import { Inertia } from '@inertiajs/inertia';
 import { usePage } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
@@ -66,7 +74,8 @@ const props = defineProps(
         filterByCategories: {
             type: Object,
             default: {},
-        }
+        },
+        tags: Object
     })
 
 const emits = defineEmits(['toggleCheckCategory']);
@@ -114,8 +123,12 @@ function searchFor() {
 }
 
 function toggleCheckCategory(cat) {
-    emits('toggleCheckCategory', cat)
+    emits('toggleCheckCategory', cat.item)
     searchFor()
 }
 
+function toggleCheckTag(tag) {
+    emits('toggleCheckCategory', cat.item)
+    searchFor()
+}
 </script>

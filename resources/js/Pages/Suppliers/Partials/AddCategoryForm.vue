@@ -8,10 +8,10 @@
                     <i class="fa-solid fa-pen"></i>
                 </button>
             </div>
-            <SelectCategoryDropdown @toggle-check-category="toggleCheckCategory" :checked-categories="checkedCategories"
-                :categories="categories">
+            <SelectItemDropdown @toggle-check-item="toggleCheckCategory" :checked-items="checkedCategories"
+                :items="categories" item-type="category">
                 Kategorie Auswahl
-            </SelectCategoryDropdown>
+            </SelectItemDropdown>
         </div>
 
         <ul class="flex flex-wrap items-center gap-4 uppercase">
@@ -50,8 +50,8 @@ const props = defineProps({
 
 const emit = defineEmits(['toggleCheckCategory']);
 
-function toggleCheckCategory(category) {
-    emit('toggleCheckCategory', category)
+function toggleCheckCategory(item) {
+    emit('toggleCheckCategory', item.item)
 }
 
 </script>
