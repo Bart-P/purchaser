@@ -8,8 +8,8 @@
                     <i class="fa-solid fa-pen"></i>
                 </button>
             </div>
-            <SelectItemDropdown @toggle-check-item="toggleCheckCategory" :checked-items="checkedCategories"
-                :items="categories" item-type="category">
+            <SelectItemDropdown id="createOrEditCategoryDropdown" @toggle-check-item="toggleCheckCategory"
+                :checked-items="checkedCategories" :items="categories">
                 Kategorie Auswahl
             </SelectItemDropdown>
         </div>

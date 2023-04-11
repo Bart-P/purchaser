@@ -23,8 +23,8 @@
             </div>
         </div>
         <div class="space-x-3">
-            <SelectItemDropdown @toggle-check-item="toggleCheckCategory" color="light" :items="categories"
-                :checked-items="filterByCategories">
+            <SelectItemDropdown id="categoryDropdown" @toggle-check-item="toggleCheckCategory" color="light"
+                :items="categories" :checked-items="filterByCategories">
                 Kategorie filter
                 <transition>
                     <div v-show="filterByCategories.length"

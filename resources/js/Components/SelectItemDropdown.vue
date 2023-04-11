@@ -1,11 +1,11 @@
 <template>
-    <BaseButton :color="color" id="dropdownSearchButton" data-dropdown-toggle="dropdownCategorySearch"
-        data-dropdown-placement="bottom" class="inline-flex items-center" type="button">
+    <BaseButton :color="color" :data-dropdown-toggle="id" data-dropdown-placement="bottom" class="inline-flex items-center"
+        type="button">
         <slot />
     </BaseButton>
     <!-- Dropdown menu -->
     <!-- The class !m-0 has to be added to the dropdown, else popper.js throughs a warning in the console -->
-    <div id="dropdownCategorySearch" class="z-10 hidden bg-white rounded-md shadow w-60 dark:bg-gray-700 !m-0">
+    <div :id="id" class="z-10 hidden bg-white rounded-md shadow w-60 dark:bg-gray-700 !m-0">
         <div class="p-3">
             <label for="item-search-input" class="sr-only">Search</label>
             <div class="relative">
@@ -49,6 +49,7 @@ onMounted(() => {
 
 const props = defineProps(
     {
+        id: String,
         items: {
             default: {},
             type: Object,
