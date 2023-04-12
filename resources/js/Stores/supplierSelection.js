@@ -5,7 +5,7 @@ export default reactive(
         searchTerm: '',
         categoryFilter: [],
         tagFilter: [],
-        add(searchTerm) {
+        addSearchTerm(searchTerm) {
             this.searchTerm = searchTerm
         },
         removeSearchTerm() {
@@ -17,7 +17,8 @@ export default reactive(
             this.tagFilter = []
         },
         addCategoryFilter(catId) {
-            this.categoryFilter.push(catId)
+            this.categoryFilter = [catId]
+            this.tagFilter = []
         },
         removeCategoryFilter(catId) {
             this.categoryFilter = this.tagFilter.filter(id => id !== catId)
