@@ -50,8 +50,6 @@
 
 <script setup>
 
-// TODO fix Bug where back from edit Suppliers goes only back to last visited page - thought it will be smart to add window back.. It wasn't.
-
 import BaseButton from '@/Components/BaseButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue';
 import { Inertia } from '@inertiajs/inertia';
