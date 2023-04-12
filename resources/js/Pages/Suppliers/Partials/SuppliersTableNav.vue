@@ -53,9 +53,11 @@
 <script setup>
 
 // TODO passing values should be done per Store.. not through props and queryParams. 
+// 1. remove queryParams 
 
 import BaseButton from '@/Components/BaseButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue';
+import SupplierSelection from '@/Stores/supplierSelection';
 import { Inertia } from '@inertiajs/inertia';
 import { usePage } from '@inertiajs/inertia-vue3';
 import { computed } from '@vue/reactivity';
@@ -63,10 +65,6 @@ import { ref } from 'vue';
 
 const props = defineProps(
     {
-        search: {
-            default: ref(''),
-            type: Object,
-        },
         suppliersChosen: {
             default: ref(true),
             type: Object,
@@ -112,14 +110,15 @@ const categoryTags = computed(() => {
     return filteredTags
 })
 
-let searchInput = queryParams.search || props.search.value || ''
+let searchInput = queryParams.search || SupplierSelection.searchTerm || ''
+
 let timeOut = null
 
 if (searchInput) searchFor()
 
 function searchFor() {
     clearTimeout(timeOut)
-    props.search.value = searchInput
+    SupplierSelection.addSearchTerm(searchInput)
 
     let filterCategories = []
     let filterTags = []
@@ -136,7 +135,7 @@ function searchFor() {
         Inertia.get(
             route('suppliers'),
             {
-                search: props.search.value,
+                search: SupplierSelection.searchTerm,
                 filterCategories: filterCategories.join(','),
                 filterTags: filterTags.join(','),
             },
