@@ -16,9 +16,11 @@
                     placeholder="Suche">
             </div>
             <div class="h-full space-x-3">
-                <BaseButton :href="route('suppliers.create')" color="primary">Neu
+                <BaseButton :href="route('suppliers.create')" color="primary">
+                    Neu
                 </BaseButton>
-                <BaseButton :disabled="props.suppliersChosen.value" color="secondary">Zur Anfrage Hinzufügen
+                <BaseButton :disabled="props.suppliersChosen.value" color="secondary">
+                    Zur Anfrage Hinzufügen
                 </BaseButton>
             </div>
         </div>
@@ -49,6 +51,8 @@
 </template>
 
 <script setup>
+
+// TODO passing values should be done per Store.. not through props and queryParams. 
 
 import BaseButton from '@/Components/BaseButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue';
