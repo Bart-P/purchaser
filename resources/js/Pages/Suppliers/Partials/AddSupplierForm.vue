@@ -47,10 +47,9 @@ import AddCategoryForm from '@/Pages/Suppliers/Partials/AddCategoryForm.vue';
 import AddTagForm from '@/Pages/Suppliers/Partials/AddTagForm.vue';
 import TextInput from '@/Components/TextInput.vue';
 import Toast from '@/Stores/toast';
-import { useForm, usePage } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/inertia-vue3';
 import { initDrawers, initDropdowns } from 'flowbite';
 import { onMounted, ref, watch } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
 
 onMounted(() => {
     initDropdowns();
