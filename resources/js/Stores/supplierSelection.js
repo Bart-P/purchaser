@@ -21,7 +21,8 @@ export default reactive(
             this.tagFilter = []
         },
         removeCategoryFilter(catId) {
-            this.categoryFilter = this.tagFilter.filter(id => id !== catId)
+            this.categoryFilter = this.categoryFilter.filter(id => id !== catId)
+            this.tagFilter = []
         },
         addTagFilter(tagId) {
             this.tagFilter.push(tagId)
