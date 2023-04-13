@@ -57,7 +57,7 @@
 
 import BaseButton from '@/Components/BaseButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue';
-import SupplierSelection from '@/Stores/supplierSelection';
+import SupplierSelectionStore from '@/Stores/SupplierSelectionStore';
 import { Inertia } from '@inertiajs/inertia';
 import { usePage } from '@inertiajs/inertia-vue3';
 import { computed } from '@vue/reactivity';

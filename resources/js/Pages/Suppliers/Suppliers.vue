@@ -26,7 +26,7 @@ import { Head } from '@inertiajs/inertia-vue3';
 import SuppliersTable from '@/Pages/Suppliers/Partials/SuppliersTable.vue';
 import { ref } from 'vue';
 import SuppliersTableNav from '@/Pages/Suppliers/Partials/SuppliersTableNav.vue';
-import SupplierSelect from '@/Stores/supplierSelection'
+import SupplierSelectionStore from '@/Stores/SupplierSelectionStore'
 
 const props = defineProps(
     {
@@ -47,7 +47,7 @@ function toggleCheckCategory(category) {
     if (filterByCategories.value.some((cat => cat['id'] === category.id))) {
         filterByCategories.value = filterByCategories.value.filter((cat) => cat['id'] !== category.id)
     } else {
-        console.log(SupplierSelect.addCategoryFilter(category.id))
+        console.log(SupplierSelectionStore.addCategoryFilter(category.id))
         filterByCategories.value = [updateCategoryWithTags(category)]
     }
 }
