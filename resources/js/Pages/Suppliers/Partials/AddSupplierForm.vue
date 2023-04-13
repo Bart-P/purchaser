@@ -46,7 +46,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import AddCategoryForm from '@/Pages/Suppliers/Partials/AddCategoryForm.vue';
 import AddTagForm from '@/Pages/Suppliers/Partials/AddTagForm.vue';
 import TextInput from '@/Components/TextInput.vue';
-import Toast from '@/Stores/toast';
+import ToastStore from '@/Stores/ToastStore';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { initDrawers, initDropdowns } from 'flowbite';
 import { onMounted, ref, watch } from 'vue';
@@ -154,7 +154,7 @@ function toggleCheckTag(tag) {
 
 function submitSupplier() {
     if (!checkedCategories.value.length) {
-        Toast.add(
+        ToastStore.add(
             {
                 'message': 'Bitte mindestens eine Kategorie auswählen',
                 'type': 'warning',

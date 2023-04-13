@@ -81,7 +81,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { CountryCodes } from '@/Localisation/CountryCodes';
 import SelectCountryField from '@/Pages/Address/Partials/SelectCountryField.vue';
-import toast from '@/Stores/toast';
+import ToastStore from '@/Stores/ToastStore';
 import { Inertia } from '@inertiajs/inertia';
 import { useForm } from '@inertiajs/inertia-vue3';
 
@@ -116,7 +116,7 @@ const addressForm = useForm(
 function addAddress() {
 
     if (!addressForm.type || !addressForm.name1 || !addressForm.street || !addressForm.street_nr || !addressForm.city_code || !addressForm.city || !addressForm.country) {
-        toast.add({
+        ToastStore.add({
             type: 'warning',
             message: 'Bitte alle mit * gekennzeichneten Felder befüllen!',
         })
@@ -124,7 +124,7 @@ function addAddress() {
     }
 
     if (addressForm.country && !CountryCodes.de.hasOwnProperty(addressForm.country)) {
-        toast.add({
+        ToastStore.add({
             type: 'warning',
             message: 'Länderkod nicht erkannt!',
         })
@@ -139,7 +139,7 @@ function addAddress() {
 
     props.addresses.push(addressForm.data())
     addressForm.reset()
-    toast.add({
+    ToastStore.add({
         type: 'info',
         message: 'Addresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.',
     })

@@ -100,7 +100,7 @@
 import BaseButton from '@/Components/BaseButton.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
-import toast from '@/Stores/toast';
+import ToastStore from '@/Stores/ToastStore';
 import { Inertia } from '@inertiajs/inertia';
 import { useForm } from '@inertiajs/inertia-vue3';
 
@@ -131,7 +131,7 @@ const personForm = useForm(
 function addPerson() {
 
     if (!personForm.type || !personForm.gender || !personForm.first_name || !personForm.last_name) {
-        toast.add({
+        ToastStore.add({
             type: 'warning',
             message: 'Bitte alle mit "*" gekennzeichneten Felder befüllen!',
         })
@@ -142,7 +142,7 @@ function addPerson() {
         }
 
         personForm.reset()
-        toast.add({
+        ToastStore.add({
             type: 'info',
             message: 'Person Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.',
         })
