@@ -47,7 +47,6 @@ function toggleCheckCategory(category) {
     if (filterByCategories.value.some((cat => cat['id'] === category.id))) {
         filterByCategories.value = filterByCategories.value.filter((cat) => cat['id'] !== category.id)
     } else {
-        console.log(SupplierSelectionStore.addCategoryFilter(category.id))
         filterByCategories.value = [updateCategoryWithTags(category)]
     }
 }

@@ -15,19 +15,25 @@ class SuppliersController extends Controller
     {
         return Inertia::render('Suppliers/Suppliers', [
             'suppliers' => Supplier
-                ::when($request->search, function ($query, $search) {
-                    $query->where('name', 'LIKE', '%' . $search . '%')
-                        ->orWhere('email', 'LIKE', '%' . $search . '%');
+                ::where(function ($query) use ($request) {
+                    if ($request->filterCategories) {
+                        return $query->whereHas('categories', function ($query) use ($request) {
+                            $query->whereIn('id',  explode(',', $request->filterCategories));
+                        }, '=', count(explode(',', $request->filterCategories)));
+                    }
                 })
-                ->when($request->filterCategories, function ($query, $filterCategories) {
-                    $query->whereHas('categories', function ($query) use ($filterCategories) {
-                        $query->whereIn('id',  explode(',', $filterCategories));
-                    }, '=', count(explode(',', $filterCategories)));
+                ->where(function ($query) use ($request) {
+                    if ($request->search) {
+                        return $query->where('name', 'LIKE', '%' . $request->search . '%')
+                            ->orWhere('email', 'LIKE', '%' . $request->search . '%');
+                    }
                 })
-                ->when($request->filterTags, function ($query, $filterTags) {
-                    $query->whereHas('tags', function ($query) use ($filterTags) {
-                        $query->whereIn('id',  explode(',', $filterTags));
-                    }, '=', count(explode(',', $filterTags)));
+                ->where(function ($query) use ($request) {
+                    if ($request->filterTags) {
+                        return $query->whereHas('tags', function ($query) use ($request) {
+                            $query->whereIn('id',  explode(',', $request->filterTags));
+                        }, '=', count(explode(',', $request->filterTags)));
+                    }
                 })
                 ->orderBy('updated_at', 'DESC')
                 ->paginate(15)
