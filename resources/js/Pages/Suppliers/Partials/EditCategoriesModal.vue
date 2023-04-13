@@ -92,7 +92,11 @@ function toggleEditCategory(category) {
     refreshCategoryTags()
 }
 
+// TODO Categories now already have their tags from the backend - so this should work differently? 
+// TODO 2 everywhere where category tags are assignt to categories on the frontend should be addaped. 
+
 function refreshCategoryTags() {
+    console.log(selectedCategory.value)
     categoryTags.value = props.tags.filter(tag => {
         return selectedCategory.value.id === tag.category_id
     })

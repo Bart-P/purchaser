@@ -13,6 +13,16 @@ class SuppliersController extends Controller
 {
     function index(Request $request)
     {
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        $categories->map(function ($cat) use ($tags) {
+            $cat->tags = $tags->filter(function ($tag) use ($cat) {
+                return $cat->id == $tag->category_id;
+            });
+            return $cat;
+        });
+
         return Inertia::render('Suppliers/Suppliers', [
             'suppliers' => Supplier
                 ::where(function ($query) use ($request) {
@@ -38,8 +48,8 @@ class SuppliersController extends Controller
                 ->orderBy('updated_at', 'DESC')
                 ->paginate(15)
                 ->withQueryString(),
-            'categories' => Category::all(),
-            'tags' => Tag::all(),
+            'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
