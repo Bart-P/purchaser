@@ -110,7 +110,7 @@ const categoryTags = computed(() => {
     return filteredTags
 })
 
-let searchInput = queryParams.search || SupplierSelection.searchTerm || ''
+let searchInput = queryParams.search || SupplierSelectionStore.searchTerm || ''
 
 let timeOut = null
 
@@ -118,7 +118,7 @@ if (searchInput) searchFor()
 
 function searchFor() {
     clearTimeout(timeOut)
-    SupplierSelection.addSearchTerm(searchInput)
+    SupplierSelectionStore.addSearchTerm(searchInput)
 
     let filterCategories = []
     let filterTags = []
@@ -135,7 +135,7 @@ function searchFor() {
         Inertia.get(
             route('suppliers'),
             {
-                search: SupplierSelection.searchTerm,
+                search: SupplierSelectionStore.searchTerm,
                 filterCategories: filterCategories.join(','),
                 filterTags: filterTags.join(','),
             },
