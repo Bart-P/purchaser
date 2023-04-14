@@ -24,8 +24,11 @@ export default reactive(
             this.categoryFilter = this.categoryFilter.filter(id => id !== catId)
             this.tagFilter = []
         },
-        addTagFilter(tagId) {
-            this.tagFilter.push(tagId)
+        toggleTagFilter(tagId) {
+            const tagIndex = this.tagFilter.findIndex((tId) => tId === tagId)
+            tagIndex > -1
+                ? this.removeTagFilter(tagId)
+                : this.tagFilter.push(tagId)
         },
         removeTagFilter(tagId) {
             this.tagFilter = this.tagFilter.filter(id => id !== tagId)
