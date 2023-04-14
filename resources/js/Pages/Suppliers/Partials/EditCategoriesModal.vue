@@ -68,17 +68,15 @@ const props = defineProps({
     }
 })
 
-let categoryTags = ref([])
-let selectedCategory = ref({})
-let selectedTag = ref({})
+const selectedCategory = ref({})
+const selectedTag = ref({})
 
 watch(
     () => props.tags,
-    () => refreshCategoryTags()
+    () => selectedCategory.value = props.categories.find(cat => cat.id === selectedCategory.value.id)
 )
 
 function resetSelectableValues() {
-    categoryTags.value = []
     selectedCategory.value = {}
     selectedTag.value = {}
 }
@@ -90,18 +88,7 @@ function toggleEditCategory(category) {
     }
 
     selectedTag.value = {}
-    selectedCategory.value = { ...category }
-    refreshCategoryTags()
-}
-
-// TODO Categories now already have their tags from the backend - so this should work differently? 
-// TODO 2 everywhere where category tags are assignt to categories on the frontend should be addaped. 
-
-function refreshCategoryTags() {
-    console.log(selectedCategory.value)
-    categoryTags.value = props.tags.filter(tag => {
-        return selectedCategory.value.id === tag.category_id
-    })
+    selectedCategory.value = category
 }
 
 function toggleEditTag(tag) {
@@ -110,7 +97,7 @@ function toggleEditTag(tag) {
         return
     }
 
-    selectedTag.value = { ...tag }
+    selectedTag.value = tag
 }
 
 </script>
