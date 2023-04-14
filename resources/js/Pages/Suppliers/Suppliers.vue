@@ -44,6 +44,9 @@ const filterByCategories = ref([]);
 const filterByTags = ref([]);
 
 function toggleCheckCategory(category) {
+
+    // SupplierSelectionStore.addCategoryFilter(category.id)
+    // console.log(SupplierSelectionStore.categoryFilter)
     filterByTags.value = []
     if (filterByCategories.value.some((cat => cat['id'] === category.id))) {
         filterByCategories.value = filterByCategories.value.filter((cat) => cat['id'] !== category.id)

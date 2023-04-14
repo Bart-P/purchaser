@@ -97,15 +97,13 @@ if (props.categories && queryParams.filterCategories) {
     }
 }
 
+// TODO - mess here needs to be moved to Suppliers view, TableNav should only show the values, nothing else
 const categoryTags = computed(() => {
     let filteredTags = []
-    props.filterByCategories.map(
-        cat => {
-            return cat.tags.map(
-                tag => filteredTags.push(tag)
-            )
-        })
-
+    if (Object.keys(props.filterByCategories).length) {
+        console.log(props.filterByCategories[0])
+        filteredTags = props.categories.find((cat) => cat.id === Object.entries(filterByCategories)[0].id)
+    }
     return filteredTags
 })
 
