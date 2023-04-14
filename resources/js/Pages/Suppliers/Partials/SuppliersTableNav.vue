@@ -57,7 +57,6 @@
 
 import BaseButton from '@/Components/BaseButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue';
-import SupplierSelectionStore from '@/Stores/SupplierSelectionStore';
 import { Inertia } from '@inertiajs/inertia';
 import { usePage } from '@inertiajs/inertia-vue3';
 import { computed } from '@vue/reactivity';
@@ -84,7 +83,7 @@ const props = defineProps(
         }
     })
 
-const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag', 'filterByCategories', 'filterByTags']);
+const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag']);
 
 const queryParams = usePage().props.value.ziggy.query;
 
@@ -110,7 +109,7 @@ const categoryTags = computed(() => {
     return filteredTags
 })
 
-let searchInput = queryParams.search || SupplierSelectionStore.searchTerm || ''
+let searchInput = queryParams.search || ''
 
 let timeOut = null
 
@@ -118,7 +117,6 @@ if (searchInput) searchFor()
 
 function searchFor() {
     clearTimeout(timeOut)
-    SupplierSelectionStore.addSearchTerm(searchInput)
 
     let filterCategories = []
     let filterTags = []
@@ -135,7 +133,7 @@ function searchFor() {
         Inertia.get(
             route('suppliers'),
             {
-                search: SupplierSelectionStore.searchTerm,
+                search: searchInput,
                 filterCategories: filterCategories.join(','),
                 filterTags: filterTags.join(','),
             },
@@ -151,6 +149,7 @@ function toggleCheckCategory(cat) {
     emits('toggleCheckCategory', cat)
     searchFor()
 }
+
 
 function toggleCheckTag(tag) {
     emits('toggleCheckTag', tag)
