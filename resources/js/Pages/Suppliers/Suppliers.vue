@@ -37,7 +37,8 @@ const props = defineProps(
         },
         categories: Object,
         tags: Object,
-    })
+    }
+)
 
 const filterByCategories = ref([]);
 const filterByTags = ref([]);

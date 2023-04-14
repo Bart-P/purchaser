@@ -84,7 +84,7 @@ const props = defineProps(
         }
     })
 
-const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag']);
+const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag', 'filterByCategories', 'filterByTags']);
 
 const queryParams = usePage().props.value.ziggy.query;
 
