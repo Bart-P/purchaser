@@ -48,30 +48,17 @@ function toggleCheckCategory(category) {
     if (filterByCategories.value.some((cat => cat['id'] === category.id))) {
         filterByCategories.value = filterByCategories.value.filter((cat) => cat['id'] !== category.id)
     } else {
-        filterByCategories.value = [updateCategoryWithTags(category)]
+        filterByCategories.value = [category]
     }
 }
 
 function toggleCheckTag(tag) {
+    SupplierSelectionStore.toggleTagFilter(tag.id)
     if (filterByTags.value.some((t => t['id'] === tag.id))) {
         filterByTags.value = filterByTags.value.filter((t) => t['id'] !== tag.id)
     } else {
         filterByTags.value = [...filterByTags.value, tag]
     }
-}
-
-function updateCategoryWithTags(category) {
-    category = {
-        ...category,
-        tags: getTagsForCategory(category.id),
-    }
-    return category
-}
-
-function getTagsForCategory(id) {
-    return [...props.tags].filter((tag) => {
-        return id === tag.category_id
-    })
 }
 
 </script>
