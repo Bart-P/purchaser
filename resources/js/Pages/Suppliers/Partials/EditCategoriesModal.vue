@@ -25,20 +25,22 @@
 
                 <ul class="flex flex-wrap gap-2">
                     <TransitionGroup>
-                        <li class="tag bg-gray-500 cursor-pointer" v-for="tag in categoryTags" :key="tag.name + tag.id"
-                            @click="toggleEditTag(tag)"
+                        <li class="tag bg-gray-500 cursor-pointer" v-for="tag in selectedCategory.tags"
+                            :key="tag.name + tag.id" @click="toggleEditTag(tag)"
                             :style="tag.id === selectedTag.id ? { backgroundColor: tag.color } : {}">
                             {{ tag.name }}
                         </li>
                     </TransitionGroup>
 
                     <Transition>
-                        <li v-show="!categoryTags.length && !selectedCategory.name" class="text-gray-600">
+                        <li v-show="!selectedCategory.tags && !selectedCategory.name" class="text-gray-600">
                             Bitte eine Kategorie auswählen und Tags anzuzeigen!
                         </li>
                     </Transition>
                     <Transition>
-                        <li v-show="!categoryTags.length && selectedCategory.name" class="text-gray-600">
+                        <li v-if="selectedCategory.tags"
+                            v-show="!Object.keys(selectedCategory.tags).length && selectedCategory.name"
+                            class="text-gray-600">
                             Diese Kategorie hat noch keine Tags!
                         </li>
                     </Transition>

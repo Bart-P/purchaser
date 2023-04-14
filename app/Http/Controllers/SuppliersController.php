@@ -13,15 +13,8 @@ class SuppliersController extends Controller
 {
     function index(Request $request)
     {
-        $categories = Category::all();
         $tags = Tag::all();
-
-        $categories->map(function ($cat) use ($tags) {
-            $cat->tags = $tags->filter(function ($tag) use ($cat) {
-                return $cat->id == $tag->category_id;
-            });
-            return $cat;
-        });
+        $categories = $this->updateCategoriesWithTags(Category::all(), $tags);
 
         return Inertia::render('Suppliers/Suppliers', [
             'suppliers' => Supplier
@@ -53,10 +46,20 @@ class SuppliersController extends Controller
         ]);
     }
 
+    function updateCategoriesWithTags($categories, $tags)
+    {
+        return $categories->map(function ($cat) use ($tags) {
+            $cat->tags = $tags->filter(function ($tag) use ($cat) {
+                return $cat->id == $tag->category_id;
+            });
+            return $cat;
+        });
+    }
+
     function create()
     {
-        $categories = Category::all();
         $tags = Tag::all();
+        $categories = $this->updateCategoriesWithTags(Category::all(), $tags);
         $this->updateTagsWithColors($tags, $categories);
 
         return Inertia::render('Suppliers/SuppliersCreate', [
@@ -70,10 +73,10 @@ class SuppliersController extends Controller
         $supplier = Supplier::find($id);
         $addresses = [];
         $persons = [];
-        $categories = Category::all();
-        $supplierCategories = [];
         $tags = Tag::all();
         $supplierTags = [];
+        $categories = $this->updateCategoriesWithTags(Category::all(), $tags);
+        $supplierCategories = [];
 
         $this->updateTagsWithColors($tags, $categories);
 
