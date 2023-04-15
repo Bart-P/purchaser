@@ -76,10 +76,6 @@ const props = defineProps(
             default: {},
             type: Object,
         },
-        // filterByCategories: {
-        //     type: Object,
-        //     default: {},
-        // },
         tags: Object,
         // filterByTags: {
         //     type: Object,
@@ -90,16 +86,6 @@ const props = defineProps(
 const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag', 'searchForTerm']);
 
 // const queryParams = usePage().props.value.ziggy.query;
-//
-// // emit toggle if any filterCategories are in queryParams or props.filterByCategories to reselect them
-// if (props.categories && queryParams.filterCategories) {
-//     for (let i = 0; i < props.categories.length; i++) {
-//         const filterCategoryIdList = queryParams.filterCategories.split(',')
-//         if (filterCategoryIdList.filter(id => id == props.categories[i].id).length) {
-//             emits('toggleCheckCategory', props.categories[i])
-//         }
-//     }
-// }
 
 let searchInput = props.searchTerm
 
