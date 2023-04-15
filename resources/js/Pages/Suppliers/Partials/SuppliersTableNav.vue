@@ -64,89 +64,64 @@ const props = defineProps(
             default: ref(true),
             type: Object,
         },
+        searchTerm: {
+            default: '',
+            type: String,
+        },
         categories: {
             type: Object,
             default: {},
         },
-        filterByCategories: {
-            type: Object,
+        selectedCategory: {
             default: {},
+            type: Object,
         },
+        // filterByCategories: {
+        //     type: Object,
+        //     default: {},
+        // },
         tags: Object,
-        filterByTags: {
-            type: Object,
-            default: {},
-        }
+        // filterByTags: {
+        //     type: Object,
+        //     default: {},
+        // }
     })
 
-const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag']);
+const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag', 'searchForTerm']);
 
-const queryParams = usePage().props.value.ziggy.query;
+// const queryParams = usePage().props.value.ziggy.query;
+//
+// // emit toggle if any filterCategories are in queryParams or props.filterByCategories to reselect them
+// if (props.categories && queryParams.filterCategories) {
+//     for (let i = 0; i < props.categories.length; i++) {
+//         const filterCategoryIdList = queryParams.filterCategories.split(',')
+//         if (filterCategoryIdList.filter(id => id == props.categories[i].id).length) {
+//             emits('toggleCheckCategory', props.categories[i])
+//         }
+//     }
+// }
 
-// emit toggle if any filterCategories are in queryParams or props.filterByCategories to reselect them
-if (props.categories && queryParams.filterCategories) {
-    for (let i = 0; i < props.categories.length; i++) {
-        const filterCategoryIdList = queryParams.filterCategories.split(',')
-        if (filterCategoryIdList.filter(id => id == props.categories[i].id).length) {
-            emits('toggleCheckCategory', props.categories[i])
-        }
+let searchInput = props.searchTerm
+
+let timeout = null
+const timeoutTime = 500
+function clearCurrentTimeout() {
+    if (timeout) {
+        clearTimeout(timeout)
     }
-}
-
-// TODO - mess here needs to be moved to Suppliers view, TableNav should only show the values, nothing else
-const categoryTags = computed(() => {
-    let filteredTags = []
-    if (Object.keys(props.filterByCategories).length) {
-        console.log(props.filterByCategories[0])
-        filteredTags = props.categories.find((cat) => cat.id === Object.entries(filterByCategories)[0].id)
-    }
-    return filteredTags
-})
-
-let searchInput = queryParams.search || ''
-
-let timeOut = null
-
-if (searchInput) searchFor()
-
-function searchFor() {
-    clearTimeout(timeOut)
-
-    let filterCategories = []
-    let filterTags = []
-
-    timeOut = setTimeout(() => {
-        if (props.filterByCategories.length) {
-            filterCategories = props.filterByCategories.map((cat) => cat.id)
-        }
-
-        if (props.filterByTags.length) {
-            filterTags = props.filterByTags.map((tag) => tag.id)
-        }
-
-        Inertia.get(
-            route('suppliers'),
-            {
-                search: searchInput,
-                filterCategories: filterCategories.join(','),
-                filterTags: filterTags.join(','),
-            },
-            {
-                preserveState: true,
-                replace: true,
-            },
-        )
-    }, 500)
 }
 
 function toggleCheckCategory(cat) {
     emits('toggleCheckCategory', cat)
-    searchFor()
 }
 
-
 function toggleCheckTag(tag) {
-    emits('toggleCheckTag', tag)
-    searchFor()
+    clearCurrentTimeout()
+    timeout = setTimeout(() => emits('toggleCheckTag', tag), timeoutTime)
+}
+
+function searchForTerm() {
+    clearCurrentTimeout()
+    timeout = setTimeout(() => emits('searchForTerm', searchInput), timeoutTime)
 }
 </script>

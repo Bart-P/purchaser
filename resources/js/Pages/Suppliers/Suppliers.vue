@@ -9,8 +9,8 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-4">
                         <SuppliersTableNav @toggle-check-category="toggleCheckCategory" @toggle-check-tag="toggleCheckTag"
-                            :suppliers="suppliers" :categories="categories" :filter-by-categories="filterByCategories"
-                            :filter-by-tags="filterByTags" :tags="tags" />
+                            @search-for-term="updateSearchTerm" :search-term="search" :suppliers="suppliers"
+                            :categories="categories" :selected-category="filterByCategories" :tags="tags" />
 
                         <SuppliersTable :suppliers="suppliers" />
                     </div>
@@ -27,32 +27,32 @@ import SuppliersTable from '@/Pages/Suppliers/Partials/SuppliersTable.vue';
 import { ref } from 'vue';
 import SuppliersTableNav from '@/Pages/Suppliers/Partials/SuppliersTableNav.vue';
 import SupplierSelectionStore from '@/Stores/SupplierSelectionStore'
+import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps(
     {
         suppliers: Object,
         search: {
-            type: Object,
-            default: ref(''),
+            type: String,
+            default: '',
         },
         categories: Object,
         tags: Object,
     }
 )
 
-const filterByCategories = ref([]);
+const filterByCategories = ref();
 const filterByTags = ref([]);
 
-function toggleCheckCategory(category) {
+// TODO page should also reload data if other filter are active - cant it be handeled in the backend? Seems that it should be there. 
+if (SupplierSelectionStore.categoryFilter.length) {
+    applySearchAndFilter()
+}
 
-    // SupplierSelectionStore.addCategoryFilter(category.id)
-    // console.log(SupplierSelectionStore.categoryFilter)
-    filterByTags.value = []
-    if (filterByCategories.value.some((cat => cat['id'] === category.id))) {
-        filterByCategories.value = filterByCategories.value.filter((cat) => cat['id'] !== category.id)
-    } else {
-        filterByCategories.value = [category]
-    }
+function toggleCheckCategory(category) {
+    SupplierSelectionStore.addCategoryFilter(category.id)
+    filterByCategories.value = { category }
+    applySearchAndFilter()
 }
 
 function toggleCheckTag(tag) {
@@ -62,6 +62,31 @@ function toggleCheckTag(tag) {
     } else {
         filterByTags.value = [...filterByTags.value, tag]
     }
+}
+
+function updateSearchTerm(searchTerm) {
+    SupplierSelectionStore.addSearchTerm(searchTerm)
+    applySearchAndFilter()
+}
+
+function applySearchAndFilter() {
+    // let filterTags = []
+    // if (props.filterByTags.length) {
+    //     filterTags = props.filterByTags.map((tag) => tag.id)
+    // }
+
+    Inertia.get(
+        route('suppliers'),
+        {
+            search: SupplierSelectionStore.searchTerm,
+            filterCategories: SupplierSelectionStore.categoryFilter.join(','),
+            // filterTags: filterTags.join(','),
+        },
+        {
+            preserveState: true,
+            replace: true,
+        },
+    )
 }
 
 </script>
