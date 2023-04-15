@@ -55,7 +55,7 @@ const props = defineProps(
             type: Object,
         },
         checkedItems: {
-            default: {},
+            default: null,
             type: Object,
         },
         color: {
@@ -78,7 +78,6 @@ function itemIsChecked(itemId) {
     if (!props.checkedItems) {
         return false
     }
-
     return Boolean(Object.values(props.checkedItems)
         .some(item => item.id === itemId))
 }
