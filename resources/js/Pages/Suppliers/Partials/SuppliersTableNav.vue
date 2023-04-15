@@ -11,7 +11,7 @@
                             clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <input type="text" id="table-search" v-model="searchInput" @keyup="searchFor"
+                <input type="text" id="table-search" v-model="searchInput" @keyup="searchForTerm"
                     class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Suche">
             </div>
@@ -26,40 +26,36 @@
         </div>
         <div class="space-x-3">
             <SelectItemDropdown id="categoryDropdown" @toggle-check-item="toggleCheckCategory" color="light"
-                :items="categories" :checked-items="filterByCategories">
+                :items="categories" :checked-items="selectedCategory">
                 Kategorie filter
                 <transition>
-                    <div v-show="filterByCategories.length"
-                        class="inline-flex items-center justify-center ml-2 text-sm bg-purchaser-secondary w-6 h-6 rounded-full text-white font-bold -right-4">
-                        {{ filterByCategories.length }}
-                    </div>
-                </transition>
-            </SelectItemDropdown>
-
-            <SelectItemDropdown id="tagDropdown" @toggle-check-item="toggleCheckTag" color="light" :items="categoryTags"
-                :checked-items="filterByTags">
-                Tag filter
-                <transition>
-                    <div v-show="filterByTags.length"
-                        class="inline-flex items-center justify-center ml-2 text-sm bg-purchaser-secondary w-6 h-6 rounded-full text-white font-bold -right-4">
-                        {{ filterByTags.length }}
+                    <div v-show="SupplierSelectionStore.categoryFilter.length"
+                        class="inline-flex items-center align-middle justify-center ml-2 text-sm bg-purchaser-secondary w-6 h-6 rounded-full text-white font-bold -right-4">
+                        {{ SupplierSelectionStore.categoryFilter.length }}
                     </div>
                 </transition>
             </SelectItemDropdown>
         </div>
+
+        <!--     <SelectItemDropdown id="tagDropdown" @toggle-check-item="toggleCheckTag" color="light" :items="categoryTags" -->
+        <!--         :checked-items="filterByTags"> -->
+        <!--         Tag filter -->
+        <!--         <transition> -->
+        <!--             <div v-show="filterByTags.length" -->
+        <!--                 class="inline-flex items-center justify-center ml-2 text-sm bg-purchaser-secondary w-6 h-6 rounded-full text-white font-bold -right-4"> -->
+        <!--                 {{ filterByTags.length }} -->
+        <!--             </div> -->
+        <!--         </transition> -->
+        <!--     </SelectItemDropdown> -->
+        <!-- </div> -->
     </div>
 </template>
 
 <script setup>
 
-// TODO passing values should be done per Store.. not through props and queryParams. 
-// 1. remove queryParams 
-
 import BaseButton from '@/Components/BaseButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue';
-import { Inertia } from '@inertiajs/inertia';
-import { usePage } from '@inertiajs/inertia-vue3';
-import { computed } from '@vue/reactivity';
+import SupplierSelectionStore from '@/Stores/SupplierSelectionStore';
 import { ref } from 'vue';
 
 const props = defineProps(
