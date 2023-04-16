@@ -42,14 +42,16 @@ const props = defineProps(
     }
 )
 
-const filterByTags = ref([])
+const pageQuery = usePage().props.value.query
 const searchTerm = SupplierSelectionStore.searchTerm
 const filterByCategory = computed(() => {
     return props.categories.filter((cat) => cat.id === SupplierSelectionStore.categoryFilter[0])
 })
 
-const pageQuery = usePage().props.value.query
-if (!pageQuery.page && (SupplierSelectionStore.searchTerm || SupplierSelectionStore.categoryFilter)) {
+// TODO filterByTags has to work same as filterByCategory 
+const filterByTags = SupplierSelectionStore.tagFilter
+
+if (!pageQuery.page && (searchTerm || filterByCategory)) {
     applySearchAndFilter()
 }
 
