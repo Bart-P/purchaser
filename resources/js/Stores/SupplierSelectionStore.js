@@ -16,9 +16,12 @@ export default reactive(
             this.categoryFilter = []
             this.tagFilter = []
         },
-        addCategoryFilter(catId) {
-            this.categoryFilter = [catId]
+        toggleCategoryFilter(catId) {
             this.tagFilter = []
+            const CatIndex = this.categoryFilter.findIndex((categoryId) => categoryId === catId)
+            CatIndex > -1
+                ? this.categoryFilter = []
+                : this.categoryFilter = [catId]
         },
         removeCategoryFilter(catId) {
             this.categoryFilter = this.categoryFilter.filter(id => id !== catId)

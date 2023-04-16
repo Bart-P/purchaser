@@ -50,8 +50,11 @@ if (SupplierSelectionStore.categoryFilter.length) {
 }
 
 function toggleCheckCategory(category) {
-    SupplierSelectionStore.addCategoryFilter(category.id)
-    filterByCategories.value = { category }
+    SupplierSelectionStore.toggleCategoryFilter(category.id)
+    filterByCategory.value = []
+    if (SupplierSelectionStore.categoryFilter.length) {
+        filterByCategory.value = { category }
+    }
     applySearchAndFilter()
 }
 
@@ -74,6 +77,10 @@ function applySearchAndFilter() {
     // if (props.filterByTags.length) {
     //     filterTags = props.filterByTags.map((tag) => tag.id)
     // }
+
+    if (SupplierSelectionStore.categoryFilter.length) {
+        filterByCategory.value = props.categories.filter(cat => cat.id === SupplierSelectionStore.categoryFilter[0])
+    }
 
     Inertia.get(
         route('suppliers'),
