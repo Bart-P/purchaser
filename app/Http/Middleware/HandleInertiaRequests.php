@@ -40,6 +40,7 @@ class HandleInertiaRequests extends Middleware
                     'query' => $request->query(),
                 ]);
             },
+            'query' => $request->query(),
             'notification' => [
                 'message' => fn () => session('notification.message'),
                 'type'    => fn () => session('notification.type'),
@@ -47,4 +48,3 @@ class HandleInertiaRequests extends Middleware
         ]);
     }
 }
-
