@@ -42,22 +42,19 @@ const props = defineProps(
     }
 )
 
-const filterByCategory = ref([])
 const filterByTags = ref([])
 const searchTerm = SupplierSelectionStore.searchTerm
+const filterByCategory = computed(() => {
+    return props.categories.filter((cat) => cat.id === SupplierSelectionStore.categoryFilter[0])
+})
 
-// TODO page should also reload data if other filter are active - cant it be handeled in the backend? Seems that it should be there. 
-if (SupplierSelectionStore.categoryFilter.length || searchTerm != '') {
-    filterByCategory.value = props.categories.filter(cat => cat.id === SupplierSelectionStore.categoryFilter[0])
+const pageQuery = usePage().props.value.query
+if (!pageQuery.page && (SupplierSelectionStore.searchTerm || SupplierSelectionStore.categoryFilter)) {
     applySearchAndFilter()
 }
 
 function toggleCheckCategory(category) {
     SupplierSelectionStore.toggleCategoryFilter(category.id)
-    filterByCategory.value = []
-    if (SupplierSelectionStore.categoryFilter.length) {
-        filterByCategory.value = { category }
-    }
     applySearchAndFilter()
 }
 
