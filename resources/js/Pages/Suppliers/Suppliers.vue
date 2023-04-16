@@ -10,7 +10,8 @@
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-4">
                         <SuppliersTableNav @toggle-check-category="toggleCheckCategory" @toggle-check-tag="toggleCheckTag"
                             @search-for-term="updateSearchTerm" :search-term="searchTerm" :suppliers="suppliers"
-                            :categories="categories" :selected-category="filterByCategory" :tags="tags" />
+                            :categories="categories" :selected-category="filterByCategory" :tags="tags"
+                            :filter-by-tags="filterByTags" />
 
                         <SuppliersTable :suppliers="suppliers" />
                     </div>
@@ -24,7 +25,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, usePage } from '@inertiajs/inertia-vue3';
 import SuppliersTable from '@/Pages/Suppliers/Partials/SuppliersTable.vue';
-import { ref } from 'vue';
 import SuppliersTableNav from '@/Pages/Suppliers/Partials/SuppliersTableNav.vue';
 import SupplierSelectionStore from '@/Stores/SupplierSelectionStore'
 import { Inertia } from '@inertiajs/inertia';
@@ -60,11 +60,6 @@ function toggleCheckCategory(category) {
 
 function toggleCheckTag(tag) {
     SupplierSelectionStore.toggleTagFilter(tag.id)
-    if (filterByTags.value.some((t => t['id'] === tag.id))) {
-        filterByTags.value = filterByTags.value.filter((t) => t['id'] !== tag.id)
-    } else {
-        filterByTags.value = [...filterByTags.value, tag]
-    }
 }
 
 function updateSearchTerm(searchTerm) {

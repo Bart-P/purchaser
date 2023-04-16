@@ -29,25 +29,24 @@
                 :items="categories" :checked-items="selectedCategory">
                 Kategorie filter
                 <transition>
-                    <div v-show="SupplierSelectionStore.categoryFilter.length"
+                    <div v-show="selectedCategory.length"
                         class="inline-flex items-center align-middle justify-center ml-2 text-sm bg-purchaser-secondary w-6 h-6 rounded-full text-white font-bold -right-4">
-                        {{ SupplierSelectionStore.categoryFilter.length }}
+                        {{ selectedCategory.length }}
+                    </div>
+                </transition>
+            </SelectItemDropdown>
+
+            <SelectItemDropdown id="tagDropdown" @toggle-check-item="toggleCheckTag" color="light" :items="categoryTags"
+                :checked-items="filterByTags">
+                Tag filter
+                <transition>
+                    <div v-show="filterByTags.length"
+                        class="inline-flex items-center justify-center ml-2 text-sm bg-purchaser-secondary w-6 h-6 rounded-full text-white font-bold -right-4">
+                        {{ filterByTags.length }}
                     </div>
                 </transition>
             </SelectItemDropdown>
         </div>
-
-        <!--     <SelectItemDropdown id="tagDropdown" @toggle-check-item="toggleCheckTag" color="light" :items="categoryTags" -->
-        <!--         :checked-items="filterByTags"> -->
-        <!--         Tag filter -->
-        <!--         <transition> -->
-        <!--             <div v-show="filterByTags.length" -->
-        <!--                 class="inline-flex items-center justify-center ml-2 text-sm bg-purchaser-secondary w-6 h-6 rounded-full text-white font-bold -right-4"> -->
-        <!--                 {{ filterByTags.length }} -->
-        <!--             </div> -->
-        <!--         </transition> -->
-        <!--     </SelectItemDropdown> -->
-        <!-- </div> -->
     </div>
 </template>
 

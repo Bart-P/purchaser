@@ -64,8 +64,6 @@ const props = defineProps(
         },
     })
 
-
-
 const emit = defineEmits(['toggleCheckItem'])
 
 let filterTerm = ref('')
