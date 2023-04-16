@@ -9,7 +9,7 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-4">
                         <SuppliersTableNav @toggle-check-category="toggleCheckCategory" @toggle-check-tag="toggleCheckTag"
-                            @search-for-term="updateSearchTerm" :search-term="search" :suppliers="suppliers"
+                            @search-for-term="updateSearchTerm" :search-term="searchTerm" :suppliers="suppliers"
                             :categories="categories" :selected-category="filterByCategory" :tags="tags" />
 
                         <SuppliersTable :suppliers="suppliers" />
@@ -41,11 +41,13 @@ const props = defineProps(
     }
 )
 
-const filterByCategory = ref([]);
-const filterByTags = ref([]);
+const filterByCategory = ref([])
+const filterByTags = ref([])
+const searchTerm = SupplierSelectionStore.searchTerm
 
 // TODO page should also reload data if other filter are active - cant it be handeled in the backend? Seems that it should be there. 
-if (SupplierSelectionStore.categoryFilter.length) {
+if (SupplierSelectionStore.categoryFilter.length || searchTerm != '') {
+    filterByCategory.value = props.categories.filter(cat => cat.id === SupplierSelectionStore.categoryFilter[0])
     applySearchAndFilter()
 }
 
@@ -77,10 +79,6 @@ function applySearchAndFilter() {
     // if (props.filterByTags.length) {
     //     filterTags = props.filterByTags.map((tag) => tag.id)
     // }
-
-    if (SupplierSelectionStore.categoryFilter.length) {
-        filterByCategory.value = props.categories.filter(cat => cat.id === SupplierSelectionStore.categoryFilter[0])
-    }
 
     Inertia.get(
         route('suppliers'),
