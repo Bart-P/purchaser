@@ -10,7 +10,7 @@
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-4">
                         <SuppliersTableNav @toggle-check-category="toggleCheckCategory" @toggle-check-tag="toggleCheckTag"
                             @search-for-term="updateSearchTerm" :search-term="search" :suppliers="suppliers"
-                            :categories="categories" :selected-category="filterByCategories" :tags="tags" />
+                            :categories="categories" :selected-category="filterByCategory" :tags="tags" />
 
                         <SuppliersTable :suppliers="suppliers" />
                     </div>
@@ -41,7 +41,7 @@ const props = defineProps(
     }
 )
 
-const filterByCategories = ref();
+const filterByCategory = ref([]);
 const filterByTags = ref([]);
 
 // TODO page should also reload data if other filter are active - cant it be handeled in the backend? Seems that it should be there. 
