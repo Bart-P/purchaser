@@ -68,6 +68,8 @@ const props = defineProps({
     }
 })
 
+// TODO - there is a bug, when deleting a newly created category the list is not updated and an error in console appears.. something is amiss.
+
 const selectedCategory = ref({})
 const selectedTag = ref({})
 

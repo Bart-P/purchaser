@@ -22,12 +22,13 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import { Head, usePage } from '@inertiajs/inertia-vue3';
 import SuppliersTable from '@/Pages/Suppliers/Partials/SuppliersTable.vue';
 import { ref } from 'vue';
 import SuppliersTableNav from '@/Pages/Suppliers/Partials/SuppliersTableNav.vue';
 import SupplierSelectionStore from '@/Stores/SupplierSelectionStore'
 import { Inertia } from '@inertiajs/inertia';
+import { computed } from '@vue/reactivity';
 
 const props = defineProps(
     {

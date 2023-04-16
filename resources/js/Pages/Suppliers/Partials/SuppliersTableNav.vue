@@ -85,8 +85,6 @@ const props = defineProps(
 
 const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag', 'searchForTerm']);
 
-// const queryParams = usePage().props.value.ziggy.query;
-
 let searchInput = props.searchTerm
 
 let timeout = null
