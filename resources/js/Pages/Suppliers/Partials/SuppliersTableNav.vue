@@ -54,8 +54,7 @@
 
 import BaseButton from '@/Components/BaseButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue';
-import SupplierSelectionStore from '@/Stores/SupplierSelectionStore';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const props = defineProps(
     {
@@ -72,17 +71,29 @@ const props = defineProps(
             default: {},
         },
         selectedCategory: {
-            default: {},
-            type: Object,
+            default: [],
+            type: Array,
         },
         tags: Object,
-        // filterByTags: {
-        //     type: Object,
-        //     default: {},
-        // }
+        filterByTags: {
+            type: Array,
+            default: [],
+        }
     })
 
 const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag', 'searchForTerm']);
+
+const categoryTags = ref([])
+
+watch(
+    () => props.selectedCategory,
+    () => {
+        categoryTags.value = []
+        if (props.selectedCategory.length) {
+            categoryTags.value = props.tags.filter((tag) => tag.category_id === props.selectedCategory[0].id)
+        }
+    }
+)
 
 let searchInput = props.searchTerm
 
@@ -99,8 +110,7 @@ function toggleCheckCategory(cat) {
 }
 
 function toggleCheckTag(tag) {
-    clearCurrentTimeout()
-    timeout = setTimeout(() => emits('toggleCheckTag', tag), timeoutTime)
+    emits('toggleCheckTag', tag)
 }
 
 function searchForTerm() {
