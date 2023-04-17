@@ -40,24 +40,31 @@ const props = defineProps(
 
 const pageQuery = usePage().props.value.query
 const searchTerm = SupplierSelectionStore.searchTerm
-const filterByCategory = computed(() => {
-    return props.categories.filter((cat) => cat.id === SupplierSelectionStore.categoryFilter[0])
-})
+let filterByCategory = SupplierSelectionStore.categoryFilter
+let filterByTags = SupplierSelectionStore.tagFilter
 
-// TODO filterByTags has to work same as filterByCategory 
-const filterByTags = SupplierSelectionStore.tagFilter
+watch(
+    () => SupplierSelectionStore.categoryFilter,
+    () => filterByCategory = SupplierSelectionStore.categoryFilter
+)
 
-if (!pageQuery.page && (searchTerm || filterByCategory)) {
+watch(
+    () => SupplierSelectionStore.tagFilter,
+    () => filterByTags = SupplierSelectionStore.tagFilter
+)
+
+if (!pageQuery.page && (searchTerm || filterByCategory || filterByTags)) {
     applySearchAndFilter()
 }
 
-function toggleCheckCategory(category) {
-    SupplierSelectionStore.toggleCategoryFilter(category.id)
+function toggleCheckCategory(categoryId) {
+    SupplierSelectionStore.toggleCategoryFilter(categoryId)
     applySearchAndFilter()
 }
 
-function toggleCheckTag(tag) {
-    SupplierSelectionStore.toggleTagFilter(tag.id)
+function toggleCheckTag(tagId) {
+    SupplierSelectionStore.toggleTagFilter(tagId)
+    applySearchAndFilter()
 }
 
 function updateSearchTerm(searchTerm) {
@@ -66,17 +73,12 @@ function updateSearchTerm(searchTerm) {
 }
 
 function applySearchAndFilter() {
-    // let filterTags = []
-    // if (props.filterByTags.length) {
-    //     filterTags = props.filterByTags.map((tag) => tag.id)
-    // }
-
     Inertia.get(
         route('suppliers'),
         {
             search: SupplierSelectionStore.searchTerm,
             filterCategories: SupplierSelectionStore.categoryFilter.join(','),
-            // filterTags: filterTags.join(','),
+            filterTags: SupplierSelectionStore.tagFilter.join(','),
         },
         {
             preserveState: true,
