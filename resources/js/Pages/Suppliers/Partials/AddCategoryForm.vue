@@ -8,7 +8,6 @@
                     <i class="fa-solid fa-pen"></i>
                 </button>
             </div>
-            <!-- TODO SelectItemDropdown does not work anymore, need to adjust it same as in Suppliers page -->
             <SelectItemDropdown id="createOrEditCategoryDropdown" @toggle-check-item="toggleCheckCategory"
                 :checked-items="checkedCategories.map(cat => cat.id)" :items="categories">
                 Kategorie Auswahl

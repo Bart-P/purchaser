@@ -73,7 +73,10 @@ onMounted(() => {
 })
 
 const props = defineProps({
-    selectedCategory: Object
+    selectedCategory: {
+        default: null,
+        type: Object,
+    }
 });
 
 const emits = defineEmits(['resetSelectableValues']);

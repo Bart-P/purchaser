@@ -11,7 +11,7 @@
                 <ul class="space-y-2">
                     <button v-for="category in categories" class="w-full text-start" @click="toggleEditCategory(category)">
                         <li class="category border-gray-400 text-gray-400"
-                            :style="category.id === selectedCategory.id ? { color: category.color, borderColor: category.color } : {}">
+                            :style="category.id === selectedCategory?.id ? { color: category.color, borderColor: category.color } : {}">
                             {{ category.name }}
                         </li>
                     </button>
@@ -20,7 +20,7 @@
             <div class="basis-2/3 space-y-2">
                 <div class="flex items-center justify-between gap-2">
                     <h4 class="heading-4">Tags</h4>
-                    <TagControls :category-id="selectedCategory.id" :selected-tag="selectedTag" />
+                    <TagControls :category-id="selectedCategory?.id" :selected-tag="selectedTag" />
                 </div>
 
                 <ul class="flex flex-wrap gap-2">
@@ -33,13 +33,13 @@
                     </TransitionGroup>
 
                     <Transition>
-                        <li v-show="!selectedCategory.tags && !selectedCategory.name" class="text-gray-600">
+                        <li v-show="!selectedCategory?.tags && !selectedCategory?.name" class="text-gray-600">
                             Bitte eine Kategorie auswählen und Tags anzuzeigen!
                         </li>
                     </Transition>
                     <Transition>
-                        <li v-if="selectedCategory.tags"
-                            v-show="!Object.keys(selectedCategory.tags).length && selectedCategory.name"
+                        <li v-if="selectedCategory?.tags"
+                            v-show="!Object.keys(selectedCategory?.tags).length && selectedCategory?.name"
                             class="text-gray-600">
                             Diese Kategorie hat noch keine Tags!
                         </li>
@@ -68,14 +68,20 @@ const props = defineProps({
     }
 })
 
-// TODO - there is a bug, when deleting a newly created category the list is not updated and an error in console appears.. something is amiss.
-
 const selectedCategory = ref({})
 const selectedTag = ref({})
 
 watch(
     () => props.tags,
-    () => selectedCategory.value = props.categories.find(cat => cat.id === selectedCategory.value.id)
+    () => {
+        const reloadedCategory = props.categories.find(cat => cat.id === selectedCategory.value.id)
+        selectedCategory.value = {}
+
+        // reloadedCategory returns 0 if not found, this prevents console type error
+        if (reloadedCategory) {
+            selectedCategory.value = reloadedCategory
+        }
+    }
 )
 
 function resetSelectableValues() {
