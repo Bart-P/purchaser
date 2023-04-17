@@ -85,8 +85,6 @@ const props = defineProps(
 const checkedCategories = ref([])
 const checkedTags = ref([])
 
-console.log(props.supplierCategories)
-
 // set checkedCategories on page load an when supplierCategories are edited/deleted.
 if (props.supplierCategories) checkedCategories.value = props.supplierCategories
 watch(
