@@ -85,7 +85,7 @@ const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag', 'searchForTe
 
 const categoryTags = ref([])
 
-// CategoryTags need to be assigned once when component is loaded and once after selectedCategory changes
+// CategoryTags need to be assigned once when component is loaded and everytime after selectedCategory changes
 assignCategoryTags()
 
 watch(
