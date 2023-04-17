@@ -18,7 +18,7 @@
         <div class="py-4 overflow-y-auto">
             <ul class="space-y-2">
                 <template v-for="category in checkedCategories">
-                    <li v-if="category.tags.length" class="border-t-2 border-purchaser-primary cursor-pointer">
+                    <li v-show="category.tags.length" class="border-t-2 border-purchaser-primary cursor-pointer">
                         <h4 class="heading-4">
                             {{ category.name }}
                             <span class="float-right text-purchaser-dark text-base font-bold"
