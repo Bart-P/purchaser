@@ -75,7 +75,7 @@ const props = defineProps(
             default: [],
         },
         supplierTags: {
-            type: Object,
+            type: Array,
             default: [],
         },
         addresses: Array,
