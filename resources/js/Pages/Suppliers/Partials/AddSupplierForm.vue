@@ -82,12 +82,10 @@ const props = defineProps(
         persons: Array,
     })
 
-let checkedCategories = ref([])
-let checkedTags = ref([])
+const checkedCategories = ref([])
+const checkedTags = ref([])
 
-if (props.supplierCategories) {
-    assignTagsToCategories()
-}
+console.log(props.supplierCategories)
 
 // If an category is updated by something, update the view automagically
 watch(
@@ -97,21 +95,6 @@ watch(
 
 if (props.supplierTags.length) {
     checkedTags.value = props.supplierTags
-}
-
-function assignTagsToCategories() {
-    checkedCategories.value =
-        props.supplierCategories.map((cat) => {
-            return updateCategoryWithTags(cat)
-        })
-}
-
-function updateCategoryWithTags(category) {
-    category = {
-        ...category,
-        tags: getTagsForCategory(category.id),
-    }
-    return category
 }
 
 if (props.supplierTags) {
@@ -134,14 +117,8 @@ function toggleCheckCategory(category) {
         checkedCategories.value = checkedCategories.value.filter((cat) => cat['id'] !== category.id)
         checkedTags.value = checkedTags.value.filter((tag) => tag.category_id !== category.id)
     } else {
-        checkedCategories.value = [...checkedCategories.value, updateCategoryWithTags(category)]
+        checkedCategories.value = [...checkedCategories.value, props.categories.find(cat => cat.id === categoryId)]
     }
-}
-
-function getTagsForCategory(id) {
-    return [...props.tags].filter((tag) => {
-        return id === tag.category_id
-    })
 }
 
 function toggleCheckTag(tag) {
