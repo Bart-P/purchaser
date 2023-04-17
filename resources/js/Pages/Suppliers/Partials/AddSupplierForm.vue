@@ -87,10 +87,11 @@ const checkedTags = ref([])
 
 console.log(props.supplierCategories)
 
-// If an category is updated by something, update the view automagically
+// set checkedCategories on page load an when supplierCategories are edited/deleted.
+if (props.supplierCategories) checkedCategories.value = props.supplierCategories
 watch(
     () => props.supplierCategories,
-    () => assignTagsToCategories()
+    () => checkedCategories.value = props.supplierCategories
 )
 
 if (props.supplierTags.length) {
@@ -112,10 +113,10 @@ const supplierForm = useForm(
     },
 )
 
-function toggleCheckCategory(category) {
-    if (checkedCategories.value.some((cat => cat['id'] === category.id))) {
-        checkedCategories.value = checkedCategories.value.filter((cat) => cat['id'] !== category.id)
-        checkedTags.value = checkedTags.value.filter((tag) => tag.category_id !== category.id)
+function toggleCheckCategory(categoryId) {
+    if (checkedCategories.value.some((cat => cat['id'] === categoryId))) {
+        checkedCategories.value = checkedCategories.value.filter((cat) => cat['id'] !== categoryId)
+        checkedTags.value = checkedTags.value.filter((tag) => tag.category_id !== categoryId)
     } else {
         checkedCategories.value = [...checkedCategories.value, props.categories.find(cat => cat.id === categoryId)]
     }
