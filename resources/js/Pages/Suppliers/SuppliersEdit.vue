@@ -149,14 +149,16 @@ onMounted(() => {
 
 const props = defineProps(
     {
-        'supplier': Object,
-        'addresses': Array,
-        'persons': Array,
-        'categories': Object,
-        'supplierCategories': Object,
-        'tags': Object,
-        'supplierTags': Object,
+        supplier: Object,
+        addresses: Array,
+        persons: Array,
+        categories: Object,
+        supplierCategories: Array,
+        tags: Object,
+        supplierTags: Object,
     })
+
+console.log(props.supplierCategories)
 
 let deleteAddressModal = null
 let deletePersonModal = null
