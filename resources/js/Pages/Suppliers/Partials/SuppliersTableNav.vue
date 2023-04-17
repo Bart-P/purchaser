@@ -85,15 +85,22 @@ const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag', 'searchForTe
 
 const categoryTags = ref([])
 
+// CategoryTags need to be assigned once when component is loaded and once after selectedCategory changes
+assignCategoryTags()
+
 watch(
     () => props.selectedCategory,
     () => {
-        categoryTags.value = []
-        if (props.selectedCategory.length) {
-            categoryTags.value = props.tags.filter((tag) => tag.category_id === props.selectedCategory[0].id)
-        }
+        assignCategoryTags()
     }
 )
+
+function assignCategoryTags() {
+    categoryTags.value = []
+    if (props.selectedCategory.length) {
+        categoryTags.value = props.tags.filter((tag) => tag.category_id === props.selectedCategory[0])
+    }
+}
 
 let searchInput = props.searchTerm
 
