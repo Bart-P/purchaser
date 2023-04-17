@@ -112,12 +112,12 @@ function clearCurrentTimeout() {
     }
 }
 
-function toggleCheckCategory(cat) {
-    emits('toggleCheckCategory', cat)
+function toggleCheckCategory(catId) {
+    emits('toggleCheckCategory', catId)
 }
 
-function toggleCheckTag(tag) {
-    emits('toggleCheckTag', tag)
+function toggleCheckTag(tagId) {
+    emits('toggleCheckTag', tagId)
 }
 
 function searchForTerm() {

@@ -28,15 +28,11 @@ import SuppliersTable from '@/Pages/Suppliers/Partials/SuppliersTable.vue';
 import SuppliersTableNav from '@/Pages/Suppliers/Partials/SuppliersTableNav.vue';
 import SupplierSelectionStore from '@/Stores/SupplierSelectionStore'
 import { Inertia } from '@inertiajs/inertia';
-import { computed } from '@vue/reactivity';
+import { watch } from 'vue';
 
 const props = defineProps(
     {
         suppliers: Object,
-        search: {
-            type: String,
-            default: '',
-        },
         categories: Object,
         tags: Object,
     }
