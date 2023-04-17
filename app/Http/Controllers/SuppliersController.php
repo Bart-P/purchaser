@@ -51,7 +51,7 @@ class SuppliersController extends Controller
         return $categories->map(function ($cat) use ($tags) {
             $cat->tags = $tags->filter(function ($tag) use ($cat) {
                 return $cat->id == $tag->category_id;
-            });
+            })->values();
             return $cat;
         });
     }
@@ -84,7 +84,7 @@ class SuppliersController extends Controller
             $addresses = $supplier->addresses()->get();
             $persons = $supplier->persons()->get();
             $supplierTags = $supplier->tags()->get();
-            $supplierCategories = $supplier->categories()->get();
+            $supplierCategories = $this->updateCategoriesWithTags($supplier->categories()->get(), $tags);
 
             $this->updateTagsWithColors($supplierTags, $categories);
         }
