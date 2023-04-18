@@ -15,6 +15,7 @@ class Supplier extends Model
     protected $fillable = [
         'name',
         'email',
+        'web',
     ];
 
     public function addresses(): HasMany

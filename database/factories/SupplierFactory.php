@@ -19,6 +19,7 @@ class SupplierFactory extends Factory
         return [
             'name' => fake()->unique()->company(),
             'email' => fake()->unique()->companyEmail(),
+            'web' => fake()->unique()->url(),
         ];
     }
 }

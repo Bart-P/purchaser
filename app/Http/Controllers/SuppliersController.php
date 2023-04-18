@@ -114,6 +114,7 @@ class SuppliersController extends Controller
                 [
                     'name'  => ['required', 'max:50'],
                     'email' => ['required', 'max:50'],
+                    'web' => ['max:50'],
                 ]
             )
         );
@@ -150,6 +151,7 @@ class SuppliersController extends Controller
         $supplier = Supplier::find($request->id);
         $supplier->name = $request->name;
         $supplier->email = $request->email;
+        $supplier->web = $request->web;
 
         if ($supplier->touch()) {
 

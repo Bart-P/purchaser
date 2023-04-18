@@ -15,15 +15,20 @@
         </div>
 
         <div class="flex gap-5">
-            <div class="w-1/2">
+            <div class="w-1/3">
                 <InputLabel for="company" value="Firma Name *" />
                 <TextInput id="company" v-model="supplierForm.name" type="text" class="mt-1 block w-full" required
                     autofocus />
             </div>
 
-            <div class="w-1/2">
+            <div class="w-1/3">
                 <InputLabel for="companyEmail" value="Firma E-Mail *" />
                 <TextInput id="companyEmail" v-model="supplierForm.email" type="email" class="mt-1 block w-full" required />
+            </div>
+
+            <div class="w-1/3">
+                <InputLabel for="companyWeb" value="Webseite (optional)" />
+                <TextInput id="companyWeb" v-model="supplierForm.web" type="text" class="mt-1 block w-full" />
             </div>
         </div>
 
@@ -104,6 +109,7 @@ const supplierForm = useForm(
     {
         name: props.supplier?.name,
         email: props.supplier?.email,
+        web: props.supplier?.web,
         addresses: null,
         persons: null,
         categories: checkedCategories,
@@ -152,6 +158,7 @@ function submitSupplier() {
                 {
                     'id': props.supplier.id,
                     'name': supplierForm.name,
+                    'web': supplierForm.web,
                     'email': supplierForm.email,
                     'categories': checkedCategories,
                     'tags': checkedTags,
