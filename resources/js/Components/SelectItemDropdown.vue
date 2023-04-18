@@ -1,6 +1,6 @@
 <template>
-    <BaseButton :color="color" :data-dropdown-toggle="id" data-dropdown-placement="bottom" class="inline-flex items-center"
-        type="button">
+    <BaseButton :disabled="isDisabled" :color="color" :data-dropdown-toggle="id" data-dropdown-placement="bottom"
+        class="inline-flex items-center" type="button">
         <slot />
     </BaseButton>
     <!-- Dropdown menu -->
@@ -62,6 +62,10 @@ const props = defineProps(
             default: null,
             type: String,
         },
+        isDisabled: {
+            default: false,
+            type: Boolean,
+        }
     })
 
 const emit = defineEmits(['toggleCheckItem'])

@@ -1,6 +1,6 @@
 <template>
     <component :is="this.$attrs.href ? Link : 'button'" :class="this.$attrs.disabled ? buttonStyles.disabled : getClass()"
-        class="cursor-pointer px-6 py-2 rounded">
+        class="px-6 py-2 rounded">
         <slot />
     </component>
 </template>
@@ -19,19 +19,19 @@ const props = defineProps(
 
 const buttonStyles = {
     primary: {
-        'bg-purchaser-primary hover:bg-purchaser-primary-dark text-white': true
+        'cursor-pointer bg-purchaser-primary hover:bg-purchaser-primary-dark text-white': true
     },
     secondary: {
-        'bg-purchaser-secondary hover:bg-purchaser-primary-dark text-white': true
+        'cursor-pointer bg-purchaser-secondary hover:bg-purchaser-primary-dark text-white': true
     },
     light: {
-        'bg-gray-100 hover:bg-purchaser-primary-light text-purchaser-primary-dark': true
+        'cursor-pointer bg-gray-100 hover:bg-purchaser-primary-light text-purchaser-primary-dark': true
     },
     disabled: {
         'cursor-not-allowed bg-gray-100 text-gray-500 px-6 py-2 rounded': true
     },
     danger: {
-        'bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded': true
+        'cursor-pointer bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded': true
     },
 }
 

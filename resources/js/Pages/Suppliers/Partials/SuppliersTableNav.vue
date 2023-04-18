@@ -36,8 +36,8 @@
                 </transition>
             </SelectItemDropdown>
 
-            <SelectItemDropdown id="tagDropdown" @toggle-check-item="toggleCheckTag" color="light" :items="categoryTags"
-                :checked-items="filterByTags">
+            <SelectItemDropdown id="tagDropdown" @toggle-check-item="toggleCheckTag" :is-disabled="categoryTags.length < 1"
+                color="light" :items="categoryTags" :checked-items="filterByTags">
                 Tag filter
                 <transition>
                     <div v-show="filterByTags.length"
