@@ -46,6 +46,10 @@
                     </div>
                 </transition>
             </SelectItemDropdown>
+
+            <BaseButton @click="resetFields" color="secondary"
+                :disabled="filterByTags.length + categoryTags.length + searchInput.length < 1">
+                Reset</BaseButton>
         </div>
     </div>
 </template>
@@ -81,11 +85,11 @@ const props = defineProps(
         }
     })
 
-const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag', 'searchForTerm']);
+const emits = defineEmits(['toggleCheckCategory', 'toggleCheckTag', 'searchForTerm', 'resetFields']);
 
 const categoryTags = ref([])
 
-// CategoryTags need to be assigned once when component is loaded and everytime after selectedCategory changes
+// CategoryTags need to be assigned once when component is loaded and everytime after selectedCategory changes. 
 assignCategoryTags()
 
 watch(
@@ -123,5 +127,10 @@ function toggleCheckTag(tagId) {
 function searchForTerm() {
     clearCurrentTimeout()
     timeout = setTimeout(() => emits('searchForTerm', searchInput), timeoutTime)
+}
+
+function resetFields() {
+    searchInput = props.searchTerm
+    emits('resetFields')
 }
 </script>

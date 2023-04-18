@@ -9,9 +9,9 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-4">
                         <SuppliersTableNav @toggle-check-category="toggleCheckCategory" @toggle-check-tag="toggleCheckTag"
-                            @search-for-term="updateSearchTerm" :search-term="searchTerm" :suppliers="suppliers"
-                            :categories="categories" :selected-category="filterByCategory" :tags="tags"
-                            :filter-by-tags="filterByTags" />
+                            @search-for-term="updateSearchTerm" @reset-fields="resetFilterAndSearch"
+                            :search-term="searchTerm" :suppliers="suppliers" :categories="categories"
+                            :selected-category="filterByCategory" :tags="tags" :filter-by-tags="filterByTags" />
 
                         <SuppliersTable :suppliers="suppliers" />
                     </div>
@@ -85,6 +85,11 @@ function applySearchAndFilter() {
             replace: true,
         },
     )
+}
+
+function resetFilterAndSearch() {
+    SupplierSelectionStore.resetFields()
+    applySearchAndFilter()
 }
 
 </script>
