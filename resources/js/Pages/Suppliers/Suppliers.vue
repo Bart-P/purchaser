@@ -5,18 +5,14 @@
             Alle Lieferanten
         </template>
         <div class="py-12">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-4">
-                        <SuppliersTableNav @toggle-check-category="toggleCheckCategory" @toggle-check-tag="toggleCheckTag"
-                            @search-for-term="updateSearchTerm" @reset-fields="resetFilterAndSearch"
-                            :search-term="searchTerm" :suppliers="suppliers" :categories="categories"
-                            :selected-category="filterByCategory" :tags="tags" :filter-by-tags="filterByTags" />
+            <PageBoxWrapper>
+                <SuppliersTableNav @toggle-check-category="toggleCheckCategory" @toggle-check-tag="toggleCheckTag"
+                    @search-for-term="updateSearchTerm" @reset-fields="resetFilterAndSearch" :search-term="searchTerm"
+                    :suppliers="suppliers" :categories="categories" :selected-category="filterByCategory" :tags="tags"
+                    :filter-by-tags="filterByTags" />
 
-                        <SuppliersTable :suppliers="suppliers" />
-                    </div>
-                </div>
-            </div>
+                <SuppliersTable :suppliers="suppliers" />
+            </PageBoxWrapper>
         </div>
     </AuthenticatedLayout>
 </template>
@@ -29,6 +25,7 @@ import SuppliersTableNav from '@/Pages/Suppliers/Partials/SuppliersTableNav.vue'
 import SupplierSelectionStore from '@/Stores/SupplierSelectionStore'
 import { Inertia } from '@inertiajs/inertia';
 import { watch } from 'vue';
+import PageBoxWrapper from '@/Components/PageBoxWrapper.vue';
 
 const props = defineProps(
     {
@@ -93,3 +90,4 @@ function resetFilterAndSearch() {
 }
 
 </script>
+
