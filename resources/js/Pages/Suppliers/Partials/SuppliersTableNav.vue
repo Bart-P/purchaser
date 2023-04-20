@@ -1,5 +1,5 @@
 <template>
-    <div class="px-6 pb-6 bg-white dark:bg-gray-900 w-full space-y-4">
+    <div class="pb-6 bg-white dark:bg-gray-900 w-full space-y-4">
         <div class=" flex justify-between">
             <div class="flex align-middle justify-center items-center gap-3">
                 <div class="">
@@ -15,7 +15,7 @@
                         </div>
                         <input type="text" id="table-search" v-model="searchInput" @keyup="searchForTerm"
                             class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-md w-80 bg-gray-50
-                                                                                                                            focus:ring-purchaser-primary focus:border-purchaser-primary"
+                                                                                                                                    focus:ring-purchaser-primary focus:border-purchaser-primary"
                             placeholder="Suche">
                     </div>
                 </div>
