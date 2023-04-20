@@ -97,13 +97,14 @@ watch(
     () => checkedCategories.value = props.supplierCategories
 )
 
-if (props.supplierTags.length) {
-    checkedTags.value = props.supplierTags
-}
-
+// set checkedTags on page load an when supplierTags are edited/deleted.
 if (props.supplierTags) {
     checkedTags.value = props.supplierTags
 }
+watch(
+    () => props.supplierTags,
+    () => checkedTags.value = props.supplierTags
+)
 
 const supplierForm = useForm(
     {
