@@ -14,8 +14,7 @@
                             </svg>
                         </div>
                         <input type="text" id="table-search" v-model="searchInput" @keyup="searchForTerm"
-                            class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-md w-80 bg-gray-50
-                                                                                                                                    focus:ring-purchaser-primary focus:border-purchaser-primary"
+                            class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-md w-80 bg-gray-50 focus:ring-purchaser-primary focus:border-purchaser-primary"
                             placeholder="Suche">
                     </div>
                 </div>
