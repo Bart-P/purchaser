@@ -5,6 +5,10 @@ export default reactive(
         searchTerm: '',
         categoryFilter: [],
         tagFilter: [],
+        sort: {
+            column: '',
+            direction: '',
+        },
         addSearchTerm(searchTerm) {
             this.searchTerm = searchTerm
         },
@@ -35,5 +39,12 @@ export default reactive(
         },
         removeTagFilter(tagId) {
             this.tagFilter = this.tagFilter.filter(id => id !== tagId)
+        },
+        sortBy(column) {
+            this.sort.column = column
+            this.sort.direction = this.sort.direction === 'asc'
+                ? 'desc'
+                : 'asc'
+
         }
     })
