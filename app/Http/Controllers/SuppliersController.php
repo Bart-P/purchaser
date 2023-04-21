@@ -38,6 +38,12 @@ class SuppliersController extends Controller
                         }, '=', count(explode(',', $request->filterTags)));
                     }
                 })
+                ->when(
+                    $request->sortBy && $request->sortBy['column'] != '',
+                    function ($query) use ($request) {
+                        return $query->orderBy($request->sortBy['column'], $request->sortBy['direction']);
+                    }
+                )
                 ->orderBy('updated_at', 'DESC')
                 ->paginate(15)
                 ->withQueryString(),
