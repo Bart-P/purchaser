@@ -11,7 +11,7 @@
                     :suppliers="suppliers" :categories="categories" :selected-category="filterByCategory" :tags="tags"
                     :filter-by-tags="filterByTags" />
 
-                <SuppliersTable :suppliers="suppliers" />
+                <SuppliersTable @sort-by="sortBy" :suppliers="suppliers" />
             </PageBoxWrapper>
         </div>
     </AuthenticatedLayout>
@@ -76,6 +76,7 @@ function applySearchAndFilter() {
             search: SupplierSelectionStore.searchTerm,
             filterCategories: SupplierSelectionStore.categoryFilter.join(','),
             filterTags: SupplierSelectionStore.tagFilter.join(','),
+            sortBy: SupplierSelectionStore.sort,
         },
         {
             preserveState: true,
@@ -89,5 +90,9 @@ function resetFilterAndSearch() {
     applySearchAndFilter()
 }
 
-</script>
+function sortBy(column) {
+    SupplierSelectionStore.sortBy(column)
+    applySearchAndFilter()
+}
 
+</script>

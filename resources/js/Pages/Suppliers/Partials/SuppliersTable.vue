@@ -26,7 +26,7 @@
                         <label for="checkbox-all-search" class="sr-only">checkbox</label>
                     </div>
                 </th>
-                <th scope="col" class="px-6 py-3  max-w-[30px]">
+                <th @click="sort('id')" scope="col" class="px-6 py-3  max-w-[30px]">
                     ID
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -97,6 +97,8 @@ const props = defineProps(
     },
 )
 
+const emits = defineEmits(['sortBy']);
+
 const supplierToDelete = reactive(
     {
         id: 0,
@@ -110,6 +112,16 @@ function setSupplierToDelete(id, name) {
 
 function deleteSupplier() {
     Inertia.delete(route('suppliers.destroy', supplierToDelete.id))
+}
+
+// TODO Sort still is not perfect: 
+// 1. there is no visual indication if sorting is DESC or ASC
+// 2. There is no way to reset sort 
+// 3. Sort only on ID? Name and Email also need sort
+
+
+function sort(column) {
+    this.emits('sortBy', column)
 }
 
 </script>
