@@ -6,7 +6,6 @@
                     ID
                 </th>
                 <th scope="col" class="px-6 py-3">
-
                     Projekt
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -18,12 +17,16 @@
                 <th scope="col" class="px-6 py-3">
                     Tags
                 </th>
+                <th scope="col" class="px-6 py-3">
+                    PM
+                </th>
                 <th></th>
             </tr>
         </thead>
 
         <tbody>
             <tr>
+                <td>test</td>
                 <td>test</td>
                 <td>test</td>
                 <td>test</td>
