@@ -64,6 +64,11 @@ class Supplier extends Model
         $this->tags()->sync($tag_ids);
     }
 
+    public function inquiries()
+    {
+        return $this->hasMany(Inquiry::class);
+    }
+
     public function delete(): ?bool
     {
         $this->addresses()->delete();
