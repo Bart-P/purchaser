@@ -26,11 +26,14 @@
                         <label for="checkbox-all-search" class="sr-only">checkbox</label>
                     </div>
                 </th>
-                <th @click="sort('id')" scope="col" class="px-6 py-3  max-w-[30px]">
+                <th @click="sort('id')" scope="col" class="px-6 py-3  max-w-[30px] cursor-pointer">
                     ID
+                    <i class="fa-solid" :class="getSortDirectionClass('id')"></i>
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th @click="sort('name')" scope="col" class="px-6 py-3 cursor-pointer">
                     Firma
+
+                    <i class="fa-solid" :class="getSortDirectionClass('name')"></i>
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Email
@@ -104,13 +107,13 @@ const props = defineProps(
 const sortBy = reactive({
     column: '',
     direction: '',
+
 })
 
 watch(
     () => props.sortDirection,
     () => {
         sortBy.direction = props.sortDirection
-        console.log(sortBy)
     }
 )
 
@@ -131,14 +134,24 @@ function deleteSupplier() {
     Inertia.delete(route('suppliers.destroy', supplierToDelete.id))
 }
 
-// TODO Sort still is not perfect: ID
-// 1. there is no visual indication if sorting is DESC or ASC
-// 3. Sort only on ID? Name and Email also need sort
-
-
 function sort(column) {
     this.sortBy.column = column
     this.emits('sortBy', column)
+}
+
+function getSortDirectionClass(column) {
+
+    const sortIndicator = {
+        asc: 'fa-sort-up text-gray-700',
+        desc: 'fa-sort-down text-gray-700',
+        '': 'fa-sort text-gray-300',
+    }
+
+    if (sortBy.column === column) {
+        return sortIndicator[sortBy.direction]
+    }
+
+    return sortIndicator['']
 }
 
 </script>
