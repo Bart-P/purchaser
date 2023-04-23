@@ -45,6 +45,9 @@ export default reactive(
             this.tagFilter = this.tagFilter.filter(id => id !== tagId)
         },
         sortBy(column) {
+            if (this.sort.column != column) {
+                this.sort.direction = ''
+            }
             this.sort.column = column
             if (this.sort.direction === 'asc') {
                 this.sort.direction = 'desc'
