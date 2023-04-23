@@ -8,7 +8,7 @@
 
         <div class="py-12">
             <PageBoxWrapper>
-                <InquiriesTable></InquiriesTable>
+                <InquiriesTable :inquiries="inquiries"></InquiriesTable>
 
             </PageBoxWrapper>
         </div>
@@ -21,4 +21,8 @@ import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 import InquiriesTable from "@/Pages/Inquiries/Partials/InquiriesTable.vue"
+
+const props = defineProps({
+    inquiries: Object
+});
 </script>
