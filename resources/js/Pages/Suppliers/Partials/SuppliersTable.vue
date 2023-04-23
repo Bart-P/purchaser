@@ -85,7 +85,7 @@ import Pagination from '@/Components/Pagination.vue';
 import { Inertia } from '@inertiajs/inertia';
 import { Link } from '@inertiajs/inertia-vue3';
 import { initModals } from 'flowbite';
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, watch } from 'vue';
 
 onMounted(() => {
     initModals()
@@ -94,7 +94,24 @@ onMounted(() => {
 const props = defineProps(
     {
         suppliers: Object,
+        sortDirection: {
+            default: '',
+            type: String
+        }
     },
+)
+
+const sortBy = reactive({
+    column: '',
+    direction: '',
+})
+
+watch(
+    () => props.sortDirection,
+    () => {
+        sortBy.direction = props.sortDirection
+        console.log(sortBy)
+    }
 )
 
 const emits = defineEmits(['sortBy']);
@@ -114,13 +131,13 @@ function deleteSupplier() {
     Inertia.delete(route('suppliers.destroy', supplierToDelete.id))
 }
 
-// TODO Sort still is not perfect: 
+// TODO Sort still is not perfect: ID
 // 1. there is no visual indication if sorting is DESC or ASC
-// 2. There is no way to reset sort 
 // 3. Sort only on ID? Name and Email also need sort
 
 
 function sort(column) {
+    this.sortBy.column = column
     this.emits('sortBy', column)
 }
 

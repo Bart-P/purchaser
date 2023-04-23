@@ -42,9 +42,14 @@ export default reactive(
         },
         sortBy(column) {
             this.sort.column = column
-            this.sort.direction = this.sort.direction === 'asc'
-                ? 'desc'
-                : 'asc'
+            if (this.sort.direction === 'asc') {
+                this.sort.direction = 'desc'
+            } else if (this.sort.direction === 'desc') {
+                this.sort.direction = ''
+            } else if (this.sort.direction === '') {
+                this.sort.direction = 'asc'
+            }
 
+            return this.sort.direction
         }
     })

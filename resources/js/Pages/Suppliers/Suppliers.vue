@@ -11,7 +11,7 @@
                     :suppliers="suppliers" :categories="categories" :selected-category="filterByCategory" :tags="tags"
                     :filter-by-tags="filterByTags" />
 
-                <SuppliersTable @sort-by="sortBy" :suppliers="suppliers" />
+                <SuppliersTable @sort-by="sortBy" :suppliers="suppliers" :sort-direction="sortDirection" />
             </PageBoxWrapper>
         </div>
     </AuthenticatedLayout>
@@ -24,7 +24,7 @@ import SuppliersTable from '@/Pages/Suppliers/Partials/SuppliersTable.vue';
 import SuppliersTableNav from '@/Pages/Suppliers/Partials/SuppliersTableNav.vue';
 import SupplierSelectionStore from '@/Stores/SupplierSelectionStore'
 import { Inertia } from '@inertiajs/inertia';
-import { watch } from 'vue';
+import { ref, watch } from 'vue';
 import PageBoxWrapper from '@/Components/PageBoxWrapper.vue';
 
 const props = defineProps(
@@ -37,6 +37,7 @@ const props = defineProps(
 
 const pageQuery = usePage().props.value.query
 const searchTerm = SupplierSelectionStore.searchTerm
+const sortDirection = ref('')
 let filterByCategory = SupplierSelectionStore.categoryFilter
 let filterByTags = SupplierSelectionStore.tagFilter
 
@@ -87,11 +88,12 @@ function applySearchAndFilter() {
 
 function resetFilterAndSearch() {
     SupplierSelectionStore.resetFields()
+    sortDirection.value = ''
     applySearchAndFilter()
 }
 
 function sortBy(column) {
-    SupplierSelectionStore.sortBy(column)
+    sortDirection.value = SupplierSelectionStore.sortBy(column)
     applySearchAndFilter()
 }
 
