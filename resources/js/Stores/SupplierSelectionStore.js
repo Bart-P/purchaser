@@ -19,6 +19,10 @@ export default reactive(
             this.searchTerm = ''
             this.categoryFilter = []
             this.tagFilter = []
+            this.sort = {
+                column: '',
+                direction: ''
+            }
         },
         toggleCategoryFilter(catId) {
             this.tagFilter = []
@@ -51,5 +55,11 @@ export default reactive(
             }
 
             return this.sort.direction
+        },
+        resetSort() {
+            this.sort = {
+                column: '',
+                direction: ''
+            }
         }
     })

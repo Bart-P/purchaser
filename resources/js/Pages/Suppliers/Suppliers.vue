@@ -11,7 +11,7 @@
                     :suppliers="suppliers" :categories="categories" :selected-category="filterByCategory" :tags="tags"
                     :filter-by-tags="filterByTags" />
 
-                <SuppliersTable @sort-by="sortBy" :suppliers="suppliers" :sort-direction="sortDirection" />
+                <SuppliersTable @sort-by="sortBy" :suppliers="suppliers" :sort="sort" />
             </PageBoxWrapper>
         </div>
     </AuthenticatedLayout>
@@ -37,7 +37,10 @@ const props = defineProps(
 
 const pageQuery = usePage().props.value.query
 const searchTerm = SupplierSelectionStore.searchTerm
-const sortDirection = ref('')
+const sort = ref({
+    direction: SupplierSelectionStore.sort.direction,
+    column: SupplierSelectionStore.sort.column,
+})
 let filterByCategory = SupplierSelectionStore.categoryFilter
 let filterByTags = SupplierSelectionStore.tagFilter
 
@@ -71,6 +74,10 @@ function updateSearchTerm(searchTerm) {
 }
 
 function applySearchAndFilter() {
+    if (SupplierSelectionStore.sort.column.length > 0) {
+        sort.column = SupplierSelectionStore.column
+        sort.direction = SupplierSelectionStore.direction
+    }
     Inertia.get(
         route('suppliers'),
         {
@@ -88,12 +95,12 @@ function applySearchAndFilter() {
 
 function resetFilterAndSearch() {
     SupplierSelectionStore.resetFields()
-    sortDirection.value = ''
+    sort.value.direction = ''
     applySearchAndFilter()
 }
 
 function sortBy(column) {
-    sortDirection.value = SupplierSelectionStore.sortBy(column)
+    sort.value.direction = SupplierSelectionStore.sortBy(column)
     applySearchAndFilter()
 }
 

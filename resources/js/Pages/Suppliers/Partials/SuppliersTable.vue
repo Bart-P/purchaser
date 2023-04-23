@@ -97,23 +97,30 @@ onMounted(() => {
 const props = defineProps(
     {
         suppliers: Object,
-        sortDirection: {
-            default: '',
+        sortColumn: {
+            default: null,
             type: String
+        },
+        sort: {
+            default: {
+                direction: '',
+                column: ''
+            },
+            type: Object
         }
     },
 )
 
-const sortBy = reactive({
-    column: '',
-    direction: '',
+const sortBy = reactive(props.sort)
 
-})
+if (props.sortColumn) {
+    sortBy.column = props.sortColumn
+}
 
 watch(
-    () => props.sortDirection,
+    () => props.sort,
     () => {
-        sortBy.direction = props.sortDirection
+        sortBy.direction = props.sort.direction
     }
 )
 
@@ -135,15 +142,15 @@ function deleteSupplier() {
 }
 
 function sort(column) {
-    this.sortBy.column = column
+    sortBy.column = column
     this.emits('sortBy', column)
 }
 
 function getSortDirectionClass(column) {
 
     const sortIndicator = {
-        asc: 'fa-sort-up text-gray-700',
-        desc: 'fa-sort-down text-gray-700',
+        asc: 'fa-sort-up text-purchaser-secondary',
+        desc: 'fa-sort-down text-purchaser-secondary',
         '': 'fa-sort text-gray-300',
     }
 
