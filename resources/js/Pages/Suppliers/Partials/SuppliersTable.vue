@@ -16,8 +16,8 @@
         </template>
     </DeleteConfirmationModal>
 
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="table">
+        <thead class="table-head">
             <tr>
                 <th scope="col" class="p-4">
                     <div class="flex items-center">
@@ -43,8 +43,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="supplier in suppliers.data"
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr v-for="supplier in suppliers.data" class="table-row">
                 <td class="w-4 p-4">
                     <div class="flex items-center">
                         <input id="checkbox-table-search-1" type="checkbox"
@@ -52,16 +51,16 @@
                         <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                     </div>
                 </td>
-                <td class="px-6 py-4 max-w-[30px]">
+                <td class="table-data max-w-[30px]">
                     {{ supplier.id }}
                 </td>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <td class="table-data font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{ supplier.name }}
                 </td>
-                <td class="px-6 py-4">
+                <td class="table-data">
                     {{ supplier.email }}
                 </td>
-                <td class="px-6 py-4 flex justify-end gap-4">
+                <td class="table-data flex justify-end gap-4">
                     <Link :href="route('suppliers.edit', supplier.id)"
                         class="text-blue-600 dark:text-blue-500 hover:underline">
                     <i class="fa-solid fa-pen"></i>
