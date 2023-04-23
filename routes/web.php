@@ -5,6 +5,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\TagController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -41,9 +42,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // INQUIRIES
     Route::get(
         '/inquiries',
-        function () {
-            return Inertia::render('Inquiries/Inquiries');
-        }
+        [
+            InquiryController::class,
+            'index'
+        ]
     )->name('inquiries');
 
     // SUPPLIERS

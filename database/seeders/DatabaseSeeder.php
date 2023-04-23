@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Address;
+use App\Models\Inquiry;
 use App\Models\Person;
 use App\Models\Supplier;
 use App\Models\User;
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
         Supplier::factory(100)->create();
         Address::factory(150)->create();
         Person::factory(125)->create();
+        Inquiry::factory(10)->create();
 
         $this->call(CategorySeeder::class);
         $this->call(TagSeeder::class);
