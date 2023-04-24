@@ -5,8 +5,9 @@
 </template>
 
 <script setup>
-
 import { Link } from "@inertiajs/inertia-vue3";
+
+// TODO -> change all icon buttons to this component. 
 
 const props = defineProps(
     {
