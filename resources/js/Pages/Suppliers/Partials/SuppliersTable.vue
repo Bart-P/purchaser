@@ -61,15 +61,14 @@
                     {{ supplier.email }}
                 </td>
                 <td class="table-data flex justify-end gap-4">
-                    <Link :href="route('suppliers.edit', supplier.id)"
-                        class="text-blue-600 dark:text-blue-500 hover:underline">
-                    <i class="fa-solid fa-pen"></i>
-                    </Link>
+                    <IconButton color='blue' :href="route('suppliers.edit', supplier.id)">
+                        <i class="fa-solid fa-pen"></i>
+                    </IconButton>
 
-                    <button @click="setSupplierToDelete(supplier.id, supplier.name)" data-modal-target="deleteSupplierModal"
-                        data-modal-toggle="deleteSupplierModal" class="text-red-600 dark:text-red-500 hover:underline">
+                    <IconButton color="red" @click="setSupplierToDelete(supplier.id, supplier.name)"
+                        data-modal-target="deleteSupplierModal" data-modal-toggle="deleteSupplierModal">
                         <i class="fa-solid fa-trash"></i>
-                    </button>
+                    </IconButton>
                 </td>
             </tr>
             <tr v-if="suppliers.data.length < 5" class="h-32">
@@ -82,10 +81,10 @@
 <script setup>
 
 import BaseButton from '@/Components/BaseButton.vue';
+import IconButton from '@/Components/IconButton.vue';
 import DeleteConfirmationModal from '@/Components/DeleteConfirmationModal.vue';
 import Pagination from '@/Components/Pagination.vue';
 import { Inertia } from '@inertiajs/inertia';
-import { Link } from '@inertiajs/inertia-vue3';
 import { initModals } from 'flowbite';
 import { onMounted, reactive, watch } from 'vue';
 
