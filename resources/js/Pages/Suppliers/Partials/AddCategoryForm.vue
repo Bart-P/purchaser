@@ -4,9 +4,9 @@
         <div class="flex justify-between items-center">
             <div class="flex items-center gap-4">
                 <h4 class="heading-4">Kategorien (erforderlich)</h4>
-                <button type="button" class="text-blue-700 text-sm" data-modal-toggle="editCategoryModal">
+                <IconButton color='blue' data-modal-toggle="editCategoryModal" type="button" class="text-sm">
                     <i class="fa-solid fa-pen"></i>
-                </button>
+                </IconButton>
             </div>
             <SelectItemDropdown id="createOrEditCategoryDropdown" @toggle-check-item="toggleCheckCategory"
                 :checked-items="checkedCategories.map(cat => cat.id)" :items="categories">
@@ -32,6 +32,7 @@
 
 <script setup>
 
+import IconButton from '@/Components/IconButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue'
 import EditCategoriesModal from '@/Pages/Suppliers/Partials/EditCategoriesModal.vue'
 import { TransitionGroup } from 'vue'
