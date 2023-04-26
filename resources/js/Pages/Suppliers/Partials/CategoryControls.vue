@@ -22,10 +22,9 @@
         <h5 class="heading-5">Kategorie hinzufügen</h5>
         <TextInput type="text" placeholder="Name" v-model="addCategoryForm.name" required />
         <TextInput type="text" placeholder="Farbe" v-model="addCategoryForm.color" required />
-        <button type="submit"
-            class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
+        <BaseButton type="submit" color="success">
             <i class="fa-solid fa-save"></i>
-        </button>
+        </BaseButton>
     </form>
 
     <form id="dropdownEditCategory" @submit.prevent="updateCategory"
@@ -33,10 +32,9 @@
         <h5 class="heading-5">Kategorie bearbeiten</h5>
         <TextInput type="text" placeholder="Name" v-model="selectedCategory.name" />
         <TextInput type="text" placeholder="Farbe" v-model="selectedCategory.color" />
-        <button type="submit"
-            class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
+        <BaseButton type="submit" color="success">
             <i class="fa-solid fa-save"></i>
-        </button>
+        </BaseButton>
     </form>
 
     <form id="dropdownDeleteCategory" @submit.prevent="deleteSelectedCategory"
@@ -51,10 +49,9 @@
             </p>
         </div>
 
-        <button type="submit"
-            class="text-white px-2 py-1 w-full hover:text-red-500 hover:bg-white border-2 border-red-500 bg-red-500 rounded-md">
+        <BaseButton type="submit" color="danger">
             <i class="fa-solid fa-trash"></i>
-        </button>
+        </BaseButton>
     </form>
 </template>
 

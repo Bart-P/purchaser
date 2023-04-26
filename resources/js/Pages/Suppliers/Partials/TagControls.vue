@@ -22,20 +22,18 @@
         class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
         <h5 class="heading-5">Tag hinzufügen</h5>
         <TextInput type="text" placeholder="Name" v-model="addTagForm.name" required />
-        <button type="submit"
-            class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
+        <BaseButton type="submit" color="success">
             <i class="fa-solid fa-save"></i>
-        </button>
+        </BaseButton>
     </form>
 
     <form id="dropdownEditTag" @submit.prevent="updateTag"
         class="!m-0 flex flex-col z-10 gap-4 rounded-md bg-white shadow-md p-4 hidden">
         <h5 class="heading-5">Tag bearbeiten</h5>
         <TextInput type="text" placeholder="Name" v-model="selectedTag.name" />
-        <button type="submit"
-            class="text-white px-2 py-1 w-full hover:text-green-500 hover:bg-white border-2 border-green-500 bg-green-500 rounded-md">
+        <BaseButton type="submit" color="success">
             <i class="fa-solid fa-save"></i>
-        </button>
+        </BaseButton>
     </form>
 
     <form id="dropdownDeleteTag" @submit.prevent="deleteTag"
