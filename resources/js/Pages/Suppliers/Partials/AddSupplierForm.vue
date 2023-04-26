@@ -135,6 +135,9 @@ function toggleCheckTag(tag) {
     }
 }
 
+// TODO - there is a bug that 2 notifications are send when a edit or save is done. On Delete only one notification
+// comes up
+
 function submitSupplier() {
     if (!checkedCategories.value.length) {
         ToastStore.add(
