@@ -24,6 +24,9 @@ const buttonStyles = {
     secondary: {
         'cursor-pointer bg-purchaser-secondary hover:bg-purchaser-primary-dark text-white': true
     },
+    success: {
+        'cursor-pointer bg-green-600 hover:bg-green-800 text-white': true
+    },
     light: {
         'cursor-pointer bg-gray-100 hover:bg-purchaser-primary-light text-purchaser-primary-dark': true
     },
@@ -41,6 +44,8 @@ function getClass() {
             return buttonStyles.primary
         case 'secondary':
             return buttonStyles.secondary
+        case 'success':
+            return buttonStyles.success
         case 'light':
             return buttonStyles.light
         case 'danger':
