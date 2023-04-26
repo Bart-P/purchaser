@@ -68,13 +68,13 @@
                     <div v-for="(address, index) in addresses"
                         class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                         <div class="float-right flex gap-4">
-                            <Link v-if="address.id" :href="route('address.edit', address.id)" class="text-blue-600">
-                            <i class="fa-solid fa-pen"></i>
-                            </Link>
-                            <button class="text-red-600" type="submit" data-modal-target="deleteAddressModal"
+                            <IconButton v-if="address.id" :href="route('address.edit', address.id)">
+                                <i class="fa-solid fa-pen"></i>
+                            </IconButton>
+                            <IconButton type="submit" color="red" data-modal-target="deleteAddressModal"
                                 @click="setAddressToDelete(address.id, address.name1)">
                                 <i class="fa-solid fa-trash"></i>
-                            </button>
+                            </IconButton>
                         </div>
 
                         <SingleAddressList :id="index" :address="address" />
@@ -106,13 +106,13 @@
                                 class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
                                 <div class="float-right flex gap-4">
-                                    <Link v-if="person.id" :href="route('person.edit', person.id)" class="text-blue-600">
-                                    <i class="fa-solid fa-pen"></i>
-                                    </Link>
-                                    <button class="float-right text-red-600" type="submit"
+                                    <IconButton v-if="person.id" :href="route('person.edit', person.id)">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </IconButton>
+                                    <IconButton class="float-right" type="submit" color="red"
                                         @click="setPersonToDelete(person.first_name, person.last_name, person.id)">
                                         <i class="fa-solid fa-trash"></i>
-                                    </button>
+                                    </IconButton>
                                 </div>
                                 <SinglePersonList :id="index" :person="person" />
                             </div>
@@ -130,6 +130,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 import { onMounted, ref } from 'vue';
 import { initModals } from 'flowbite';
 import BaseButton from '@/Components/BaseButton.vue';
+import IconButton from '@/Components/IconButton.vue';
 import PageBoxWrapper from '@/Components/PageBoxWrapper.vue';
 import AddSupplierForm from '@/Pages/Suppliers/Partials/AddSupplierForm.vue';
 import AddAddressForm from '@/Pages/Suppliers/Partials/AddAddressForm.vue';

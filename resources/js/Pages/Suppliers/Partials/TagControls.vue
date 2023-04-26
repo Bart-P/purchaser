@@ -1,22 +1,20 @@
 <template>
-    <div class="space-x-2">
+    <div class="space-x-3">
         <Transition>
-            <button v-show="selectedTag.id" data-dropdown-toggle="dropdownEditTag" id="toggleEditTagForm"
-                class="text-blue-500 px-1 py-1 rounded-md border-blue-500 hover:bg-blue-500 hover:text-white">
+            <IconButton v-show="selectedTag.id" data-dropdown-toggle="dropdownEditTag" id="toggleEditTagForm">
                 <i class="fa-solid fa-pen"></i>
-            </button>
+            </IconButton>
         </Transition>
         <Transition>
-            <button v-show="selectedTag.id" data-dropdown-toggle="dropdownDeleteTag" id="toggleDeleteTagForm"
-                class="text-red-500 px-1 py-1 rounded-md border-red-500 hover:bg-red-500 hover:text-white">
+            <IconButton v-show="selectedTag.id" data-dropdown-toggle="dropdownDeleteTag" id="toggleDeleteTagForm"
+                color="red">
                 <i class="fa-solid fa-trash"></i>
-            </button>
+            </IconButton>
         </Transition>
         <Transition>
-            <button v-show="!!categoryId" data-dropdown-toggle="dropdownAddTag" id="toggleAddTagForm"
-                class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white">
+            <IconButton v-show="!!categoryId" data-dropdown-toggle="dropdownAddTag" id="toggleAddTagForm" color="green">
                 <i class="fa-solid fa-plus"></i>
-            </button>
+            </IconButton>
         </Transition>
     </div>
 
@@ -52,15 +50,16 @@
             </p>
         </div>
 
-        <button type="submit"
-            class="text-white px-2 py-1 w-full hover:text-red-500 hover:bg-white border-2 border-red-500 bg-red-500 rounded-md">
+        <BaseButton type="submit" color="danger">
             <i class="fa-solid fa-trash"></i>
-        </button>
+        </BaseButton>
     </form>
 </template>
 
 <script setup>
 import TextInput from '@/Components/TextInput.vue';
+import IconButton from '@/Components/IconButton.vue';
+import BaseButton from '@/Components/BaseButton.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { onMounted } from 'vue'
 import { initDropdowns } from 'flowbite'

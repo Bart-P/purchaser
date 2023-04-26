@@ -1,22 +1,20 @@
 <template>
-    <div class="space-x-2">
+    <div class="space-x-3">
         <Transition>
-            <button v-show="selectedCategory.id" data-dropdown-toggle="dropdownEditCategory" id="toggleEditCategoryDropdown"
-                class="text-blue-500 px-1 py-1 rounded-md border-blue-500 hover:bg-blue-500 hover:text-white">
+            <IconButton v-show="selectedCategory.id" data-dropdown-toggle="dropdownEditCategory"
+                id="toggleEditCategoryDropdown">
                 <i class="fa-solid fa-pen"></i>
-            </button>
+            </IconButton>
         </Transition>
         <Transition>
-            <button v-show="selectedCategory.id" data-dropdown-toggle="dropdownDeleteCategory"
-                id="toggleDeleteCategoryDropdown"
-                class="text-red-500 px-1 py-1 rounded-md border-red-500 hover:bg-red-500 hover:text-white">
+            <IconButton v-show="selectedCategory.id" data-dropdown-toggle="dropdownDeleteCategory" color="red"
+                id="toggleDeleteCategoryDropdown">
                 <i class="fa-solid fa-trash"></i>
-            </button>
+            </IconButton>
         </Transition>
-        <button data-dropdown-toggle="dropdownAddCategory" type="button" id="toggleAddCategoryDropdown"
-            class="text-green-500 px-1 py-1 rounded-md hover:bg-green-500 hover:text-white">
+        <IconButton data-dropdown-toggle="dropdownAddCategory" color="green" type="button" id="toggleAddCategoryDropdown">
             <i class="fa-solid fa-plus"></i>
-        </button>
+        </IconButton>
     </div>
 
     <form id="dropdownAddCategory" @submit.prevent="addNewCategory"
@@ -64,6 +62,8 @@
 
 import { useForm } from '@inertiajs/inertia-vue3'
 import TextInput from '@/Components/TextInput.vue'
+import IconButton from '@/Components/IconButton.vue'
+import BaseButton from '@/Components/BaseButton.vue'
 import { onMounted } from 'vue'
 import { initDropdowns } from 'flowbite'
 import { Inertia } from '@inertiajs/inertia'

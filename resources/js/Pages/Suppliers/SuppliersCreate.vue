@@ -30,10 +30,9 @@
                 <div class="flex flex-wrap gap-8 pt-8">
                     <div v-for="(address, index) in addresses"
                         class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <button class="float-right text-red-600" type="submit" @click="removeAddress(index)">
+                        <IconButton class="float-right" color="red" type="submit" @click="removeAddress(index)">
                             <i class="fa-solid fa-trash"></i>
-                        </button>
-
+                        </IconButton>
                         <SingleAddressList :id="index" :address="address" />
                     </div>
                 </div>
@@ -61,9 +60,9 @@
                         <template v-for="(person, index) in persons">
                             <div
                                 class="w-[31.5%] max-w-md min-w-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                                <button class="float-right text-red-600" type="submit" @click="removePerson(index)">
+                                <IconButton class="float-right" color="red" type="submit" @click="removePerson(index)">
                                     <i class="fa-solid fa-trash"></i>
-                                </button>
+                                </IconButton>
                                 <SinglePersonList :id="index" :person="person" />
                             </div>
                         </template>
@@ -81,6 +80,7 @@ import { Head } from '@inertiajs/inertia-vue3';
 import { onMounted, reactive } from 'vue';
 import { initModals } from 'flowbite';
 import BaseButton from '@/Components/BaseButton.vue';
+import IconButton from '@/Components/IconButton.vue';
 import PageBoxWrapper from '@/Components/PageBoxWrapper.vue';
 import AddSupplierForm from '@/Pages/Suppliers/Partials/AddSupplierForm.vue';
 import AddAddressForm from '@/Pages/Suppliers/Partials/AddAddressForm.vue';
