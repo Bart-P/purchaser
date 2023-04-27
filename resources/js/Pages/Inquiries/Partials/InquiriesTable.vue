@@ -33,7 +33,7 @@
                 <td class="table-data">{{ inquiry.pm }}</td>
                 <td class="table-data">{{ new Date(inquiry.updated_at).toLocaleString('de').slice(0, -3) }}</td>
                 <td class="table-data space-x-3">
-                    <IconButton color="green">
+                    <IconButton color="green" :href="route('inquiries.show', inquiry.id)">
                         <i class="fa-solid fa-eye"></i>
                     </IconButton>
                     <IconButton color="blue">
@@ -51,7 +51,6 @@
 
 <script setup>
 import IconButton from '@/Components/IconButton.vue';
-
 
 const props = defineProps({
     'inquiries': Object,
