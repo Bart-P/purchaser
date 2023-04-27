@@ -48,5 +48,3 @@ const props = defineProps({
 });
 
 </script>
-
-
