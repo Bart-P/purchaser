@@ -126,7 +126,7 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/inertia-vue3';
 import { onMounted, ref } from 'vue';
 import { initModals } from 'flowbite';
 import BaseButton from '@/Components/BaseButton.vue';

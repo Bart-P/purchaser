@@ -98,9 +98,7 @@ watch(
 )
 
 // set checkedTags on page load an when supplierTags are edited/deleted.
-if (props.supplierTags) {
-    checkedTags.value = props.supplierTags
-}
+if (props.supplierTags) checkedTags.value = props.supplierTags
 watch(
     () => props.supplierTags,
     () => checkedTags.value = props.supplierTags
