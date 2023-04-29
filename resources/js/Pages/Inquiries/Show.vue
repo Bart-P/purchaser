@@ -15,6 +15,9 @@
                     <BaseButton color="edit" class="!px-3 rounded-full text-sm">
                         <i class="fa-solid fa-pen"></i>
                     </BaseButton>
+                    <BaseButton color="back" class="!px-3 rounded-full text-sm">
+                        <i class="fa-solid fa-delete-left"></i>
+                    </BaseButton>
                 </div>
             </div>
         </template>
