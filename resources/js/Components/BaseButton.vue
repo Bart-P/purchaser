@@ -30,6 +30,9 @@ const buttonStyles = {
     light: {
         'cursor-pointer bg-gray-100 hover:bg-purchaser-primary-light text-purchaser-primary-dark': true
     },
+    edit: {
+        'cursor-pointer bg-blue-600 hover:bg-blue-800 text-white': true
+    },
     disabled: {
         'cursor-not-allowed bg-gray-100 text-gray-500 px-6 py-2 rounded': true
     },
@@ -48,6 +51,8 @@ function getClass() {
             return buttonStyles.success
         case 'light':
             return buttonStyles.light
+        case 'edit':
+            return buttonStyles.edit
         case 'danger':
             return buttonStyles.danger
         default:
