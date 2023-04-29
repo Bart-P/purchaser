@@ -29,37 +29,37 @@
                         <h3 class="heading-3">Anfrage Daten</h3>
                         <table class="text-left">
                             <tr class="table-row">
-                                <th class="table-data">Projekt Titel:</th>
+                                <th class="w-2/5">Projekt Titel:</th>
                                 <td class="table-data">
                                     {{ props.inquiry.title }}
                                 </td>
                             </tr>
                             <tr class="table-row">
-                                <th class="table-data">Projekt Nr:</th>
+                                <th class="w-2/5">Projekt Nr:</th>
                                 <td class="table-data">
                                     {{ props.inquiry.project }}
                                 </td>
                             </tr>
                             <tr class="table-row">
-                                <th class="table-data">Leiter:</th>
+                                <th class="w-2/5">Leiter:</th>
                                 <td class="table-data">
                                     {{ props.inquiry.pm }}
                                 </td>
                             </tr>
                             <tr class="table-row">
-                                <th class="table-data">Kunde</th>
+                                <th class="w-2/5">Kunde</th>
                                 <td class="table-data">
                                     {{ props.inquiry.client }}
                                 </td>
                             </tr>
                             <tr class="table-row">
-                                <th class="table-data">Erstellt am</th>
+                                <th class="w-2/5">Erstellt am</th>
                                 <td class="table-data">
                                     {{ new Date(props.inquiry.created_at).toLocaleString('de').slice(0, -3) }}
                                 </td>
                             </tr>
                             <tr class="table-row">
-                                <th class="table-data">Letztes Update</th>
+                                <th class="w-2/5">Letztes Update</th>
                                 <td class="table-data">
                                     {{ new Date(props.inquiry.updated_at).toLocaleString('de').slice(0, -3) }}
                                 </td>
