@@ -88,7 +88,7 @@
             <BaseButton @click="addPerson()" color="primary" type="button">
                 Speichern
             </BaseButton>
-            <BaseButton data-modal-hide="addPersonModal" color="light" type="button">
+            <BaseButton data-modal-hide="addPersonModal" color="back" type="button">
                 Abbrechen
             </BaseButton>
         </div>

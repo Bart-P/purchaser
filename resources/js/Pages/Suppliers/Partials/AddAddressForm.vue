@@ -67,7 +67,7 @@
             <BaseButton color="primary" @click.prevent="addAddress()" type="submit">
                 Speichern
             </BaseButton>
-            <BaseButton data-modal-hide="addAddressModal" color="light" type="button">
+            <BaseButton data-modal-hide="addAddressModal" color="back" type="button">
                 Abbrechen
             </BaseButton>
         </div>

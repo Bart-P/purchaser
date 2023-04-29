@@ -8,7 +8,7 @@
                 <BaseButton type="submit" color="primary">
                     Speichern
                 </BaseButton>
-                <BaseButton type="button" :href="route('suppliers')" color="light">
+                <BaseButton type="button" :href="route('suppliers')" color="back">
                     Zurück
                 </BaseButton>
             </div>

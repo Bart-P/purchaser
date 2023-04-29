@@ -12,7 +12,7 @@
                 Löschen
             </BaseButton>
 
-            <BaseButton @click="deleteAddressModal.hide()" color="light">
+            <BaseButton @click="deleteAddressModal.hide()" color="back">
                 Abbrechen
             </BaseButton>
         </template>
@@ -31,7 +31,7 @@
                 Löschen
             </BaseButton>
 
-            <BaseButton @click="deletePersonModal.hide()" color="light">
+            <BaseButton @click="deletePersonModal.hide()" color="back">
                 Abbrechen
             </BaseButton>
         </template>

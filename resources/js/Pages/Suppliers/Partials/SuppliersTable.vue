@@ -10,7 +10,7 @@
                 Löschen
             </BaseButton>
 
-            <BaseButton data-modal-hide="deleteSupplierModal" color="light">
+            <BaseButton data-modal-hide="deleteSupplierModal" color="back">
                 Abbrechen
             </BaseButton>
         </template>

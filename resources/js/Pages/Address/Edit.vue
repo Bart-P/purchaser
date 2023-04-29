@@ -16,7 +16,7 @@
                             Speichern
                         </BaseButton>
 
-                        <BaseButton :href="route('suppliers.edit', addressForm.supplier_id)" color="light">
+                        <BaseButton :href="route('suppliers.edit', addressForm.supplier_id)" color="back">
                             Zurück
                         </BaseButton>
                     </div>
