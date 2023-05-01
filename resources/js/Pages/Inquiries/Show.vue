@@ -108,7 +108,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PageBoxWrapper from '@/Components/PageBoxWrapper.vue'
-import { Head } from "@inertiajs/inertia-vue3";
+import { Head } from "@inertiajs/vue3";
 import BaseButton from '@/Components/BaseButton.vue';
 
 const props = defineProps({

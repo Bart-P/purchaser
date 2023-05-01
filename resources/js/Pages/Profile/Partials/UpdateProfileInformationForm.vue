@@ -8,74 +8,45 @@
             </p>
         </header>
 
-        <form @submit.prevent="form.patch(route('profile.update'))"
-              class="mt-6 space-y-6">
+        <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
             <div>
-                <InputLabel for="name"
-                            value="Name" />
+                <InputLabel for="name" value="Name" />
 
-                <TextInput
-                    id="name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
+                <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus
+                    autocomplete="name" />
 
-                <InputError class="mt-2"
-                            :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.name" />
             </div>
 
             <div>
-                <InputLabel for="email"
-                            value="Email" />
+                <InputLabel for="email" value="Email" />
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="email"
-                />
+                <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required
+                    autocomplete="email" />
 
-                <InputError class="mt-2"
-                            :message="form.errors.email" />
+                <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div v-if="props.mustVerifyEmail && user.email_verified_at === null">
                 <p class="text-sm mt-2 text-gray-800">
                     Deine Email addresse ist nicht verifiziert.
-                    <Link
-                        :href="route('verification.send')"
-                        method="post"
-                        as="button"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        Hier klicken um die Verifikationsemail nochmal zu versenden.
+                    <Link :href="route('verification.send')" method="post" as="button"
+                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Hier klicken um die Verifikationsemail nochmal zu versenden.
                     </Link>
                 </p>
 
-                <div
-                    v-show="props.status === 'verification-link-sent'"
-                    class="mt-2 font-medium text-sm text-green-600"
-                >
+                <div v-show="props.status === 'verification-link-sent'" class="mt-2 font-medium text-sm text-green-600">
                     Ein neuer Verifikationslink wurde an deine Emailadresse geschickt.
                 </div>
             </div>
 
             <div class="flex items-center gap-4">
-                <BaseButton color="primary"
-                            :disabled="form.processing">Speichern
+                <BaseButton color="primary" :disabled="form.processing">Speichern
                 </BaseButton>
 
-                <Transition enter-from-class="opacity-0"
-                            leave-to-class="opacity-0"
-                            class="transition ease-in-out">
-                    <p v-if="form.recentlySuccessful"
-                       class="text-sm text-gray-600">Gespeichert.</p>
+                <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
+                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Gespeichert.</p>
                 </Transition>
             </div>
         </form>
@@ -87,19 +58,19 @@ import BaseButton from '@/Components/BaseButton.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
-import {Link, useForm, usePage} from '@inertiajs/inertia-vue3';
+import { Link, useForm, usePage } from '@inertiajs/vue3';
 
 const props = defineProps(
     {
         mustVerifyEmail: Boolean,
-        status         : String,
+        status: String,
     });
 
-const user = usePage().props.value.auth.user;
+const user = usePage().props.auth.user;
 
 const form = useForm(
     {
-        name : user.name,
+        name: user.name,
         email: user.email,
     });
 </script>

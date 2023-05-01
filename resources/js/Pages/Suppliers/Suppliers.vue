@@ -19,11 +19,11 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, usePage } from '@inertiajs/inertia-vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import SuppliersTable from '@/Pages/Suppliers/Partials/SuppliersTable.vue';
 import SuppliersTableNav from '@/Pages/Suppliers/Partials/SuppliersTableNav.vue';
 import SupplierSelectionStore from '@/Stores/SupplierSelectionStore'
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/vue3';
 import { ref, watch } from 'vue';
 import PageBoxWrapper from '@/Components/PageBoxWrapper.vue';
 
@@ -35,7 +35,7 @@ const props = defineProps(
     }
 )
 
-const pageQuery = usePage().props.value.query
+const pageQuery = usePage().props.query
 const searchTerm = SupplierSelectionStore.searchTerm
 const sort = ref({
     direction: SupplierSelectionStore.sort.direction,
@@ -78,7 +78,7 @@ function applySearchAndFilter() {
         sort.column = SupplierSelectionStore.column
         sort.direction = SupplierSelectionStore.direction
     }
-    Inertia.get(
+    router.get(
         route('suppliers'),
         {
             search: SupplierSelectionStore.searchTerm,

@@ -52,7 +52,7 @@ import AddCategoryForm from '@/Pages/Suppliers/Partials/AddCategoryForm.vue';
 import AddTagForm from '@/Pages/Suppliers/Partials/AddTagForm.vue';
 import TextInput from '@/Components/TextInput.vue';
 import ToastStore from '@/Stores/ToastStore';
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/vue3';
 import { initDrawers, initDropdowns } from 'flowbite';
 import { onMounted, ref, watch } from 'vue';
 

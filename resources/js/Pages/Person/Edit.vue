@@ -127,10 +127,9 @@
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import BaseButton from "@/Components/BaseButton.vue";
-import { useForm, Head } from "@inertiajs/inertia-vue3";
+import { router, useForm, Head } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
-import { Inertia } from "@inertiajs/inertia";
 
 const props = defineProps(
     {
@@ -140,7 +139,7 @@ const props = defineProps(
 let personForm = useForm(props.person)
 
 function savePerson() {
-    Inertia.patch(route('person.patch', personForm))
+    router.patch(route('person.patch', personForm))
 }
 
 

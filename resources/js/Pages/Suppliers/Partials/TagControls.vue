@@ -58,10 +58,9 @@
 import TextInput from '@/Components/TextInput.vue';
 import IconButton from '@/Components/IconButton.vue';
 import BaseButton from '@/Components/BaseButton.vue';
-import { useForm } from '@inertiajs/inertia-vue3';
+import { router, useForm } from '@inertiajs/vue3';
 import { onMounted } from 'vue'
 import { initDropdowns } from 'flowbite'
-import { Inertia } from '@inertiajs/inertia';
 
 onMounted(() => {
     initDropdowns()
@@ -93,12 +92,12 @@ function addTag() {
 }
 
 function updateTag() {
-    Inertia.patch(route('tag.patch'), props.selectedTag)
+    router.patch(route('tag.patch'), props.selectedTag)
     document.getElementById('toggleEditTagForm').click()
 }
 
 function deleteTag() {
-    Inertia.delete(route('tag.destroy', props.selectedTag.id))
+    router.delete(route('tag.destroy', props.selectedTag.id))
     document.getElementById('toggleDeleteTagForm').click()
 }
 

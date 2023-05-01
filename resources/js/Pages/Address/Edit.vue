@@ -85,13 +85,13 @@
 <script setup>
 import AlertFailed from '@/Components/AlertFailed.vue';
 import SelectCountryField from '@/Pages/Address/Partials/SelectCountryField.vue';
-import { Head, useForm } from '@inertiajs/inertia-vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PageBoxWrapper from '@/Components/PageBoxWrapper.vue';
 import BaseButton from '@/Components/BaseButton.vue';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/vue3';
 import { CountryCodes } from '@/Localisation/CountryCodes';
 import { ref } from 'vue';
 
@@ -110,7 +110,7 @@ function selectCountry(countryCode) {
 
 function saveAddress() {
     if (fieldsValidated()) {
-        Inertia.patch(route('address.patch', addressForm));
+        router.patch(route('address.patch', addressForm));
     } else {
         addressFormError.value =
             'Bitte alle mit * gekennzeichneten Felder befüllen';

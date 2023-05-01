@@ -1,7 +1,7 @@
 <script setup>
 import PageBoxWrapper from '@/Components/PageBoxWrapper.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>

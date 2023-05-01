@@ -57,13 +57,13 @@
 
 <script setup>
 
-import { useForm } from '@inertiajs/inertia-vue3'
+import { useForm } from '@inertiajs/vue3'
 import TextInput from '@/Components/TextInput.vue'
 import IconButton from '@/Components/IconButton.vue'
 import BaseButton from '@/Components/BaseButton.vue'
 import { onMounted } from 'vue'
 import { initDropdowns } from 'flowbite'
-import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
 
 onMounted(() => {
     initDropdowns()
@@ -98,7 +98,7 @@ function deleteSelectedCategory() {
 
     if (idToDelete) {
         emits('resetSelectableValues')
-        Inertia.delete(route('category.destroy', idToDelete))
+        router.delete(route('category.destroy', idToDelete))
         document.getElementById('toggleDeleteCategoryDropdown').click()
     }
 }
@@ -106,7 +106,7 @@ function deleteSelectedCategory() {
 function updateCategory() {
     const selectedCat = props.selectedCategory
     if (selectedCat.name && selectedCat.color) {
-        Inertia.patch(route('category.patch', selectedCat))
+        router.patch(route('category.patch', selectedCat))
         document.getElementById('toggleEditCategoryDropdown').click()
     }
 }

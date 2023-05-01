@@ -82,8 +82,7 @@ import TextInput from '@/Components/TextInput.vue';
 import { CountryCodes } from '@/Localisation/CountryCodes';
 import SelectCountryField from '@/Pages/Address/Partials/SelectCountryField.vue';
 import ToastStore from '@/Stores/ToastStore';
-import { Inertia } from '@inertiajs/inertia';
-import { useForm } from '@inertiajs/inertia-vue3';
+import { router, useForm } from '@inertiajs/vue3';
 
 const props = defineProps(
     {
@@ -147,7 +146,7 @@ function addAddress() {
 
 function saveNewAddressForSupplier(addressData) {
     addressData['supplier_id'] = props.supplier.id
-    Inertia.post(route('address.store'), addressData)
+    router.post(route('address.store'), addressData)
 }
 
 function selectCountry(countryCode) {

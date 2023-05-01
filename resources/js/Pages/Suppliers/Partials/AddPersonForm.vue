@@ -101,8 +101,7 @@ import BaseButton from '@/Components/BaseButton.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import ToastStore from '@/Stores/ToastStore';
-import { Inertia } from '@inertiajs/inertia';
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm, router } from '@inertiajs/vue3';
 
 const props = defineProps(
     {
@@ -151,7 +150,7 @@ function addPerson() {
 
 function saveNewPersonForSupplier(personData) {
     personData['supplier_id'] = props.supplier.id
-    Inertia.post(route('person.store'), personData)
+    router.post(route('person.store'), personData)
 }
 
 

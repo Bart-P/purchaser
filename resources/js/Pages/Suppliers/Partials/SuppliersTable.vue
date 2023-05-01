@@ -84,7 +84,7 @@ import BaseButton from '@/Components/BaseButton.vue';
 import IconButton from '@/Components/IconButton.vue';
 import DeleteConfirmationModal from '@/Components/DeleteConfirmationModal.vue';
 import Pagination from '@/Components/Pagination.vue';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/vue3';
 import { initModals } from 'flowbite';
 import { onMounted, reactive, watch } from 'vue';
 
@@ -136,7 +136,7 @@ function setSupplierToDelete(id, name) {
 }
 
 function deleteSupplier() {
-    Inertia.delete(route('suppliers.destroy', supplierToDelete.id))
+    router.delete(route('suppliers.destroy', supplierToDelete.id))
 }
 
 function sort(column) {

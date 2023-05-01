@@ -126,7 +126,7 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/vue3';
 import { onMounted, ref } from 'vue';
 import { initModals } from 'flowbite';
 import BaseButton from '@/Components/BaseButton.vue';
@@ -139,7 +139,7 @@ import AddPersonForm from '@/Pages/Suppliers/Partials/AddPersonForm.vue';
 import BaseModal from '@/Components/BaseModal.vue';
 import SinglePersonList from '@/Pages/Suppliers/Partials/SinglePersonList.vue';
 import DeleteConfirmationModal from '@/Components/DeleteConfirmationModal.vue';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/vue3';
 import { Modal } from 'flowbite';
 
 onMounted(() => {
@@ -194,12 +194,12 @@ function setPersonToDelete(fname, lname, id) {
 }
 
 function deleteAddress() {
-    Inertia.delete(route('address.destroy', addressToDelete.value.id))
+    router.delete(route('address.destroy', addressToDelete.value.id))
     deleteAddressModal.hide()
 }
 
 function deletePerson() {
-    Inertia.delete(route('person.destroy', personToDelete.value.id))
+    router.delete(route('person.destroy', personToDelete.value.id))
     deletePersonModal.hide()
 }
 </script>
