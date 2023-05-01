@@ -17,22 +17,17 @@ import { onUnmounted } from 'vue';
 
 const page = usePage();
 
-let removeFinishEventListener = () => {
+onUnmounted(() => {
     router.on('finish', () => {
         if (page.props.notification.message) {
-            // TODO bug fix - this is called twice.. Why? 
-            // also on Supplier delete no notification comes up... 
-            console.log(page.props.notification)
+            // TODO on Supplier delete no notification comes up... 
             ToastStore.add(
                 {
                     ...page.props.notification,
                 })
+            page.props.notification = {}
         }
     })
-
-}
-onUnmounted(() => {
-    removeFinishEventListener()
 })
 
 function removeToast(key) {
@@ -40,6 +35,5 @@ function removeToast(key) {
 }
 
 </script>
-
 
 <style scoped></style>
