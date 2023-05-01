@@ -17,11 +17,6 @@ import { onUnmounted, watch } from 'vue';
 
 const page = usePage();
 
-watch(
-    () => page.props.notification.message,
-    () => usePageNotificationOnce()
-)
-
 function usePageNotificationOnce() {
     if (page.props.notification.message) {
         ToastStore.add(
@@ -31,6 +26,11 @@ function usePageNotificationOnce() {
         page.props.notification = {}
     }
 }
+
+watch(
+    () => page.props.notification.message,
+    () => usePageNotificationOnce()
+)
 
 onUnmounted(() => {
     router.on('finish', () => {
