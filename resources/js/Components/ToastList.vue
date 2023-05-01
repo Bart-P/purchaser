@@ -13,20 +13,28 @@ import ToastListItem from '@/Components/ToastListItem.vue';
 import ToastStore from '@/Stores/ToastStore';
 import { router } from '@inertiajs/vue3';
 import { usePage } from '@inertiajs/vue3';
-import { onUnmounted } from 'vue';
+import { onUnmounted, watch } from 'vue';
 
 const page = usePage();
 
+watch(
+    () => page.props.notification.message,
+    () => usePageNotificationOnce()
+)
+
+function usePageNotificationOnce() {
+    if (page.props.notification.message) {
+        ToastStore.add(
+            {
+                ...page.props.notification,
+            })
+        page.props.notification = {}
+    }
+}
+
 onUnmounted(() => {
     router.on('finish', () => {
-        if (page.props.notification.message) {
-            // TODO on Supplier delete no notification comes up... 
-            ToastStore.add(
-                {
-                    ...page.props.notification,
-                })
-            page.props.notification = {}
-        }
+        usePageNotificationOnce()
     })
 })
 
