@@ -152,6 +152,8 @@ function submitSupplier() {
     }
 
     if (props.supplier) {
+        supplierForm.categories = checkedCategories
+        supplierForm.tags = checkedTags
         supplierForm.put(
             route('suppliers.put',
                 {
@@ -159,8 +161,8 @@ function submitSupplier() {
                     'name': supplierForm.name,
                     'web': supplierForm.web,
                     'email': supplierForm.email,
-                    'categories': checkedCategories,
-                    'tags': checkedTags,
+                    'categories': supplierForm.checkedCategories,
+                    'tags': supplierForm.checkedTags,
                 }))
     } else {
         supplierForm.post(route('suppliers.store'))
