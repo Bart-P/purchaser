@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('inquiry_id');
             $table->string('title');
-            $table->string('description');
             $table->timestamps();
         });
     }

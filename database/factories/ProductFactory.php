@@ -19,7 +19,6 @@ class ProductFactory extends Factory
         return [
             'title' => fake()->text(rand(10, 30)),
             'inquiry_id' => fake()->numberBetween(1, 10),
-            'description' => fake()->text(rand(100, 150)),
         ];
     }
 }
