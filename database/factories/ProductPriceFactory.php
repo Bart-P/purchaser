@@ -18,7 +18,7 @@ class ProductPriceFactory extends Factory
     {
         return [
             'product_id' => fake()->numberBetween(1, 20),
-            'amount' => fake()->randomElement([10, 50, 100, 200, 500, 1000]),
+            'quantity' => fake()->randomElement([10, 50, 100, 200, 500, 1000]),
             'note' => fake()->text(10, 20),
             'cost_in_cent' => fake()->numberBetween(99, 9999),
             'price_in_cent' => fake()->numberBetween(99, 9999),

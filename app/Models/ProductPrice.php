@@ -12,7 +12,7 @@ class ProductPrice extends Model
 
     protected $fillable = [
         'product_id',
-        'amount',
+        'quantity',
         'note',
         'cost_in_cent',
         'price_in_cent',

@@ -9,6 +9,8 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    // TODO add to seeder, test it out (not tested yet)
     public function up(): void
     {
         Schema::create('product_prices', function (Blueprint $table) {
@@ -17,7 +19,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('cost_in_cent');
             $table->integer('price_in_cent');
-            $table->text('note');
+            $table->string('note');
             $table->timestamps();
         });
     }
