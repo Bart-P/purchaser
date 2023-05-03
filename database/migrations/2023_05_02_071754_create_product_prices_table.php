@@ -10,7 +10,6 @@ return new class extends Migration
      * Run the migrations.
      */
 
-    // TODO add to seeder, test it out (not tested yet)
     public function up(): void
     {
         Schema::create('product_prices', function (Blueprint $table) {
