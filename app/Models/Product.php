@@ -12,9 +12,8 @@ class Product extends Model
 
     protected $fillable = [
         'title',
+        'inquiry_id',
         'description',
-        'cost',
-        'price',
     ];
 
     public function inquiries(): BelongsTo
