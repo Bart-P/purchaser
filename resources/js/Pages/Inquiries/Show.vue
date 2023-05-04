@@ -97,7 +97,7 @@
                     </div>
                 </div>
                 <div class="card mt-3">
-
+                    <h3 class="heading-3 pb-3">Produkte</h3>
                     <table class="table">
                         <thead class="table-head">
                             <tr>
