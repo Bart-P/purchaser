@@ -41,10 +41,10 @@ class SuppliersController extends Controller
                 ->when(
                     $request->sortBy && $request->sortBy['column'] != '',
                     function ($query) use ($request) {
-                        if ($request->sortBy['direction'] == '') {
-                            return $query->orderBy('updated_at', 'DESC');
+                        if (array_key_exists('direction', $request->sortBy) && $request->sortBy['direction'] != '') {
+                            return $query->orderBy($request->sortBy['column'], $request->sortBy['direction']);
                         }
-                        return $query->orderBy($request->sortBy['column'], $request->sortBy['direction']);
+                        return $query->orderBy('updated_at', 'DESC');
                     },
                     function ($query) {
                         return $query->orderBy('updated_at', 'DESC');
