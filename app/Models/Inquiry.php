@@ -23,4 +23,9 @@ class Inquiry extends Model
     {
         return $this->hasMany(Supplier::class);
     }
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
 }

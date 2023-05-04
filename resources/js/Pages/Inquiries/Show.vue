@@ -112,7 +112,8 @@ import { Head } from "@inertiajs/vue3";
 import BaseButton from '@/Components/BaseButton.vue';
 
 const props = defineProps({
-    inquiry: Object
+    inquiry: Object,
+    products: Object,
 });
 
 </script>

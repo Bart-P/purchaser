@@ -18,8 +18,15 @@ class InquiryController extends Controller
     function show($id)
     {
         $inquiry = Inquiry::find($id);
+        $inquiryProducts = $inquiry->products()->get()->map(function ($prod) {
+            $prodPrices = $prod->productPrices()->get();
+            $prod->prices = $prodPrices;
+            return $prod;
+        });
+
         return Inertia::render('Inquiries/Show', [
             'inquiry' => $inquiry,
+            'products' => $inquiryProducts,
         ]);
     }
 }
