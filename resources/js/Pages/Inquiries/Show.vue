@@ -71,18 +71,14 @@
                             <div class="">
                                 <h3 class="heading-3 pb-3">Beschreibung</h3>
                                 <p class="">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo ad harum quaerat alias
-                                    quae
-                                    autem
-                                    excepturi voluptas tenetur!
-                                    Dolorum cum facere eveniet ducimus incidunt facilis voluptates
-                                    quaerat, commodi non omnis.
+                                    {{ inquiry.description }}
                                 </p>
                             </div>
                             <div class="">
                                 <hr>
                                 <h3 class="heading-3 py-3">Anhänge</h3>
                                 <ul class="flex flex-wrap mb-6 text-gray-900 dark:text-white">
+                                    <!-- TODO - make uploads work -->
                                     <li>
                                         <a href="#" class="hover:underline mr-3">bild1.jpg;</a>
                                     </li>
