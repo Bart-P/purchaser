@@ -37,6 +37,18 @@
                                 </td>
                             </tr>
                             <tr class="table-row">
+                                <th class="w-2/5">Abgabe Preis bis</th>
+                                <td class="table-data">
+                                    -
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <th class="w-2/5">Geplater Liefertermin</th>
+                                <td class="table-data">
+                                    -
+                                </td>
+                            </tr>
+                            <tr class="table-row">
                                 <th class="w-2/5">Projekt Nr.</th>
                                 <td class="table-data">
                                     {{ props.inquiry.project }}

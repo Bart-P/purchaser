@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('inquiries', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->date('offers_until');
+            $table->string('delivery_date');
             $table->string('status');
             $table->string('description', 2000);
             $table->string('project');

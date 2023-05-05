@@ -12,6 +12,8 @@ class Inquiry extends Model
 
     protected $fillable = [
         'title',
+        'offers_until',
+        'delivery_date',
         'status',
         'description',
         'project',
