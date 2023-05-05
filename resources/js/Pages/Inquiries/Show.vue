@@ -22,26 +22,26 @@
             </div>
         </template>
 
-        <div class="py-12">
+        <div class="py-12 space-y-6">
             <PageBoxWrapper>
+                <h3 class="heading-3 mb-6">Anfrage Daten</h3>
                 <div class="flex gap-3">
-                    <div class="card basis-1/3">
-                        <h3 class="heading-3">Anfrage Daten</h3>
+                    <div class="card basis-1/2">
                         <table class="text-left">
                             <tr class="table-row">
-                                <th class="w-2/5">Projekt Titel:</th>
+                                <th class="w-2/5">Projekt Titel</th>
                                 <td class="table-data">
                                     {{ props.inquiry.title }}
                                 </td>
                             </tr>
                             <tr class="table-row">
-                                <th class="w-2/5">Projekt Nr:</th>
+                                <th class="w-2/5">Projekt Nr.</th>
                                 <td class="table-data">
                                     {{ props.inquiry.project }}
                                 </td>
                             </tr>
                             <tr class="table-row">
-                                <th class="w-2/5">Leiter:</th>
+                                <th class="w-2/5">Leiter</th>
                                 <td class="table-data">
                                     {{ props.inquiry.pm }}
                                 </td>
@@ -58,7 +58,7 @@
                                     {{ new Date(props.inquiry.created_at).toLocaleString('de').slice(0, -3) }}
                                 </td>
                             </tr>
-                            <tr class="table-row">
+                            <tr class="">
                                 <th class="w-2/5">Letztes Update</th>
                                 <td class="table-data">
                                     {{ new Date(props.inquiry.updated_at).toLocaleString('de').slice(0, -3) }}
@@ -66,17 +66,17 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="card basis-2/3">
+                    <div class="card basis-1/2">
                         <div class="flex flex-col content-between justify-between h-full">
                             <div class="">
-                                <h3 class="heading-3 pb-3">Beschreibung</h3>
+                                <h4 class="heading-4 pb-3">Beschreibung</h4>
                                 <p class="">
                                     {{ inquiry.description }}
                                 </p>
                             </div>
                             <div class="">
                                 <hr>
-                                <h3 class="heading-3 py-3">Anhänge</h3>
+                                <h4 class="heading-4 py-3">Anhänge</h4>
                                 <ul class="flex flex-wrap mb-6 text-gray-900 dark:text-white">
                                     <!-- TODO - make uploads work -->
                                     <li>
@@ -96,46 +96,46 @@
                         </div>
                     </div>
                 </div>
-                <div class="card mt-3">
-                    <h3 class="heading-3 pb-3">Produkte</h3>
-                    <table class="table">
-                        <thead class="table-head">
-                            <tr>
-                                <th class="p-4">ID</th>
-                                <th class="p-4">Titel</th>
-                                <th class="p-4">Auflagen</th>
-                                <th class="p-4">Erstellt am</th>
-                                <th class="p-4">Letztes update</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-
-                        <tr v-for="product in products" class="table-row">
-                            <td class="table-data">{{ product.id }}</td>
-                            <td class="table-data">{{ product.title }}</td>
-                            <td class="table-date">
-                                <span v-for="$price, index in sortPricesByQuantities(product.prices)">
-                                    {{ $price.quantity }}
-                                    {{ index - sortPricesByQuantities(product.prices).length ===
-                                        -1 ? '' : ', '
-                                    }}</span>
-                            </td>
-                            <td class="table-data">{{ product.created_at }}</td>
-                            <td class="table-data">{{ product.updated_at }}</td>
-                            <td class="space-x-3">
-                                <IconButton color="green">
-                                    <i class="fa-solid fa-eye"></i>
-                                </IconButton>
-                                <IconButton>
-                                    <i class="fa-solid fa-pen"></i>
-                                </IconButton>
-                                <IconButton color="red">
-                                    <i class="fa-solid fa-trash"></i>
-                                </IconButton>
-                            </td>
+            </PageBoxWrapper>
+            <PageBoxWrapper>
+                <h3 class="heading-3 pb-3">Produkte</h3>
+                <table class="table">
+                    <thead class="table-head">
+                        <tr>
+                            <th class="p-4">ID</th>
+                            <th class="p-4">Titel</th>
+                            <th class="p-4">Auflagen</th>
+                            <th class="p-4">Erstellt am</th>
+                            <th class="p-4">Letztes update</th>
+                            <th></th>
                         </tr>
-                    </table>
-                </div>
+                    </thead>
+
+                    <tr v-for="product in products" class="table-row">
+                        <td class="table-data">{{ product.id }}</td>
+                        <td class="table-data">{{ product.title }}</td>
+                        <td class="table-date">
+                            <span v-for="$price, index in sortPricesByQuantities(product.prices)">
+                                {{ $price.quantity }}
+                                {{ index - sortPricesByQuantities(product.prices).length ===
+                                    -1 ? '' : ', '
+                                }}</span>
+                        </td>
+                        <td class="table-data">{{ product.created_at }}</td>
+                        <td class="table-data">{{ product.updated_at }}</td>
+                        <td class="space-x-3">
+                            <IconButton color="green">
+                                <i class="fa-solid fa-eye"></i>
+                            </IconButton>
+                            <IconButton>
+                                <i class="fa-solid fa-pen"></i>
+                            </IconButton>
+                            <IconButton color="red">
+                                <i class="fa-solid fa-trash"></i>
+                            </IconButton>
+                        </td>
+                    </tr>
+                </table>
             </PageBoxWrapper>
         </div>
     </AuthenticatedLayout>
@@ -154,7 +154,7 @@ const props = defineProps({
 });
 
 function sortPricesByQuantities($prices) {
-    return $prices.sort((a, b) => a.quantity - b.quantity);
 
+    return $prices.sort((a, b) => a.quantity - b.quantity);
 }
 </script>
