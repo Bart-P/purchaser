@@ -12,9 +12,6 @@
                     <BaseButton color="danger" class="!px-3 rounded-full text-sm">
                         <i class="fa-solid fa-trash"></i>
                     </BaseButton>
-                    <BaseButton color="edit" class="!px-3 rounded-full text-sm">
-                        <i class="fa-solid fa-pen"></i>
-                    </BaseButton>
                     <BaseButton :href="route('inquiries')" color="back" class="!px-3 rounded-full text-sm">
                         <i class="fa-solid fa-delete-left"></i>
                     </BaseButton>
@@ -24,7 +21,12 @@
 
         <div class="py-12 space-y-6">
             <PageBoxWrapper>
-                <h3 class="heading-3 mb-6">Anfrage Daten</h3>
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="heading-3">Anfrage Daten</h3>
+                    <BaseButton color="edit" class="!px-3 rounded-full text-sm">
+                        <i class="fa-solid fa-pen"></i>
+                    </BaseButton>
+                </div>
                 <div class="flex gap-3">
                     <div class="card basis-1/2">
                         <table class="text-left">
