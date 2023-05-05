@@ -84,9 +84,9 @@
                         <div class="flex flex-col content-between justify-between h-full">
                             <div class="">
                                 <h4 class="heading-4 pb-3">Beschreibung</h4>
-                                <p class="">
-                                    {{ inquiry.description }}
+                                <p v-html="parseDescription" class="">
                                 </p>
+                                <!-- {{ inquiry.description }} -->
                             </div>
                             <div class="">
                                 <hr>
@@ -206,11 +206,14 @@ import PageBoxWrapper from '@/Components/PageBoxWrapper.vue'
 import { Head } from "@inertiajs/vue3";
 import BaseButton from '@/Components/BaseButton.vue';
 import IconButton from '@/Components/IconButton.vue';
+import { computed } from '@vue/reactivity';
 
 const props = defineProps({
     inquiry: Object,
     products: Object,
 });
+
+const parseDescription = computed(() => props.inquiry.description)
 
 function sortPricesByQuantities($prices) {
 
