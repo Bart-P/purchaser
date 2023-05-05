@@ -39,13 +39,13 @@
                             <tr class="table-row">
                                 <th class="w-2/5">Abgabe Preis bis</th>
                                 <td class="table-data">
-                                    -
+                                    {{ new Date(props.inquiry.offers_until).toLocaleString('de').slice(0, -10) }}
                                 </td>
                             </tr>
                             <tr class="table-row">
                                 <th class="w-2/5">Geplater Liefertermin</th>
                                 <td class="table-data">
-                                    -
+                                    {{ new Date(props.inquiry.delivery_date).toLocaleString('de').slice(0, -10) }}
                                 </td>
                             </tr>
                             <tr class="table-row">
