@@ -1,0 +1,111 @@
+<template>
+    <div class="flex justify-between items-center mb-3">
+        <h3 class="heading-3">Anfrage Daten</h3>
+        <BaseButton color="edit" class="!px-3 rounded-full text-sm">
+            <i class="fa-solid fa-pen"></i>
+        </BaseButton>
+    </div>
+    <div class="flex gap-3">
+        <div class="card basis-1/2">
+            <table class="text-left">
+                <tr class="table-row">
+                    <th class="w-2/5">Projekt Titel</th>
+                    <td class="table-data">
+                        {{ props.inquiry.title }}
+                    </td>
+                </tr>
+                <tr class="table-row">
+                    <th class="w-2/5">Status</th>
+                    <td class="table-data">
+                        {{ props.inquiry.status }}
+                    </td>
+                </tr>
+                <tr class="table-row">
+                    <th class="w-2/5">Abgabe Preis bis</th>
+                    <td class="table-data">
+                        {{ new Date(props.inquiry.offers_until).toLocaleString('de').slice(0, -10) }}
+                    </td>
+                </tr>
+                <tr class="table-row">
+                    <th class="w-2/5">Geplater Liefertermin</th>
+                    <td class="table-data">
+                        {{ new Date(props.inquiry.delivery_date).toLocaleString('de').slice(0, -10) }}
+                    </td>
+                </tr>
+                <tr class="table-row">
+                    <th class="w-2/5">Projekt Nr.</th>
+                    <td class="table-data">
+                        {{ props.inquiry.project }}
+                    </td>
+                </tr>
+                <tr class="table-row">
+                    <th class="w-2/5">Leiter</th>
+                    <td class="table-data">
+                        {{ props.inquiry.pm }}
+                    </td>
+                </tr>
+                <tr class="table-row">
+                    <th class="w-2/5">Kunde</th>
+                    <td class="table-data">
+                        {{ props.inquiry.client }}
+                    </td>
+                </tr>
+                <tr class="table-row">
+                    <th class="w-2/5">Erstellt am</th>
+                    <td class="table-data">
+                        {{ new Date(props.inquiry.created_at).toLocaleString('de').slice(0, -3) }}
+                    </td>
+                </tr>
+                <tr class="">
+                    <th class="w-2/5">Letztes Update</th>
+                    <td class="table-data">
+                        {{ new Date(props.inquiry.updated_at).toLocaleString('de').slice(0, -3) }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="card basis-1/2">
+            <div class="flex flex-col content-between justify-between h-full">
+                <div class="">
+                    <h4 class="heading-4 pb-3">Beschreibung</h4>
+                    <p v-html="parseDescription" class="">
+                    </p>
+                    <!-- TODO does it stay that way or should it be different? WYIWIG needed? Maybe just add -->
+                    <!-- text or list items and build a description out of it? -->
+                    <!-- {{ inquiry.description }} -->
+                </div>
+                <div class="">
+                    <hr>
+                    <h4 class="heading-4 py-3">Anhänge</h4>
+                    <ul class="flex flex-wrap mb-6 text-gray-900 dark:text-white">
+                        <!-- TODO - make uploads work -->
+                        <li>
+                            <a href="#" class="hover:underline mr-3">bild1.jpg;</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:underline mr-3">bild2.jpg;</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:underline mr-3">bild3.jpg;</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:underline mr-3">bild4.jpg;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import BaseButton from '@/Components/BaseButton.vue';
+import { computed } from '@vue/reactivity';
+
+const props = defineProps({
+    inquiry: Object,
+});
+
+const parseDescription = computed(() => props.inquiry.description)
+
+</script>
