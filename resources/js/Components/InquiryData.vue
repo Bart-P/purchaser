@@ -65,7 +65,7 @@
             </table>
         </div>
         <div class="card basis-1/2">
-            <div class="flex flex-col content-between justify-between gap-3 h-full">
+            <div class="flex flex-col content-between gap-3 h-full">
                 <div class="">
                     <h4 class="heading-4 py-3">Anhänge</h4>
                     <ul class="flex flex-wrap mb-6 text-gray-900 dark:text-white">
