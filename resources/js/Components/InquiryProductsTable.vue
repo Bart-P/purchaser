@@ -56,6 +56,6 @@ const props = defineProps({
 
 function sortPricesByQuantities($prices) {
 
-    return $prices.sort((a, b) => a.quantity - b.quantity);
+    return $prices?.sort((a, b) => a.quantity - b.quantity);
 }
 </script>
