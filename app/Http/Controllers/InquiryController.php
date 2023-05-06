@@ -23,11 +23,14 @@ class InquiryController extends Controller
             $prod->prices = $prodPrices;
             return $prod;
         });
-        // $inquryRequests = 
+
+        // TODO - Join the data, so requests get a supplier name
+        $inquiryRequests = $inquiry->inquiryRequests()->get();
 
         return Inertia::render('Inquiries/Show', [
             'inquiry' => $inquiry,
             'products' => $inquiryProducts,
+            'inquiryRequests' => $inquiryRequests,
         ]);
     }
 }

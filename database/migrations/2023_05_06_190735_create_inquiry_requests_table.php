@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('inquiry_requests', function (Blueprint $table) {
             $table->id();
             $table->integer('supplier_id');
+            $table->integer('inquiry_id');
             $table->text('message');
             $table->text('status');
             $table->timestamps();

@@ -11,7 +11,7 @@ class InquiryRequest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['supplier_id', 'message', 'status'];
+    protected $fillable = ['supplier_id', 'inquiry_id', 'message', 'status'];
 
     public function inquiries(): BelongsTo
     {

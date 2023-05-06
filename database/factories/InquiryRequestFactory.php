@@ -18,6 +18,7 @@ class InquiryRequestFactory extends Factory
     {
         return [
             'supplier_id' => fake()->randomNumber(1, 100),
+            'inquiry_id' => fake()->randomNumber(1, 10),
             'message' => fake()->text(50),
             'status' => fake()->randomElement(['created', 'send', 'waiting', 'done', 'closed']),
         ];
