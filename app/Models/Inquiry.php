@@ -30,4 +30,9 @@ class Inquiry extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function inquiryRequests(): HasMany
+    {
+        return $this->hasMany(InquiryRequest::class);
+    }
 }

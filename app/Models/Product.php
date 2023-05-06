@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
     use HasFactory;
-
-    // TODO description is now a separate db. 
 
     protected $fillable = [
         'title',
@@ -31,5 +30,10 @@ class Product extends Model
     public function productDescriptions(): HasMany
     {
         return $this->hasMany(ProductDescription::class);
+    }
+
+    public function inquiryRequests(): BelongsToMany
+    {
+        return $this->belongsToMany(InquiryRequest::class);
     }
 }
