@@ -33,26 +33,20 @@
                     <thead class="table-head">
                         <tr>
                             <th class="p-4">ID</th>
-                            <th class="p-4">Titel</th>
-                            <th class="p-4">Auflagen</th>
+                            <th class="p-4">Lieferant</th>
+                            <th class="p-4">Anfrage</th>
                             <th class="p-4">Erstellt am</th>
                             <th class="p-4">Letztes update</th>
                             <th></th>
                         </tr>
                     </thead>
 
-                    <tr v-for="product in products" class="table-row">
-                        <td class="table-data">{{ product.id }}</td>
-                        <td class="table-data">{{ product.title }}</td>
-                        <td class="table-date">
-                            <span v-for="$price, index in sortPricesByQuantities(product.prices)">
-                                {{ $price.quantity }}
-                                {{ index - sortPricesByQuantities(product.prices).length ===
-                                    -1 ? '' : ', '
-                                }}</span>
-                        </td>
-                        <td class="table-data">{{ product.created_at }}</td>
-                        <td class="table-data">{{ product.updated_at }}</td>
+                    <tr v-for="inquiryRequest in inquiryRequests" class="table-row">
+                        <td class="table-data">{{ inquiryRequest.id }}</td>
+                        <td class="table-data">{{ inquiryRequest.supplier_id }}</td>
+                        <td class="table-data">{{ inquiryRequest.inquiry_id }}</td>
+                        <td class="table-data">{{ inquiryRequest.created_at }}</td>
+                        <td class="table-data">{{ inquiryRequest.updated_at }}</td>
                         <td class="space-x-3">
                             <IconButton color="green">
                                 <i class="fa-solid fa-eye"></i>
@@ -86,8 +80,5 @@ const props = defineProps({
     inquiryRequests: Object,
 });
 
-function sortPricesByQuantities($prices) {
-
-    return $prices.sort((a, b) => a.quantity - b.quantity);
-}
+console.log(props.inquiryRequests)
 </script>
