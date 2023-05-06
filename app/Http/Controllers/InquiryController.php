@@ -23,8 +23,6 @@ class InquiryController extends Controller
             $prod->prices = $prodPrices;
             return $prod;
         });
-        // TODO - need a relation between inquiry and inquiryRequest, as well as
-        // between product and inquiryRequest... 
         // $inquryRequests = 
 
         return Inertia::render('Inquiries/Show', [
