@@ -20,7 +20,7 @@
 import PageBoxWrapper from "@/Components/PageBoxWrapper.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
-import InquiriesTable from "@/Pages/Inquiries/Partials/InquiriesTable.vue"
+import InquiriesTable from "@/Components/InquiriesTable.vue"
 
 const props = defineProps({
     inquiries: Object
