@@ -65,17 +65,8 @@
             </table>
         </div>
         <div class="card basis-1/2">
-            <div class="flex flex-col content-between justify-between h-full">
+            <div class="flex flex-col content-between justify-between gap-3 h-full">
                 <div class="">
-                    <h4 class="heading-4 pb-3">Beschreibung</h4>
-                    <p v-html="parseDescription" class="">
-                    </p>
-                    <!-- TODO does it stay that way or should it be different? WYIWIG needed? Maybe just add -->
-                    <!-- text or list items and build a description out of it? -->
-                    <!-- {{ inquiry.description }} -->
-                </div>
-                <div class="">
-                    <hr>
                     <h4 class="heading-4 py-3">Anhänge</h4>
                     <ul class="flex flex-wrap mb-6 text-gray-900 dark:text-white">
                         <!-- TODO - make uploads work -->
@@ -92,6 +83,15 @@
                             <a href="#" class="hover:underline mr-3">bild4.jpg;</a>
                         </li>
                     </ul>
+                    <hr>
+                </div>
+                <div class="">
+                    <h4 class="heading-4 pb-3">Beschreibung</h4>
+                    <p v-html="parseDescription" class="">
+                    </p>
+                    <!-- TODO does it stay that way or should it be different? WYIWIG needed? Maybe just add -->
+                    <!-- text or list items and build a description out of it? -->
+                    <!-- {{ inquiry.description }} -->
                 </div>
             </div>
         </div>
