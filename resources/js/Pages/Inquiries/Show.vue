@@ -20,6 +20,7 @@
         </template>
 
         <div class="py-12 space-y-6">
+            <!-- TODO Extract to its own component -->
             <PageBoxWrapper>
                 <div class="flex justify-between items-center mb-3">
                     <h3 class="heading-3">Anfrage Daten</h3>
@@ -34,6 +35,12 @@
                                 <th class="w-2/5">Projekt Titel</th>
                                 <td class="table-data">
                                     {{ props.inquiry.title }}
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <th class="w-2/5">Status</th>
+                                <td class="table-data">
+                                    {{ props.inquiry.status }}
                                 </td>
                             </tr>
                             <tr class="table-row">
@@ -86,6 +93,8 @@
                                 <h4 class="heading-4 pb-3">Beschreibung</h4>
                                 <p v-html="parseDescription" class="">
                                 </p>
+                                <!-- TODO does it stay that way or should it be different? WYIWIG needed? Maybe just add -->
+                                <!-- text or list items and build a description out of it? -->
                                 <!-- {{ inquiry.description }} -->
                             </div>
                             <div class="">
@@ -111,6 +120,7 @@
                     </div>
                 </div>
             </PageBoxWrapper>
+            <!-- TODO Extract to its own component -->
             <PageBoxWrapper>
                 <div class="flex justify-between items-center mb-3">
                     <h3 class="heading-3 pb-3">Produkte</h3>
@@ -156,6 +166,7 @@
                     </tr>
                 </table>
             </PageBoxWrapper>
+            <!-- TODO Extract to its own component -->
             <PageBoxWrapper>
                 <h3 class="heading-3">Lieferantenanfragen</h3>
                 <table class="table">
