@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Address;
 use App\Models\Inquiry;
+use App\Models\InquiryRequest;
 use App\Models\Person;
 use App\Models\Product;
 use App\Models\ProductDescription;
@@ -36,6 +37,7 @@ class DatabaseSeeder extends Seeder
         Product::factory(20)->create();
         ProductPrice::factory(20)->create();
         ProductDescription::factory(20)->create();
+        InquiryRequest::factory(5)->create();
 
         $this->call(CategorySeeder::class);
         $this->call(TagSeeder::class);
