@@ -37,8 +37,6 @@
                             </TextInput>
                         </div>
                     </form>
-
-
                 </div>
             </PageBoxWrapper>
         </div>

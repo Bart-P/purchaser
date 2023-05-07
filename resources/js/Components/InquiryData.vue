@@ -5,6 +5,7 @@
             <i class="fa-solid fa-pen"></i>
         </BaseButton>
     </div>
+
     <div class="flex gap-3">
         <div class="card basis-1/2">
             <table class="text-left">

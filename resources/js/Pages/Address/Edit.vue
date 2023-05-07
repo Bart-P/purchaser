@@ -21,10 +21,13 @@
                         </BaseButton>
                     </div>
                 </div>
+
                 <Transition>
                     <AlertFailed v-show="addressFormError" :message="addressFormError" />
                 </Transition>
+
                 <InputLabel for="addressType">Typ *</InputLabel>
+
                 <select v-model="addressForm.type" required id="addressType"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary">
                     <option value="main">Hauptadresse</option>
@@ -59,6 +62,7 @@
                         <TextInput v-model="addressForm.street_nr" id="streetNr" type="text" required />
                     </div>
                 </div>
+
                 <div class="flex gap-3">
                     <div class="w-1/3">
                         <InputLabel for="cityCode" value="PLZ *" />
@@ -135,5 +139,3 @@ function fieldsValidated() {
     );
 }
 </script>
-
-<style scoped></style>
