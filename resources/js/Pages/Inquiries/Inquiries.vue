@@ -9,7 +9,6 @@
         <div class="py-12">
             <PageBoxWrapper>
                 <InquiriesTable :inquiries="inquiries"></InquiriesTable>
-
             </PageBoxWrapper>
         </div>
     </AuthenticatedLayout>

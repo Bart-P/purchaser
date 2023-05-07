@@ -56,6 +56,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ]
     )->name('inquiries.show');
 
+    Route::get(
+        '/inquiries/edit/{id}',
+        [
+            InquiryController::class,
+            'edit',
+        ]
+    )->name('inquiries.edit');
+
     // SUPPLIERS
     Route::get(
         '/suppliers',

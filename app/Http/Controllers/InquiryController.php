@@ -36,4 +36,12 @@ class InquiryController extends Controller
             'inquiryRequests' => $inquiryRequests,
         ]);
     }
+
+    function edit($id)
+    {
+        $inquiry = Inquiry::find($id);
+        return Inertia::render('Inquiries/Edit', [
+            'inquiry' => $inquiry,
+        ]);
+    }
 }
