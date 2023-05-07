@@ -23,13 +23,13 @@
                 <tr class="table-row">
                     <th class="w-2/5">Abgabe Preis bis</th>
                     <td class="table-data">
-                        {{ new Date(props.inquiry.offers_until).toLocaleString('de').slice(0, -10) }}
+                        {{ dateToDMY(props.inquiry.offers_until) }}
                     </td>
                 </tr>
                 <tr class="table-row">
                     <th class="w-2/5">Geplater Liefertermin</th>
                     <td class="table-data">
-                        {{ new Date(props.inquiry.delivery_date).toLocaleString('de').slice(0, -10) }}
+                        {{ dateToDMY(props.inquiry.delivery_date) }}
                     </td>
                 </tr>
                 <tr class="table-row">
@@ -53,13 +53,13 @@
                 <tr class="table-row">
                     <th class="w-2/5">Erstellt am</th>
                     <td class="table-data">
-                        {{ new Date(props.inquiry.created_at).toLocaleString('de').slice(0, -3) }}
+                        {{ dateToDMYHM(inquiry.created_at) }}
                     </td>
                 </tr>
                 <tr class="">
                     <th class="w-2/5">Letztes Update</th>
                     <td class="table-data">
-                        {{ new Date(props.inquiry.updated_at).toLocaleString('de').slice(0, -3) }}
+                        {{ dateToDMYHM(props.inquiry.updated_at) }}
                     </td>
                 </tr>
             </table>
@@ -101,6 +101,7 @@
 <script setup>
 import BaseButton from '@/Components/BaseButton.vue';
 import { computed } from '@vue/reactivity';
+import { dateToDMY, dateToDMYHM } from '@/utils';
 
 const props = defineProps({
     inquiry: Object,

@@ -31,7 +31,7 @@
                 <td class="table-data">{{ inquiry.status }}</td>
                 <td class="table-data">{{ inquiry.title }}</td>
                 <td class="table-data">{{ inquiry.pm }}</td>
-                <td class="table-data">{{ new Date(inquiry.updated_at).toLocaleString('de').slice(0, -3) }}</td>
+                <td class="table-data">{{ dateToDMYHM(inquiry.updated_at) }}</td>
                 <td class="table-data flex gap-3">
                     <IconButton color="green" :href="route('inquiries.show', inquiry.id)">
                         <i class="fa-solid fa-eye"></i>
@@ -50,6 +50,7 @@
 
 <script setup>
 import IconButton from '@/Components/IconButton.vue';
+import { dateToDMYHM } from '@/utils';
 
 const props = defineProps({
     'inquiries': Object,

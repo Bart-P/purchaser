@@ -16,8 +16,8 @@
             <td class="table-data">{{ inquiryRequest.id }}</td>
             <td class="table-data">{{ inquiryRequest.name }}</td>
             <td class="table-data">{{ inquiryRequest.inquiry_id }}</td>
-            <td class="table-data">{{ inquiryRequest.created_at }}</td>
-            <td class="table-data">{{ inquiryRequest.updated_at }}</td>
+            <td class="table-data">{{ dateToDMYHM(inquiryRequest.created_at) }}</td>
+            <td class="table-data">{{ dateToDMYHM(inquiryRequest.updated_at) }}</td>
             <td class="space-x-3">
                 <IconButton color="green">
                     <i class="fa-solid fa-eye"></i>
@@ -35,6 +35,7 @@
 
 <script setup>
 import IconButton from '@/Components/IconButton.vue';
+import { dateToDMYHM } from '@/utils';
 
 const props = defineProps({
     inquiryRequests: Object,
