@@ -40,6 +40,7 @@ class InquiryController extends Controller
     function edit($id)
     {
         $inquiry = Inquiry::find($id);
+
         return Inertia::render('Inquiries/Edit', [
             'inquiry' => $inquiry,
         ]);
