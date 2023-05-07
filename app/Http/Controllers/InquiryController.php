@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inquiry;
+use App\Models\InquiryRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -24,8 +25,11 @@ class InquiryController extends Controller
             return $prod;
         });
 
-        // TODO - Join the data, so requests get a supplier name
-        $inquiryRequests = $inquiry->inquiryRequests()->get();
+        $inquiryRequests = $inquiry
+            ->inquiryRequests()
+            ->select('inquiry_requests.*', 'suppliers.name')
+            ->join('suppliers', 'suppliers.id', '=', 'inquiry_requests.supplier_id')
+            ->get();
 
         return Inertia::render('Inquiries/Show', [
             'inquiry' => $inquiry,

@@ -14,7 +14,7 @@
 
         <tr v-for="inquiryRequest in inquiryRequests" class="table-row">
             <td class="table-data">{{ inquiryRequest.id }}</td>
-            <td class="table-data">{{ inquiryRequest.supplier_id }}</td>
+            <td class="table-data">{{ inquiryRequest.name }}</td>
             <td class="table-data">{{ inquiryRequest.inquiry_id }}</td>
             <td class="table-data">{{ inquiryRequest.created_at }}</td>
             <td class="table-data">{{ inquiryRequest.updated_at }}</td>
