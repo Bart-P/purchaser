@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inquiry;
-use App\Models\InquiryRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
