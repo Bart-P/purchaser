@@ -42,6 +42,7 @@
                             <TextInput class="w-3/4" id="offers_until" v-model="inquiryDataForm.offers_until" type="text"
                                 name="title">
                             </TextInput>
+                            <DatePicker></DatePicker>
                         </div>
                         <div class="flex items-center justify-end gap-3">
                             <InputLabel class="w-1/4" for="delivery_date">Lieferdatum:</InputLabel>
@@ -94,6 +95,7 @@ import BaseButton from '@/Components/BaseButton.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import TextInput from '@/Components/TextInput.vue'
 import StatusBadge from '@/Components/StatusBadge.vue'
+import DatePicker from '@/Components/DatePicker.vue'
 import { Head, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
