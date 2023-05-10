@@ -19,12 +19,19 @@
             <PageBoxWrapper>
                 <form class="flex gap-6 w-full">
                     <div class="w-1/2 space-y-3" @submit.prevent="" action="#">
+                        <h3 class="heading-3">Daten:</h3>
+                        <div class="flex items-center gap-3">
+                            <InputLabel class="w-1/4" for="id">ID:</InputLabel>
+                            <TextInput :disabled="true" class="w-3/4 border-none shadow-none" id="id"
+                                v-model="inquiryDataForm.id" type="text" name="id">
+                            </TextInput>
+                        </div>
                         <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="title">Titel:</InputLabel>
                             <TextInput class="w-3/4" id="title" v-model="inquiryDataForm.title" type="text" name="title">
                             </TextInput>
                         </div>
-                        <div class="flex items-center justify-end gap-3">
+                        <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="status">Status:</InputLabel>
                             <div class="text-start w-full py-2">
                                 <StatusBadge :status="inquiryDataForm.status" />
@@ -61,10 +68,12 @@
                     </div>
                     <div class="w-1/2">
                         <div class="">
-                            <InputLabel for="description" class="mb-3">Beschreibung:</InputLabel>
+                            <h3 class="heading-3 mb-3">
+                                Beschreibung:
+                            </h3>
                             <div class="border border-gray-300 rounded-md">
                                 <div class="px-4 py-2 bg-white rounded-md">
-                                    <textarea id="description" rows="30"
+                                    <textarea id="description" rows="20"
                                         class="w-full px-0 text-gray-900 bg-white border-0 focus:ring-0"
                                         v-model="inquiryDataForm.description" placeholder="Hier kommt die Beschreibung hin."
                                         required></textarea>
