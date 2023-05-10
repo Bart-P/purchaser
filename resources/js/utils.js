@@ -15,3 +15,17 @@ export function dateToDMYHM(date) {
         return new Date(date).toLocaleString('de').slice(0, -3)
     }
 }
+
+export function getStatusForLang(status, lang) {
+    const allStatus = {
+        'de': {
+            'created': 'erstellt',
+            'send': 'gesendet',
+            'waiting': 'warte',
+            'done': 'fertig',
+            'closed': 'geschlossen'
+        },
+    }
+
+    return allStatus[lang][status]
+}
