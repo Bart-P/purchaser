@@ -26,8 +26,9 @@
                         </div>
                         <div class="flex items-center justify-end gap-3">
                             <InputLabel class="w-1/4" for="status">Status:</InputLabel>
-                            <TextInput class="w-3/4" id="status" v-model="inquiryDataForm.status" type="text" name="title">
-                            </TextInput>
+                            <div class="text-start w-full py-2">
+                                <StatusBadge :status="inquiryDataForm.status" />
+                            </div>
                         </div>
                         <div class="flex items-center justify-end gap-3">
                             <InputLabel class="w-1/4" for="offers_until">Angebote bis:</InputLabel>
@@ -78,11 +79,12 @@
 </template>
 
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import PageBoxWrapper from '@/Components/PageBoxWrapper.vue'
 import BaseButton from '@/Components/BaseButton.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import TextInput from '@/Components/TextInput.vue'
+import StatusBadge from '@/Components/StatusBadge.vue'
 import { Head, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({

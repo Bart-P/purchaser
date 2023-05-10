@@ -28,7 +28,9 @@
             <tr v-for="inquiry in inquiries" class="table-row">
                 <td class="table-data">{{ inquiry.id }}</td>
                 <td class="table-data">{{ inquiry.project }}</td>
-                <td class="table-data">{{ inquiry.status }}</td>
+                <td class="table-data">
+                    <StatusBadge :status="inquiry.status" />
+                </td>
                 <td class="table-data">{{ inquiry.title }}</td>
                 <td class="table-data">{{ inquiry.pm }}</td>
                 <td class="table-data">{{ dateToDMYHM(inquiry.updated_at) }}</td>
@@ -50,6 +52,7 @@
 
 <script setup>
 import IconButton from '@/Components/IconButton.vue';
+import StatusBadge from '@/Components/StatusBadge.vue';
 import { dateToDMYHM } from '@/utils';
 
 const props = defineProps({

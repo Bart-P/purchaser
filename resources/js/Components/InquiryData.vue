@@ -103,6 +103,7 @@
 import BaseButton from '@/Components/BaseButton.vue';
 import { computed } from '@vue/reactivity';
 import { dateToDMY, dateToDMYHM } from '@/utils';
+import StatusBadge from './StatusBadge.vue';
 
 const props = defineProps({
     inquiry: Object,
