@@ -17,27 +17,61 @@
 
         <div class="py-12">
             <PageBoxWrapper>
-                <div class="flex gap-3 w-full">
-                    <form class="w-1/2" @submit.prevent="" action="#">
-                        <div>
-                            <InputLabel for="title">Titel:</InputLabel>
-                            <TextInput id="title" v-model="inquiryDataForm.title" type="text" name="title"></TextInput>
-                        </div>
-                        <div>
-                            <InputLabel for="status">Status:</InputLabel>
-                            <TextInput id="status" v-model="inquiryDataForm.status" type="text" name="title"></TextInput>
-                        </div>
-                    </form>
-                    <form class="w-1/2">
-                        <div class="">
-                            <!-- TODO - style textarea, new component?  -->
-                            <InputLabel for="description">Beschreibung</InputLabel>
-                            <TextInput id="description" v-model="inquiryDataForm.description" type="textarea"
-                                name="description">
+                <form class="flex gap-6 w-full">
+                    <div class="w-1/2 space-y-3" @submit.prevent="" action="#">
+                        <div class="flex items-center gap-3">
+                            <InputLabel class="w-1/4" for="title">Titel:</InputLabel>
+                            <TextInput class="w-3/4" id="title" v-model="inquiryDataForm.title" type="text" name="title">
                             </TextInput>
                         </div>
-                    </form>
-                </div>
+                        <div class="flex items-center justify-end gap-3">
+                            <InputLabel class="w-1/4" for="status">Status:</InputLabel>
+                            <TextInput class="w-3/4" id="status" v-model="inquiryDataForm.status" type="text" name="title">
+                            </TextInput>
+                        </div>
+                        <div class="flex items-center justify-end gap-3">
+                            <InputLabel class="w-1/4" for="offers_until">Angebote bis:</InputLabel>
+                            <TextInput class="w-3/4" id="offers_until" v-model="inquiryDataForm.offers_until" type="text"
+                                name="title">
+                            </TextInput>
+                        </div>
+                        <div class="flex items-center justify-end gap-3">
+                            <InputLabel class="w-1/4" for="delivery_date">Lieferdatum:</InputLabel>
+                            <TextInput class="w-3/4" id="delivery_date" v-model="inquiryDataForm.delivery_date" type="text"
+                                name="title">
+                            </TextInput>
+                        </div>
+                        <div class="flex items-center justify-end gap-3">
+                            <InputLabel class="w-1/4" for="project">Projekt Nr:</InputLabel>
+                            <TextInput class="w-3/4" id="project" v-model="inquiryDataForm.project" type="text"
+                                name="title">
+                            </TextInput>
+                        </div>
+                        <div class="flex items-center justify-end gap-3">
+                            <InputLabel class="w-1/4" for="pm">Projektleiter:</InputLabel>
+                            <TextInput class="w-3/4" id="pm" v-model="inquiryDataForm.pm" type="text" name="title">
+                            </TextInput>
+                        </div>
+                        <div class="flex items-center justify-end gap-3">
+                            <InputLabel class="w-1/4" for="client">Kunde:</InputLabel>
+                            <TextInput class="w-3/4" id="client" v-model="inquiryDataForm.client" type="text" name="title">
+                            </TextInput>
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <div class="">
+                            <InputLabel for="description" class="mb-3">Beschreibung:</InputLabel>
+                            <div class="border border-gray-300 rounded-md">
+                                <div class="px-4 py-2 bg-white rounded-md">
+                                    <textarea id="description" rows="30"
+                                        class="w-full px-0 text-gray-900 bg-white border-0 focus:ring-0"
+                                        v-model="inquiryDataForm.description" placeholder="Hier kommt die Beschreibung hin."
+                                        required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </PageBoxWrapper>
         </div>
     </AuthenticatedLayout>
