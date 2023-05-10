@@ -11,7 +11,6 @@
                     </h2>
                 </div>
             </header>
-
             <!-- Page Content -->
             <main>
                 <slot />
