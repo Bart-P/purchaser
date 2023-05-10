@@ -15,7 +15,6 @@
             <main>
                 <slot />
             </main>
-
             <!-- Page Footer -->
             <footer class="p-16 bg-white relative bottom-0 left-0 right-0 border-t-gray-200 border-t-[1px] shadow">
                 <h3 class="text-2xl text-center text-gray-400">Made by bartp</h3>

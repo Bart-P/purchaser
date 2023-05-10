@@ -22,7 +22,6 @@ const colorClasses = {
     'done': 'bg-green-100 text-green-800 border-green-800',
     'closed': 'bg-gray-100 text-gray-800 border-gray-800',
 }
-
 </script>
 
 
