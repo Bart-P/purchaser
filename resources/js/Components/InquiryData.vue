@@ -12,43 +12,43 @@
                 <tr class="table-row">
                     <th class="w-2/5">Projekt Titel</th>
                     <td class="table-data">
-                        {{ props.inquiry.title }}
+                        {{ inquiry.title }}
                     </td>
                 </tr>
                 <tr class="table-row">
                     <th class="w-2/5">Status</th>
                     <td class="table-data">
-                        {{ props.inquiry.status }}
+                        <StatusBadge :status="inquiry.status" />
                     </td>
                 </tr>
                 <tr class="table-row">
                     <th class="w-2/5">Abgabe Preis bis</th>
                     <td class="table-data">
-                        {{ dateToDMY(props.inquiry.offers_until) }}
+                        {{ dateToDMY(inquiry.offers_until) }}
                     </td>
                 </tr>
                 <tr class="table-row">
                     <th class="w-2/5">Geplater Liefertermin</th>
                     <td class="table-data">
-                        {{ dateToDMY(props.inquiry.delivery_date) }}
+                        {{ dateToDMY(inquiry.delivery_date) }}
                     </td>
                 </tr>
                 <tr class="table-row">
                     <th class="w-2/5">Projekt Nr.</th>
                     <td class="table-data">
-                        {{ props.inquiry.project }}
+                        {{ inquiry.project }}
                     </td>
                 </tr>
                 <tr class="table-row">
                     <th class="w-2/5">Leiter</th>
                     <td class="table-data">
-                        {{ props.inquiry.pm }}
+                        {{ inquiry.pm }}
                     </td>
                 </tr>
                 <tr class="table-row">
                     <th class="w-2/5">Kunde</th>
                     <td class="table-data">
-                        {{ props.inquiry.client }}
+                        {{ inquiry.client }}
                     </td>
                 </tr>
                 <tr class="table-row">
@@ -60,7 +60,7 @@
                 <tr class="">
                     <th class="w-2/5">Letztes Update</th>
                     <td class="table-data">
-                        {{ dateToDMYHM(props.inquiry.updated_at) }}
+                        {{ dateToDMYHM(inquiry.updated_at) }}
                     </td>
                 </tr>
             </table>
