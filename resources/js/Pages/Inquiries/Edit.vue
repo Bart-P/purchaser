@@ -36,13 +36,13 @@
                         </div>
                         <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="offers_until">Angebote bis:</InputLabel>
-                            <DatePicker class="w-full" :selected-date="inquiryDataForm.offers_until" />
+                            <DatePicker class="w-full" picker-id="offers_until_datepicker"
+                                :selected-date="dateToDMY(inquiryDataForm.offers_until)" />
                         </div>
                         <div class="flex items-center justify-end gap-3">
                             <InputLabel class="w-1/4" for="delivery_date">Lieferdatum:</InputLabel>
-                            <TextInput class="w-3/4" id="delivery_date" v-model="inquiryDataForm.delivery_date" type="text"
-                                name="delivery_date">
-                            </TextInput>
+                            <DatePicker class="w-full" picker-id="delivery_date_datepicker"
+                                :selected-date="dateToDMY(inquiryDataForm.delivery_date)" />
                         </div>
                         <div class="flex items-center justify-end gap-3">
                             <InputLabel class="w-1/4" for="project">Projekt Nr:</InputLabel>

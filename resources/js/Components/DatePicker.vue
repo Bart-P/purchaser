@@ -1,30 +1,39 @@
 <template>
-    <input id="datepicker" type="text" :value="dateToDMY(selectedDate)"
-        class="border border-gray-300 rounded-md focus:ring-purchaser-primary focus:border-blue-500"
-        placeholder="Datum auswählen">
+    <div class="">
+        <input :id="pickerId" type="text"
+            class="border border-gray-300 rounded-md focus:ring-purchaser-primary focus:border-purchaser-primary"
+            placeholder="Datum auswählen">
+    </div>
 </template>
 
 <script setup>
 
 import Datepicker from 'flowbite-datepicker/Datepicker'
 import { onMounted } from 'vue';
-import { dateToDMY } from '@/utils';
 
 const props = defineProps({
     selectedDate: {
         default: null,
         type: String
-    }
+    },
+    pickerId: String,
 });
 
-let datepickerEl
+const emits = defineEmits(['setPickerDate']);
+
+let datepickerEl = null
+let picker = null
 
 onMounted(() => {
-    datepickerEl = document.getElementById('datepicker')
-    new Datepicker(datepickerEl, {
+    datepickerEl = document.getElementById(props.pickerId)
+    picker = new Datepicker(datepickerEl, {
         format: 'dd.mm.yyyy',
         autohide: true
     })
+
+    if (props.selectedDate) {
+        picker.setDate(props.selectedDate)
+    }
 })
 
 </script>
