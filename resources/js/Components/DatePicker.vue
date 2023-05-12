@@ -8,14 +8,32 @@
                     clip-rule="evenodd"></path>
             </svg>
         </div>
-        <input datepicker type="text"
+        <input id="datepicker" type="text" :value="selectedDate"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Select date">
+            placeholder="Datum auswählen">
     </div>
 </template>
 
 <script setup>
 
-// TODO datepicker can only be installed it would seem, check npm install on flowbite page
+import Datepicker from 'flowbite-datepicker/Datepicker'
+import { onMounted } from 'vue';
+
+const props = defineProps({
+    selectedDate: {
+        default: null,
+        type: String
+    }
+});
+
+let datepickerEl
+
+onMounted(() => {
+    datepickerEl = document.getElementById('datepicker')
+    new Datepicker(datepickerEl, {
+        format: 'dd.mm.yyyy',
+        autohide: true
+    })
+})
 
 </script>

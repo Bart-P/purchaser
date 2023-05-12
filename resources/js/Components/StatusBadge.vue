@@ -23,5 +23,3 @@ const colorClasses = {
     'closed': 'bg-gray-100 text-gray-800 border-gray-800',
 }
 </script>
-
-

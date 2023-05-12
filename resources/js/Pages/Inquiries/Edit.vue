@@ -40,20 +40,20 @@
                         <div class="flex items-center justify-end gap-3">
                             <InputLabel class="w-1/4" for="offers_until">Angebote bis:</InputLabel>
                             <TextInput class="w-3/4" id="offers_until" v-model="inquiryDataForm.offers_until" type="text"
-                                name="title">
+                                name="offers_until">
                             </TextInput>
-                            <DatePicker></DatePicker>
+                            <DatePicker :selected-date="inquiryDataForm.offers_until" />
                         </div>
                         <div class="flex items-center justify-end gap-3">
                             <InputLabel class="w-1/4" for="delivery_date">Lieferdatum:</InputLabel>
                             <TextInput class="w-3/4" id="delivery_date" v-model="inquiryDataForm.delivery_date" type="text"
-                                name="title">
+                                name="delivery_date">
                             </TextInput>
                         </div>
                         <div class="flex items-center justify-end gap-3">
                             <InputLabel class="w-1/4" for="project">Projekt Nr:</InputLabel>
                             <TextInput class="w-3/4" id="project" v-model="inquiryDataForm.project" type="text"
-                                name="title">
+                                name="project">
                             </TextInput>
                         </div>
                         <div class="flex items-center justify-end gap-3">
