@@ -97,6 +97,7 @@ import TextInput from '@/Components/TextInput.vue'
 import StatusBadge from '@/Components/StatusBadge.vue'
 import DatePicker from '@/Components/DatePicker.vue'
 import { Head, useForm } from "@inertiajs/vue3";
+import { dateToDMY } from '@/utils'
 
 const props = defineProps({
     inquiry: Object,
