@@ -22,14 +22,11 @@
                         <h3 class="heading-3">Daten:</h3>
                         <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="id">ID:</InputLabel>
-                            <TextInput :disabled="true" class="w-3/4 border-none shadow-none" id="id"
-                                v-model="inquiryDataForm.id" type="text" name="id">
-                            </TextInput>
+                            <div class="w-full">{{ inquiryDataForm.id }}</div>
                         </div>
                         <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="title">Titel:</InputLabel>
-                            <TextInput class="w-3/4" id="title" v-model="inquiryDataForm.title" type="text" name="title">
-                            </TextInput>
+                            <TextInput class="w-3/4" id="title" v-model="inquiryDataForm.title" type="text" name="title" />
                         </div>
                         <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="status">Status:</InputLabel>
@@ -37,12 +34,9 @@
                                 <StatusBadge :status="inquiryDataForm.status" />
                             </div>
                         </div>
-                        <div class="flex items-center justify-end gap-3">
+                        <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="offers_until">Angebote bis:</InputLabel>
-                            <TextInput class="w-3/4" id="offers_until" v-model="inquiryDataForm.offers_until" type="text"
-                                name="offers_until">
-                            </TextInput>
-                            <DatePicker :selected-date="inquiryDataForm.offers_until" />
+                            <DatePicker class="w-full" :selected-date="inquiryDataForm.offers_until" />
                         </div>
                         <div class="flex items-center justify-end gap-3">
                             <InputLabel class="w-1/4" for="delivery_date">Lieferdatum:</InputLabel>
