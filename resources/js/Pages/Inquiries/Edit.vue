@@ -36,11 +36,15 @@
                         </div>
                         <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="offers_until">Angebote bis:</InputLabel>
-                            <DatePicker class="w-full" v-model="inquiryDataForm.offers_until" />
+                            <div class="w-full">
+                                <DatePicker v-model="inquiryDataForm.offers_until" />
+                            </div>
                         </div>
                         <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="delivery_date">Lieferdatum:</InputLabel>
-                            <DatePicker class="w-full" v-model="inquiryDataForm.delivery_date" />
+                            <div class="w-full">
+                                <DatePicker v-model="inquiryDataForm.delivery_date" />
+                            </div>
                         </div>
                         <div class="flex items-center justify-end gap-3">
                             <InputLabel class="w-1/4" for="project">Projekt Nr:</InputLabel>
