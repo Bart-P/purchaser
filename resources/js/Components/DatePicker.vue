@@ -1,39 +1,16 @@
 <template>
-    <div class="">
-        <input :id="pickerId" type="text"
-            class="border border-gray-300 rounded-md focus:ring-purchaser-primary focus:border-purchaser-primary"
-            placeholder="Datum auswählen">
-    </div>
+    <input type="date" @input="$emit('update:modelValue', $event.target.value)" placeholder="Datum auswählen"
+        :value="modelValue"
+        class="border border-gray-300 rounded-md focus:ring-purchaser-primary focus:border-purchaser-primary">
 </template>
 
 <script setup>
 
-import Datepicker from 'flowbite-datepicker/Datepicker'
-import { onMounted } from 'vue';
-
 const props = defineProps({
-    selectedDate: {
-        default: null,
-        type: String
+    modelValue: {
+        type: String,
     },
-    pickerId: String,
 });
 
-const emits = defineEmits(['setPickerDate']);
-
-let datepickerEl = null
-let picker = null
-
-onMounted(() => {
-    datepickerEl = document.getElementById(props.pickerId)
-    picker = new Datepicker(datepickerEl, {
-        format: 'dd.mm.yyyy',
-        autohide: true
-    })
-
-    if (props.selectedDate) {
-        picker.setDate(props.selectedDate)
-    }
-})
-
+const emits = defineEmits(['update:modelValue']);
 </script>

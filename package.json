@@ -18,7 +18,6 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^1.0.6",
-        "flowbite": "^1.6.2",
-        "flowbite-datepicker": "^1.2.2"
+        "flowbite": "^1.6.2"
     }
 }

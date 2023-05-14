@@ -36,13 +36,11 @@
                         </div>
                         <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="offers_until">Angebote bis:</InputLabel>
-                            <DatePicker class="w-full" picker-id="offers_until_datepicker"
-                                :selected-date="dateToDMY(inquiryDataForm.offers_until)" />
+                            <DatePicker class="w-full" v-model="inquiryDataForm.offers_until" />
                         </div>
-                        <div class="flex items-center justify-end gap-3">
+                        <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="delivery_date">Lieferdatum:</InputLabel>
-                            <DatePicker class="w-full" picker-id="delivery_date_datepicker"
-                                :selected-date="dateToDMY(inquiryDataForm.delivery_date)" />
+                            <DatePicker class="w-full" v-model="inquiryDataForm.delivery_date" />
                         </div>
                         <div class="flex items-center justify-end gap-3">
                             <InputLabel class="w-1/4" for="project">Projekt Nr:</InputLabel>
@@ -91,7 +89,6 @@ import TextInput from '@/Components/TextInput.vue'
 import StatusBadge from '@/Components/StatusBadge.vue'
 import DatePicker from '@/Components/DatePicker.vue'
 import { Head, useForm } from "@inertiajs/vue3";
-import { dateToDMY } from '@/utils'
 
 const props = defineProps({
     inquiry: Object,
