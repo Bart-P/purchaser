@@ -16,7 +16,11 @@
         </template>
 
         <div class="py-12">
-            <PageBoxWrapper>
+            <PageBoxWrapper class="relative">
+                <BaseButton @click="submitInquiryUpdateForm" color="success"
+                    class="!px-3 rounded-full text-sm absolute right-12">
+                    <i class="fa-solid fa-save"></i>
+                </BaseButton>
                 <form class="flex gap-6 w-full">
                     <div class="w-1/2 space-y-3" @submit.prevent="" action="#">
                         <h3 class="heading-3">Daten:</h3>
@@ -64,14 +68,9 @@
                         </div>
                     </div>
                     <div class="w-1/2">
-                        <div class="flex justify-between items-center mb-3">
-                            <h3 class="heading-3 mb-3">
-                                Beschreibung:
-                            </h3>
-                            <BaseButton @click="submitInquiryUpdateForm" color="success" class="!px-3 rounded-full text-sm">
-                                <i class="fa-solid fa-save"></i>
-                            </BaseButton>
-                        </div>
+                        <h3 class="heading-3 mb-6">
+                            Beschreibung:
+                        </h3>
                         <div class="border border-gray-300 rounded-md">
                             <div class="px-4 py-2 bg-white rounded-md">
                                 <textarea id="description" rows="20"
