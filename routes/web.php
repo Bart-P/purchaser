@@ -64,6 +64,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ]
     )->name('inquiries.edit');
 
+    Route::patch(
+        '/inquiries/',
+        [
+            InquiryController::class,
+            'update',
+        ]
+    )->name('inquiries.patch');
+
     // SUPPLIERS
     Route::get(
         '/suppliers',

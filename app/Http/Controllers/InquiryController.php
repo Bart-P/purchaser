@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Inquiry;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 class InquiryController extends Controller
 {
@@ -42,6 +43,23 @@ class InquiryController extends Controller
 
         return Inertia::render('Inquiries/Edit', [
             'inquiry' => $inquiry,
+        ]);
+    }
+
+    function update(Request $request)
+    {
+        $inquiry = Inquiry::find($request->id);
+        $inquiry->fill($request->query());
+        if ($inquiry->save()) {
+            return redirect()->back()->with('notification', [
+                'message' => 'Anfrage wurde geändert!',
+                'type'    => 'success',
+            ]);
+        }
+
+        return redirect()->back()->with('notification', [
+            'message' => 'Es ist ein Fehler aufgetreten! Anfrage konnte nicht gespeichert werden.',
+            'type'    => 'danger',
         ]);
     }
 }

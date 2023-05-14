@@ -5,6 +5,9 @@
             <div class="flex justify-between">
                 <div class="">Anfrage (ID {{ inquiryDataForm.id }}) Daten Bearbeiten:</div>
                 <div class="space-x-3">
+                    <BaseButton @click="submitInquiryUpdateForm" color="success" class="!px-3 rounded-full text-sm">
+                        <i class="fa-solid fa-save"></i>
+                    </BaseButton>
                     <BaseButton color="danger" class="!px-3 rounded-full text-sm">
                         <i class="fa-solid fa-trash"></i>
                     </BaseButton>
@@ -92,12 +95,16 @@ import InputLabel from '@/Components/InputLabel.vue'
 import TextInput from '@/Components/TextInput.vue'
 import StatusBadge from '@/Components/StatusBadge.vue'
 import DatePicker from '@/Components/DatePicker.vue'
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, router, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
     inquiry: Object,
 })
 
 const inquiryDataForm = useForm(props.inquiry)
+
+function submitInquiryUpdateForm() {
+    router.patch(route('inquiries.patch', inquiryDataForm))
+}
 
 </script>
