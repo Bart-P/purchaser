@@ -21,7 +21,10 @@
         class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
         <h5 class="heading-5">Kategorie hinzufügen</h5>
         <TextInput type="text" placeholder="Name" v-model="addCategoryForm.name" required />
-        <TextInput type="text" placeholder="Farbe" v-model="addCategoryForm.color" required />
+        <div class="flex gap-4">
+            <span>Farbe: </span>
+            <input class="w-full cursor-pointer" name="colorPicker" type="color" v-model='addCategoryForm.color' />
+        </div>
         <BaseButton type="submit" color="success">
             <i class="fa-solid fa-save"></i>
         </BaseButton>
@@ -31,7 +34,11 @@
         class="!m-0 flex flex-col z-10 gap-4 rounded-md bg-white shadow-md p-4 hidden">
         <h5 class="heading-5">Kategorie bearbeiten</h5>
         <TextInput type="text" placeholder="Name" v-model="selectedCategory.name" />
-        <TextInput type="text" placeholder="Farbe" v-model="selectedCategory.color" />
+        <div class="flex gap-4">
+            <span>Farbe: </span>
+            <input class="w-full cursor-pointer" name="colorPicker" type="color" v-model='selectedCategory.color'
+                required />
+        </div>
         <BaseButton type="submit" color="success">
             <i class="fa-solid fa-save"></i>
         </BaseButton>
@@ -81,7 +88,7 @@ const emits = defineEmits(['resetSelectableValues']);
 const addCategoryForm = useForm(
     {
         name: null,
-        color: null,
+        color: '#000000',
     },
 )
 
