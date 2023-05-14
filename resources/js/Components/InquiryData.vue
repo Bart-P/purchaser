@@ -88,11 +88,7 @@
                 </div>
                 <div class="">
                     <h4 class="heading-4 pb-3">Beschreibung</h4>
-                    <p v-html="parseDescription" class="">
-                    </p>
-                    <!-- TODO does it stay that way or should it be different? WYIWIG needed? Maybe just add -->
-                    <!-- text or list items and build a description out of it? -->
-                    <!-- {{ inquiry.description }} -->
+                    <p v-html="parseDescription" class=""></p>
                 </div>
             </div>
         </div>
