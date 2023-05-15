@@ -38,6 +38,9 @@ class Inquiry extends Model
 
     public function delete()
     {
+
+        // TODO - if products are deleted, also description and prices of this
+        // products should be deleted... 
         $this->products()->delete();
         $this->inquiryRequests()->delete();
 
