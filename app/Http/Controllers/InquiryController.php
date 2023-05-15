@@ -62,4 +62,14 @@ class InquiryController extends Controller
             'type'    => 'danger',
         ]);
     }
+
+    function destroy(Request $request)
+    {
+        Inquiry::destroy($request->id);
+
+        return redirect('inquiries')->with('notification', [
+            'message' => 'Anfrage gelöscht!',
+            'type'    => 'warning',
+        ]);
+    }
 }

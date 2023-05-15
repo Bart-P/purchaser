@@ -35,4 +35,12 @@ class Inquiry extends Model
     {
         return $this->hasMany(InquiryRequest::class);
     }
+
+    public function delete()
+    {
+        $this->products()->delete();
+        $this->inquiryRequests()->delete();
+
+        return parent::delete();
+    }
 }

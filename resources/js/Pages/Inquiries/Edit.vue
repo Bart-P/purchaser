@@ -5,7 +5,7 @@
             <div class="flex justify-between">
                 <div class="">Anfrage (ID {{ inquiryDataForm.id }}) Daten Bearbeiten:</div>
                 <div class="space-x-3">
-                    <BaseButton color="danger" class="!px-3 rounded-full text-sm">
+                    <BaseButton @click="deleteConfirmationModal.show()" color="danger" class="!px-3 rounded-full text-sm">
                         <i class="fa-solid fa-trash"></i>
                     </BaseButton>
                     <BaseButton :href="route('inquiries.show', inquiry.id)" color="back" class="!px-3 rounded-full text-sm">
@@ -15,6 +15,22 @@
             </div>
         </template>
 
+        <DeleteConfirmationModal id="deleteConfirmationModal">
+            <template #text>
+                Die Anfrage
+                <span class="font-bold">"{{ inquiryDataForm.title }} (ID: {{ inquiryDataForm.id }})"</span>
+                wird unwiederruflich gelöscht!
+            </template>
+            <template #buttons>
+                <BaseButton @click="deleteInquiry()" color="danger">
+                    Löschen
+                </BaseButton>
+
+                <BaseButton @click="deleteConfirmationModal.hide()" color="back">
+                    Abbrechen
+                </BaseButton>
+            </template>
+        </DeleteConfirmationModal>
         <div class="py-12">
             <PageBoxWrapper class="relative">
                 <BaseButton @click="submitInquiryUpdateForm" color="success"
@@ -88,6 +104,7 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+import DeleteConfirmationModal from '@/Components/DeleteConfirmationModal.vue'
 import PageBoxWrapper from '@/Components/PageBoxWrapper.vue'
 import BaseButton from '@/Components/BaseButton.vue'
 import InputLabel from '@/Components/InputLabel.vue'
@@ -95,6 +112,15 @@ import TextInput from '@/Components/TextInput.vue'
 import StatusBadge from '@/Components/StatusBadge.vue'
 import DatePicker from '@/Components/DatePicker.vue'
 import { Head, router, useForm } from "@inertiajs/vue3";
+import { onMounted } from 'vue'
+import { initModals } from 'flowbite'
+
+let deleteConfirmationModal
+
+onMounted(() => {
+    initModals()
+    deleteConfirmationModal = new Modal(document.getElementById('deleteConfirmationModal'))
+})
 
 const props = defineProps({
     inquiry: Object,
@@ -104,6 +130,11 @@ const inquiryDataForm = useForm(props.inquiry)
 
 function submitInquiryUpdateForm() {
     router.patch(route('inquiries.patch', inquiryDataForm))
+}
+
+function deleteInquiry() {
+    deleteConfirmationModal.hide()
+    router.delete(route('inquiries.destroy', inquiryDataForm.id))
 }
 
 </script>

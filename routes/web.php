@@ -72,6 +72,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ]
     )->name('inquiries.patch');
 
+    Route::delete(
+        '/inquiries/{id}',
+        [
+            InquiryController::class,
+            'destroy',
+        ]
+    )->name('inquiries.destroy');
+
     // SUPPLIERS
     Route::get(
         '/suppliers',
