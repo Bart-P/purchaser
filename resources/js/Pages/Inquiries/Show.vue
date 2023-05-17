@@ -9,9 +9,6 @@
                     <span class="text-gray-500">{{ props.inquiry.title }}</span>
                 </div>
                 <div class="space-x-3">
-                    <BaseButton color="danger" class="!px-3 rounded-full text-sm">
-                        <i class="fa-solid fa-trash"></i>
-                    </BaseButton>
                     <BaseButton :href="route('inquiries')" color="back" class="!px-3 rounded-full text-sm">
                         <i class="fa-solid fa-delete-left"></i>
                     </BaseButton>
