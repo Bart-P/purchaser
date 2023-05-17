@@ -18,8 +18,13 @@ class ProductDescription extends Model
         'description_list',
     ];
 
-    public function products(): BelongsTo
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function delete()
+    {
+        return parent::delete();
     }
 }

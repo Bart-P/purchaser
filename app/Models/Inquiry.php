@@ -38,10 +38,13 @@ class Inquiry extends Model
 
     public function delete()
     {
-
-        // TODO - if products are deleted, also description and prices of this
-        // products should be deleted... 
-        $this->products()->delete();
+        // By calling delete on products, the products themself are deleted but
+        // not the relations of products. Through calling delete on each product
+        // individually this problem is bypassed and relations are deleted as
+        // well. 
+        foreach ($this->products()->get() as $product) {
+            $product->delete();
+        };
         $this->inquiryRequests()->delete();
 
         return parent::delete();

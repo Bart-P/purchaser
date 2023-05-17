@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
@@ -27,13 +28,21 @@ class Product extends Model
         return $this->hasMany(ProductPrice::class);
     }
 
-    public function productDescriptions(): HasMany
+    public function productDescription(): HasOne
     {
-        return $this->hasMany(ProductDescription::class);
+        return $this->hasOne(ProductDescription::class);
     }
 
     public function inquiryRequests(): BelongsToMany
     {
         return $this->belongsToMany(InquiryRequest::class);
+    }
+
+    public function delete()
+    {
+        $this->productDescription()->delete();
+        $this->productPrices()->delete();
+
+        return parent::delete();
     }
 }
