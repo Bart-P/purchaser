@@ -6,6 +6,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\PersonController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Supplier extends Model
@@ -44,7 +45,7 @@ class Supplier extends Model
         }
     }
 
-    public function categories()
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
@@ -54,7 +55,7 @@ class Supplier extends Model
         $this->categories()->sync($categegory_ids);
     }
 
-    public function tags()
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
     }
@@ -64,9 +65,14 @@ class Supplier extends Model
         $this->tags()->sync($tag_ids);
     }
 
-    public function inquiries()
+    public function inquiries(): HasMany
     {
         return $this->hasMany(Inquiry::class);
+    }
+
+    public function inquiryRequests(): HasMany
+    {
+        return $this->hasMany(InquiryRequest::class);
     }
 
     public function delete(): ?bool
@@ -75,6 +81,7 @@ class Supplier extends Model
         $this->persons()->delete();
         $this->categories()->detach();
         $this->tags()->detach();
+        $this->inquiryRequests()->delete();
 
         return parent::delete();
     }
