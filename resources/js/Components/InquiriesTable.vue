@@ -41,9 +41,8 @@
                     <IconButton :href="route('inquiries.edit', inquiry.id)" color="blue">
                         <i class="fa-solid fa-pen"></i>
                     </IconButton>
-                    <IconButton color="red">
-                        <i class="fa-solid fa-trash"></i>
-                    </IconButton>
+                    <DeleteInquiryWithConfirmation :id="'DeleteModalWithIcon-' + inquiry.id" :inquiry="inquiry"
+                        button-type="icon" />
                 </td>
             </tr>
         </tbody>
@@ -53,6 +52,7 @@
 <script setup>
 import IconButton from '@/Components/IconButton.vue';
 import StatusBadge from '@/Components/StatusBadge.vue';
+import DeleteInquiryWithConfirmation from '@/Pages/Inquiries/Partials/DeleteInquiryWithConfirmation.vue';
 import { dateToDMYHM } from '@/utils';
 
 const props = defineProps({

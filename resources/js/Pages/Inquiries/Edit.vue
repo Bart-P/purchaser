@@ -5,38 +5,22 @@
             <div class="flex justify-between">
                 <div class="">Anfrage (ID {{ inquiryDataForm.id }}) Daten Bearbeiten:</div>
                 <div class="space-x-3">
-                    <BaseButton @click="deleteConfirmationModal.show()" color="danger" class="!px-3 rounded-full text-sm">
-                        <i class="fa-solid fa-trash"></i>
-                    </BaseButton>
                     <BaseButton :href="route('inquiries.show', inquiry.id)" color="back" class="!px-3 rounded-full text-sm">
                         <i class="fa-solid fa-delete-left"></i>
                     </BaseButton>
                 </div>
             </div>
         </template>
-
-        <DeleteConfirmationModal id="deleteConfirmationModal">
-            <template #text>
-                Die Anfrage
-                <span class="font-bold">"{{ inquiryDataForm.title }} (ID: {{ inquiryDataForm.id }})"</span>
-                wird unwiederruflich gelöscht!
-            </template>
-            <template #buttons>
-                <BaseButton @click="deleteInquiry()" color="danger">
-                    Löschen
-                </BaseButton>
-
-                <BaseButton @click="deleteConfirmationModal.hide()" color="back">
-                    Abbrechen
-                </BaseButton>
-            </template>
-        </DeleteConfirmationModal>
         <div class="py-12">
             <PageBoxWrapper class="relative">
-                <BaseButton @click="submitInquiryUpdateForm" color="success"
-                    class="!px-3 rounded-full text-sm absolute right-12">
-                    <i class="fa-solid fa-save"></i>
-                </BaseButton>
+                <div class="absolute right-12 space-x-3">
+                    <DeleteInquiryWithConfirmation :id="'DeleteModalWithButton-' + inquiryDataForm.id"
+                        :inquiry="inquiryDataForm" button-type="button">
+                    </DeleteInquiryWithConfirmation>
+                    <BaseButton @click="submitInquiryUpdateForm" color="success" class="!px-3 rounded-full text-sm">
+                        <i class="fa-solid fa-save"></i>
+                    </BaseButton>
+                </div>
                 <form class="flex gap-6 w-full">
                     <div class="w-1/2 space-y-3" @submit.prevent="" action="#">
                         <h3 class="heading-3">Daten:</h3>
@@ -104,7 +88,7 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
-import DeleteConfirmationModal from '@/Components/DeleteConfirmationModal.vue'
+import DeleteInquiryWithConfirmation from '@/Pages/Inquiries/Partials/DeleteInquiryWithConfirmation.vue'
 import PageBoxWrapper from '@/Components/PageBoxWrapper.vue'
 import BaseButton from '@/Components/BaseButton.vue'
 import InputLabel from '@/Components/InputLabel.vue'
@@ -112,15 +96,6 @@ import TextInput from '@/Components/TextInput.vue'
 import StatusBadge from '@/Components/StatusBadge.vue'
 import DatePicker from '@/Components/DatePicker.vue'
 import { Head, router, useForm } from "@inertiajs/vue3";
-import { onMounted } from 'vue'
-import { initModals } from 'flowbite'
-
-let deleteConfirmationModal
-
-onMounted(() => {
-    initModals()
-    deleteConfirmationModal = new Modal(document.getElementById('deleteConfirmationModal'))
-})
 
 const props = defineProps({
     inquiry: Object,
@@ -130,11 +105,6 @@ const inquiryDataForm = useForm(props.inquiry)
 
 function submitInquiryUpdateForm() {
     router.patch(route('inquiries.patch', inquiryDataForm))
-}
-
-function deleteInquiry() {
-    deleteConfirmationModal.hide()
-    router.delete(route('inquiries.destroy', inquiryDataForm.id))
 }
 
 </script>
