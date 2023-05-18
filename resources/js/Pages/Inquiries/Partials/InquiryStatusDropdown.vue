@@ -59,4 +59,3 @@ function selectStatus(status) {
     document.getElementById(btnId).click()
 }
 </script>
-

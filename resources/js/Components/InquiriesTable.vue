@@ -52,7 +52,6 @@
 
 <script setup>
 import IconButton from '@/Components/IconButton.vue';
-import StatusBadge from '@/Components/StatusBadge.vue';
 import DeleteInquiryWithConfirmation from '@/Pages/Inquiries/Partials/DeleteInquiryWithConfirmation.vue';
 import InquiryStatusDropdown from '@/Pages/Inquiries/Partials/InquiryStatusDropdown.vue';
 import { dateToDMYHM } from '@/utils';

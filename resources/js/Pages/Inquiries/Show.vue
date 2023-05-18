@@ -8,6 +8,7 @@
                     Anfrage ID {{ props.inquiry.id }}:
                     <span class="text-gray-500">{{ props.inquiry.title }}</span>
                 </div>
+
                 <div class="space-x-3">
                     <BaseButton :href="route('inquiries')" color="back" class="!px-3 rounded-full text-sm">
                         <i class="fa-solid fa-delete-left"></i>
@@ -20,9 +21,11 @@
             <PageBoxWrapper>
                 <InquiryData :inquiry="inquiry"></InquiryData>
             </PageBoxWrapper>
+
             <PageBoxWrapper>
                 <InquiryProductsTable :products="products"></InquiryProductsTable>
             </PageBoxWrapper>
+
             <PageBoxWrapper>
                 <InquiryRequestsTable :inquiry-requests="inquiryRequests"></InquiryRequestsTable>
             </PageBoxWrapper>
