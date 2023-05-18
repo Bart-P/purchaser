@@ -29,7 +29,8 @@
                 <td class="table-data">{{ inquiry.id }}</td>
                 <td class="table-data">{{ inquiry.project }}</td>
                 <td class="table-data">
-                    <StatusBadge :status="inquiry.status" />
+                    <InquiryStatusDropdown :id="'InquiryStatusDropdown-' + inquiry.id" :current-status="inquiry.status"
+                        :auto-update-inquiry="inquiry" />
                 </td>
                 <td class="table-data">{{ inquiry.title }}</td>
                 <td class="table-data">{{ inquiry.pm }}</td>
@@ -53,6 +54,7 @@
 import IconButton from '@/Components/IconButton.vue';
 import StatusBadge from '@/Components/StatusBadge.vue';
 import DeleteInquiryWithConfirmation from '@/Pages/Inquiries/Partials/DeleteInquiryWithConfirmation.vue';
+import InquiryStatusDropdown from '@/Pages/Inquiries/Partials/InquiryStatusDropdown.vue';
 import { dateToDMYHM } from '@/utils';
 
 const props = defineProps({

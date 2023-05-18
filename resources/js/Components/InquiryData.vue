@@ -18,7 +18,7 @@
                 <tr class="table-row">
                     <th class="w-2/5">Status</th>
                     <td class="table-data">
-                        <StatusBadge :status="inquiry.status" />
+                        <InquiryStatusDropdown :auto-update-inquiry="inquiry" :current-status="inquiry.status" />
                     </td>
                 </tr>
                 <tr class="table-row">
@@ -98,7 +98,7 @@
 <script setup>
 import BaseButton from '@/Components/BaseButton.vue';
 import { dateToDMY, dateToDMYHM } from '@/utils';
-import StatusBadge from './StatusBadge.vue';
+import InquiryStatusDropdown from '@/Pages/Inquiries/Partials/InquiryStatusDropdown.vue';
 
 const props = defineProps({
     inquiry: Object,
