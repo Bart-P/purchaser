@@ -1,7 +1,6 @@
 <template>
     <!-- Toggle status Dropdown button -->
-    <button id="selectStatusDropdownBtn" data-dropdown-toggle="selectStatusDropdown" type="button"
-        class="px-3 py-2 rounded-md">
+    <button id="selectStatusDropdownBtn" data-dropdown-toggle="selectStatusDropdown" type="button" class="rounded-md">
         <StatusBadge :status="currentStatus" />
         <i class="fa-solid fa-angle-down"></i>
     </button>
