@@ -3,7 +3,7 @@
     <AuthenticatedLayout>
         <template #header>
             <div class="flex justify-between">
-                <div class="">Anfrage (ID {{ inquiryDataForm.id }}) Daten Bearbeiten:</div>
+                <h1><b>ID: {{ inquiryDataForm.id }}</b> Anfrage Daten Bearbeiten</h1>
                 <div class="space-x-3">
                     <BaseButton :href="route('inquiries.show', inquiry.id)" color="back" class="!px-3 rounded-full text-sm">
                         <i class="fa-solid fa-delete-left"></i>
@@ -25,37 +25,15 @@
                     <div class="w-1/2 space-y-3" @submit.prevent="" action="#">
                         <h3 class="heading-3">Daten:</h3>
                         <div class="flex items-center gap-3">
-                            <InputLabel class="w-1/4" for="id">ID:</InputLabel>
-                            <div class="w-full">{{ inquiryDataForm.id }}</div>
+                            <InputLabel class="w-1/4" for="status">Status:</InputLabel>
+                            <div class="text-start w-full">
+                                <InquiryStatusDropdown :current-status="inquiryDataForm.status"
+                                    @select-status="selectStatus" />
+                            </div>
                         </div>
                         <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="title">Titel:</InputLabel>
                             <TextInput class="w-3/4" id="title" v-model="inquiryDataForm.title" type="text" name="title" />
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <InputLabel class="w-1/4" for="status">Status:</InputLabel>
-                            <div class="text-start w-full py-2">
-
-                                <!-- Toggle status Dropdown button -->
-                                <button id="selectStatusDropdownBtn" data-dropdown-toggle="selectStatusDropdown"
-                                    type="button" class="border border-gray-300 px-3 py-2 rounded-md">
-                                    <StatusBadge :status="inquiryDataForm.status" />
-                                    <i class="fa-solid fa-angle-down"></i>
-                                </button>
-
-                                <!-- Dropdown menu -->
-                                <div id="selectStatusDropdown"
-                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow px-2 py-1">
-                                    <ul class="py-2 text-sm text-gray-700 space-y-3"
-                                        aria-labelledby="selectStatusDropdownBtn">
-                                        <li v-for="status in statusKeys">
-                                            <button @click="selectStatus(status)" type="button" class="w-full align-middle">
-                                                <StatusBadge :status="status" />
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                         <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="offers_until">Angebote bis:</InputLabel>
@@ -108,26 +86,17 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import DeleteInquiryWithConfirmation from '@/Pages/Inquiries/Partials/DeleteInquiryWithConfirmation.vue'
+import InquiryStatusDropdown from '@/Pages/Inquiries/Partials/InquiryStatusDropdown.vue'
 import PageBoxWrapper from '@/Components/PageBoxWrapper.vue'
 import BaseButton from '@/Components/BaseButton.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import TextInput from '@/Components/TextInput.vue'
-import StatusBadge from '@/Components/StatusBadge.vue'
 import DatePicker from '@/Components/DatePicker.vue'
 import { Head, router, useForm } from "@inertiajs/vue3";
-import { allStatus } from '@/utils'
-import { onMounted } from 'vue'
-import { initDropdowns } from 'flowbite'
-
-onMounted(() => {
-    initDropdowns()
-})
 
 const props = defineProps({
     inquiry: Object,
 })
-
-const statusKeys = Object.keys(allStatus.de)
 
 const inquiryDataForm = useForm(props.inquiry)
 
@@ -137,7 +106,6 @@ function submitInquiryUpdateForm() {
 
 function selectStatus(status) {
     inquiryDataForm.status = status;
-    document.getElementById('selectStatusDropdownBtn').click()
 }
 
 </script>
