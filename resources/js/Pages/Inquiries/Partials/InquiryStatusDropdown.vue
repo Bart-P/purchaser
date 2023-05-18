@@ -40,5 +40,3 @@ function selectStatus(status) {
     document.getElementById('selectStatusDropdownBtn').click()
 }
 </script>
-
-
