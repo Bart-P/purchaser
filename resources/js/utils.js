@@ -16,16 +16,16 @@ export function dateToDMYHM(date) {
     }
 }
 
-export function getStatusForLang(status, lang) {
-    const allStatus = {
-        'de': {
-            'created': 'erstellt',
-            'send': 'gesendet',
-            'waiting': 'warte',
-            'done': 'fertig',
-            'closed': 'geschlossen'
-        },
-    }
+export const allStatus = {
+    'de': {
+        'created': 'erstellt',
+        'send': 'gesendet',
+        'waiting': 'warte',
+        'done': 'fertig',
+        'closed': 'geschlossen'
+    },
+}
 
+export function getStatusForLang(status, lang) {
     return allStatus[lang][status]
 }

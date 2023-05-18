@@ -35,7 +35,26 @@
                         <div class="flex items-center gap-3">
                             <InputLabel class="w-1/4" for="status">Status:</InputLabel>
                             <div class="text-start w-full py-2">
-                                <StatusBadge :status="inquiryDataForm.status" />
+
+                                <!-- Toggle status Dropdown button -->
+                                <button id="selectStatusDropdownBtn" data-dropdown-toggle="selectStatusDropdown"
+                                    type="button" class="border border-gray-300 px-3 py-2 rounded-md">
+                                    <StatusBadge :status="inquiryDataForm.status" />
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </button>
+
+                                <!-- Dropdown menu -->
+                                <div id="selectStatusDropdown"
+                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow px-2 py-1">
+                                    <ul class="py-2 text-sm text-gray-700 space-y-3"
+                                        aria-labelledby="selectStatusDropdownBtn">
+                                        <li v-for="status in statusKeys">
+                                            <button @click="selectStatus(status)" type="button" class="w-full align-middle">
+                                                <StatusBadge :status="status" />
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
@@ -96,15 +115,29 @@ import TextInput from '@/Components/TextInput.vue'
 import StatusBadge from '@/Components/StatusBadge.vue'
 import DatePicker from '@/Components/DatePicker.vue'
 import { Head, router, useForm } from "@inertiajs/vue3";
+import { allStatus } from '@/utils'
+import { onMounted } from 'vue'
+import { initDropdowns } from 'flowbite'
+
+onMounted(() => {
+    initDropdowns()
+})
 
 const props = defineProps({
     inquiry: Object,
 })
 
+const statusKeys = Object.keys(allStatus.de)
+
 const inquiryDataForm = useForm(props.inquiry)
 
 function submitInquiryUpdateForm() {
     router.patch(route('inquiries.patch', inquiryDataForm))
+}
+
+function selectStatus(status) {
+    inquiryDataForm.status = status;
+    document.getElementById('selectStatusDropdownBtn').click()
 }
 
 </script>
