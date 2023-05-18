@@ -86,9 +86,9 @@
                     </ul>
                     <hr>
                 </div>
-                <div class="">
+                <div class="h-full">
                     <h4 class="heading-4 pb-3">Beschreibung</h4>
-                    <p v-html="parseDescription" class=""></p>
+                    <p v-html="inquiry.description" style="white-space: pre-wrap" class="overflow-hidden"></p>
                 </div>
             </div>
         </div>
@@ -97,14 +97,11 @@
 
 <script setup>
 import BaseButton from '@/Components/BaseButton.vue';
-import { computed } from '@vue/reactivity';
 import { dateToDMY, dateToDMYHM } from '@/utils';
 import StatusBadge from './StatusBadge.vue';
 
 const props = defineProps({
     inquiry: Object,
 });
-
-const parseDescription = computed(() => props.inquiry.description)
 
 </script>
