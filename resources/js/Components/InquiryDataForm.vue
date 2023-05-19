@@ -5,7 +5,7 @@
                 button-type="button">
             </DeleteInquiryWithConfirmation>
 
-            <BaseButton @click="submitInquiryUpdateForm" color="success" class="!px-3 rounded-full text-sm">
+            <BaseButton @click="submitInquiryUpdateForm" color="success" btn-type="rounded">
                 <i class="fa-solid fa-save" />
             </BaseButton>
         </div>

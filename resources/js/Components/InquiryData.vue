@@ -2,7 +2,7 @@
     <div class="flex justify-between items-center mb-3">
         <h3 class="heading-3">Anfrage Daten</h3>
 
-        <BaseButton :href="route('inquiries.edit', inquiry.id)" color="edit" class="!px-3 rounded-full text-sm">
+        <BaseButton :href="route('inquiries.edit', inquiry.id)" color="edit" btn-type="rounded">
             <i class="fa-solid fa-pen"></i>
         </BaseButton>
     </div>

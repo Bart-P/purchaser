@@ -1,6 +1,5 @@
 <template>
-    <BaseButton v-if="buttonType === 'button'" @click="deleteConfirmationModal.show()" color="danger"
-        class="!px-3 rounded-full text-sm">
+    <BaseButton v-if="buttonType === 'button'" @click="deleteConfirmationModal.show()" btn-type="rounded" color="danger">
         <i class="fa-solid fa-trash"></i>
     </BaseButton>
 

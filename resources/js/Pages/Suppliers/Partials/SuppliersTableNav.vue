@@ -42,7 +42,7 @@
                         </transition>
                     </SelectItemDropdown>
 
-                    <BaseButton @click="resetFields" color="secondary" class="rounded-full !px-3"
+                    <BaseButton @click="resetFields" color="secondary" btn-type="rounded"
                         :disabled="filterByTags.length + categoryTags.length + searchInput.length < 1">
                         <i class="fa-solid fa-filter-circle-xmark"></i>
                     </BaseButton>
@@ -50,8 +50,10 @@
             </div>
             <div class="h-full space-x-3">
                 <BaseButton :href="route('suppliers.create')" color="primary">
-                    Neu
+                    <i class="fa-solid fa-plus" />
                 </BaseButton>
+
+                <IconButton color="green"><i class="fa-solid fa-plus" /></IconButton>
                 <BaseButton :disabled="props.suppliersChosen.value" color="secondary">
                     Zur Anfrage Hinzufügen
                 </BaseButton>
@@ -63,6 +65,7 @@
 <script setup>
 
 import BaseButton from '@/Components/BaseButton.vue';
+import IconButton from '@/Components/IconButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue';
 import { ref, watch } from 'vue';
 

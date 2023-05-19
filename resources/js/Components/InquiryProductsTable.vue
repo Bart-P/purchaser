@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-between mb-3">
         <h3 class="heading-3 pb-3">Produkte</h3>
-        <BaseButton @click="" color="success" class="!px-3 rounded-full text-sm">
+        <BaseButton @click="" color="success" btn-type="rounded">
             <i class="fa-solid fa-cart-plus"></i>
         </BaseButton>
     </div>

@@ -5,7 +5,7 @@
             <div class="flex justify-between">
                 <h1><b>ID: {{ inquiry.id }}</b> Anfrage Daten Bearbeiten</h1>
                 <div class="space-x-3">
-                    <BaseButton :href="route('inquiries')" color="back" class="!px-3 rounded-full text-sm">
+                    <BaseButton :href="route('inquiries')" color="back" btn-type="rounded">
                         <i class="fa-solid fa-delete-left"></i>
                     </BaseButton>
                 </div>

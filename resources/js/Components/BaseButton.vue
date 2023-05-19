@@ -1,6 +1,6 @@
 <template>
-    <component :is="this.$attrs.href ? Link : 'button'" :class="this.$attrs.disabled ? buttonStyles.disabled : getClass()"
-        class="px-6 py-2 rounded">
+    <component :is="this.$attrs.href ? Link : 'button'" :class="(this.$attrs.disabled ? buttonStyles.disabled :
+        getClass()), colorClasses" class="py-2">
         <slot />
     </component>
 </template>
@@ -15,7 +15,20 @@ const props = defineProps(
             type: String,
             default: 'primary'
         },
+        btnType: {
+            type: String,
+            default: 'button'
+        },
     })
+
+let colorClasses = {}
+
+if (props.btnType === 'rounded') {
+    colorClasses = { '!px-3 rounded-full text-sm': true }
+}
+if (props.btnType === 'button') {
+    colorClasses = { 'px-6 rounded-md': true }
+}
 
 const buttonStyles = {
     primary: {
