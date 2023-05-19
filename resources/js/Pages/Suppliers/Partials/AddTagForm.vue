@@ -2,10 +2,10 @@
     <div class="space-y-6">
         <div class="flex justify-between items-center">
             <h4 class="heading-4">Tags (optional)</h4>
-            <BaseButton color="primary" type="button" class="inline-flex items-center"
+            <BaseButton color="secondary" btn-type="rounded" type="button" class="inline-flex items-center"
                 data-drawer-target="choose-tag-drawer" data-drawer-show="choose-tag-drawer"
                 aria-controls="choose-tag-drawer">
-                Tag Auswählen
+                <i class="fa-solid fa-plus-minus" />
             </BaseButton>
         </div>
 

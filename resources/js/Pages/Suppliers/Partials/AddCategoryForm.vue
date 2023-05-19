@@ -2,16 +2,16 @@
     <EditCategoriesModal :categories="categories" :tags="tags" id="editCategoryModal" />
     <div class="space-y-6">
         <div class="flex justify-between items-center">
-            <div class="flex items-center gap-4">
-                <h4 class="heading-4">Kategorien (erforderlich)</h4>
-                <IconButton color='blue' data-modal-toggle="editCategoryModal" type="button" class="text-sm">
-                    <i class="fa-solid fa-pen"></i>
-                </IconButton>
+            <h4 class="heading-4">Kategorien (erforderlich)</h4>
+            <div class="flex gap-3">
+                <BaseButton type="button" color="edit" btn-type="rounded" data-modal-toggle="editCategoryModal"><i
+                        class="fa-solid fa-pen"></i></BaseButton>
+                <SelectItemDropdown btn-type="rounded" id="createOrEditCategoryDropdown" color="secondary"
+                    @toggle-check-item="toggleCheckCategory" :checked-items="checkedCategories.map(cat => cat.id)"
+                    :items="categories">
+                    <i class="fa-solid fa-plus-minus" />
+                </SelectItemDropdown>
             </div>
-            <SelectItemDropdown id="createOrEditCategoryDropdown" @toggle-check-item="toggleCheckCategory"
-                :checked-items="checkedCategories.map(cat => cat.id)" :items="categories">
-                Kategorie Auswahl
-            </SelectItemDropdown>
         </div>
 
         <ul class="flex flex-wrap items-center gap-4 uppercase">
@@ -32,7 +32,7 @@
 
 <script setup>
 
-import IconButton from '@/Components/IconButton.vue';
+import BaseButton from '@/Components/BaseButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue'
 import EditCategoriesModal from '@/Pages/Suppliers/Partials/EditCategoriesModal.vue'
 import { TransitionGroup } from 'vue'

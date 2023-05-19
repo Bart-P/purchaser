@@ -3,7 +3,12 @@
 
     <AuthenticatedLayout>
         <template #header>
-            Neuen Lieferant Hinzufügen
+            <div class="flex justify-between">
+                <h3>Neuen Lieferant Hinzufügen</h3>
+                <BaseButton type="button" :href="route('suppliers')" color="back" btn-type="rounded">
+                    <i class="fa-solid fa-delete-left" />
+                </BaseButton>
+            </div>
         </template>
         <div class="py-12 w-full h-full flex flex-col gap-8">
             <!-- add Company Form -->

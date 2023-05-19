@@ -1,6 +1,6 @@
 <template>
     <BaseButton :disabled="isDisabled" :color="color" :data-dropdown-toggle="id" data-dropdown-placement="bottom"
-        class="inline-flex items-center" type="button">
+        :btn-type="btnType" class="inline-flex items-center" type="button">
         <slot />
     </BaseButton>
     <!-- Dropdown menu -->
@@ -65,6 +65,10 @@ const props = defineProps(
         isDisabled: {
             default: false,
             type: Boolean,
+        },
+        btnType: {
+            default: 'button',
+            type: String
         }
     })
 

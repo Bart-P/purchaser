@@ -18,7 +18,7 @@
                             placeholder="Suche">
                     </div>
                 </div>
-                <div class="space-x-3">
+                <div class="flex gap-3">
                     <SelectItemDropdown id="categoryDropdown" @toggle-check-item="toggleCheckCategory" color="light"
                         :items="categories" :checked-items="selectedCategory">
                         Kategorie filter <i class="ml-2 fa-solid fa-angle-down"></i>
@@ -48,14 +48,13 @@
                     </BaseButton>
                 </div>
             </div>
-            <div class="h-full space-x-3">
-                <BaseButton :href="route('suppliers.create')" color="primary">
-                    <i class="fa-solid fa-plus" />
-                </BaseButton>
-
-                <IconButton color="green"><i class="fa-solid fa-plus" /></IconButton>
+            <div class="h-full flex gap-3">
                 <BaseButton :disabled="props.suppliersChosen.value" color="secondary">
                     Zur Anfrage Hinzufügen
+                </BaseButton>
+
+                <BaseButton :href="route('suppliers.create')" color="success" btn-type="rounded">
+                    <i class="fa-solid fa-plus" />
                 </BaseButton>
             </div>
         </div>
@@ -65,7 +64,6 @@
 <script setup>
 
 import BaseButton from '@/Components/BaseButton.vue';
-import IconButton from '@/Components/IconButton.vue';
 import SelectItemDropdown from '@/Components/SelectItemDropdown.vue';
 import { ref, watch } from 'vue';
 

@@ -4,12 +4,9 @@
             <h3 class="heading-3">
                 Firma (erforderlich)
             </h3>
-            <div class="flex gap-4 justify-end">
-                <BaseButton type="submit" color="primary">
-                    Speichern
-                </BaseButton>
-                <BaseButton type="button" :href="route('suppliers')" color="back">
-                    Zurück
+            <div class="flex gap-3 justify-end">
+                <BaseButton type="submit" color="success" btn-type="rounded">
+                    <i class="fa-solid fa-save" />
                 </BaseButton>
             </div>
         </div>

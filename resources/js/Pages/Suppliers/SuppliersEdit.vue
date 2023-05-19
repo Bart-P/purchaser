@@ -1,6 +1,5 @@
 <template>
     <Head title="Lieferant Bearbeiten" />
-
     <DeleteConfirmationModal id="deleteAddressModal">
         <template #text>
             Die Addresse
@@ -39,7 +38,14 @@
 
     <AuthenticatedLayout>
         <template #header>
-            Lieferant Bearbeiten
+            <div class="flex justify-between">
+                <h1>Lieferant Bearbeiten ID: {{ supplier.id }}</h1>
+                <div class="space-x-3">
+                    <BaseButton :href="route('suppliers')" color="back" btn-type="rounded">
+                        <i class="fa-solid fa-delete-left"></i>
+                    </BaseButton>
+                </div>
+            </div>
         </template>
         <div class="py-12 w-full h-full flex flex-col gap-8">
             <!-- add Company Form -->
@@ -59,9 +65,9 @@
                     <h3 class="heading-3">
                         Adressen (optional)
                     </h3>
-                    <BaseButton color="primary" type="button" data-modal-target="addAddressModal"
+                    <BaseButton color="success" type="button" data-modal-target="addAddressModal" btn-type="rounded"
                         data-modal-toggle="addAddressModal">
-                        Adresse Hinzufügen
+                        <i class="fa-solid fa-plus" />
                     </BaseButton>
                 </div>
                 <div class="flex flex-wrap gap-8 pt-8">
@@ -94,9 +100,9 @@
                         <h3 class="heading-3">
                             Personen (optional)
                         </h3>
-                        <BaseButton color="primary" type="button" data-modal-target="addPersonModal"
+                        <BaseButton color="success" type="button" data-modal-target="addPersonModal" btn-type="rounded"
                             data-modal-toggle="addPersonModal">
-                            Person Hinzufügen
+                            <i class="fa-solid fa-plus" />
                         </BaseButton>
                     </div>
 
@@ -147,6 +153,8 @@ onMounted(() => {
     deleteAddressModal = new Modal(document.getElementById('deleteAddressModal'))
     deletePersonModal = new Modal(document.getElementById('deletePersonModal'))
 })
+
+// TODO - change all save buttons to success green from primary
 
 const props = defineProps(
     {

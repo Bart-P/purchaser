@@ -1,13 +1,15 @@
 <template>
     <form class="flex gap-6 w-full" @submit.prevent="" action="#">
-        <div class="absolute right-12 space-x-3">
-            <DeleteInquiryWithConfirmation :id="'DeleteModalWithButton-' + inquiryDataForm.id" :inquiry="inquiryDataForm"
-                button-type="button">
-            </DeleteInquiryWithConfirmation>
+        <div class="absolute right-12">
+            <div class="flex gap-3">
+                <DeleteInquiryWithConfirmation :id="'DeleteModalWithButton-' + inquiryDataForm.id"
+                    :inquiry="inquiryDataForm" button-type="button">
+                </DeleteInquiryWithConfirmation>
 
-            <BaseButton @click="submitInquiryUpdateForm" color="success" btn-type="rounded">
-                <i class="fa-solid fa-save" />
-            </BaseButton>
+                <BaseButton @click="submitInquiryUpdateForm" color="success" btn-type="rounded">
+                    <i class="fa-solid fa-save" />
+                </BaseButton>
+            </div>
         </div>
         <div class="w-1/2 space-y-3">
             <h3 class="heading-3">Daten:</h3>
