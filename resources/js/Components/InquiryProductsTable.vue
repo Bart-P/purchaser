@@ -1,7 +1,7 @@
 <template>
-    <div class="flex justify-between items-center mb-3">
+    <div class="flex justify-between mb-3">
         <h3 class="heading-3 pb-3">Produkte</h3>
-        <BaseButton color="success" class="!px-3 rounded-full text-sm">
+        <BaseButton @click="" color="success" class="!px-3 rounded-full text-sm">
             <i class="fa-solid fa-cart-plus"></i>
         </BaseButton>
     </div>
@@ -56,7 +56,6 @@ const props = defineProps({
 });
 
 function sortPricesByQuantities($prices) {
-
     return $prices?.sort((a, b) => a.quantity - b.quantity);
 }
 </script>
