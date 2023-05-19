@@ -15,7 +15,7 @@ class InquiryController extends Controller
         ]);
     }
 
-    function show($id)
+    function edit($id)
     {
         $inquiry = Inquiry::find($id);
         $inquiryProducts = $inquiry->products()->get()->map(function ($prod) {
@@ -30,19 +30,10 @@ class InquiryController extends Controller
             ->join('suppliers', 'suppliers.id', '=', 'inquiry_requests.supplier_id')
             ->get();
 
-        return Inertia::render('Inquiries/Show', [
-            'inquiry' => $inquiry,
-            'products' => $inquiryProducts,
-            'inquiryRequests' => $inquiryRequests,
-        ]);
-    }
-
-    function edit($id)
-    {
-        $inquiry = Inquiry::find($id);
-
         return Inertia::render('Inquiries/Edit', [
             'inquiry' => $inquiry,
+            'products' => $inquiryProducts,
+            'requests' => $inquiryRequests,
         ]);
     }
 

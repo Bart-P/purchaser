@@ -36,9 +36,6 @@
                 <td class="table-data">{{ inquiry.pm }}</td>
                 <td class="table-data">{{ dateToDMYHM(inquiry.updated_at) }}</td>
                 <td class="table-data flex gap-3">
-                    <IconButton color="green" :href="route('inquiries.show', inquiry.id)">
-                        <i class="fa-solid fa-eye"></i>
-                    </IconButton>
                     <IconButton :href="route('inquiries.edit', inquiry.id)" color="blue">
                         <i class="fa-solid fa-pen"></i>
                     </IconButton>

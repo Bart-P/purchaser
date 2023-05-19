@@ -5,14 +5,14 @@
             <div class="flex justify-between">
                 <h1><b>ID: {{ inquiryDataForm.id }}</b> Anfrage Daten Bearbeiten</h1>
                 <div class="space-x-3">
-                    <BaseButton :href="route('inquiries.show', inquiry.id)" color="back" class="!px-3 rounded-full text-sm">
+                    <BaseButton :href="route('inquiries')" color="back" class="!px-3 rounded-full text-sm">
                         <i class="fa-solid fa-delete-left"></i>
                     </BaseButton>
                 </div>
             </div>
         </template>
 
-        <div class="py-12">
+        <div class="py-12 space-y-6">
             <PageBoxWrapper class="relative">
                 <div class="absolute right-12 space-x-3">
                     <DeleteInquiryWithConfirmation :id="'DeleteModalWithButton-' + inquiryDataForm.id"
@@ -92,6 +92,14 @@
                     </div>
                 </form>
             </PageBoxWrapper>
+
+            <PageBoxWrapper>
+                <InquiryProductsTable :products="products"></InquiryProductsTable>
+            </PageBoxWrapper>
+
+            <PageBoxWrapper>
+                <InquiryRequestsTable :inquiry-requests="requests"></InquiryRequestsTable>
+            </PageBoxWrapper>
         </div>
     </AuthenticatedLayout>
 </template>
@@ -105,10 +113,14 @@ import BaseButton from '@/Components/BaseButton.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import TextInput from '@/Components/TextInput.vue'
 import DatePicker from '@/Components/DatePicker.vue'
+import InquiryProductsTable from '@/Components/InquiryProductsTable.vue'
+import InquiryRequestsTable from '@/Components/InquiryRequestsTable.vue'
 import { Head, router, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
     inquiry: Object,
+    products: Object,
+    requests: Object,
 })
 
 const inquiryDataForm = useForm(props.inquiry)

@@ -49,14 +49,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     )->name('inquiries');
 
     Route::get(
-        '/inquiries/{id}',
-        [
-            InquiryController::class,
-            'show',
-        ]
-    )->name('inquiries.show');
-
-    Route::get(
         '/inquiries/edit/{id}',
         [
             InquiryController::class,
