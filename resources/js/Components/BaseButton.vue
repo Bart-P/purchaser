@@ -1,6 +1,6 @@
 <template>
     <component :is="this.$attrs.href ? Link : 'button'" :class="(this.$attrs.disabled ? buttonStyles.disabled :
-        getClass()), colorClasses" class="py-2">
+        getClass()), colorClasses" class="flex justify-center items-center">
         <slot />
     </component>
 </template>
@@ -24,10 +24,9 @@ const props = defineProps(
 let colorClasses = {}
 
 if (props.btnType === 'rounded') {
-    colorClasses = { '!px-3 rounded-full text-sm': true }
-}
-if (props.btnType === 'button') {
-    colorClasses = { 'px-6 rounded-md': true }
+    colorClasses = { 'w-[38px] h-[38px] rounded-full text-sm': true }
+} else if (props.btnType === 'button') {
+    colorClasses = { 'px-6 py-2 rounded-md': true }
 }
 
 const buttonStyles = {
@@ -50,10 +49,10 @@ const buttonStyles = {
         'cursor-pointer bg-blue-600 hover:bg-blue-800 text-white': true
     },
     disabled: {
-        'cursor-not-allowed bg-gray-100 text-gray-500 px-6 py-2 rounded': true
+        'cursor-not-allowed bg-gray-100 text-gray-500': true
     },
     danger: {
-        'cursor-pointer bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded': true
+        'cursor-pointer bg-red-600 hover:bg-red-700 text-white rounded': true
     },
 }
 
