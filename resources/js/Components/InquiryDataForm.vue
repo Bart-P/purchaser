@@ -26,7 +26,8 @@
 
             <div class="flex items-center gap-3">
                 <InputLabel class="w-1/4" for="title">Titel:</InputLabel>
-                <TextInput class="w-3/4" id="title" v-model="inquiryDataForm.title" type="text" name="title" />
+                <TextInput class="w-3/4" id="title" v-model="inquiryDataForm.title" type="text" name="title"
+                    placeholder="Titel der Anfrage" />
             </div>
 
             <div class="flex items-center gap-3">
@@ -45,17 +46,20 @@
 
             <div class="flex items-center justify-end gap-3">
                 <InputLabel class="w-1/4" for="project">Projekt Nr:</InputLabel>
-                <TextInput class="w-3/4" id="project" v-model="inquiryDataForm.project" type="text" name="project" />
+                <TextInput class="w-3/4" id="project" v-model="inquiryDataForm.project" type="text" name="project"
+                    placeholder="AB-123" />
             </div>
 
             <div class="flex items-center justify-end gap-3">
                 <InputLabel class="w-1/4" for="pm">Projektleiter:</InputLabel>
-                <TextInput class="w-3/4" id="pm" v-model="inquiryDataForm.pm" type="text" name="title" />
+                <TextInput class="w-3/4" id="pm" v-model="inquiryDataForm.pm" type="text" name="pm"
+                    placeholder="Max Mustermann" />
             </div>
 
             <div class="flex items-center justify-end gap-3">
                 <InputLabel class="w-1/4" for="client">Kunde:</InputLabel>
-                <TextInput class="w-3/4" id="client" v-model="inquiryDataForm.client" type="text" name="title" />
+                <TextInput class="w-3/4" id="client" v-model="inquiryDataForm.client" type="text" name="client"
+                    placeholder="Musterfirma" />
             </div>
         </div>
 
