@@ -27,9 +27,9 @@
                     <h3 class="heading-3">
                         Adressen (optional)
                     </h3>
-                    <BaseButton color="primary" type="button" data-modal-target="addAddressModal"
+                    <BaseButton color="success" btn-type="rounded" type="button" data-modal-target="addAddressModal"
                         data-modal-toggle="addAddressModal">
-                        Adresse Hinzufügen
+                        <i class="fa-solid fa-plus" />
                     </BaseButton>
                 </div>
                 <div class="flex flex-wrap gap-8 pt-8">
@@ -55,9 +55,9 @@
                         <h3 class="heading-3">
                             Personen (optional)
                         </h3>
-                        <BaseButton color="primary" type="button" data-modal-target="addPersonModal"
+                        <BaseButton color="success" type="button" btn-type="rounded" data-modal-target="addPersonModal"
                             data-modal-toggle="addPersonModal">
-                            Person Hinzufügen
+                            <i class="fa-solid fa-plus"></i>
                         </BaseButton>
                     </div>
 
