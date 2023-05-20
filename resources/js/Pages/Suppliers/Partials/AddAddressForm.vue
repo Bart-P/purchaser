@@ -2,7 +2,7 @@
     <form>
         <!-- Modal body -->
         <div class="flex flex-col gap-5 p-6">
-            <h3 class="text-purchaser-primary text-xl font-bold">Addresse Hinzufügen</h3>
+            <h3 class="text-purchaser-primary text-xl font-bold">Adresse Hinzufügen</h3>
             <InputLabel for="addressType">Typ *</InputLabel>
             <select v-model="addressForm.type" required id="addressType"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-purchaser-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:bg-purchaser-primary-light dark:focus:border-purchaser-primary">
@@ -140,7 +140,7 @@ function addAddress() {
     addressForm.reset()
     ToastStore.add({
         type: 'info',
-        message: 'Addresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.',
+        message: 'Adresse Hinzugefügt! Bitte weitere eingeben oder auf Abbrechen drücken.',
     })
 }
 
