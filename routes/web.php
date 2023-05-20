@@ -64,6 +64,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ]
     )->name('inquiries.patch');
 
+    Route::get(
+        '/inquiries/create',
+        [
+            InquiryController::class,
+            'create',
+        ]
+    )->name('inquiries.create');
+
     Route::delete(
         '/inquiries/{id}',
         [

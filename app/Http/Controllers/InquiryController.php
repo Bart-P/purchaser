@@ -54,6 +54,11 @@ class InquiryController extends Controller
         ]);
     }
 
+    function create()
+    {
+        return Inertia::render('Inquiries/Create');
+    }
+
     function destroy(Request $request)
     {
         Inquiry::destroy($request->id);
