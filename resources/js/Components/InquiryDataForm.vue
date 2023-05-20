@@ -2,9 +2,11 @@
     <form class="flex gap-6 w-full" @submit.prevent="" action="#">
         <div class="absolute right-12">
             <div class="flex gap-3">
-                <DeleteInquiryWithConfirmation :id="'DeleteModalWithButton-' + inquiryDataForm.id"
-                    :inquiry="inquiryDataForm" button-type="button">
-                </DeleteInquiryWithConfirmation>
+                <template v-if="inquiry?.id">
+                    <DeleteInquiryWithConfirmation :id="'DeleteModalWithButton-' + inquiryDataForm.id"
+                        :inquiry="inquiryDataForm" button-type="button">
+                    </DeleteInquiryWithConfirmation>
+                </template>
 
                 <BaseButton @click="submitInquiryUpdateForm" color="success" btn-type="rounded">
                     <i class="fa-solid fa-save" />
