@@ -14,15 +14,15 @@
 
         <div class="py-12 space-y-6">
             <PageBoxWrapper class="relative">
-                <InquiryDataForm :inquiry="inquiry"></InquiryDataForm>
+                <InquiryDataForm :inquiry="inquiry" />
             </PageBoxWrapper>
 
             <PageBoxWrapper>
-                <InquiryProductsTable :products="products"></InquiryProductsTable>
+                <InquiryProductsTable :products="products" />
             </PageBoxWrapper>
 
             <PageBoxWrapper>
-                <InquiryRequestsTable :inquiry-requests="requests"></InquiryRequestsTable>
+                <InquiryRequestsTable :inquiry-requests="requests" />
             </PageBoxWrapper>
         </div>
     </AuthenticatedLayout>
