@@ -93,7 +93,17 @@ const props = defineProps({
 
 const emits = defineEmits(['updateInquiry']);
 
-const inquiryDataForm = useForm(props.inquiry)
+const inquiryDataForm = props.inquiry ? useForm(props.inquiry) : useForm(
+    {
+        status: "created",
+        title: null,
+        offers_until: null,
+        delivery_date: null,
+        project: null,
+        pm: null,
+        client: null,
+        description: null
+    })
 
 function submitInquiryUpdateForm() {
     router.patch(route('inquiries.patch', inquiryDataForm))
