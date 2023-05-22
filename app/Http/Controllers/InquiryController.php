@@ -73,7 +73,7 @@ class InquiryController extends Controller
         ]));
 
         if ($inquiry) {
-            return redirect('inquiries')->with('notification', [
+            return redirect('/inquiries/edit/' . $inquiry->id)->with('notification', [
                 'message' => 'Anfrage erstellt!',
                 'type'    => 'success',
             ]);
