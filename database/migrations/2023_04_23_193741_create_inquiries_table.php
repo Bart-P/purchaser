@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('inquiries', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->date('offers_until');
-            $table->string('delivery_date');
+            $table->date('offers_until')->nullable();
+            $table->string('delivery_date')->nullable();
             $table->string('status');
-            $table->string('description', 2000);
-            $table->string('project');
-            $table->string('pm');
-            $table->string('client');
+            $table->string('description', 2000)->nullable();
+            $table->string('project')->nullable();
+            $table->string('pm')->nullable();
+            $table->string('client')->nullable();
             $table->timestamps();
         });
     }

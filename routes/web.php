@@ -7,6 +7,7 @@ use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\TagController;
+use App\Models\Inquiry;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;

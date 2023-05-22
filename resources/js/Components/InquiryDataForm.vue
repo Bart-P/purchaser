@@ -106,7 +106,11 @@ const inquiryDataForm = props.inquiry ? useForm(props.inquiry) : useForm(
     })
 
 function submitInquiryUpdateForm() {
-    router.patch(route('inquiries.patch', inquiryDataForm))
+    if (props.inquiry?.id) {
+        return router.patch(route('inquiries.patch', inquiryDataForm))
+    }
+
+    return router.post(route('inquiries.store', inquiryDataForm))
 }
 
 function selectStatus(status) {
