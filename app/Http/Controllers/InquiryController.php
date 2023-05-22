@@ -59,6 +59,32 @@ class InquiryController extends Controller
         return Inertia::render('Inquiries/Create');
     }
 
+    function store(Request $request)
+    {
+        $inquiry = Inquiry::create($request->validate([
+            'title' => 'required',
+            'offers_until' => 'date|nullable',
+            'delivery_date' => 'date|nullable',
+            'status' => 'required',
+            'description' => 'nullable',
+            'project' => 'nullable',
+            'pm' => 'nullable',
+            'client' => 'nullable',
+        ]));
+
+        if ($inquiry) {
+            return redirect('inquiries')->with('notification', [
+                'message' => 'Anfrage erstellt!',
+                'type'    => 'success',
+            ]);
+        }
+
+        return redirect('inquiries')->with('notification', [
+            'message' => 'Anfrage konnte nicht erstellt werden! Versuchen Sie es bitte noch einmal.',
+            'type'    => 'warning',
+        ]);
+    }
+
     function destroy(Request $request)
     {
         Inquiry::destroy($request->id);

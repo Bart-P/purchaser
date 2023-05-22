@@ -72,6 +72,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ]
     )->name('inquiries.create');
 
+    Route::post(
+        '/inquiries/store',
+        [
+            InquiryController::class,
+            'store',
+        ]
+    )->name('inquiries.store');
+
     Route::delete(
         '/inquiries/{id}',
         [
