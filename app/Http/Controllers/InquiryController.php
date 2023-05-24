@@ -20,7 +20,9 @@ class InquiryController extends Controller
         $inquiry = Inquiry::find($id);
         $inquiryProducts = $inquiry->products()->get()->map(function ($prod) {
             $prodPrices = $prod->productPrices()->get();
+            $prodDescription = $prod->productDescriptions()->get();
             $prod->prices = $prodPrices;
+            $prod->description = $prodDescription;
             return $prod;
         });
 
