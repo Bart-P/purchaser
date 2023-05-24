@@ -1,11 +1,12 @@
 <template>
     <div class="flex justify-between mb-3">
         <h3 class="heading-3 pb-3">Produkte</h3>
-        <BaseButton @click="showProductForm" color="success" btn-type="rounded">
+        <BaseButton @click="showEmptyProductForm" color="success" btn-type="rounded">
             <i class="fa-solid fa-cart-plus"></i>
         </BaseButton>
     </div>
-    <ProductFormModal id='productFormModal' />
+    <ProductFormModal id='productFormModal' :product="selectedProduct"
+        @close-product-form-modal="productFormModal.hide()" />
     <table class="table">
         <thead class="table-head">
             <tr>
@@ -33,7 +34,7 @@
             <td class="table-data">{{ dateToDMYHM(product.created_at) }}</td>
             <td class="table-data">{{ dateToDMYHM(product.updated_at) }}</td>
             <td class="space-x-3">
-                <IconButton>
+                <IconButton @click="showProductForm(product)">
                     <i class="fa-solid fa-pen"></i>
                 </IconButton>
                 <IconButton color="red">
@@ -50,6 +51,7 @@ import IconButton from '@/Components/IconButton.vue';
 import ProductFormModal from '@/Components/Products/ProductFormModal.vue';
 import { dateToDMYHM } from '@/utils';
 import { initModals } from 'flowbite';
+import { ref } from 'vue';
 import { onMounted } from 'vue';
 
 let productFormModal
@@ -63,14 +65,19 @@ const props = defineProps({
     products: Object,
 });
 
-let selectedProduct
+let selectedProduct = ref(null)
 
 function sortPricesByQuantities($prices) {
     return $prices?.sort((a, b) => a.quantity - b.quantity);
 }
 
-function showProductForm() {
+function showProductForm(product) {
+    selectedProduct.value = product
     productFormModal.show()
+}
 
+function showEmptyProductForm() {
+    selectedProduct.value = null
+    productFormModal.show()
 }
 </script>

@@ -1,24 +1,73 @@
 <template>
     <BaseModal :id="id">
-        <div class="p-6 text-center">
-            <i class="fa-solid fa-triangle-exclamation mx-auto mb-4 text-red-600 text-5xl dark:text-gray-200"></i>
-            <h3 class="mb-5 text-2xl font-normal text-gray-600">Bist du sicher?</h3>
-            <p class="mb-5 text-lg text-gray-600">
-                <slot name="text"></slot>
-            </p>
-            <div class="flex gap-5 w-full items-center justify-center">
-                <slot name="buttons"></slot>
+        <form>
+
+            <!-- Modal body -->
+            <div class="flex flex-col gap-5 p-6">
+                <h3 class="text-purchaser-primary text-xl font-bold">
+                    Produkt
+                    <span v-if="product">Bearbeiten</span>
+                    <span v-else>Hinzufügen</span>
+                </h3>
+
+                <div class="">
+                    <InputLabel for="title" value="Titel" />
+
+                    <TextInput v-model="productFormData.title" required id="title" type="text" class="mt-1 block w-full"
+                        autofocus />
+                </div>
+
+                <!-- Modal footer -->
+                <div
+                    class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <BaseButton color="primary" @click.prevent="" type="submit">
+                        Speichern
+                    </BaseButton>
+
+                    <BaseButton @click="$emit('closeProductFormModal')" color="back" type="button">
+                        Abbrechen
+                    </BaseButton>
+                </div>
             </div>
-        </div>
+        </form>
     </BaseModal>
 </template>
 
 <script setup>
 
 import BaseModal from "@/Components/BaseModal.vue";
+import BaseButton from "@/Components/BaseButton.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
+import { useForm } from '@inertiajs/vue3';
+import { watch } from "vue";
 
-defineProps(
+const props = defineProps(
     {
-        id: String
+        id: String,
+        product: Object,
     })
+
+const emits = defineEmits(['closeProductFormModal']);
+
+const emptyProduct = {
+    id: null,
+    inquiry_id: null,
+    title: null,
+    created_at: null,
+    updated_at: null
+}
+
+let productFormData = useForm(emptyProduct)
+
+if (props.product?.id) {
+    productFormData = useForm(props.product)
+}
+
+watch(
+    () => props.product,
+    () => {
+        productFormData = useForm(props.product)
+    }
+)
 </script>
