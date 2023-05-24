@@ -17,6 +17,16 @@
                         autofocus />
                 </div>
 
+                <!-- TODO -> figure out how to v-model to array elements... -->
+
+                <div class="" v-for="desc in productFormData.description">
+                    <InputLabel for="description" value="Titel" />
+                    {{ desc.description }}
+
+                    <TextInput v-model="productFormData.description[key]" required id="title" type="text"
+                        class="mt-1 block w-full" autofocus />
+                </div>
+
                 <!-- Modal footer -->
                 <div
                     class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
