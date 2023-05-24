@@ -67,7 +67,11 @@ if (props.product?.id) {
 watch(
     () => props.product,
     () => {
-        productFormData = useForm(props.product)
+        if (props.product) {
+            productFormData = useForm(props.product)
+        } else {
+            productFormData = useForm(emptyProduct)
+        }
     }
 )
 </script>
