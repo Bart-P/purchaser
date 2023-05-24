@@ -33,9 +33,6 @@
             <td class="table-data">{{ dateToDMYHM(product.created_at) }}</td>
             <td class="table-data">{{ dateToDMYHM(product.updated_at) }}</td>
             <td class="space-x-3">
-                <IconButton color="green">
-                    <i class="fa-solid fa-eye"></i>
-                </IconButton>
                 <IconButton>
                     <i class="fa-solid fa-pen"></i>
                 </IconButton>
