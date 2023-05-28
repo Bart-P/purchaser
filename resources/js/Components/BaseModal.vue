@@ -18,5 +18,4 @@ defineProps({
         default: '2xl'
     }
 })
-
 </script>
