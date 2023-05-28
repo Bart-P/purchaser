@@ -154,8 +154,6 @@ onMounted(() => {
     deletePersonModal = new Modal(document.getElementById('deletePersonModal'))
 })
 
-// TODO - change all save buttons to success green from primary
-
 const props = defineProps(
     {
         supplier: Object,
