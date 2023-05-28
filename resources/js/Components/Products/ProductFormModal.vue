@@ -16,6 +16,7 @@
                         autofocus />
                 </div>
 
+                <!-- TODO figure this one out, tabbed does not work at all.. maybe start from the beginning...  -->
                 <div class="mb-4 border-b border-gray-200">
                     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="descriptionTab"
                         data-tabs-toggle="#descriptionTabContent" role="tablist">
