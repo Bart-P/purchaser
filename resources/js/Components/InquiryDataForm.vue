@@ -70,8 +70,9 @@
 
             <div class="border border-gray-300 rounded-md">
                 <div class="px-4 py-2 bg-white rounded-md">
-                    <textarea id="description" rows="20" class="w-full px-0 text-gray-900 bg-white border-0 focus:ring-0"
-                        v-model="inquiryDataForm.description" placeholder="Hier kommt die Beschreibung hin." required />
+                    lol
+                    <TextArea rows="20" v-model="inquiryDataForm.description" placeholder="Hier kommt die Beschreibung hin."
+                        required />
                 </div>
             </div>
         </div>
@@ -84,6 +85,7 @@ import InquiryStatusDropdown from '@/Pages/Inquiries/Partials/InquiryStatusDropd
 import BaseButton from '@/Components/BaseButton.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import TextInput from '@/Components/TextInput.vue'
+import TextArea from '@/Components/TextArea.vue'
 import DatePicker from '@/Components/DatePicker.vue'
 import { router, useForm } from "@inertiajs/vue3";
 
