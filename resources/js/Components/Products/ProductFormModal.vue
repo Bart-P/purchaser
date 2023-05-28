@@ -17,9 +17,7 @@
                         autofocus />
                 </div>
 
-                <!-- TODO -> figure out how to v-model to array elements... -->
-
-                <div class="" v-if="productFormData.description" v-for="(desc, index) in productFormData.description">
+                <div v-if="productFormData.description" v-for="(desc, index) in productFormData.description">
                     <InputLabel :for="'description' + index" :value="'Beschreibung ' + (index + 1)" />
                     <div class="border border-gray-300 px-4 py-2 bg-white rounded-md focus:border-purchaser-primary">
                         <TextArea :id="'description' + index" :key="'description-' + index" v-model="desc.description"
@@ -49,9 +47,9 @@ import BaseModal from "@/Components/BaseModal.vue";
 import BaseButton from "@/Components/BaseButton.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
+import TextArea from "@/Components/TextArea.vue";
 import { useForm } from '@inertiajs/vue3';
 import { watch } from "vue";
-import TextArea from "../TextArea.vue";
 
 const props = defineProps(
     {
