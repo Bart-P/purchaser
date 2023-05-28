@@ -67,10 +67,8 @@
             <h3 class="heading-3 mb-6">
                 Beschreibung:
             </h3>
-
             <div class="border border-gray-300 rounded-md">
                 <div class="px-4 py-2 bg-white rounded-md">
-                    lol
                     <TextArea rows="20" v-model="inquiryDataForm.description" placeholder="Hier kommt die Beschreibung hin."
                         required />
                 </div>

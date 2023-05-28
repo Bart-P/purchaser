@@ -1,7 +1,6 @@
 <template>
-    <BaseModal :id="id">
+    <BaseModal :id="id" width="6xl">
         <form>
-
             <!-- Modal body -->
             <div class="flex flex-col gap-5 p-6">
                 <h3 class="text-purchaser-primary text-xl font-bold">
