@@ -16,17 +16,17 @@
                         autofocus />
                 </div>
 
-                <!-- TODO figure this one out, tabbed does not work at all.. maybe start from the beginning...  -->
-
                 <div class="flex gap-3 w-full">
                     <div class="w-1/2">
                         <h3 class="py-2 text-purchaser-primary font-bold">
                             Beschreibung:
                         </h3>
+
                         <div class="border border-gray-300 px-4 py-2 bg-white rounded-md focus:border-purchaser-primary">
                             <TextArea rows="20" :value="mainDescription?.description" />
                         </div>
                     </div>
+
                     <div class="w-1/2">
                         <div class="flex justify-between mb-2">
                             <ul class="flex gap-2 ms-2 w-full">
