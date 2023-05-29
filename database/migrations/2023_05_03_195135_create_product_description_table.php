@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('product_id');
             $table->integer('supplier_id')->nullable();
-            $table->text('title');
-            $table->integer('order')->nullable();
+            $table->text('lang');
+            $table->boolean('is_main')->default(false);
             $table->longText('description')->default('');
             $table->timestamps();
         });

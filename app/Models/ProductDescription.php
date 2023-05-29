@@ -12,8 +12,8 @@ class ProductDescription extends Model
 
     protected $fillable = [
         'supplier_id',
-        'title',
-        'order',
+        'lang',
+        'is_main',
         'description',
     ];
 

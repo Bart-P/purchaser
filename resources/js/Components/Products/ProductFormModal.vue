@@ -51,7 +51,6 @@
                             </div>
                         </div>
 
-
                         <div class="border border-gray-300 px-4 py-2 bg-white rounded-md focus:border-purchaser-primary">
                             <TextArea rows="20" :value="activeDescription.description" />
                         </div>

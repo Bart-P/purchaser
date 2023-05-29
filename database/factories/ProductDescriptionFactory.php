@@ -18,7 +18,7 @@ class ProductDescriptionFactory extends Factory
     {
         return [
             'product_id' => fake()->numberBetween(1, 20),
-            'title' => fake()->text(rand(15, 30)),
+            'lang' => fake()->randomElement(['EN', 'PL']),
             'description' => fake()->text(rand(100, 300)),
         ];
     }
