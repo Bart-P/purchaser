@@ -1,5 +1,5 @@
 <template>
-    <BaseModal :id="id" width="6xl">
+    <BaseModal :id="id" width="7xl">
         <form>
             <!-- Modal body -->
             <div class="flex flex-col gap-5 p-6">
@@ -17,40 +17,31 @@
                 </div>
 
                 <!-- TODO figure this one out, tabbed does not work at all.. maybe start from the beginning...  -->
-                <div class="mb-4 border-b border-gray-200">
-                    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="descriptionTab"
-                        data-tabs-toggle="#descriptionTabContent" role="tablist">
-                        <li v-for="desc in productFormData.description" class="mr-2" role="presentation">
-                            <button class="inline-block p-4 border-b-2 rounded-t-lg" :id="'description-tab-btn-' + desc.id"
-                                :data-tabs-target="'#description-id-' + desc.id" type="button" role="tab"
-                                :aria-controls="'description-control-id-' + desc.id" aria-selected="true">{{ desc.title }}
-                            </button>
-                        </li>
-                        <!-- <li class="mr-2" role="presentation"> -->
-                        <!--     <button -->
-                        <!--         class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" -->
-                        <!--         id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" -->
-                        <!--         aria-controls="dashboard" aria-selected="false">Dashboard</button> -->
-                        <!-- </li> -->
-                    </ul>
-                </div>
-                <div id="descriptionTabContent">
-                    <div v-if="productFormData.description" v-for="(desc, index) in productFormData.description"
-                        :id="'description-id-' + desc.id" role="tabpanel" :aria-labelledby="'description-tab-btn-' +
-                            desc.id" class="hidden">
-                        <InputLabel :for="'description' + index" :value="'Beschreibung ' + (index + 1)" />
+
+                <div class="flex gap-3 w-full">
+                    <div class="w-1/2">
+                        <h3 class="py-2 text-purchaser-primary font-bold">
+                            Beschreibung:
+                        </h3>
                         <div class="border border-gray-300 px-4 py-2 bg-white rounded-md focus:border-purchaser-primary">
-                            <TextArea :id="'description' + index" :key="'description-' + index" v-model="desc.description"
-                                required />
+                            <TextArea rows="20"
+                                value="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis saepe quam totam, error odio expedita deleniti quos, dolorem blanditiis iste placeat atque laborum perspiciatis necessitatibus explicabo praesentium nisi consequatur quod." />
                         </div>
                     </div>
-                    <!-- <div class="hidden p-4 rounded-lg bg-gray-50" :id="'description-control-id-' + desc.id" role="tabpanel" -->
-                    <!--     :aria-labelledby="'description-tab-btn-' + desc.id"> -->
-                    <!--     <p class="text-sm text-gray-500">This is some placeholder content the <strong -->
-                    <!--             class="font-medium text-gray-800">Profile tab's associated content</strong>. -->
-                    <!--         Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript -->
-                    <!--         swaps classes to control the content visibility and styling.</p> -->
-                    <!-- </div> -->
+                    <div class="w-1/2">
+                        <div class="flex gap-2 ms-2 mb-2 w-full">
+                            <BaseButton @click="setActiveDescription(productFormData.description[0])" class="!py-1 !px-3"
+                                type="button">EN
+                            </BaseButton>
+                            <BaseButton @click="setActiveDescription(productFormData.description[1])" class="!py-1 !px-3"
+                                color="light" type="button">PL
+                            </BaseButton>
+                        </div>
+
+                        <div class="border border-gray-300 px-4 py-2 bg-white rounded-md focus:border-purchaser-primary">
+                            <TextArea rows="20" :value="activeDescription.description" />
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Modal footer -->
@@ -76,7 +67,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
 import { useForm } from '@inertiajs/vue3';
-import { watch } from "vue";
+import { ref, watch } from "vue";
 
 const props = defineProps(
     {
@@ -94,10 +85,16 @@ const emptyProduct = {
     updated_at: null
 }
 
+const activeDescription = ref({})
+
 let productFormData = useForm(emptyProduct)
 
 if (props.product?.id) {
     productFormData = useForm(props.product)
+}
+
+function setActiveDescription(description) {
+    activeDescription.value = description
 }
 
 watch(
@@ -105,6 +102,8 @@ watch(
     () => {
         if (props.product) {
             productFormData = useForm(props.product)
+            activeDescription.value = productFormData.description[0]
+            console.log(productFormData.description[0])
         } else {
             productFormData = useForm(emptyProduct)
         }
