@@ -39,6 +39,19 @@ class DatabaseSeeder extends Seeder
         ProductDescription::factory(20)->create();
         InquiryRequest::factory(5)->create();
 
+        $products = Product::all();
+
+        foreach ($products as $product) {
+            $id = $product->id;
+
+            ProductDescription::create([
+                'product_id' => $id,
+                'lang' => 'DE',
+                'is_main' => true,
+                'description' => 'Das ist eine deutsch beschreibung.'
+            ]);
+        };
+
         $this->call(CategorySeeder::class);
         $this->call(TagSeeder::class);
     }
