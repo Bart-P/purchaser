@@ -34,15 +34,17 @@
                                 <BaseButton @click="setActiveDescription(productFormData.description[0])"
                                     class="!py-1 !px-3" type="button">EN
                                 </BaseButton>
+
                                 <BaseButton @click="setActiveDescription(productFormData.description[1])"
                                     class="!py-1 !px-3" color="light" type="button">PL
                                 </BaseButton>
-
                             </div>
+
                             <div class="flex gap-2">
                                 <BaseButton color="success" btn-type="rounded" type="button">
                                     <i class="fa-solid fa-plus"></i>
                                 </BaseButton>
+
                                 <BaseButton color="danger" btn-type="rounded" type="button">
                                     <i class="fa-solid fa-trash"></i>
                                 </BaseButton>

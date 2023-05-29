@@ -18,7 +18,6 @@ return new class extends Migration
             $table->text('title');
             $table->integer('order')->nullable();
             $table->longText('description')->default('');
-            $table->json('description_list')->nullable();
             $table->timestamps();
         });
     }

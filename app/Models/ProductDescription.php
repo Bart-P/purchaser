@@ -15,7 +15,6 @@ class ProductDescription extends Model
         'title',
         'order',
         'description',
-        'description_list',
     ];
 
     public function product(): BelongsTo
