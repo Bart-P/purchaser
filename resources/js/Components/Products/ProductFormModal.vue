@@ -24,21 +24,19 @@
                             Beschreibung:
                         </h3>
                         <div class="border border-gray-300 px-4 py-2 bg-white rounded-md focus:border-purchaser-primary">
-                            <TextArea rows="20"
-                                value="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis saepe quam totam, error odio expedita deleniti quos, dolorem blanditiis iste placeat atque laborum perspiciatis necessitatibus explicabo praesentium nisi consequatur quod." />
+                            <TextArea rows="20" :value="mainDescription?.description" />
                         </div>
                     </div>
                     <div class="w-1/2">
                         <div class="flex justify-between mb-2">
-                            <div class="flex gap-2 ms-2 w-full">
-                                <BaseButton @click="setActiveDescription(productFormData.description[0])"
-                                    class="!py-1 !px-3" type="button">EN
-                                </BaseButton>
-
-                                <BaseButton @click="setActiveDescription(productFormData.description[1])"
-                                    class="!py-1 !px-3" color="light" type="button">PL
-                                </BaseButton>
-                            </div>
+                            <ul class="flex gap-2 ms-2 w-full">
+                                <li v-for="desc in productFormData.description?.filter((desc) => !desc.is_main)">
+                                    <BaseButton @click="setActiveDescription(desc)" class="!py-2 !px-3" type="button"
+                                        :color="activeDescription.id === desc.id ? 'primary' : 'light'">
+                                        {{ desc.lang }}
+                                    </BaseButton>
+                                </li>
+                            </ul>
 
                             <div class="flex gap-2">
                                 <BaseButton color="success" btn-type="rounded" type="button">
@@ -99,6 +97,7 @@ const emptyProduct = {
 }
 
 const activeDescription = ref({})
+const mainDescription = ref({})
 
 let productFormData = useForm(emptyProduct)
 
@@ -115,7 +114,8 @@ watch(
     () => {
         if (props.product) {
             productFormData = useForm(props.product)
-            activeDescription.value = productFormData.description[0]
+            activeDescription.value = productFormData.description.filter((desc) => desc.is_main != 1)[0]
+            mainDescription.value = productFormData.description.find((desc) => desc.is_main === 1)
         } else {
             productFormData = useForm(emptyProduct)
         }
