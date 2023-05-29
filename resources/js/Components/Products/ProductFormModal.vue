@@ -29,14 +29,26 @@
                         </div>
                     </div>
                     <div class="w-1/2">
-                        <div class="flex gap-2 ms-2 mb-2 w-full">
-                            <BaseButton @click="setActiveDescription(productFormData.description[0])" class="!py-1 !px-3"
-                                type="button">EN
-                            </BaseButton>
-                            <BaseButton @click="setActiveDescription(productFormData.description[1])" class="!py-1 !px-3"
-                                color="light" type="button">PL
-                            </BaseButton>
+                        <div class="flex justify-between mb-2">
+                            <div class="flex gap-2 ms-2 w-full">
+                                <BaseButton @click="setActiveDescription(productFormData.description[0])"
+                                    class="!py-1 !px-3" type="button">EN
+                                </BaseButton>
+                                <BaseButton @click="setActiveDescription(productFormData.description[1])"
+                                    class="!py-1 !px-3" color="light" type="button">PL
+                                </BaseButton>
+
+                            </div>
+                            <div class="flex gap-2">
+                                <BaseButton color="success" btn-type="rounded" type="button">
+                                    <i class="fa-solid fa-plus"></i>
+                                </BaseButton>
+                                <BaseButton color="danger" btn-type="rounded" type="button">
+                                    <i class="fa-solid fa-trash"></i>
+                                </BaseButton>
+                            </div>
                         </div>
+
 
                         <div class="border border-gray-300 px-4 py-2 bg-white rounded-md focus:border-purchaser-primary">
                             <TextArea rows="20" :value="activeDescription.description" />
@@ -103,7 +115,6 @@ watch(
         if (props.product) {
             productFormData = useForm(props.product)
             activeDescription.value = productFormData.description[0]
-            console.log(productFormData.description[0])
         } else {
             productFormData = useForm(emptyProduct)
         }
