@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="border border-gray-300 px-4 py-2 bg-white rounded-md focus:border-purchaser-primary">
-                            <TextArea rows="20" :value="activeDescription.description" />
+                            <TextArea rows="20" :value="activeDescription?.description" />
                         </div>
                     </div>
                 </div>
@@ -114,8 +114,8 @@ watch(
     () => {
         if (props.product) {
             productFormData = useForm(props.product)
-            activeDescription.value = productFormData.description.filter((desc) => desc.is_main != 1)[0]
-            mainDescription.value = productFormData.description.find((desc) => desc.is_main === 1)
+            activeDescription.value = productFormData.description?.filter((desc) => desc.is_main != 1)[0]
+            mainDescription.value = productFormData.description?.find((desc) => desc.is_main === 1)
         } else {
             productFormData = useForm(emptyProduct)
         }
