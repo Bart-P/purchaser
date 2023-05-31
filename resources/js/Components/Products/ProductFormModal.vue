@@ -61,8 +61,12 @@
                             </form>
                         </div>
 
+                        <!-- TODO - the way it is set up there is no binding to the form itself, -->
+                        <!-- means when you click on another lang, all changes are deleted. -->
+                        <!-- What should happen is the array in memory should change as soon as i type-->
+
                         <div class="border border-gray-300 px-4 py-2 bg-white rounded-md focus:border-purchaser-primary">
-                            <TextArea rows="20" :v-model="activeDescription?.description" />
+                            <TextArea rows="20" :value="activeDescription.description" />
                         </div>
                     </div>
                 </div>
