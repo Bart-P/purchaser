@@ -61,9 +61,6 @@
                             </form>
                         </div>
 
-                        <!-- TODO - the way it is set up there is no binding to the form itself, -->
-                        <!-- means when you click on another lang, all changes are deleted. -->
-                        <!-- What should happen is the array in memory should change as soon as i type-->
 
                         <div class="border border-gray-300 px-4 py-2 bg-white rounded-md focus:border-purchaser-primary">
                             <TextArea rows="20" :value="activeDescription.description" />
@@ -116,6 +113,10 @@ const emptyProduct = {
     created_at: null,
     updated_at: null
 }
+// TODO - the way it is set up there is no binding to the form itself,
+// means when you click on another lang, all changes are deleted.
+// What should happen is the array in memory should change as soon as i type.
+// Same thing for mainDescription, it should be connected to the actual element in description array.
 
 const activeDescription = ref({})
 const mainDescription = ref({})
