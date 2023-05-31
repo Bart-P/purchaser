@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="flex gap-3 w-full">
-                    <div class="w-1/2">
+                    <div :class="productFormData.description?.length > 1 ? 'w-1/2' : 'w-full'">
                         <h3 class="py-2 text-purchaser-primary font-bold">
                             Beschreibung:
                         </h3>
@@ -27,7 +27,7 @@
                         </div>
                     </div>
 
-                    <div class="w-1/2">
+                    <div v-show="productFormData.description?.length > 1" class="w-1/2">
                         <div class="flex justify-between mb-2">
                             <ul class="flex gap-2 ms-2 w-full">
                                 <li v-for="desc in productFormData.description?.filter((desc) => !desc.is_main)">
