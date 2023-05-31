@@ -18,7 +18,7 @@
 
                 <div class="flex gap-3 w-full">
                     <div :class="productFormData.description?.length > 1 ? 'w-1/2' : 'w-full'">
-                        <h3 class="py-2 text-purchaser-primary font-bold">
+                        <h3 class="py-3 text-purchaser-primary font-bold">
                             Beschreibung:
                         </h3>
 
@@ -107,6 +107,17 @@ if (props.product?.id) {
 
 function setActiveDescription(description) {
     activeDescription.value = description
+}
+
+function createNewDescription(title) {
+    newDesc = {
+        'title': title,
+        'product_id': props.product.id,
+        'description': '',
+    }
+    productFormData.description = [...productFormData.description, newDesc]
+
+    setActiveDescription(newDesc)
 }
 
 watch(
