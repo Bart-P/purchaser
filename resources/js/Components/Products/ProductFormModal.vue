@@ -134,7 +134,6 @@ function createNewDescription(lang) {
         'description': '',
     }
     productFormData.description = [...productFormData.description, newDesc]
-    console.log(productFormData.description)
 
     setActiveDescription(newDesc)
 }
