@@ -39,7 +39,8 @@
                             </ul>
 
                             <div class="flex gap-2">
-                                <BaseButton color="success" btn-type="rounded" type="button">
+                                <BaseButton color="success" btn-type="rounded" type="button"
+                                    data-dropdown-toggle="dropdownAddDescription">
                                     <i class="fa-solid fa-plus"></i>
                                 </BaseButton>
 
@@ -47,10 +48,21 @@
                                     <i class="fa-solid fa-trash"></i>
                                 </BaseButton>
                             </div>
+
+                            <form id="dropdownAddDescription"
+                                @submit.prevent="createNewDescription(addDescriptionForm.lang)"
+                                class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
+                                <h5 class="heading-5">Beschreibung hinzufügen:</h5>
+                                <TextInput v-model="addDescriptionForm.lang" type="text" placeholder="Sprache eingeben"
+                                    required />
+                                <BaseButton type="submit" color="success">
+                                    <i class="fa-solid fa-save"></i>
+                                </BaseButton>
+                            </form>
                         </div>
 
                         <div class="border border-gray-300 px-4 py-2 bg-white rounded-md focus:border-purchaser-primary">
-                            <TextArea rows="20" :value="activeDescription?.description" />
+                            <TextArea rows="20" :v-model="activeDescription?.description" />
                         </div>
                     </div>
                 </div>
@@ -78,7 +90,12 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
 import { useForm } from '@inertiajs/vue3';
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
+import { initDropdowns } from "flowbite";
+
+onMounted(() => {
+    initDropdowns()
+})
 
 const props = defineProps(
     {
@@ -100,6 +117,7 @@ const activeDescription = ref({})
 const mainDescription = ref({})
 
 let productFormData = useForm(emptyProduct)
+const addDescriptionForm = useForm({})
 
 if (props.product?.id) {
     productFormData = useForm(props.product)
@@ -109,13 +127,14 @@ function setActiveDescription(description) {
     activeDescription.value = description
 }
 
-function createNewDescription(title) {
-    newDesc = {
-        'title': title,
+function createNewDescription(lang) {
+    const newDesc = {
+        'lang': lang,
         'product_id': props.product.id,
         'description': '',
     }
     productFormData.description = [...productFormData.description, newDesc]
+    console.log(productFormData.description)
 
     setActiveDescription(newDesc)
 }
