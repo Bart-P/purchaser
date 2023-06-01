@@ -36,10 +36,11 @@ class DatabaseSeeder extends Seeder
         Inquiry::factory(10)->create();
         Product::factory(20)->create()
             ->each(function ($product) {
-                ProductDescription::factory(1)->create(['product_id' => $product->id, 'lang' => 'DE']);
+                ProductDescription::factory(1)->create(['product_id' => $product->id, 'lang' => 'DE', 'is_main' => true]);
                 ProductDescription::factory(rand(0, 3))->create(['product_id' => $product->id]);
+                ProductPrice::factory(rand(0, 5))->create(['product_id' => $product->id]);
             });
-        ProductPrice::factory(20)->create();
+        // ProductPrice::factory(20)->create();
         InquiryRequest::factory(5)->create();
 
         $this->call(CategorySeeder::class);
