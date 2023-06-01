@@ -11,7 +11,7 @@
 
 <script setup>
 
-defineProps({
+const props = defineProps({
     id: String,
     width: {
         type: String,
