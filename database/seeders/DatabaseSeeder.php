@@ -34,23 +34,13 @@ class DatabaseSeeder extends Seeder
         Address::factory(150)->create();
         Person::factory(125)->create();
         Inquiry::factory(10)->create();
-        Product::factory(20)->create();
+        Product::factory(20)->create()
+            ->each(function ($product) {
+                ProductDescription::factory(1)->create(['product_id' => $product->id, 'lang' => 'DE']);
+                ProductDescription::factory(rand(0, 3))->create(['product_id' => $product->id]);
+            });
         ProductPrice::factory(20)->create();
-        ProductDescription::factory(20)->create();
         InquiryRequest::factory(5)->create();
-
-        $products = Product::all();
-
-        foreach ($products as $product) {
-            $id = $product->id;
-
-            ProductDescription::create([
-                'product_id' => $id,
-                'lang' => 'DE',
-                'is_main' => true,
-                'description' => 'Das ist eine deutsch beschreibung.'
-            ]);
-        };
 
         $this->call(CategorySeeder::class);
         $this->call(TagSeeder::class);
