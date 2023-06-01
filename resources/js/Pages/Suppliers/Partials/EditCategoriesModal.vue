@@ -1,5 +1,5 @@
 <template>
-    <BaseModal :id="id">
+    <BaseModal :id="id" width="6xl">
         <div class="flex w-full p-4 gap-4">
             <div class="basis-1/3 space-y-2">
                 <div class="flex items-center justify-between gap-2">
@@ -107,7 +107,4 @@ function toggleEditTag(tag) {
 
     selectedTag.value = tag
 }
-
 </script>
-
-<style scoped></style>
