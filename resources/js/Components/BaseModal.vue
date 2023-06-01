@@ -15,7 +15,7 @@ const props = defineProps({
     id: String,
     width: {
         type: String,
-        default: '2xl'
+        default: 'xl'
     }
 })
 </script>
