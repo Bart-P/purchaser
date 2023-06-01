@@ -33,10 +33,12 @@ class DatabaseSeeder extends Seeder
         Supplier::factory(100)->create();
         Address::factory(150)->create();
         Person::factory(125)->create();
+        // Create Inquiries and InquiryRequest for it
         Inquiry::factory(10)->create()
             ->each(function ($inquiry) {
                 InquiryRequest::factory(rand(0, 10))->create(['inquiry_id' => $inquiry->id]);
             });
+        // Create Products and ProductDescription + ProductPrice for it
         Product::factory(20)->create()
             ->each(function ($product) {
                 ProductDescription::factory(1)

@@ -9,7 +9,8 @@ use Illuminate\Database\Seeder;
 class TagSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * TagSeeder depends on Categories and Suppliers. 
+     * To be called after Categories and Suppliers are created.
      *
      * @return void
      */

@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 class CategorySeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * CategorySeeder needs to be called after Suppliers are created
      *
      * @return void
      */
@@ -26,6 +26,7 @@ class CategorySeeder extends Seeder
         ];
 
         Category::factory()->createMany($categories);
+        // Assigning categories to suppliers 
         Supplier::all()
             ->pluck('id')
             ->each(function ($supplierId) {
