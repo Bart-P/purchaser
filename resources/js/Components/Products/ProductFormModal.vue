@@ -88,7 +88,6 @@
 
 import BaseModal from "@/Components/BaseModal.vue";
 import BaseButton from "@/Components/BaseButton.vue";
-import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
 import { useForm } from '@inertiajs/vue3';
