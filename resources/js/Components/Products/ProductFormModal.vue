@@ -133,9 +133,16 @@ function createNewDescription(lang) {
     const newDesc = {
         'lang': lang,
         'product_id': props.product.id,
+        'is_main': false,
+        'title': '',
         'description': '',
     }
-    productFormData.description = [...productFormData.description, newDesc]
+
+    if (productFormData.description.length) {
+        productFormData.description = [...productFormData.description, newDesc]
+    } else {
+        productFormData.description = [newDesc]
+    }
 
     setActiveDescription(newDesc)
 }
