@@ -10,7 +10,7 @@
                 </h3>
 
                 <div class="">
-                    <h3 class="py-3 text-purchaser-primary font-bold">Sprache:</h3>
+                    <h3 class="py-3 text-purchaser-primary font-bold">Produkt Titel:</h3>
 
                     <TextInput v-model="productFormData.title" required id="title" type="text" class="mt-1 block w-full"
                         autofocus />
