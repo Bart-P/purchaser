@@ -110,17 +110,18 @@ const emptyProduct = {
     id: null,
     inquiry_id: null,
     title: null,
+    description: null,
     created_at: null,
     updated_at: null
 }
 
-const activeDescription = ref({})
-const mainDescription = ref({})
+const activeDescription = ref(null)
+const mainDescription = ref(null)
 
 let productFormData = useForm(emptyProduct)
 const addDescriptionForm = useForm({})
 
-if (props.product?.id) {
+if (props.product) {
     productFormData = useForm(props.product)
 }
 
@@ -149,6 +150,8 @@ watch(
 
         } else {
             productFormData = useForm(emptyProduct)
+            mainDescription.value = null
+            activeDescription.value = null
         }
     }
 )
