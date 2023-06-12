@@ -15,6 +15,22 @@
                     <TextInput v-model="productFormData.title" required id="title" type="text" class="mt-1 block w-full"
                         autofocus />
                 </div>
+                <div class="">
+                    <h3 class="py-3 text-purchaser-primary font-bold">Auflagen</h3>
+
+
+                    <div class="flex gap-2">
+                        <span class="border py-1 px-2 rounded-full border-gray-300 self-center"
+                            v-for="price in productFormData?.prices">{{
+                                price.quantity + " St." }}
+                        </span>
+                        <BaseButton btn-type="rounded" color="success" type="button"><i class="fa-solid fa-plus"></i>
+                        </BaseButton>
+                    </div>
+
+                    <!-- <TextInput v-model="productFormData.title" required id="title" type="text" class="mt-1 block w-full" -->
+                    <!--     autofocus /> -->
+                </div>
 
                 <div class="flex gap-3 w-full">
                     <div :class="productFormData.description?.length > 1 ? 'w-1/2' : 'w-full'">
@@ -106,10 +122,12 @@ const props = defineProps(
 
 const emits = defineEmits(['closeProductFormModal']);
 
+
 const emptyProduct = {
     id: null,
     inquiry_id: null,
     title: null,
+    prices: null,
     description: null,
     created_at: null,
     updated_at: null
