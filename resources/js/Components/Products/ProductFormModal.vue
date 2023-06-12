@@ -24,9 +24,19 @@
                             v-for="price in productFormData?.prices">{{
                                 price.quantity + " St." }}
                         </span>
-                        <BaseButton btn-type="rounded" color="success" type="button"><i class="fa-solid fa-plus"></i>
+                        <BaseButton btn-type="rounded" color="success" type="button"
+                            data-dropdown-toggle="dropdownAddQuantity"><i class="fa-solid fa-plus"></i>
                         </BaseButton>
                     </div>
+
+                    <form id="dropdownAddQuantity" @submit.prevent=""
+                        class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
+                        <h5 class="heading-5">Auflage hinzufügen:</h5>
+                        <TextInput type="number" placeholder="Auflage eingeben" required />
+                        <BaseButton type="submit" color="success">
+                            <i class="fa-solid fa-save"></i>
+                        </BaseButton>
+                    </form>
 
                     <!-- <TextInput v-model="productFormData.title" required id="title" type="text" class="mt-1 block w-full" -->
                     <!--     autofocus /> -->
