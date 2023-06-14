@@ -61,7 +61,19 @@
                                 </li>
                             </ul>
 
-                            <div class="flex gap-2">
+                            <div v-if="productFormData.description?.filter((desc) => desc.id == 'temp').length > 0"
+                                class="flex gap-2">
+                                <BaseButton color="success" btn-type="rounded" type="button">
+                                    <i class="fa-solid fa-save"></i>
+                                </BaseButton>
+
+                                <BaseButton color="secondary" btn-type="rounded" type="button"
+                                    @click="removeTempDescription()">
+                                    <i class="fa-solid fa-cancel"></i>
+                                </BaseButton>
+                            </div>
+
+                            <div v-else class="flex gap-2">
                                 <BaseButton color="success" btn-type="rounded" type="button"
                                     data-dropdown-toggle="dropdownAddDescription">
                                     <i class="fa-solid fa-plus"></i>
