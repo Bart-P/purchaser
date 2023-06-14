@@ -155,6 +155,7 @@ function setActiveDescription(description) {
 
 function createNewDescription(lang) {
     const newDesc = {
+        'id': 'temp',
         'lang': lang,
         'product_id': props.product.id,
         'is_main': false,
@@ -171,19 +172,26 @@ function createNewDescription(lang) {
     setActiveDescription(newDesc)
 }
 
+function removeTempDescription() {
+    productFormData.description = productFormData.description.filter((desc) => desc.id !== 'temp')
+    resetProduct()
+}
+
+function resetProduct() {
+    if (props.product) {
+        productFormData = useForm(props.product)
+        activeDescription.value = props.product?.description.filter((desc) => desc.is_main !== 1)[0]
+        mainDescription.value = productFormData.description?.filter((desc) => desc.is_main === 1)[0]
+
+    } else {
+        productFormData = useForm(emptyProduct)
+        mainDescription.value = null
+        activeDescription.value = null
+    }
+}
+
 watch(
     () => props.product,
-    () => {
-        if (props.product) {
-            productFormData = useForm(props.product)
-            activeDescription.value = props.product?.description.filter((desc) => desc.is_main !== 1)[0]
-            mainDescription.value = productFormData.description?.filter((desc) => desc.is_main === 1)[0]
-
-        } else {
-            productFormData = useForm(emptyProduct)
-            mainDescription.value = null
-            activeDescription.value = null
-        }
-    }
+    () => resetProduct()
 )
 </script>
