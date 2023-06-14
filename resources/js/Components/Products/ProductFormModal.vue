@@ -37,9 +37,6 @@
                             <i class="fa-solid fa-save"></i>
                         </BaseButton>
                     </form>
-
-                    <!-- <TextInput v-model="productFormData.title" required id="title" type="text" class="mt-1 block w-full" -->
-                    <!--     autofocus /> -->
                 </div>
 
                 <div class="flex gap-3 w-full">
