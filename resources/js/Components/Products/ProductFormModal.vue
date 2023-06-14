@@ -61,6 +61,8 @@
                                 </li>
                             </ul>
 
+                            <!-- TODO -> make save and delete work. -->
+
                             <div v-if="productFormData.description?.filter((desc) => desc.id == 'temp').length > 0"
                                 class="flex gap-2">
                                 <BaseButton color="success" btn-type="rounded" type="button">
@@ -139,7 +141,6 @@ const props = defineProps(
     })
 
 const emits = defineEmits(['closeProductFormModal']);
-
 
 const emptyProduct = {
     id: null,
