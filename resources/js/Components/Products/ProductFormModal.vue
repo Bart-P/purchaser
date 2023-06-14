@@ -84,8 +84,7 @@
                             </form>
                         </div>
 
-
-                        <div v-if="activeDescription?.description"
+                        <div v-if="activeDescription?.description || activeDescription?.description === ''"
                             class="border border-gray-300 px-4 py-2 bg-white rounded-md focus:border-purchaser-primary">
                             <TextArea rows="20" v-model="activeDescription.description" />
                         </div>
