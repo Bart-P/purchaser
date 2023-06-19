@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InquiryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TagController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -249,6 +250,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'update',
         ]
     )->name('tag.patch');
+
+    // PRODUCT
+    Route::post(
+        '/product/store-description',
+        [ProductController::class, 'storeDescription',]
+    )->name('product.store-description');
 
     // USER PROFILE
     Route::get(

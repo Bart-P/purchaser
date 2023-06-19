@@ -11,6 +11,7 @@ class ProductDescription extends Model
     use HasFactory;
 
     protected $fillable = [
+        'product_id',
         'supplier_id',
         'lang',
         'is_main',

@@ -64,7 +64,8 @@
                             <!-- TODO -> make save and delete work. -->
                             <div v-if="productFormData.description?.filter((desc) => desc.id == 'temp').length > 0"
                                 class="flex gap-2">
-                                <BaseButton color="success" btn-type="rounded" type="button">
+                                <BaseButton @click="saveProductDescription()" color="success" btn-type="rounded"
+                                    type="button">
                                     <i class="fa-solid fa-save"></i>
                                 </BaseButton>
 
@@ -125,7 +126,7 @@ import BaseModal from "@/Components/BaseModal.vue";
 import BaseButton from "@/Components/BaseButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
-import { useForm } from '@inertiajs/vue3';
+import { router, useForm } from "@inertiajs/vue3";
 import { ref, watch, onMounted } from "vue";
 import { initDropdowns } from "flowbite";
 
@@ -187,6 +188,14 @@ function createNewDescription(lang) {
 function removeTempDescription() {
     productFormData.description = productFormData.description.filter((desc) => desc.id !== 'temp')
     resetProduct()
+}
+
+function saveProductDescription() {
+    const product = productFormData.description.find((desc) => {
+        return desc.id == 'temp'
+    })
+
+    return router.post(route('product.store-description', product))
 }
 
 function resetProduct() {
