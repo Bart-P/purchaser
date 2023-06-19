@@ -209,6 +209,11 @@ function saveProductDescription() {
     return router.post(route('product.store-description', product))
 }
 
+function deleteProductDescription() {
+    // TODO -> lang list does not update on delete, the description is deleted but View does not change ant all.. 
+    return router.post(route('product.destroy-description', { id: activeDescription.value.id }))
+}
+
 function resetProduct() {
     if (props.product) {
         productFormData = useForm(props.product)

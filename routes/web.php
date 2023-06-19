@@ -257,6 +257,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         [ProductController::class, 'storeDescription',]
     )->name('product.store-description');
 
+    Route::post(
+        '/product/destroy-description',
+        [ProductController::class, 'destroyDescription',]
+    )->name('product.destroy-description');
+
     // USER PROFILE
     Route::get(
         '/profile',
