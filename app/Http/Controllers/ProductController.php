@@ -43,5 +43,10 @@ class ProductController extends Controller
                 'type'    => 'success',
             ]);
         };
+
+        return redirect()->back()->with('notification', [
+            'message' => 'Beschreibung konnte nicht gelöscht werden!',
+            'type'    => 'danger',
+        ]);
     }
 }
