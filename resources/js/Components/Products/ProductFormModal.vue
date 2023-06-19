@@ -81,9 +81,20 @@
                                     <i class="fa-solid fa-plus"></i>
                                 </BaseButton>
 
-                                <BaseButton color="danger" btn-type="rounded" type="button">
+                                <BaseButton color="danger" btn-type="rounded" type="button"
+                                    data-dropdown-toggle="deleteProductDescriptionDropdown">
                                     <i class="fa-solid fa-trash"></i>
                                 </BaseButton>
+
+                                <div id="deleteProductDescriptionDropdown"
+                                    class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
+                                    <h5 class="heading-5 text-center text-red-600">Bist du sicher?</h5>
+                                    <p v-if="activeDescription">Beschreibung ID: {{
+                                        activeDescription['id'] }} unwiederruflich löschen</p>
+                                    <BaseButton @click="deleteProductDescription()" type="button" color="danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </BaseButton>
+                                </div>
                             </div>
 
                             <form id="dropdownAddDescription"
