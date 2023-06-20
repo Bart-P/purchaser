@@ -61,7 +61,7 @@
                                 </li>
                             </ul>
 
-                            <!-- TODO -> make save and delete work. -->
+                            <!-- TODO delete now works, after a description is created it cannot be deleted! fix it! -->
                             <div v-if="productFormData.description?.filter((desc) => desc.id == 'temp').length > 0"
                                 class="flex gap-2">
                                 <BaseButton @click="saveProductDescription()" color="success" btn-type="rounded"
@@ -151,7 +151,7 @@ const props = defineProps(
         product: Object,
     })
 
-const emits = defineEmits(['closeProductFormModal']);
+const emits = defineEmits(['closeProductFormModal', 'deleteProductDescription']);
 
 const emptyProduct = {
     id: null,
@@ -210,8 +210,8 @@ function saveProductDescription() {
 }
 
 function deleteProductDescription() {
-    // TODO -> lang list does not update on delete, the description is deleted but View does not change ant all.. 
-    return router.post(route('product.destroy-description', { id: activeDescription.value.id }))
+    emits('deleteProductDescription', activeDescription.value.id)
+    document.getElementById('deleteProductDescriptionDropdown').classList.add('hidden')
 }
 
 function resetProduct() {

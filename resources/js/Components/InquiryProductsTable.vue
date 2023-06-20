@@ -6,7 +6,7 @@
         </BaseButton>
     </div>
     <ProductFormModal id='productFormModal' :product="selectedProduct"
-        @close-product-form-modal="productFormModal.hide()" />
+        @delete-product-description="deleteProductDescription" @close-product-form-modal="productFormModal.hide()" />
     <table class="table">
         <thead class="table-head">
             <tr>
@@ -51,8 +51,8 @@ import IconButton from '@/Components/IconButton.vue';
 import ProductFormModal from '@/Components/Products/ProductFormModal.vue';
 import { dateToDMYHM } from '@/utils';
 import { initModals } from 'flowbite';
-import { ref } from 'vue';
-import { onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue';
+import { router } from "@inertiajs/vue3";
 
 let productFormModal
 
@@ -66,6 +66,21 @@ const props = defineProps({
 });
 
 let selectedProduct = ref(null)
+
+// if any product in products changes, reselects "selectedProduct" to update all children where selectedProduct is
+// passed
+watch(
+    () => props.products,
+    () => {
+        if (selectedProduct.value) {
+            selectedProduct.value = props.products.find((product) => product.id === selectedProduct.value.id)
+        }
+    }
+)
+
+function deleteProductDescription(descId) {
+    return router.post(route('product.destroy-description', { id: descId }))
+}
 
 function sortPricesByQuantities($prices) {
     return $prices?.sort((a, b) => a.quantity - b.quantity);
