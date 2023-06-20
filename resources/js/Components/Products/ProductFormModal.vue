@@ -202,9 +202,11 @@ function removeTempDescription() {
 }
 
 function saveProductDescription() {
+    // TODO after delete or save both buttons cant be clicked..
     const product = productFormData.description.find((desc) => {
         return desc.id == 'temp'
     })
+    document.getElementById('dropdownAddDescription').classList.add('hidden')
 
     return router.post(route('product.store-description', product))
 }
