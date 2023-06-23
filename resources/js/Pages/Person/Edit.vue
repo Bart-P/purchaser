@@ -14,12 +14,13 @@
                         Person (ID: {{ person.id }}) Bearbeiten
                     </h3>
 
-                    <div class="flex gap-4">
-                        <BaseButton @click="savePerson()" color="primary" type="button">
-                            Speichern
+                    <div class="flex gap-3">
+                        <BaseButton @click="savePerson()" btn-type="rounded" color="success" type="button">
+                            <i class="fa-solid fa-save"></i>
                         </BaseButton>
-                        <BaseButton :href="route('suppliers.edit', personForm.supplier_id)" color="back" type="button">
-                            Zurück
+                        <BaseButton :href="route('suppliers.edit', personForm.supplier_id)" btn-type="rounded" color="back"
+                            type="button">
+                            <i class="fa-solid fa-delete-left"></i>
                         </BaseButton>
                     </div>
                 </div>

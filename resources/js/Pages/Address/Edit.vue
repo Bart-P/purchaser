@@ -11,7 +11,7 @@
                         Addresse (ID: {{ addressForm.id }}) Bearbeiten
                     </h3>
 
-                    <div class="flex gap-4">
+                    <div class="flex gap-3">
                         <BaseButton @click="saveAddress()" btn-type="rounded" color="success">
                             <i class="fa-solid fa-save"></i>
                         </BaseButton>
