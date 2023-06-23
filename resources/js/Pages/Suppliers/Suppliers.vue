@@ -36,11 +36,11 @@ const props = defineProps(
 )
 
 const pageQuery = usePage().props.query
-const searchTerm = SupplierSelectionStore.searchTerm
 const sort = ref({
     direction: SupplierSelectionStore.sort.direction,
     column: SupplierSelectionStore.sort.column,
 })
+let searchTerm = SupplierSelectionStore.searchTerm
 let filterByCategory = SupplierSelectionStore.categoryFilter
 let filterByTags = SupplierSelectionStore.tagFilter
 
@@ -52,6 +52,15 @@ watch(
 watch(
     () => SupplierSelectionStore.tagFilter,
     () => filterByTags = SupplierSelectionStore.tagFilter
+)
+
+// TODO search term does not reset after page change if i press reset fields - dunno why
+watch(
+    () => SupplierSelectionStore.searchTerm,
+    () => {
+        searchTerm = SupplierSelectionStore.searchTerm
+        console.log(searchTerm)
+    }
 )
 
 if (!pageQuery.page && (searchTerm || filterByCategory || filterByTags)) {
@@ -78,6 +87,7 @@ function applySearchAndFilter() {
         sort.column = SupplierSelectionStore.column
         sort.direction = SupplierSelectionStore.direction
     }
+
     router.get(
         route('suppliers'),
         {

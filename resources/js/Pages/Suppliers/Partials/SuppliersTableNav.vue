@@ -123,6 +123,11 @@ function clearCurrentTimeout() {
     }
 }
 
+function searchForTerm() {
+    clearCurrentTimeout()
+    timeout = setTimeout(() => emits('searchForTerm', searchInput), timeoutTime)
+}
+
 function toggleCheckCategory(catId) {
     emits('toggleCheckCategory', catId)
 }
@@ -131,13 +136,11 @@ function toggleCheckTag(tagId) {
     emits('toggleCheckTag', tagId)
 }
 
-function searchForTerm() {
-    clearCurrentTimeout()
-    timeout = setTimeout(() => emits('searchForTerm', searchInput), timeoutTime)
-}
-
 function resetFields() {
-    searchInput = props.searchTerm
     emits('resetFields')
 }
 </script>
+
+
+
+
