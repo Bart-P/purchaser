@@ -12,12 +12,13 @@
                     </h3>
 
                     <div class="flex gap-4">
-                        <BaseButton @click="saveAddress()" color="success">
-                            Speichern
+                        <BaseButton @click="saveAddress()" btn-type="rounded" color="success">
+                            <i class="fa-solid fa-save"></i>
                         </BaseButton>
 
-                        <BaseButton :href="route('suppliers.edit', addressForm.supplier_id)" color="back">
-                            Zurück
+                        <BaseButton :href="route('suppliers.edit', addressForm.supplier_id)" btn-type="rounded"
+                            color="back">
+                            <i class="fa-solid fa-delete-left"></i>
                         </BaseButton>
                     </div>
                 </div>
