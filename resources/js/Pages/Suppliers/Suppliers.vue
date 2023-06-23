@@ -56,10 +56,7 @@ watch(
 
 watch(
     () => SupplierSelectionStore.searchTerm,
-    () => {
-        searchTerm = SupplierSelectionStore.searchTerm
-        console.log(searchTerm)
-    }
+    () => searchTerm = SupplierSelectionStore.searchTerm
 )
 
 if (!pageQuery.page && (searchTerm || filterByCategory || filterByTags)) {
