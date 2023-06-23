@@ -42,8 +42,8 @@
                         </transition>
                     </SelectItemDropdown>
 
-                    <BaseButton @click="resetFields" color="secondary" btn-type="rounded"
-                        :disabled="filterByTags.length + categoryTags.length + selectedCategory.id + searchInput.length < 1">
+                    <BaseButton @click="resetFields" color="secondary" btn-type="rounded" :disabled="filterByTags.length
+                        + categoryTags.length + selectedCategory.length + searchInput.length < 1">
                         <i class="fa-solid fa-filter-circle-xmark"></i>
                     </BaseButton>
                 </div>
