@@ -26,9 +26,8 @@
                         <label for="checkbox-all-search" class="sr-only">checkbox</label>
                     </div>
                 </th>
-                <th @click="sort('id')" scope="col" class="px-6 py-3  max-w-[30px] cursor-pointer">
-                    ID
-                    <i class="fa-solid" :class="getSortDirectionClass('id')"></i>
+                <th @click="sort('id')" scope="col" class="whitespace-nowrap px-6 py-3 max-w-[30px] cursor-pointer">
+                    ID <i class="fa-solid" :class="getSortDirectionClass('id')"></i>
                 </th>
                 <th @click="sort('name')" scope="col" class="px-6 py-3 cursor-pointer">
                     Firma
