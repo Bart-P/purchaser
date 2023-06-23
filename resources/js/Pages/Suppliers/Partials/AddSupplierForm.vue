@@ -148,9 +148,10 @@ function submitSupplier() {
         supplierForm['persons'] = props.persons
     }
 
+    supplierForm.categories = checkedCategories
+    supplierForm.tags = checkedTags
+
     if (props.supplier) {
-        supplierForm.categories = checkedCategories
-        supplierForm.tags = checkedTags
         supplierForm.put(
             route('suppliers.put',
                 {

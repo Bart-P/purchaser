@@ -120,6 +120,7 @@ class SuppliersController extends Controller
 
     function store(Request $request)
     {
+
         $supplier = Supplier::create(
             $request->validate(
                 [
