@@ -25,7 +25,6 @@ class Category extends Model
 
     public function delete()
     {
-
         $this->suppliers()->each(function ($supp) {
             $supp->categories()->detach($this->id);
         });
