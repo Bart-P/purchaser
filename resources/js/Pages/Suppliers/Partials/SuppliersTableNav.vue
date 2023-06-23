@@ -106,14 +106,23 @@ watch(
     }
 )
 
+let searchInput = ref('')
+if (props.searchTerm || props.searchTerm === '') {
+    searchInput.value = props.searchTerm
+}
+
+watch(
+    () => props.searchTerm,
+    () => searchInput.value = props.searchTerm
+
+)
+
 function assignCategoryTags() {
     categoryTags.value = []
     if (props.selectedCategory.length) {
         categoryTags.value = props.tags.filter((tag) => tag.category_id === props.selectedCategory[0])
     }
 }
-
-let searchInput = props.searchTerm
 
 let timeout = null
 const timeoutTime = 500
