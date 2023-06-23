@@ -54,7 +54,6 @@ watch(
     () => filterByTags = SupplierSelectionStore.tagFilter
 )
 
-// TODO search term does not reset after page change if i press reset fields - dunno why
 watch(
     () => SupplierSelectionStore.searchTerm,
     () => {
@@ -113,5 +112,4 @@ function sortBy(column) {
     sort.value.direction = SupplierSelectionStore.sortBy(column)
     applySearchAndFilter()
 }
-
 </script>

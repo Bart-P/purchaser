@@ -167,5 +167,3 @@ function submitSupplier() {
     }
 }
 </script>
-
-<style scoped></style>

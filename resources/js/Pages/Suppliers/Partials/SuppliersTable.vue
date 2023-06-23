@@ -157,5 +157,4 @@ function getSortDirectionClass(column) {
 
     return sortIndicator['']
 }
-
 </script>

@@ -142,6 +142,4 @@ let personForm = useForm(props.person)
 function savePerson() {
     router.patch(route('person.patch', personForm))
 }
-
-
 </script>

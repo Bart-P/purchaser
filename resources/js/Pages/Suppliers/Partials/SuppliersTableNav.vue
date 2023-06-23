@@ -114,7 +114,6 @@ if (props.searchTerm || props.searchTerm === '') {
 watch(
     () => props.searchTerm,
     () => searchInput.value = props.searchTerm
-
 )
 
 function assignCategoryTags() {
@@ -149,6 +148,7 @@ function resetFields() {
     emits('resetFields')
 }
 </script>
+
 
 
 
