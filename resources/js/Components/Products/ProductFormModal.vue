@@ -17,8 +17,6 @@
                 </div>
                 <div class="">
                     <h3 class="py-3 text-purchaser-primary font-bold">Auflagen</h3>
-
-
                     <div class="flex gap-2">
                         <span class="border py-1 px-2 rounded-full border-gray-300 self-center"
                             v-for="price in productFormData?.prices">{{
@@ -61,7 +59,6 @@
                                 </li>
                             </ul>
 
-                            <!-- TODO delete now works, after a description is created it cannot be deleted! fix it! -->
                             <div v-if="productFormData.description?.filter((desc) => desc.id == 'temp').length > 0"
                                 class="flex gap-2">
                                 <BaseButton @click="saveProductDescription()" color="success" btn-type="rounded"
@@ -112,13 +109,14 @@
                                             class="!m-0 flex flex-col z-10 gap-4 rounded-md bg-white shadow-md p-4">
                                             <h5 class="heading-5 text-center text-red-600">Bist du sicher?</h5>
                                             <p class="whitespace-nowrap" v-if="activeDescription">Beschreibung ID: {{
-                                                activeDescription['id'] }} unwiederruflich löschen</p>
-
+                                                activeDescription['id'] }} unwiederruflich löschen
+                                            </p>
                                             <div class="flex gap-3 justify-end">
                                                 <BaseButton @click="deleteProductDescription()" type="button"
                                                     color="danger">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </BaseButton>
+
                                                 <BaseButton @click="showDeleteDescription = false" type="button"
                                                     color="light">
                                                     <i class="fa-solid fa-cancel"></i>
@@ -162,7 +160,6 @@ import TextArea from "@/Components/TextArea.vue";
 import { router, useForm } from "@inertiajs/vue3";
 import { ref, watch, onMounted } from "vue";
 import { initDropdowns } from "flowbite";
-
 
 onMounted(() => {
     initDropdowns()
@@ -243,7 +240,6 @@ function removeTempDescription() {
 }
 
 function saveProductDescription() {
-    // TODO after delete or save both buttons cant be clicked..
     const product = productFormData.description.find((desc) => {
         return desc.id == 'temp'
     })
