@@ -39,7 +39,7 @@ class Product extends Model
 
     public function delete()
     {
-        $this->productDescription()->delete();
+        $this->productDescriptions()->delete();
         $this->productPrices()->delete();
 
         return parent::delete();
