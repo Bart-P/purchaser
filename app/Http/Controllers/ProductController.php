@@ -25,15 +25,21 @@ class ProductController extends Controller
         $newDesc['product_id'] = $desc['product_id'];
         $newDesc['lang'] = $desc['lang'];
         $newDesc['is_main'] = intval($desc['is_main']);
+
         $newDesc['description'] = '';
         if ($desc['description']) $newDesc['description'] = $desc['description'];
 
-        if (ProductDescription::create($newDesc)) {
+        if (!ProductDescription::create($newDesc)) {
             return redirect()->back()->with('notification', [
-                'message' => 'Beschreibung gespeichert!',
-                'type'    => 'success',
+                'message' => 'Fehler! Beschreibung, konnte nicht gespeichert werden!',
+                'type'    => 'danger',
             ]);
         };
+
+        return redirect()->back()->with('notification', [
+            'message' => 'Beschreibung gespeichert!',
+            'type'    => 'success',
+        ]);
     }
 
     function destroyDescription(Request $request)
