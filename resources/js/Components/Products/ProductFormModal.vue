@@ -101,14 +101,31 @@
                                     </div>
                                 </div>
 
-                                <div id="deleteProductDescriptionDropdown"
-                                    class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
-                                    <h5 class="heading-5 text-center text-red-600">Bist du sicher?</h5>
-                                    <p v-if="activeDescription">Beschreibung ID: {{
-                                        activeDescription['id'] }} unwiederruflich löschen</p>
-                                    <BaseButton @click="deleteProductDescription()" type="button" color="danger">
+                                <div class="relative">
+                                    <BaseButton color="danger" btn-type="rounded" type="button"
+                                        id="deleteDescriptionDropdownBtn" @click="toggleDeleteDescriptionDropdown">
                                         <i class="fa-solid fa-trash"></i>
                                     </BaseButton>
+
+                                    <div class="absolute top-[40px] right-0" v-show="showDeleteDescription">
+                                        <div id="deleteProductDescriptionDropdown"
+                                            class="!m-0 flex flex-col z-10 gap-4 rounded-md bg-white shadow-md p-4">
+                                            <h5 class="heading-5 text-center text-red-600">Bist du sicher?</h5>
+                                            <p class="whitespace-nowrap" v-if="activeDescription">Beschreibung ID: {{
+                                                activeDescription['id'] }} unwiederruflich löschen</p>
+
+                                            <div class="flex gap-3 justify-end">
+                                                <BaseButton @click="deleteProductDescription()" type="button"
+                                                    color="danger">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </BaseButton>
+                                                <BaseButton @click="showDeleteDescription = false" type="button"
+                                                    color="light">
+                                                    <i class="fa-solid fa-cancel"></i>
+                                                </BaseButton>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -212,14 +229,16 @@ function saveProductDescription() {
     const product = productFormData.description.find((desc) => {
         return desc.id == 'temp'
     })
-    document.getElementById('dropdownAddDescription').classList.add('hidden')
+    addDescriptionForm.lang = ''
+
+    showAddDescription.value = false
 
     return router.post(route('product.store-description', product))
 }
 
 function deleteProductDescription() {
     emits('deleteProductDescription', activeDescription.value.id)
-    document.getElementById('deleteProductDescriptionDropdown').classList.add('hidden')
+    showDeleteDescription.value = false
 }
 
 function resetProduct() {
