@@ -25,7 +25,8 @@ class ProductController extends Controller
         $newDesc['product_id'] = $desc['product_id'];
         $newDesc['lang'] = $desc['lang'];
         $newDesc['is_main'] = intval($desc['is_main']);
-        $newDesc['description'] = $desc['description'];
+        $newDesc['description'] = '';
+        if ($desc['description']) $newDesc['description'] = $desc['description'];
 
         if (ProductDescription::create($newDesc)) {
             return redirect()->back()->with('notification', [
