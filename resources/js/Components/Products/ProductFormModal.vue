@@ -65,7 +65,7 @@
                             <div v-if="productFormData.description?.filter((desc) => desc.id == 'temp').length > 0"
                                 class="flex gap-2">
                                 <BaseButton @click="saveProductDescription()" color="success" btn-type="rounded"
-                                    type="button">
+                                    id="addDescriptionDropdown" type="button">
                                     <i class="fa-solid fa-save"></i>
                                 </BaseButton>
 
@@ -76,15 +76,30 @@
                             </div>
 
                             <div v-else class="flex gap-2">
-                                <BaseButton color="success" btn-type="rounded" type="button"
-                                    data-dropdown-toggle="dropdownAddDescription">
-                                    <i class="fa-solid fa-plus"></i>
-                                </BaseButton>
+                                <div class="relative">
+                                    <BaseButton color="success" btn-type="rounded" type="button"
+                                        id="addDescriptionDropdownBtn" @click="toggleAddDescriptionDropdown()">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </BaseButton>
 
-                                <BaseButton color="danger" btn-type="rounded" type="button"
-                                    data-dropdown-toggle="deleteProductDescriptionDropdown">
-                                    <i class="fa-solid fa-trash"></i>
-                                </BaseButton>
+                                    <div class="absolute top-[40px] right-0" v-show="showAddDescription">
+                                        <form id="addDescriptionDropdown"
+                                            @submit.prevent="createNewDescription(addDescriptionForm.lang)"
+                                            class="!m-0 flex flex-col z-10 gap-4 rounded-md bg-white shadow-md p-4">
+                                            <h5 class="heading-5 whitespace-nowrap">Neue Beschreibung: </h5>
+                                            <TextInput v-model="addDescriptionForm.lang" type="text" placeholder="Titel"
+                                                required />
+                                            <div class="flex gap-3 justify-end">
+                                                <BaseButton type="submit" color="success">
+                                                    <i class="fa-solid fa-save"></i>
+                                                </BaseButton>
+                                                <BaseButton @click="showAddDescription = false" type="button" color="light">
+                                                    <i class="fa-solid fa-cancel"></i>
+                                                </BaseButton>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
 
                                 <div id="deleteProductDescriptionDropdown"
                                     class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
@@ -97,16 +112,6 @@
                                 </div>
                             </div>
 
-                            <form id="dropdownAddDescription"
-                                @submit.prevent="createNewDescription(addDescriptionForm.lang)"
-                                class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
-                                <h5 class="heading-5">Beschreibung hinzufügen:</h5>
-                                <TextInput v-model="addDescriptionForm.lang" type="text" placeholder="Sprache eingeben"
-                                    required />
-                                <BaseButton type="submit" color="success">
-                                    <i class="fa-solid fa-save"></i>
-                                </BaseButton>
-                            </form>
                         </div>
 
                         <div v-if="activeDescription?.description || activeDescription?.description === ''"
@@ -140,6 +145,7 @@ import TextArea from "@/Components/TextArea.vue";
 import { router, useForm } from "@inertiajs/vue3";
 import { ref, watch, onMounted } from "vue";
 import { initDropdowns } from "flowbite";
+
 
 onMounted(() => {
     initDropdowns()
