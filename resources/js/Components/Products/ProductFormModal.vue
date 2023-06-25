@@ -196,6 +196,24 @@ if (props.product) {
     productFormData = useForm(props.product)
 }
 
+const showAddDescription = ref(false)
+const showDeleteDescription = ref(false)
+const showAddQuantity = ref(false)
+
+function toggleAddDescriptionDropdown() {
+    showAddDescription.value = !showAddDescription.value
+
+    showDeleteDescription.value = false
+    showAddQuantity.value = false
+}
+
+function toggleDeleteDescriptionDropdown() {
+    showDeleteDescription.value = !showDeleteDescription.value
+
+    showAddDescription.value = false
+    showAddQuantity.value = false
+}
+
 function setActiveDescription(description) {
     activeDescription.value = description
 }
@@ -252,6 +270,8 @@ function resetProduct() {
         mainDescription.value = null
         activeDescription.value = null
     }
+
+    showAddDescription.value = false
 }
 
 watch(
