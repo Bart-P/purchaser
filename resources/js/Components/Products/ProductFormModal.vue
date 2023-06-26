@@ -74,12 +74,13 @@
 
                             <div v-else class="flex gap-2">
                                 <div class="relative">
-                                    <BaseButton color="success" btn-type="rounded" type="button"
+                                    <BaseButton color="success" btn-type="rounded" type="button" data-show-trigger="true"
                                         id="addDescriptionDropdownBtn" @click="toggleAddDescriptionDropdown()">
                                         <i class="fa-solid fa-plus"></i>
                                     </BaseButton>
 
-                                    <div class="absolute top-[40px] right-0" v-show="showAddDescription">
+                                    <div class="absolute top-[40px] right-0" v-click-outside="hideAddDiscriptionDropdown"
+                                        v-show="showAddDescription">
                                         <form id="addDescriptionDropdown"
                                             @submit.prevent="createNewDescription(addDescriptionForm.lang)"
                                             class="!m-0 flex flex-col z-10 gap-4 rounded-md bg-white shadow-md p-4">
@@ -99,12 +100,13 @@
                                 </div>
 
                                 <div class="relative">
-                                    <BaseButton color="danger" btn-type="rounded" type="button"
+                                    <BaseButton color="danger" btn-type="rounded" type="button" data-show-trigger="true"
                                         id="deleteDescriptionDropdownBtn" @click="toggleDeleteDescriptionDropdown">
                                         <i class="fa-solid fa-trash"></i>
                                     </BaseButton>
 
-                                    <div class="absolute top-[40px] right-0" v-show="showDeleteDescription">
+                                    <div class="absolute top-[40px] right-0" v-show="showDeleteDescription"
+                                        v-click-outside="hideDeleteDiscriptionDropdown">
                                         <div id="deleteProductDescriptionDropdown"
                                             class="!m-0 flex flex-col z-10 gap-4 rounded-md bg-white shadow-md p-4">
                                             <h5 class="heading-5 text-center text-red-600">Bist du sicher?</h5>
@@ -274,4 +276,35 @@ watch(
     () => props.product,
     () => resetProduct()
 )
+
+function hideAddDiscriptionDropdown() {
+    if (showAddDescription.value === true) {
+        showAddDescription.value = false
+    }
+}
+
+function hideDeleteDiscriptionDropdown() {
+    if (showDeleteDescription.value === true) {
+        showDeleteDescription.value = false
+    }
+}
+
+// TODO move dropdowns to own components
+const vClickOutside = {
+    mounted(el, binding) {
+        el.__ClickOutsideHandler__ = (event) => {
+            if (!(el === event.target
+                || el.contains(event.target)
+                || event.target.dataset.showTrigger
+                || event.target.parentNode.dataset.showTrigger)) {
+
+                binding.value()
+            }
+        }
+        document.body.addEventListener('click', el.__ClickOutsideHandler__)
+    },
+    unmounted() {
+        document.body.removeEventListener('click', el.__ClickOutsideHandler__)
+    }
+}
 </script>
