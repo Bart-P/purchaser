@@ -27,6 +27,8 @@
                         </BaseButton>
                     </div>
 
+                    <!-- TODO implement custom click away functionality  -->
+                    <!-- TODO move to own component -->
                     <form id="dropdownAddQuantity" @submit.prevent=""
                         class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
                         <h5 class="heading-5">Auflage hinzufügen:</h5>
@@ -72,6 +74,7 @@
                                 </BaseButton>
                             </div>
 
+                            <!-- TODO move to own components -->
                             <div v-else class="flex gap-2">
                                 <div class="relative">
                                     <BaseButton color="success" btn-type="rounded" type="button" data-show-trigger="true"
@@ -99,6 +102,7 @@
                                     </div>
                                 </div>
 
+                                <!-- TODO move to own component -->
                                 <div class="relative">
                                     <BaseButton color="danger" btn-type="rounded" type="button" data-show-trigger="true"
                                         id="deleteDescriptionDropdownBtn" @click="toggleDeleteDescriptionDropdown">
@@ -139,6 +143,7 @@
                 </div>
 
                 <!-- Modal footer -->
+                <!-- TODO revamped below buttons to fit the rest -->
                 <div class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b">
                     <BaseButton color="primary" @click.prevent="" type="submit">
                         Speichern
