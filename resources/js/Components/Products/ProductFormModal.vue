@@ -143,9 +143,8 @@
                 </div>
 
                 <!-- Modal footer -->
-                <!-- TODO revamped below buttons to fit the rest -->
                 <div class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b">
-                    <BaseButton color="primary" @click.prevent="" type="submit">
+                    <BaseButton color="success" @click.prevent="" type="submit">
                         Speichern
                     </BaseButton>
 
