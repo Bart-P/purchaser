@@ -44,7 +44,4 @@ function hideAddDiscriptionDropdown() {
         showAddDescription.value = false
     }
 }
-
 </script>
-
-

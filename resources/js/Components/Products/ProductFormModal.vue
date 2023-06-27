@@ -24,7 +24,6 @@
                         </span>
                         <AddQuantityDropdown />
                     </div>
-
                 </div>
 
                 <div class="flex gap-3 w-full">
