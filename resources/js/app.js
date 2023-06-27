@@ -18,6 +18,23 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
+            .directive('clickOutside', {
+                mounted(el, binding) {
+                    el.__ClickOutsideHandler__ = (event) => {
+                        if (!(el === event.target
+                            || el.contains(event.target)
+                            || event.target.dataset.showTrigger === el.id
+                            || event.target.parentNode.dataset.showTrigger === el.id)) {
+
+                            binding.value()
+                        }
+                    }
+                    document.body.addEventListener('click', el.__ClickOutsideHandler__)
+                },
+                unmounted(el) {
+                    document.body.removeEventListener('click', el.__ClickOutsideHandler__)
+                }
+            })
             .mount(el);
     },
 });
