@@ -23,24 +23,7 @@
                                 price.quantity + " St." }}
                         </span>
 
-                        <!-- TODO move to own component -->
-                        <div class="relative">
-                            <BaseButton @click="toggleShowQuantityDropdown" btn-type="rounded" color="success" type="button"
-                                data-show-trigger="true">
-                                <i class="fa-solid fa-plus"></i>
-                            </BaseButton>
-                            <div class="absolute top-[40px] left-0">
-                                <form id="dropdownAddQuantity" @submit.prevent="" v-show="showAddQuantity"
-                                    v-click-outside="hideAddQuantityDropdown"
-                                    class="!m-0 flex flex-col z-10 gap-4 rounded-md bg-white shadow-md p-4">
-                                    <h5 class="heading-5 whitespace-nowrap">Auflage hinzufügen:</h5>
-                                    <TextInput type="number" placeholder="Auflage" required />
-                                    <BaseButton type="submit" color="success">
-                                        <i class="fa-solid fa-save"></i>
-                                    </BaseButton>
-                                </form>
-                            </div>
-                        </div>
+                        <AddQuantityDropdown></AddQuantityDropdown>
                     </div>
 
                 </div>
@@ -169,6 +152,7 @@ import BaseModal from "@/Components/BaseModal.vue";
 import BaseButton from "@/Components/BaseButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
+import AddQuantityDropdown from '@/Components/Products/AddQuantityDropdown.vue'
 import { router, useForm } from "@inertiajs/vue3";
 import { ref, watch, onMounted } from "vue";
 import { initDropdowns } from "flowbite";
@@ -207,29 +191,18 @@ if (props.product) {
 
 const showAddDescription = ref(false)
 const showDeleteDescription = ref(false)
-const showAddQuantity = ref(false)
 
 function toggleAddDescriptionDropdown() {
     showAddDescription.value = !showAddDescription.value
 
     showDeleteDescription.value = false
-    showAddQuantity.value = false
 }
 
 function toggleDeleteDescriptionDropdown() {
     showDeleteDescription.value = !showDeleteDescription.value
 
     showAddDescription.value = false
-    showAddQuantity.value = false
 }
-
-function toggleShowQuantityDropdown() {
-    showAddQuantity.value = !showAddQuantity.value
-
-    showDeleteDescription.value = false
-    showAddDescription.value = false
-}
-
 
 function setActiveDescription(description) {
     activeDescription.value = description
@@ -307,12 +280,7 @@ function hideDeleteDiscriptionDropdown() {
     }
 }
 
-function hideAddQuantityDropdown() {
-    if (showAddQuantity.value === true) {
-        showAddQuantity.value = false
-    }
-}
-// TODO move dropdowns to own components
+// TODO move directive to app level so it is everywhere accessible
 const vClickOutside = {
     mounted(el, binding) {
         el.__ClickOutsideHandler__ = (event) => {
