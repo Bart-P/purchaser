@@ -22,21 +22,27 @@
                             v-for="price in productFormData?.prices">{{
                                 price.quantity + " St." }}
                         </span>
-                        <BaseButton btn-type="rounded" color="success" type="button"
-                            data-dropdown-toggle="dropdownAddQuantity"><i class="fa-solid fa-plus"></i>
-                        </BaseButton>
+
+                        <!-- TODO move to own component -->
+                        <div class="relative">
+                            <BaseButton @click="toggleShowQuantityDropdown" btn-type="rounded" color="success" type="button"
+                                data-show-trigger="true">
+                                <i class="fa-solid fa-plus"></i>
+                            </BaseButton>
+                            <div class="absolute top-[40px] left-0">
+                                <form id="dropdownAddQuantity" @submit.prevent="" v-show="showAddQuantity"
+                                    v-click-outside="hideAddQuantityDropdown"
+                                    class="!m-0 flex flex-col z-10 gap-4 rounded-md bg-white shadow-md p-4">
+                                    <h5 class="heading-5 whitespace-nowrap">Auflage hinzufügen:</h5>
+                                    <TextInput type="number" placeholder="Auflage" required />
+                                    <BaseButton type="submit" color="success">
+                                        <i class="fa-solid fa-save"></i>
+                                    </BaseButton>
+                                </form>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- TODO implement custom click away functionality  -->
-                    <!-- TODO move to own component -->
-                    <form id="dropdownAddQuantity" @submit.prevent=""
-                        class="!m-0 flex flex-col hidden z-10 gap-4 rounded-md bg-white shadow-md p-4">
-                        <h5 class="heading-5">Auflage hinzufügen:</h5>
-                        <TextInput type="number" placeholder="Auflage eingeben" required />
-                        <BaseButton type="submit" color="success">
-                            <i class="fa-solid fa-save"></i>
-                        </BaseButton>
-                    </form>
                 </div>
 
                 <div class="flex gap-3 w-full">
@@ -217,6 +223,14 @@ function toggleDeleteDescriptionDropdown() {
     showAddQuantity.value = false
 }
 
+function toggleShowQuantityDropdown() {
+    showAddQuantity.value = !showAddQuantity.value
+
+    showDeleteDescription.value = false
+    showAddDescription.value = false
+}
+
+
 function setActiveDescription(description) {
     activeDescription.value = description
 }
@@ -293,6 +307,11 @@ function hideDeleteDiscriptionDropdown() {
     }
 }
 
+function hideAddQuantityDropdown() {
+    if (showAddQuantity.value === true) {
+        showAddQuantity.value = false
+    }
+}
 // TODO move dropdowns to own components
 const vClickOutside = {
     mounted(el, binding) {
