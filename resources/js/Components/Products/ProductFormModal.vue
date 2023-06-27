@@ -126,7 +126,7 @@ import BaseButton from "@/Components/BaseButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
 import AddQuantityDropdown from '@/Components/Products/AddQuantityDropdown.vue'
-import AddDescriptionDropdown from '@/Components/Products/addDescriptionDropdown.vue'
+import AddDescriptionDropdown from '@/Components/Products/AddDescriptionDropdown.vue'
 import { router, useForm } from "@inertiajs/vue3";
 import { ref, watch, onMounted } from "vue";
 import { initDropdowns } from "flowbite";
