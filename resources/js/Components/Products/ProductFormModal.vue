@@ -22,8 +22,7 @@
                             v-for="price in productFormData?.prices">{{
                                 price.quantity + " St." }}
                         </span>
-
-                        <AddQuantityDropdown></AddQuantityDropdown>
+                        <AddQuantityDropdown />
                     </div>
 
                 </div>
@@ -63,33 +62,8 @@
                                 </BaseButton>
                             </div>
 
-                            <!-- TODO move to own components -->
                             <div v-else class="flex gap-2">
-                                <div class="relative">
-                                    <BaseButton color="success" btn-type="rounded" type="button" data-show-trigger="true"
-                                        id="addDescriptionDropdownBtn" @click="toggleAddDescriptionDropdown()">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </BaseButton>
-
-                                    <div class="absolute top-[40px] right-0" v-click-outside="hideAddDiscriptionDropdown"
-                                        v-show="showAddDescription">
-                                        <form id="addDescriptionDropdown"
-                                            @submit.prevent="createNewDescription(addDescriptionForm.lang)"
-                                            class="!m-0 flex flex-col z-10 gap-4 rounded-md bg-white shadow-md p-4">
-                                            <h5 class="heading-5 whitespace-nowrap">Neue Beschreibung: </h5>
-                                            <TextInput v-model="addDescriptionForm.lang" type="text" placeholder="Titel"
-                                                required />
-                                            <div class="flex gap-3 justify-end">
-                                                <BaseButton type="submit" color="success">
-                                                    <i class="fa-solid fa-save"></i>
-                                                </BaseButton>
-                                                <BaseButton @click="showAddDescription = false" type="button" color="light">
-                                                    <i class="fa-solid fa-cancel"></i>
-                                                </BaseButton>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                                <AddDescriptionDropdown @create-new-description="createNewDescription" />
 
                                 <!-- TODO move to own component -->
                                 <div class="relative">
@@ -121,7 +95,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
                         <div v-if="activeDescription?.description || activeDescription?.description === ''"
@@ -153,6 +126,7 @@ import BaseButton from "@/Components/BaseButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
 import AddQuantityDropdown from '@/Components/Products/AddQuantityDropdown.vue'
+import AddDescriptionDropdown from '@/Components/Products/addDescriptionDropdown.vue'
 import { router, useForm } from "@inertiajs/vue3";
 import { ref, watch, onMounted } from "vue";
 import { initDropdowns } from "flowbite";
@@ -189,25 +163,6 @@ if (props.product) {
     productFormData = useForm(props.product)
 }
 
-const showAddDescription = ref(false)
-const showDeleteDescription = ref(false)
-
-function toggleAddDescriptionDropdown() {
-    showAddDescription.value = !showAddDescription.value
-
-    showDeleteDescription.value = false
-}
-
-function toggleDeleteDescriptionDropdown() {
-    showDeleteDescription.value = !showDeleteDescription.value
-
-    showAddDescription.value = false
-}
-
-function setActiveDescription(description) {
-    activeDescription.value = description
-}
-
 function createNewDescription(lang) {
     const newDesc = {
         'id': 'temp',
@@ -227,6 +182,16 @@ function createNewDescription(lang) {
     setActiveDescription(newDesc)
 }
 
+const showDeleteDescription = ref(false)
+
+function toggleDeleteDescriptionDropdown() {
+    showDeleteDescription.value = !showDeleteDescription.value
+}
+
+function setActiveDescription(description) {
+    activeDescription.value = description
+}
+
 function removeTempDescription() {
     productFormData.description = productFormData.description.filter((desc) => desc.id !== 'temp')
     resetProduct()
@@ -237,8 +202,6 @@ function saveProductDescription() {
         return desc.id == 'temp'
     })
     addDescriptionForm.lang = ''
-
-    showAddDescription.value = false
 
     return router.post(route('product.store-description', product))
 }
@@ -259,8 +222,6 @@ function resetProduct() {
         mainDescription.value = null
         activeDescription.value = null
     }
-
-    showAddDescription.value = false
 }
 
 watch(
@@ -268,19 +229,13 @@ watch(
     () => resetProduct()
 )
 
-function hideAddDiscriptionDropdown() {
-    if (showAddDescription.value === true) {
-        showAddDescription.value = false
-    }
-}
-
 function hideDeleteDiscriptionDropdown() {
     if (showDeleteDescription.value === true) {
         showDeleteDescription.value = false
     }
 }
 
-// TODO move directive to app level so it is everywhere accessible
+// TODO remove this after moving deleteDescriptionDropdown to own component
 const vClickOutside = {
     mounted(el, binding) {
         el.__ClickOutsideHandler__ = (event) => {
