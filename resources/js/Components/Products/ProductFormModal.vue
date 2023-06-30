@@ -63,36 +63,9 @@
 
                             <div v-else class="flex gap-2">
                                 <AddDescriptionDropdown @create-new-description="createNewDescription" />
-
-                                <!-- TODO move to own component -->
-                                <div class="relative">
-                                    <BaseButton color="danger" btn-type="rounded" type="button" data-show-trigger="true"
-                                        id="deleteDescriptionDropdownBtn" @click="toggleDeleteDescriptionDropdown">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </BaseButton>
-
-                                    <div class="absolute top-[40px] right-0" v-show="showDeleteDescription"
-                                        v-click-outside="hideDeleteDiscriptionDropdown">
-                                        <div id="deleteProductDescriptionDropdown"
-                                            class="!m-0 flex flex-col z-10 gap-4 rounded-md bg-white shadow-md p-4">
-                                            <h5 class="heading-5 text-center text-red-600">Bist du sicher?</h5>
-                                            <p class="whitespace-nowrap" v-if="activeDescription">Beschreibung ID: {{
-                                                activeDescription['id'] }} unwiederruflich löschen
-                                            </p>
-                                            <div class="flex gap-3 justify-end">
-                                                <BaseButton @click="deleteProductDescription()" type="button"
-                                                    color="danger">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </BaseButton>
-
-                                                <BaseButton @click="showDeleteDescription = false" type="button"
-                                                    color="light">
-                                                    <i class="fa-solid fa-cancel"></i>
-                                                </BaseButton>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <DeleteDescriptionDropdown v-if="activeDescription"
+                                    @delete-product-description="deleteProductDescription"
+                                    :description-id-to-delete="activeDescription['id']" />
                             </div>
                         </div>
 
@@ -126,6 +99,7 @@ import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
 import AddQuantityDropdown from '@/Components/Products/AddQuantityDropdown.vue'
 import AddDescriptionDropdown from '@/Components/Products/AddDescriptionDropdown.vue'
+import DeleteDescriptionDropdown from '@/Components/Products/DeleteDescriptionDropdown.vue'
 import { router, useForm } from "@inertiajs/vue3";
 import { ref, watch, onMounted } from "vue";
 import { initDropdowns } from "flowbite";
@@ -181,12 +155,6 @@ function createNewDescription(lang) {
     setActiveDescription(newDesc)
 }
 
-const showDeleteDescription = ref(false)
-
-function toggleDeleteDescriptionDropdown() {
-    showDeleteDescription.value = !showDeleteDescription.value
-}
-
 function setActiveDescription(description) {
     activeDescription.value = description
 }
@@ -205,9 +173,8 @@ function saveProductDescription() {
     return router.post(route('product.store-description', product))
 }
 
-function deleteProductDescription() {
-    emits('deleteProductDescription', activeDescription.value.id)
-    showDeleteDescription.value = false
+function deleteProductDescription(id) {
+    emits('deleteProductDescription', id)
 }
 
 function resetProduct() {
@@ -227,29 +194,4 @@ watch(
     () => props.product,
     () => resetProduct()
 )
-
-function hideDeleteDiscriptionDropdown() {
-    if (showDeleteDescription.value === true) {
-        showDeleteDescription.value = false
-    }
-}
-
-// TODO remove this after moving deleteDescriptionDropdown to own component
-const vClickOutside = {
-    mounted(el, binding) {
-        el.__ClickOutsideHandler__ = (event) => {
-            if (!(el === event.target
-                || el.contains(event.target)
-                || event.target.dataset.showTrigger
-                || event.target.parentNode.dataset.showTrigger)) {
-
-                binding.value()
-            }
-        }
-        document.body.addEventListener('click', el.__ClickOutsideHandler__)
-    },
-    unmounted(el) {
-        document.body.removeEventListener('click', el.__ClickOutsideHandler__)
-    }
-}
 </script>
