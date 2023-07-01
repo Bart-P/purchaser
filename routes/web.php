@@ -252,6 +252,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     )->name('tag.patch');
 
     // PRODUCT
+    Route::get(
+        '/products/edit/{id}',
+        [ProductController::class, 'edit',]
+    )->name('product.edit');
+
     Route::post(
         '/product/store-description',
         [ProductController::class, 'storeDescription',]

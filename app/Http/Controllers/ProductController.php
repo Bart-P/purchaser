@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\ProductDescription;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
@@ -39,6 +41,16 @@ class ProductController extends Controller
         return redirect()->back()->with('notification', [
             'message' => 'Beschreibung gespeichert!',
             'type'    => 'success',
+        ]);
+    }
+
+    function edit($id)
+    {
+        $product = Product::find($id);
+        $descriptions = $product->productDescriptions()->get();
+        return Inertia::render('Products/Edit', [
+            'product' => $product,
+            'descriptions' => $descriptions
         ]);
     }
 
