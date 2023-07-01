@@ -88,7 +88,6 @@
 </template>
 
 <script setup>
-
 import BaseButton from "@/Components/BaseButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
@@ -191,5 +190,4 @@ function saveProductDescription() {
 function deleteProductDescription(id) {
     emits('deleteProductDescription', id)
 }
-
 </script>
