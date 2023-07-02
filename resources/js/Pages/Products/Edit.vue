@@ -120,7 +120,8 @@ onMounted(() => {
 const props = defineProps(
     {
         product: Object,
-        descriptions: Object
+        descriptions: Object,
+        prices: Object,
     })
 
 const emits = defineEmits(['deleteProductDescription']);
@@ -150,7 +151,8 @@ function resetProduct() {
         productFormData = useForm(
             {
                 ...props.product,
-                descriptions: props.descriptions
+                descriptions: props.descriptions,
+                prices: props.prices
             }
         )
 
