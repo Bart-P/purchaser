@@ -12,7 +12,7 @@
                     <BaseButton color="success" btn-type="rounded">
                         <i class="fa-solid fa-save"></i>
                     </BaseButton>
-                    <BaseButton href="" color="back" btn-type="rounded">
+                    <BaseButton @click="back" color="back" btn-type="rounded">
                         <i class="fa-solid fa-delete-left"></i>
                     </BaseButton>
                 </div>
@@ -215,5 +215,9 @@ function saveProductDescription() {
 function deleteProductDescription() {
     document.getElementById('deleteDescriptionDropdownButton').click()
     return router.post(route('product.destroy-description', { id: activeDescription.value.id }))
+}
+
+function back() {
+    window.history.back()
 }
 </script>
