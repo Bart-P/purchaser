@@ -22,7 +22,6 @@
         <div class="py-12 space-y-6">
             <PageBoxWrapper class="relative">
                 <form>
-                    <!-- TODO restyle the whole thing -->
                     <div class="flex flex-col gap-5">
                         <div class="flex gap-6">
                             <h3 class="py-3 text-purchaser-primary font-bold whitespace-nowrap">Produkt Titel:</h3>
@@ -166,7 +165,7 @@ function resetProduct() {
     }
 }
 
-// if product changes, reload it
+// if product, descriptions or prices change, reload
 watch(
     [
         () => props.product,
