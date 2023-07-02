@@ -5,8 +5,6 @@
             <i class="fa-solid fa-cart-plus"></i>
         </BaseButton>
     </div>
-    <ProductFormModal id='productFormModal' :product="selectedProduct"
-        @delete-product-description="deleteProductDescription" @close-product-form-modal="productFormModal.hide()" />
     <table class="table">
         <thead class="table-head">
             <tr>
@@ -34,7 +32,7 @@
             <td class="table-data">{{ dateToDMYHM(product.created_at) }}</td>
             <td class="table-data">{{ dateToDMYHM(product.updated_at) }}</td>
             <td class="space-x-3">
-                <IconButton @click="showProductForm(product)">
+                <IconButton :href="route('product.edit', product.id)">
                     <i class="fa-solid fa-pen"></i>
                 </IconButton>
                 <IconButton color="red">
@@ -48,17 +46,12 @@
 <script setup>
 import BaseButton from '@/Components/BaseButton.vue';
 import IconButton from '@/Components/IconButton.vue';
-import ProductFormModal from '@/Components/Products/ProductFormModal.vue';
 import { dateToDMYHM } from '@/utils';
 import { initModals } from 'flowbite';
 import { ref, watch, onMounted } from 'vue';
-import { router } from "@inertiajs/vue3";
-
-let productFormModal
 
 onMounted(() => {
     initModals()
-    productFormModal = new Modal(document.getElementById('productFormModal'))
 })
 
 const props = defineProps({
@@ -78,17 +71,8 @@ watch(
     }
 )
 
-function deleteProductDescription(descId) {
-    return router.post(route('product.destroy-description', { id: descId }))
-}
-
 function sortPricesByQuantities($prices) {
     return $prices?.sort((a, b) => a.quantity - b.quantity);
-}
-
-function showProductForm(product) {
-    selectedProduct.value = product
-    productFormModal.show()
 }
 
 function showEmptyProductForm() {
