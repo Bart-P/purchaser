@@ -49,6 +49,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $descriptions = $product->productDescriptions()->get();
         $prices = $product->productPrices()->get();
+
         return Inertia::render('Products/Edit', [
             'product' => $product,
             'descriptions' => $descriptions,
