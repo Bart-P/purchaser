@@ -26,7 +26,7 @@
             </div>
 
             <div class="flex gap-3 w-full">
-                <div :class="productFormData.description?.length > 1 ? 'w-1/2' : 'w-full'">
+                <div :class="productFormData.descriptions?.length > 1 ? 'w-1/2' : 'w-full'">
                     <h3 class="py-3 text-purchaser-primary font-bold">
                         Beschreibung:
                     </h3>
@@ -36,10 +36,10 @@
                     </div>
                 </div>
 
-                <div v-show="productFormData.description?.length > 1" class="w-1/2">
+                <div v-show="productFormData.descriptions?.length > 1" class="w-1/2">
                     <div class="flex justify-between mb-2">
                         <ul class="flex gap-2 ms-2 w-full">
-                            <li v-for="desc in productFormData.description?.filter((desc) => !desc.is_main)">
+                            <li v-for="desc in productFormData.descriptions?.filter((desc) => !desc.is_main)">
                                 <BaseButton @click="setActiveDescription(desc)" class="!py-2 !px-3" type="button"
                                     :color="activeDescription.id === desc.id ? 'primary' : 'light'">
                                     {{ desc.lang }}
@@ -47,7 +47,7 @@
                             </li>
                         </ul>
 
-                        <div v-if="productFormData.description?.filter((desc) => desc.id == 'temp').length > 0"
+                        <div v-if="productFormData.descriptions?.filter((desc) => desc.id == 'temp').length > 0"
                             class="flex gap-2">
                             <BaseButton @click="saveProductDescription()" color="success" btn-type="rounded"
                                 id="addDescriptionDropdown" type="button">
@@ -108,17 +108,39 @@ const props = defineProps(
         descriptions: Object
     })
 
-// TODO descriptions do not go through, dataflow should be addapted
-// to open and check the page just type in the url ../products/edit/1 where 1 is the product id
-
 const emits = defineEmits(['closeProductFormModal', 'deleteProductDescription']);
 
-function resetProduct() {
-    if (props.product) {
-        productFormData = useForm(props.product)
-        activeDescription.value = props.product?.description.filter((desc) => desc.is_main !== 1)[0]
-        mainDescription.value = productFormData.description?.filter((desc) => desc.is_main === 1)[0]
+const emptyProduct = {
+    id: null,
+    inquiry_id: null,
+    title: null,
+    prices: null,
+    descriptions: null,
+    created_at: null,
+    updated_at: null
+}
 
+const activeDescription = ref(null)
+const mainDescription = ref(null)
+let productFormData = useForm(emptyProduct)
+const addDescriptionForm = useForm({})
+
+if (props.product) {
+    resetProduct()
+}
+
+
+function resetProduct() {
+    if (props.product.id) {
+        productFormData = useForm(
+            {
+                ...props.product,
+                descriptions: props.descriptions
+            }
+        )
+
+        activeDescription.value = props.descriptions.filter((desc) => desc.is_main !== 1)[0]
+        mainDescription.value = productFormData.descriptions?.filter((desc) => desc.is_main === 1)[0]
     } else {
         productFormData = useForm(emptyProduct)
         mainDescription.value = null
@@ -130,26 +152,6 @@ watch(
     () => props.product,
     () => resetProduct()
 )
-const emptyProduct = {
-    id: null,
-    inquiry_id: null,
-    title: null,
-    prices: null,
-    description: null,
-    created_at: null,
-    updated_at: null
-}
-
-const activeDescription = ref(null)
-const mainDescription = ref(null)
-
-let productFormData = useForm(emptyProduct)
-const addDescriptionForm = useForm({})
-
-if (props.product) {
-    productFormData = useForm(props.product)
-}
-
 function createNewDescription(lang) {
     const newDesc = {
         'id': 'temp',
@@ -157,13 +159,13 @@ function createNewDescription(lang) {
         'product_id': props.product.id,
         'is_main': false,
         'title': '',
-        'description': '',
+        'descriptions': '',
     }
 
-    if (productFormData.description.length) {
-        productFormData.description = [...productFormData.description, newDesc]
+    if (productFormData.descriptions.length) {
+        productFormData.descriptions = [...productFormData.descriptions, newDesc]
     } else {
-        productFormData.description = [newDesc]
+        productFormData.descriptions = [newDesc]
     }
 
     setActiveDescription(newDesc)
@@ -174,12 +176,12 @@ function setActiveDescription(description) {
 }
 
 function removeTempDescription() {
-    productFormData.description = productFormData.description.filter((desc) => desc.id !== 'temp')
+    productFormData.descriptions = productFormData.descriptions.filter((desc) => desc.id !== 'temp')
     resetProduct()
 }
 
 function saveProductDescription() {
-    const product = productFormData.description.find((desc) => {
+    const product = productFormData.descriptions.find((desc) => {
         return desc.id == 'temp'
     })
     addDescriptionForm.lang = ''
