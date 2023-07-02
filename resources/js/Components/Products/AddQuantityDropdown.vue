@@ -28,6 +28,7 @@ import { ref } from 'vue';
 
 const showAddQuantity = ref(false)
 
+// TODO add save quantity functionality
 function hideAddQuantityDropdown() {
     if (showAddQuantity.value === true) {
         showAddQuantity.value = false
