@@ -80,8 +80,8 @@
 
                                     <div v-else class="flex gap-2">
                                         <AddDescriptionDropdown @create-new-description="createNewDescription" />
-                                        <DeleteDescriptionDropdown v-if="activeDescription"
-                                            @delete-product-description="deleteProductDescription"
+                                        <DeleteDescriptionDropdown id="deleteDescriptionDropdownButton"
+                                            v-if="activeDescription" @delete-product-description="deleteProductDescription"
                                             :description-id-to-delete="activeDescription['id']" />
                                     </div>
                                 </div>
@@ -156,7 +156,8 @@ function resetProduct() {
             }
         )
 
-        activeDescription.value = props.descriptions.filter((desc) => desc.is_main !== 1)[0]
+        const nonActiveDescriptions = props.descriptions.filter((desc) => desc.is_main !== 1)
+        activeDescription.value = nonActiveDescriptions[nonActiveDescriptions.length - 1]
         mainDescription.value = productFormData.descriptions?.filter((desc) => desc.is_main === 1)[0]
     } else {
         productFormData = useForm(emptyProduct)
@@ -211,7 +212,8 @@ function saveProductDescription() {
     return router.post(route('product.store-description', product))
 }
 
-function deleteProductDescription(id) {
-    emits('deleteProductDescription', id)
+function deleteProductDescription() {
+    document.getElementById('deleteDescriptionDropdownButton').click()
+    return router.post(route('product.destroy-description', { id: activeDescription.value.id }))
 }
 </script>
