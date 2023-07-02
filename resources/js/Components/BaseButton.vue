@@ -24,7 +24,7 @@ const props = defineProps(
 let colorClasses = {}
 
 if (props.btnType === 'rounded') {
-    colorClasses = { 'w-[38px] h-[38px] rounded-full text-sm': true }
+    colorClasses = { 'w-[33px] h-[33px] rounded-full text-sm': true }
 } else if (props.btnType === 'button') {
     colorClasses = { 'px-6 py-2 rounded-md': true }
 }
