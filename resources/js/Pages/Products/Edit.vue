@@ -179,7 +179,7 @@ function createNewDescription(lang) {
         'product_id': props.product.id,
         'is_main': false,
         'title': '',
-        'descriptions': '',
+        'description': '',
     }
 
     if (productFormData.descriptions.length) {
