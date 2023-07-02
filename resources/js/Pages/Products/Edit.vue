@@ -169,7 +169,8 @@ function resetProduct() {
 watch(
     [
         () => props.product,
-        () => props.descriptions
+        () => props.descriptions,
+        () => props.prices,
     ],
     () => resetProduct()
 )
